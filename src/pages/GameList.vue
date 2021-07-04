@@ -1,9 +1,19 @@
 <template>
-  <h1>Games</h1>
-
-  <input type="text" placeholder="Create Game" v-on:keydown="handleKeyDown" />
-
-  <Game v-for="game in games" :key="game.id" :name="game.name" />
+  <div class="w-full h-full overflow-auto p-10 bg-gray-900">
+    <div class="container mx-auto px-20">
+      <div class="text-center my-20">
+        <h1 class="text-9xl font-extrabold mb-5 text-white">Games</h1>
+      </div>
+      <div class="grid grid-cols-3 gap-5">
+        <Game
+          v-for="(game, index) in games"
+          :key="game.id"
+          :name="game.name"
+          :index="index"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -11,7 +21,7 @@ import { defineComponent } from "vue";
 import { API, graphqlOperation } from "aws-amplify";
 import { listGames } from "../graphql/queries";
 import { createGame } from "../graphql/mutations";
-import Game from "./Game.vue";
+import Game from "../components/Game.vue";
 
 export default defineComponent({
   name: "GameList",
@@ -43,19 +53,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-a {
-  color: #42b983;
-}
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
-</style>
