@@ -1,5 +1,6 @@
 <template>
   <GameList />
+  <CreateGame />
 </template>
 
 <script lang="ts">

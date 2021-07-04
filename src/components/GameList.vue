@@ -1,26 +1,45 @@
 <template>
   <h1>Games</h1>
 
-  <div>
-    <p v-for="game in games" :key="game.id">{{ game.name }}</p>
-  </div>
+  <input type="text" placeholder="Create Game" v-on:keydown="handleKeyDown" />
+
+  <Game v-for="game in games" :key="game.id" :name="game.name" />
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from "vue";
+import { defineComponent } from "vue";
 import { API, graphqlOperation } from "aws-amplify";
 import { listGames } from "../graphql/queries";
+import { createGame } from "../graphql/mutations";
+import Game from "./Game.vue";
 
 export default defineComponent({
   name: "GameList",
+  components: {
+    Game,
+  },
   data: () => {
     return {
-      games: [],
+      games: [] as any[],
     };
   },
   mounted: async function () {
     const response = (await API.graphql(graphqlOperation(listGames))) as any;
     this.games = response.data.listGames.items;
+  },
+  methods: {
+    handleKeyDown: async function (event: any) {
+      if (event.key === "Enter") {
+        const res = (await API.graphql(
+          graphqlOperation(createGame, {
+            input: {
+              name: event.target.value,
+            },
+          })
+        )) as any;
+        this.games.push(res.data.createGame);
+      }
+    },
   },
 });
 </script>
