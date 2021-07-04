@@ -5,6 +5,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
+import Amplify from "aws-amplify";
+import awsconfig from "./aws-exports";
+Amplify.configure(awsconfig);
+
 export default defineComponent({
   name: "App",
   components: {

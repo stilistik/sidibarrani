@@ -1,0 +1,20 @@
+type Team @model @auth(rules: [{allow: public}]) @key(name: "byGame", fields: ["gameID"]) {
+  id: ID!
+  score: Int
+  name: String
+  Users: [User] @connection(keyName: "byTeam", fields: ["id"])
+  gameID: ID
+}
+
+type User @model @auth(rules: [{allow: public}]) @key(name: "byTeam", fields: ["teamID"]) {
+  id: ID!
+  username: String
+  email: String
+  teamID: ID
+}
+
+type Game @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Teams: [Team] @connection(keyName: "byGame", fields: ["id"])
+}
+ 

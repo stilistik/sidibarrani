@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sidibarrani-staging-80421-authRole",
+      "UnauthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-staging-80421-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-staging-80421-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-sidibarrani-staging-80421-deployment",
+      "UnauthRoleName": "amplify-sidibarrani-staging-80421-unauthRole",
+      "StackName": "amplify-sidibarrani-staging-80421",
+      "StackId": "arn:aws:cloudformation:eu-central-1:875427163685:stack/amplify-sidibarrani-staging-80421/70dae7f0-dc9e-11eb-8603-02dad75e68a4",
+      "AmplifyAppId": "dsmsckhno881o"
+    },
+    "categories": {
+      "auth": {
+        "SidiBarrani": {}
+      }
+    }
+  }
+}
