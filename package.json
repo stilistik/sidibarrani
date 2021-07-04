@@ -1,0 +1,9 @@
+{
+  "name": "sidi-barrani",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://stilistik@gitlab.com/stilistik/sidi-barrani.git",
+  "author": "Philipp Gerber <philipp@rundumeli.ch>",
+  "license": "MIT",
+  "private": true
+}
