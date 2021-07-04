@@ -30,6 +30,7 @@ export declare class User {
 export declare class Game {
   readonly id: string;
   readonly Teams?: (Team | null)[];
+  readonly name?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Game>);

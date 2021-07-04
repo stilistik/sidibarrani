@@ -166,10 +166,12 @@ export type DeleteUserInput = {
 
 export type CreateGameInput = {
   id?: string | null,
+  name?: string | null,
   _version?: number | null,
 };
 
 export type ModelGameConditionInput = {
+  name?: ModelStringInput | null,
   and?: Array< ModelGameConditionInput | null > | null,
   or?: Array< ModelGameConditionInput | null > | null,
   not?: ModelGameConditionInput | null,
@@ -178,6 +180,7 @@ export type ModelGameConditionInput = {
 export type Game = {
   __typename: "Game",
   id: string,
+  name?: string | null,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
@@ -195,6 +198,7 @@ export type ModelTeamConnection = {
 
 export type UpdateGameInput = {
   id: string,
+  name?: string | null,
   _version?: number | null,
 };
 
@@ -225,6 +229,7 @@ export type ModelUserFilterInput = {
 
 export type ModelGameFilterInput = {
   id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
   and?: Array< ModelGameFilterInput | null > | null,
   or?: Array< ModelGameFilterInput | null > | null,
   not?: ModelGameFilterInput | null,
@@ -381,6 +386,7 @@ export type CreateGameMutation = {
   createGame?:  {
     __typename: "Game",
     id: string,
+    name?: string | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -403,6 +409,7 @@ export type UpdateGameMutation = {
   updateGame?:  {
     __typename: "Game",
     id: string,
+    name?: string | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -425,6 +432,7 @@ export type DeleteGameMutation = {
   deleteGame?:  {
     __typename: "Game",
     id: string,
+    name?: string | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -595,6 +603,7 @@ export type GetGameQuery = {
   getGame?:  {
     __typename: "Game",
     id: string,
+    name?: string | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -620,6 +629,7 @@ export type ListGamesQuery = {
     items?:  Array< {
       __typename: "Game",
       id: string,
+      name?: string | null,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
@@ -644,6 +654,7 @@ export type SyncGamesQuery = {
     items?:  Array< {
       __typename: "Game",
       id: string,
+      name?: string | null,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
@@ -764,6 +775,7 @@ export type OnCreateGameSubscription = {
   onCreateGame?:  {
     __typename: "Game",
     id: string,
+    name?: string | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -781,6 +793,7 @@ export type OnUpdateGameSubscription = {
   onUpdateGame?:  {
     __typename: "Game",
     id: string,
+    name?: string | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -798,6 +811,7 @@ export type OnDeleteGameSubscription = {
   onDeleteGame?:  {
     __typename: "Game",
     id: string,
+    name?: string | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,

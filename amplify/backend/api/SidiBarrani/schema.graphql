@@ -16,5 +16,6 @@ type User @model @auth(rules: [{allow: public}]) @key(name: "byTeam", fields: ["
 type Game @model @auth(rules: [{allow: public}]) {
   id: ID!
   Teams: [Team] @connection(keyName: "byGame", fields: ["id"])
+  name: String
 }
  

@@ -202,6 +202,13 @@ export const schema = {
                         "associatedWith": "gameID"
                     }
                 },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -247,5 +254,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "10165fce97639ced5d9b1dd0ba1c6f03"
+    "version": "b54463834cb819b52e58225911375bbe"
 };

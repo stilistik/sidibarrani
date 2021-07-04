@@ -108,6 +108,7 @@ export const onCreateGame = /* GraphQL */ `
   subscription OnCreateGame {
     onCreateGame {
       id
+      name
       _version
       _deleted
       _lastChangedAt
@@ -124,6 +125,7 @@ export const onUpdateGame = /* GraphQL */ `
   subscription OnUpdateGame {
     onUpdateGame {
       id
+      name
       _version
       _deleted
       _lastChangedAt
@@ -140,6 +142,7 @@ export const onDeleteGame = /* GraphQL */ `
   subscription OnDeleteGame {
     onDeleteGame {
       id
+      name
       _version
       _deleted
       _lastChangedAt

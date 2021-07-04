@@ -129,6 +129,7 @@ export const createGame = /* GraphQL */ `
   ) {
     createGame(input: $input, condition: $condition) {
       id
+      name
       _version
       _deleted
       _lastChangedAt
@@ -148,6 +149,7 @@ export const updateGame = /* GraphQL */ `
   ) {
     updateGame(input: $input, condition: $condition) {
       id
+      name
       _version
       _deleted
       _lastChangedAt
@@ -167,6 +169,7 @@ export const deleteGame = /* GraphQL */ `
   ) {
     deleteGame(input: $input, condition: $condition) {
       id
+      name
       _version
       _deleted
       _lastChangedAt

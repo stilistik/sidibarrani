@@ -144,6 +144,7 @@ export const getGame = /* GraphQL */ `
   query GetGame($id: ID!) {
     getGame(id: $id) {
       id
+      name
       _version
       _deleted
       _lastChangedAt
@@ -165,6 +166,7 @@ export const listGames = /* GraphQL */ `
     listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
         _version
         _deleted
         _lastChangedAt
@@ -191,6 +193,7 @@ export const syncGames = /* GraphQL */ `
     ) {
       items {
         id
+        name
         _version
         _deleted
         _lastChangedAt
