@@ -1,6 +1,17 @@
 <template>
-  <div class="game">
-    <h3>{{ name }}</h3>
+  <div
+    class="
+      pt-6
+      md:p-8
+      text-center
+      md:text-left
+      space-y-4
+      shadow-xl
+      m-10
+      rounded-xl
+    "
+  >
+    <h3 class="text-3xl font-bold leading-tight text-gray-900">{{ name }}</h3>
     <button>Join</button>
   </div>
 </template>
@@ -13,11 +24,3 @@ export default defineComponent({
   props: ["name", "id"],
 });
 </script>
-
-<style scoped>
-div.game {
-  display: flex;
-  height: 30px;
-  align-items: center;
-}
-</style>
