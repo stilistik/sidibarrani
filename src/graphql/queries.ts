@@ -2,6 +2,11 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const echo = /* GraphQL */ `
+  query Echo($msg: String) {
+    echo(msg: $msg)
+  }
+`;
 export const getGame = /* GraphQL */ `
   query GetGame($id: ID!) {
     getGame(id: $id) {

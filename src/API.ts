@@ -718,6 +718,14 @@ export type DeletePlayerMutation = {
   } | null,
 };
 
+export type EchoQueryVariables = {
+  msg?: string | null,
+};
+
+export type EchoQuery = {
+  echo?: string | null,
+};
+
 export type GetGameQueryVariables = {
   id: string,
 };

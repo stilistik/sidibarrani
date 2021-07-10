@@ -10,6 +10,14 @@
       "StackName": "amplify-sidibarrani-dev-154244",
       "StackId": "arn:aws:cloudformation:eu-central-1:875427163685:stack/amplify-sidibarrani-dev-154244/b63e7010-e184-11eb-b86d-0ac31c9bb5d8",
       "AmplifyAppId": "d241dpptb98uz0"
+    },
+    "categories": {
+      "function": {
+        "echo": {
+          "deploymentBucketName": "amplify-sidibarrani-dev-154244-deployment",
+          "s3Key": "amplify-builds/echo-6f4c514c536d4a674142-build.zip"
+        }
+      }
     }
   }
 }
