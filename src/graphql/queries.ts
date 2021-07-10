@@ -2,16 +2,15 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getBlog = /* GraphQL */ `
-  query GetBlog($id: ID!) {
-    getBlog(id: $id) {
+export const getGame = /* GraphQL */ `
+  query GetGame($id: ID!) {
+    getGame(id: $id) {
       id
       name
-      posts {
+      teams {
         items {
           id
-          title
-          blogID
+          gameID
           createdAt
           updatedAt
         }
@@ -22,17 +21,17 @@ export const getBlog = /* GraphQL */ `
     }
   }
 `;
-export const listBlogs = /* GraphQL */ `
-  query ListBlogs(
-    $filter: ModelBlogFilterInput
+export const listGames = /* GraphQL */ `
+  query ListGames(
+    $filter: ModelGameFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listBlogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
-        posts {
+        teams {
           nextToken
         }
         createdAt
@@ -42,26 +41,16 @@ export const listBlogs = /* GraphQL */ `
     }
   }
 `;
-export const getPost = /* GraphQL */ `
-  query GetPost($id: ID!) {
-    getPost(id: $id) {
+export const getTeam = /* GraphQL */ `
+  query GetTeam($id: ID!) {
+    getTeam(id: $id) {
       id
-      title
-      blogID
-      blog {
-        id
-        name
-        posts {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      comments {
+      gameID
+      players {
         items {
           id
-          postID
-          content
+          playerID
+          teamID
           createdAt
           updatedAt
         }
@@ -72,24 +61,17 @@ export const getPost = /* GraphQL */ `
     }
   }
 `;
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
+export const listTeams = /* GraphQL */ `
+  query ListTeams(
+    $filter: ModelTeamFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
+        gameID
+        players {
           nextToken
         }
         createdAt
@@ -99,51 +81,39 @@ export const listPosts = /* GraphQL */ `
     }
   }
 `;
-export const getComment = /* GraphQL */ `
-  query GetComment($id: ID!) {
-    getComment(id: $id) {
+export const getPlayer = /* GraphQL */ `
+  query GetPlayer($id: ID!) {
+    getPlayer(id: $id) {
       id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
+      name
+      teams {
+        items {
           id
-          name
+          playerID
+          teamID
           createdAt
           updatedAt
         }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
+        nextToken
       }
-      content
       createdAt
       updatedAt
     }
   }
 `;
-export const listComments = /* GraphQL */ `
-  query ListComments(
-    $filter: ModelCommentFilterInput
+export const listPlayers = /* GraphQL */ `
+  query ListPlayers(
+    $filter: ModelPlayerFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listComments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listPlayers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        postID
-        post {
-          id
-          title
-          blogID
-          createdAt
-          updatedAt
+        name
+        teams {
+          nextToken
         }
-        content
         createdAt
         updatedAt
       }

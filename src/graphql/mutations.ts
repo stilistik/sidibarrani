@@ -2,19 +2,18 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createBlog = /* GraphQL */ `
-  mutation CreateBlog(
-    $input: CreateBlogInput!
-    $condition: ModelBlogConditionInput
+export const createGame = /* GraphQL */ `
+  mutation CreateGame(
+    $input: CreateGameInput!
+    $condition: ModelGameConditionInput
   ) {
-    createBlog(input: $input, condition: $condition) {
+    createGame(input: $input, condition: $condition) {
       id
       name
-      posts {
+      teams {
         items {
           id
-          title
-          blogID
+          gameID
           createdAt
           updatedAt
         }
@@ -25,19 +24,18 @@ export const createBlog = /* GraphQL */ `
     }
   }
 `;
-export const updateBlog = /* GraphQL */ `
-  mutation UpdateBlog(
-    $input: UpdateBlogInput!
-    $condition: ModelBlogConditionInput
+export const updateGame = /* GraphQL */ `
+  mutation UpdateGame(
+    $input: UpdateGameInput!
+    $condition: ModelGameConditionInput
   ) {
-    updateBlog(input: $input, condition: $condition) {
+    updateGame(input: $input, condition: $condition) {
       id
       name
-      posts {
+      teams {
         items {
           id
-          title
-          blogID
+          gameID
           createdAt
           updatedAt
         }
@@ -48,19 +46,18 @@ export const updateBlog = /* GraphQL */ `
     }
   }
 `;
-export const deleteBlog = /* GraphQL */ `
-  mutation DeleteBlog(
-    $input: DeleteBlogInput!
-    $condition: ModelBlogConditionInput
+export const deleteGame = /* GraphQL */ `
+  mutation DeleteGame(
+    $input: DeleteGameInput!
+    $condition: ModelGameConditionInput
   ) {
-    deleteBlog(input: $input, condition: $condition) {
+    deleteGame(input: $input, condition: $condition) {
       id
       name
-      posts {
+      teams {
         items {
           id
-          title
-          blogID
+          gameID
           createdAt
           updatedAt
         }
@@ -71,95 +68,184 @@ export const deleteBlog = /* GraphQL */ `
     }
   }
 `;
-export const createPost = /* GraphQL */ `
-  mutation CreatePost(
-    $input: CreatePostInput!
-    $condition: ModelPostConditionInput
+export const createTeam = /* GraphQL */ `
+  mutation CreateTeam(
+    $input: CreateTeamInput!
+    $condition: ModelTeamConditionInput
   ) {
-    createPost(input: $input, condition: $condition) {
+    createTeam(input: $input, condition: $condition) {
       id
-      title
-      blogID
-      blog {
+      gameID
+      players {
+        items {
+          id
+          playerID
+          teamID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateTeam = /* GraphQL */ `
+  mutation UpdateTeam(
+    $input: UpdateTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    updateTeam(input: $input, condition: $condition) {
+      id
+      gameID
+      players {
+        items {
+          id
+          playerID
+          teamID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteTeam = /* GraphQL */ `
+  mutation DeleteTeam(
+    $input: DeleteTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    deleteTeam(input: $input, condition: $condition) {
+      id
+      gameID
+      players {
+        items {
+          id
+          playerID
+          teamID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPlayerTeams = /* GraphQL */ `
+  mutation CreatePlayerTeams(
+    $input: CreatePlayerTeamsInput!
+    $condition: ModelPlayerTeamsConditionInput
+  ) {
+    createPlayerTeams(input: $input, condition: $condition) {
+      id
+      playerID
+      teamID
+      player {
         id
         name
-        posts {
+        teams {
           nextToken
         }
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
+      team {
+        id
+        gameID
+        players {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
     }
   }
 `;
-export const updatePost = /* GraphQL */ `
-  mutation UpdatePost(
-    $input: UpdatePostInput!
-    $condition: ModelPostConditionInput
+export const updatePlayerTeams = /* GraphQL */ `
+  mutation UpdatePlayerTeams(
+    $input: UpdatePlayerTeamsInput!
+    $condition: ModelPlayerTeamsConditionInput
   ) {
-    updatePost(input: $input, condition: $condition) {
+    updatePlayerTeams(input: $input, condition: $condition) {
       id
-      title
-      blogID
-      blog {
+      playerID
+      teamID
+      player {
         id
         name
-        posts {
+        teams {
           nextToken
         }
         createdAt
         updatedAt
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
+      team {
+        id
+        gameID
+        players {
+          nextToken
         }
-        nextToken
+        createdAt
+        updatedAt
       }
       createdAt
       updatedAt
     }
   }
 `;
-export const deletePost = /* GraphQL */ `
-  mutation DeletePost(
-    $input: DeletePostInput!
-    $condition: ModelPostConditionInput
+export const deletePlayerTeams = /* GraphQL */ `
+  mutation DeletePlayerTeams(
+    $input: DeletePlayerTeamsInput!
+    $condition: ModelPlayerTeamsConditionInput
   ) {
-    deletePost(input: $input, condition: $condition) {
+    deletePlayerTeams(input: $input, condition: $condition) {
       id
-      title
-      blogID
-      blog {
+      playerID
+      teamID
+      player {
         id
         name
-        posts {
+        teams {
           nextToken
         }
         createdAt
         updatedAt
       }
-      comments {
+      team {
+        id
+        gameID
+        players {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPlayer = /* GraphQL */ `
+  mutation CreatePlayer(
+    $input: CreatePlayerInput!
+    $condition: ModelPlayerConditionInput
+  ) {
+    createPlayer(input: $input, condition: $condition) {
+      id
+      name
+      teams {
         items {
           id
-          postID
-          content
+          playerID
+          teamID
           createdAt
           updatedAt
         }
@@ -170,91 +256,47 @@ export const deletePost = /* GraphQL */ `
     }
   }
 `;
-export const createComment = /* GraphQL */ `
-  mutation CreateComment(
-    $input: CreateCommentInput!
-    $condition: ModelCommentConditionInput
+export const updatePlayer = /* GraphQL */ `
+  mutation UpdatePlayer(
+    $input: UpdatePlayerInput!
+    $condition: ModelPlayerConditionInput
   ) {
-    createComment(input: $input, condition: $condition) {
+    updatePlayer(input: $input, condition: $condition) {
       id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
+      name
+      teams {
+        items {
           id
-          name
+          playerID
+          teamID
           createdAt
           updatedAt
         }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
+        nextToken
       }
-      content
       createdAt
       updatedAt
     }
   }
 `;
-export const updateComment = /* GraphQL */ `
-  mutation UpdateComment(
-    $input: UpdateCommentInput!
-    $condition: ModelCommentConditionInput
+export const deletePlayer = /* GraphQL */ `
+  mutation DeletePlayer(
+    $input: DeletePlayerInput!
+    $condition: ModelPlayerConditionInput
   ) {
-    updateComment(input: $input, condition: $condition) {
+    deletePlayer(input: $input, condition: $condition) {
       id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
+      name
+      teams {
+        items {
           id
-          name
+          playerID
+          teamID
           createdAt
           updatedAt
         }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
+        nextToken
       }
-      content
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteComment = /* GraphQL */ `
-  mutation DeleteComment(
-    $input: DeleteCommentInput!
-    $condition: ModelCommentConditionInput
-  ) {
-    deleteComment(input: $input, condition: $condition) {
-      id
-      postID
-      post {
-        id
-        title
-        blogID
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-        }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
-      }
-      content
       createdAt
       updatedAt
     }

@@ -1,20 +1,28 @@
-type Blog @model {
+type Game @model {
   id: ID!
   name: String!
-  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+  teams: [Team] @connection(keyName: "byGame", fields: ["id"])
 }
 
-type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+type Team @model @key(name: "byGame", fields: ["gameID"]) {
   id: ID!
-  title: String!
-  blogID: ID!
-  blog: Blog @connection(fields: ["blogID"])
-  comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  gameID: ID!
+  players: [PlayerTeams] @connection(keyName: "byTeam", fields: ["id"])
 }
 
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+type PlayerTeams
+  @model(queries: null)
+  @key(name: "byPlayer", fields: ["playerID", "teamID"])
+  @key(name: "byTeam", fields: ["teamID", "playerID"]) {
   id: ID!
-  postID: ID!
-  post: Post @connection(fields: ["postID"])
-  content: String!
+  playerID: ID!
+  teamID: ID!
+  player: Player! @connection(fields: ["playerID"])
+  team: Team! @connection(fields: ["teamID"])
+}
+
+type Player @model {
+  id: ID!
+  name: String!
+  teams: [PlayerTeams] @connection(keyName: "byPlayer", fields: ["id"])
 }
