@@ -15,7 +15,7 @@
       "function": {
         "echo": {
           "deploymentBucketName": "amplify-sidibarrani-dev-154244-deployment",
-          "s3Key": "amplify-builds/echo-6f4c514c536d4a674142-build.zip"
+          "s3Key": "amplify-builds/echo-74713859496342377a6b-build.zip"
         }
       }
     }
