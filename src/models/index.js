@@ -4,9 +4,13 @@ import { schema } from './schema';
 
 
 
-const { Team, User, Game } = initSchema(schema);
+const { Deck, DeckCard, Card, Round, Team, User, Game } = initSchema(schema);
 
 export {
+  Deck,
+  DeckCard,
+  Card,
+  Round,
   Team,
   User,
   Game
