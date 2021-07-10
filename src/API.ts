@@ -5,6 +5,7 @@
 export type CreateGameInput = {
   id?: string | null,
   name: string,
+  _version?: number | null,
 };
 
 export type ModelGameConditionInput = {
@@ -58,30 +59,38 @@ export type Game = {
   __typename: "Game",
   id: string,
   name: string,
-  teams?: ModelTeamConnection | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
+  teams?: ModelTeamConnection | null,
 };
 
 export type ModelTeamConnection = {
   __typename: "ModelTeamConnection",
   items?:  Array<Team | null > | null,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type Team = {
   __typename: "Team",
   id: string,
   gameID: string,
-  players?: ModelPlayerTeamsConnection | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
+  players?: ModelPlayerTeamsConnection | null,
 };
 
 export type ModelPlayerTeamsConnection = {
   __typename: "ModelPlayerTeamsConnection",
   items?:  Array<PlayerTeams | null > | null,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type PlayerTeams = {
@@ -89,33 +98,42 @@ export type PlayerTeams = {
   id: string,
   playerID: string,
   teamID: string,
-  player: Player,
-  team: Team,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
+  team: Team,
+  player: Player,
 };
 
 export type Player = {
   __typename: "Player",
   id: string,
   name: string,
-  teams?: ModelPlayerTeamsConnection | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
+  teams?: ModelPlayerTeamsConnection | null,
 };
 
 export type UpdateGameInput = {
   id: string,
   name?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteGameInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreateTeamInput = {
   id?: string | null,
   gameID: string,
+  _version?: number | null,
 };
 
 export type ModelTeamConditionInput = {
@@ -144,16 +162,19 @@ export type ModelIDInput = {
 export type UpdateTeamInput = {
   id: string,
   gameID?: string | null,
+  _version?: number | null,
 };
 
 export type DeleteTeamInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreatePlayerTeamsInput = {
   id?: string | null,
   playerID: string,
   teamID: string,
+  _version?: number | null,
 };
 
 export type ModelPlayerTeamsConditionInput = {
@@ -168,15 +189,18 @@ export type UpdatePlayerTeamsInput = {
   id: string,
   playerID?: string | null,
   teamID?: string | null,
+  _version?: number | null,
 };
 
 export type DeletePlayerTeamsInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type CreatePlayerInput = {
   id?: string | null,
   name: string,
+  _version?: number | null,
 };
 
 export type ModelPlayerConditionInput = {
@@ -189,10 +213,12 @@ export type ModelPlayerConditionInput = {
 export type UpdatePlayerInput = {
   id: string,
   name?: string | null,
+  _version?: number | null,
 };
 
 export type DeletePlayerInput = {
   id: string,
+  _version?: number | null,
 };
 
 export type ModelGameFilterInput = {
@@ -207,6 +233,7 @@ export type ModelGameConnection = {
   __typename: "ModelGameConnection",
   items?:  Array<Game | null > | null,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type ModelTeamFilterInput = {
@@ -215,6 +242,15 @@ export type ModelTeamFilterInput = {
   and?: Array< ModelTeamFilterInput | null > | null,
   or?: Array< ModelTeamFilterInput | null > | null,
   not?: ModelTeamFilterInput | null,
+};
+
+export type ModelPlayerTeamsFilterInput = {
+  id?: ModelIDInput | null,
+  playerID?: ModelIDInput | null,
+  teamID?: ModelIDInput | null,
+  and?: Array< ModelPlayerTeamsFilterInput | null > | null,
+  or?: Array< ModelPlayerTeamsFilterInput | null > | null,
+  not?: ModelPlayerTeamsFilterInput | null,
 };
 
 export type ModelPlayerFilterInput = {
@@ -229,6 +265,7 @@ export type ModelPlayerConnection = {
   __typename: "ModelPlayerConnection",
   items?:  Array<Player | null > | null,
   nextToken?: string | null,
+  startedAt?: number | null,
 };
 
 export type CreateGameMutationVariables = {
@@ -241,19 +278,26 @@ export type CreateGameMutation = {
     __typename: "Game",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelTeamConnection",
       items?:  Array< {
         __typename: "Team",
         id: string,
         gameID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -267,19 +311,26 @@ export type UpdateGameMutation = {
     __typename: "Game",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelTeamConnection",
       items?:  Array< {
         __typename: "Team",
         id: string,
         gameID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -293,19 +344,26 @@ export type DeleteGameMutation = {
     __typename: "Game",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelTeamConnection",
       items?:  Array< {
         __typename: "Team",
         id: string,
         gameID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -319,6 +377,11 @@ export type CreateTeamMutation = {
     __typename: "Team",
     id: string,
     gameID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     players?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -326,13 +389,15 @@ export type CreateTeamMutation = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -346,6 +411,11 @@ export type UpdateTeamMutation = {
     __typename: "Team",
     id: string,
     gameID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     players?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -353,13 +423,15 @@ export type UpdateTeamMutation = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -373,6 +445,11 @@ export type DeleteTeamMutation = {
     __typename: "Team",
     id: string,
     gameID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     players?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -380,13 +457,15 @@ export type DeleteTeamMutation = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -401,30 +480,41 @@ export type CreatePlayerTeamsMutation = {
     id: string,
     playerID: string,
     teamID: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      name: string,
-      teams?:  {
-        __typename: "ModelPlayerTeamsConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    },
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     team:  {
       __typename: "Team",
       id: string,
       gameID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
       players?:  {
         __typename: "ModelPlayerTeamsConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
+    },
+    player:  {
+      __typename: "Player",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
+      teams?:  {
+        __typename: "ModelPlayerTeamsConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
     },
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -439,30 +529,41 @@ export type UpdatePlayerTeamsMutation = {
     id: string,
     playerID: string,
     teamID: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      name: string,
-      teams?:  {
-        __typename: "ModelPlayerTeamsConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    },
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     team:  {
       __typename: "Team",
       id: string,
       gameID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
       players?:  {
         __typename: "ModelPlayerTeamsConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
+    },
+    player:  {
+      __typename: "Player",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
+      teams?:  {
+        __typename: "ModelPlayerTeamsConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
     },
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -477,30 +578,41 @@ export type DeletePlayerTeamsMutation = {
     id: string,
     playerID: string,
     teamID: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      name: string,
-      teams?:  {
-        __typename: "ModelPlayerTeamsConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    },
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     team:  {
       __typename: "Team",
       id: string,
       gameID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
       players?:  {
         __typename: "ModelPlayerTeamsConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
+    },
+    player:  {
+      __typename: "Player",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
+      teams?:  {
+        __typename: "ModelPlayerTeamsConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
     },
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -514,6 +626,11 @@ export type CreatePlayerMutation = {
     __typename: "Player",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -521,13 +638,15 @@ export type CreatePlayerMutation = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -541,6 +660,11 @@ export type UpdatePlayerMutation = {
     __typename: "Player",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -548,13 +672,15 @@ export type UpdatePlayerMutation = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -568,6 +694,11 @@ export type DeletePlayerMutation = {
     __typename: "Player",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -575,13 +706,15 @@ export type DeletePlayerMutation = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -594,19 +727,26 @@ export type GetGameQuery = {
     __typename: "Game",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelTeamConnection",
       items?:  Array< {
         __typename: "Team",
         id: string,
         gameID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -623,14 +763,49 @@ export type ListGamesQuery = {
       __typename: "Game",
       id: string,
       name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
       teams?:  {
         __typename: "ModelTeamConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null > | null,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncGamesQueryVariables = {
+  filter?: ModelGameFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncGamesQuery = {
+  syncGames?:  {
+    __typename: "ModelGameConnection",
+    items?:  Array< {
+      __typename: "Game",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      teams?:  {
+        __typename: "ModelTeamConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -643,6 +818,11 @@ export type GetTeamQuery = {
     __typename: "Team",
     id: string,
     gameID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     players?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -650,13 +830,15 @@ export type GetTeamQuery = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -673,14 +855,95 @@ export type ListTeamsQuery = {
       __typename: "Team",
       id: string,
       gameID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
       players?:  {
         __typename: "ModelPlayerTeamsConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null > | null,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncTeamsQueryVariables = {
+  filter?: ModelTeamFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncTeamsQuery = {
+  syncTeams?:  {
+    __typename: "ModelTeamConnection",
+    items?:  Array< {
+      __typename: "Team",
+      id: string,
+      gameID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      players?:  {
+        __typename: "ModelPlayerTeamsConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncPlayerTeamsQueryVariables = {
+  filter?: ModelPlayerTeamsFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncPlayerTeamsQuery = {
+  syncPlayerTeams?:  {
+    __typename: "ModelPlayerTeamsConnection",
+    items?:  Array< {
+      __typename: "PlayerTeams",
+      id: string,
+      playerID: string,
+      teamID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      team:  {
+        __typename: "Team",
+        id: string,
+        gameID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      player:  {
+        __typename: "Player",
+        id: string,
+        name: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -693,6 +956,11 @@ export type GetPlayerQuery = {
     __typename: "Player",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -700,13 +968,15 @@ export type GetPlayerQuery = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -723,14 +993,49 @@ export type ListPlayersQuery = {
       __typename: "Player",
       id: string,
       name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
       teams?:  {
         __typename: "ModelPlayerTeamsConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
-      createdAt: string,
-      updatedAt: string,
     } | null > | null,
     nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncPlayersQueryVariables = {
+  filter?: ModelPlayerFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncPlayersQuery = {
+  syncPlayers?:  {
+    __typename: "ModelPlayerConnection",
+    items?:  Array< {
+      __typename: "Player",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+      teams?:  {
+        __typename: "ModelPlayerTeamsConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -739,19 +1044,26 @@ export type OnCreateGameSubscription = {
     __typename: "Game",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelTeamConnection",
       items?:  Array< {
         __typename: "Team",
         id: string,
         gameID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -760,19 +1072,26 @@ export type OnUpdateGameSubscription = {
     __typename: "Game",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelTeamConnection",
       items?:  Array< {
         __typename: "Team",
         id: string,
         gameID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -781,19 +1100,26 @@ export type OnDeleteGameSubscription = {
     __typename: "Game",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelTeamConnection",
       items?:  Array< {
         __typename: "Team",
         id: string,
         gameID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -802,6 +1128,11 @@ export type OnCreateTeamSubscription = {
     __typename: "Team",
     id: string,
     gameID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     players?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -809,13 +1140,15 @@ export type OnCreateTeamSubscription = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -824,6 +1157,11 @@ export type OnUpdateTeamSubscription = {
     __typename: "Team",
     id: string,
     gameID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     players?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -831,13 +1169,15 @@ export type OnUpdateTeamSubscription = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -846,6 +1186,11 @@ export type OnDeleteTeamSubscription = {
     __typename: "Team",
     id: string,
     gameID: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     players?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -853,13 +1198,15 @@ export type OnDeleteTeamSubscription = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -869,30 +1216,41 @@ export type OnCreatePlayerTeamsSubscription = {
     id: string,
     playerID: string,
     teamID: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      name: string,
-      teams?:  {
-        __typename: "ModelPlayerTeamsConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    },
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     team:  {
       __typename: "Team",
       id: string,
       gameID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
       players?:  {
         __typename: "ModelPlayerTeamsConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
+    },
+    player:  {
+      __typename: "Player",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
+      teams?:  {
+        __typename: "ModelPlayerTeamsConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
     },
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -902,30 +1260,41 @@ export type OnUpdatePlayerTeamsSubscription = {
     id: string,
     playerID: string,
     teamID: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      name: string,
-      teams?:  {
-        __typename: "ModelPlayerTeamsConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    },
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     team:  {
       __typename: "Team",
       id: string,
       gameID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
       players?:  {
         __typename: "ModelPlayerTeamsConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
+    },
+    player:  {
+      __typename: "Player",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
+      teams?:  {
+        __typename: "ModelPlayerTeamsConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
     },
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -935,30 +1304,41 @@ export type OnDeletePlayerTeamsSubscription = {
     id: string,
     playerID: string,
     teamID: string,
-    player:  {
-      __typename: "Player",
-      id: string,
-      name: string,
-      teams?:  {
-        __typename: "ModelPlayerTeamsConnection",
-        nextToken?: string | null,
-      } | null,
-      createdAt: string,
-      updatedAt: string,
-    },
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     team:  {
       __typename: "Team",
       id: string,
       gameID: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
       players?:  {
         __typename: "ModelPlayerTeamsConnection",
         nextToken?: string | null,
+        startedAt?: number | null,
       } | null,
+    },
+    player:  {
+      __typename: "Player",
+      id: string,
+      name: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
+      teams?:  {
+        __typename: "ModelPlayerTeamsConnection",
+        nextToken?: string | null,
+        startedAt?: number | null,
+      } | null,
     },
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -967,6 +1347,11 @@ export type OnCreatePlayerSubscription = {
     __typename: "Player",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -974,13 +1359,15 @@ export type OnCreatePlayerSubscription = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -989,6 +1376,11 @@ export type OnUpdatePlayerSubscription = {
     __typename: "Player",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -996,13 +1388,15 @@ export type OnUpdatePlayerSubscription = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };
 
@@ -1011,6 +1405,11 @@ export type OnDeletePlayerSubscription = {
     __typename: "Player",
     id: string,
     name: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
     teams?:  {
       __typename: "ModelPlayerTeamsConnection",
       items?:  Array< {
@@ -1018,12 +1417,14 @@ export type OnDeletePlayerSubscription = {
         id: string,
         playerID: string,
         teamID: string,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
+      startedAt?: number | null,
     } | null,
-    createdAt: string,
-    updatedAt: string,
   } | null,
 };

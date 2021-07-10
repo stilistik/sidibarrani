@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Deck": {
-            "name": "Deck",
+        "Game": {
+            "name": "Game",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,18 +10,25 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "cards": {
-                    "name": "cards",
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "teams": {
+                    "name": "teams",
                     "isArray": true,
                     "type": {
-                        "model": "DeckCard"
+                        "model": "Team"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "deck"
+                        "associatedWith": "gameID"
                     }
                 },
                 "createdAt": {
@@ -42,261 +49,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Decks",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "DeckCard": {
-            "name": "DeckCard",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "deck": {
-                    "name": "deck",
-                    "isArray": false,
-                    "type": {
-                        "model": "Deck"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "deckID"
-                    }
-                },
-                "card": {
-                    "name": "card",
-                    "isArray": false,
-                    "type": {
-                        "model": "Card"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "cardID"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "DeckCards",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {
-                        "queries": null
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byDeck",
-                        "fields": [
-                            "deckID",
-                            "cardID"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byCard",
-                        "fields": [
-                            "cardID",
-                            "deckID"
-                        ]
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Card": {
-            "name": "Card",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "decks": {
-                    "name": "decks",
-                    "isArray": true,
-                    "type": {
-                        "model": "DeckCard"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "card"
-                    }
-                },
-                "rank": {
-                    "name": "rank",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "suit": {
-                    "name": "suit",
-                    "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Cards",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Round": {
-            "name": "Round",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "deck": {
-                    "name": "deck",
-                    "isArray": false,
-                    "type": {
-                        "model": "Deck"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "roundDeckId"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Rounds",
+            "pluralName": "Games",
             "attributes": [
                 {
                     "type": "model",
@@ -330,40 +83,26 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "score": {
-                    "name": "score",
+                "gameID": {
+                    "name": "gameID",
                     "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
+                    "type": "ID",
+                    "isRequired": true,
                     "attributes": []
                 },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "users": {
-                    "name": "users",
+                "players": {
+                    "name": "players",
                     "isArray": true,
                     "type": {
-                        "model": "User"
+                        "model": "PlayerTeams"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "teamID"
+                        "associatedWith": "team"
                     }
-                },
-                "gameID": {
-                    "name": "gameID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -416,8 +155,8 @@ export const schema = {
                 }
             ]
         },
-        "User": {
-            "name": "User",
+        "PlayerTeams": {
+            "name": "PlayerTeams",
             "fields": {
                 "id": {
                     "name": "id",
@@ -426,26 +165,31 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "username": {
-                    "name": "username",
+                "player": {
+                    "name": "player",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
+                    "type": {
+                        "model": "Player"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "playerID"
+                    }
                 },
-                "email": {
-                    "name": "email",
+                "team": {
+                    "name": "team",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "teamID": {
-                    "name": "teamID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
+                    "type": {
+                        "model": "Team"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "teamID"
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -465,18 +209,31 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Users",
+            "pluralName": "PlayerTeams",
             "attributes": [
                 {
                     "type": "model",
-                    "properties": {}
+                    "properties": {
+                        "queries": null
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byPlayer",
+                        "fields": [
+                            "playerID",
+                            "teamID"
+                        ]
+                    }
                 },
                 {
                     "type": "key",
                     "properties": {
                         "name": "byTeam",
                         "fields": [
-                            "teamID"
+                            "teamID",
+                            "playerID"
                         ]
                     }
                 },
@@ -498,8 +255,8 @@ export const schema = {
                 }
             ]
         },
-        "Game": {
-            "name": "Game",
+        "Player": {
+            "name": "Player",
             "fields": {
                 "id": {
                     "name": "id",
@@ -508,26 +265,26 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "teams": {
                     "name": "teams",
                     "isArray": true,
                     "type": {
-                        "model": "Team"
+                        "model": "PlayerTeams"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "gameID"
+                        "associatedWith": "player"
                     }
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -547,7 +304,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "Games",
+            "pluralName": "Players",
             "attributes": [
                 {
                     "type": "model",
@@ -574,5 +331,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "885c801b2b70da76b41cafad263e29f9"
+    "version": "d19dc18ceba6aad0adcfaa96cd4be34a"
 };

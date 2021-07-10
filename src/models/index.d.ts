@@ -4,74 +4,42 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-export declare class Deck {
+export declare class Game {
   readonly id: string;
-  readonly cards?: (DeckCard | null)[];
+  readonly name: string;
+  readonly teams?: (Team | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Deck>);
-  static copyOf(source: Deck, mutator: (draft: MutableModel<Deck>) => MutableModel<Deck> | void): Deck;
-}
-
-export declare class DeckCard {
-  readonly id: string;
-  readonly deck: Deck;
-  readonly card: Card;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<DeckCard>);
-  static copyOf(source: DeckCard, mutator: (draft: MutableModel<DeckCard>) => MutableModel<DeckCard> | void): DeckCard;
-}
-
-export declare class Card {
-  readonly id: string;
-  readonly decks?: (DeckCard | null)[];
-  readonly rank?: number;
-  readonly suit?: number;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<Card>);
-  static copyOf(source: Card, mutator: (draft: MutableModel<Card>) => MutableModel<Card> | void): Card;
-}
-
-export declare class Round {
-  readonly id: string;
-  readonly deck?: Deck;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<Round>);
-  static copyOf(source: Round, mutator: (draft: MutableModel<Round>) => MutableModel<Round> | void): Round;
+  constructor(init: ModelInit<Game>);
+  static copyOf(source: Game, mutator: (draft: MutableModel<Game>) => MutableModel<Game> | void): Game;
 }
 
 export declare class Team {
   readonly id: string;
-  readonly score?: number;
-  readonly name?: string;
-  readonly users?: (User | null)[];
-  readonly gameID?: string;
+  readonly gameID: string;
+  readonly players?: (PlayerTeams | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Team>);
   static copyOf(source: Team, mutator: (draft: MutableModel<Team>) => MutableModel<Team> | void): Team;
 }
 
-export declare class User {
+export declare class PlayerTeams {
   readonly id: string;
-  readonly username?: string;
-  readonly email?: string;
-  readonly teamID?: string;
+  readonly player: Player;
+  readonly team: Team;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<User>);
-  static copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+  constructor(init: ModelInit<PlayerTeams>);
+  static copyOf(source: PlayerTeams, mutator: (draft: MutableModel<PlayerTeams>) => MutableModel<PlayerTeams> | void): PlayerTeams;
 }
 
-export declare class Game {
+export declare class Player {
   readonly id: string;
-  readonly teams?: (Team | null)[];
-  readonly name?: string;
+  readonly name: string;
+  readonly teams?: (PlayerTeams | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<Game>);
-  static copyOf(source: Game, mutator: (draft: MutableModel<Game>) => MutableModel<Game> | void): Game;
+  constructor(init: ModelInit<Player>);
+  static copyOf(source: Player, mutator: (draft: MutableModel<Player>) => MutableModel<Player> | void): Player;
 }

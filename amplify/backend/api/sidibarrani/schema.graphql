@@ -1,19 +1,14 @@
-type Game @model {
+type Game @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   teams: [Team] @connection(keyName: "byGame", fields: ["id"])
 }
 
-type Team @model @key(name: "byGame", fields: ["gameID"]) {
-  id: ID!
-  gameID: ID!
-  players: [PlayerTeams] @connection(keyName: "byTeam", fields: ["id"])
-}
-
 type PlayerTeams
   @model(queries: null)
   @key(name: "byPlayer", fields: ["playerID", "teamID"])
-  @key(name: "byTeam", fields: ["teamID", "playerID"]) {
+  @key(name: "byTeam", fields: ["teamID", "playerID"])
+  @auth(rules: [{ allow: public }]) {
   id: ID!
   playerID: ID!
   teamID: ID!
@@ -21,7 +16,16 @@ type PlayerTeams
   team: Team! @connection(fields: ["teamID"])
 }
 
-type Player @model {
+type Team
+  @model
+  @key(name: "byGame", fields: ["gameID"])
+  @auth(rules: [{ allow: public }]) {
+  id: ID!
+  gameID: ID!
+  players: [PlayerTeams] @connection(keyName: "byTeam", fields: ["id"])
+}
+
+type Player @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
   teams: [PlayerTeams] @connection(keyName: "byPlayer", fields: ["id"])
