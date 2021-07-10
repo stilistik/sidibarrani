@@ -84,6 +84,52 @@ export const syncGames = /* GraphQL */ `
     }
   }
 `;
+export const syncPlayerTeams = /* GraphQL */ `
+  query SyncPlayerTeams(
+    $filter: ModelPlayerTeamsFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPlayerTeams(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        playerID
+        teamID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        team {
+          id
+          gameID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        player {
+          id
+          name
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getTeam = /* GraphQL */ `
   query GetTeam($id: ID!) {
     getTeam(id: $id) {
@@ -160,52 +206,6 @@ export const syncTeams = /* GraphQL */ `
         players {
           nextToken
           startedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncPlayerTeams = /* GraphQL */ `
-  query SyncPlayerTeams(
-    $filter: ModelPlayerTeamsFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPlayerTeams(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        playerID
-        teamID
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        team {
-          id
-          gameID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        player {
-          id
-          name
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
         }
       }
       nextToken

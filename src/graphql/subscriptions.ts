@@ -80,87 +80,6 @@ export const onDeleteGame = /* GraphQL */ `
     }
   }
 `;
-export const onCreateTeam = /* GraphQL */ `
-  subscription OnCreateTeam {
-    onCreateTeam {
-      id
-      gameID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      players {
-        items {
-          id
-          playerID
-          teamID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onUpdateTeam = /* GraphQL */ `
-  subscription OnUpdateTeam {
-    onUpdateTeam {
-      id
-      gameID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      players {
-        items {
-          id
-          playerID
-          teamID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const onDeleteTeam = /* GraphQL */ `
-  subscription OnDeleteTeam {
-    onDeleteTeam {
-      id
-      gameID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      players {
-        items {
-          id
-          playerID
-          teamID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
 export const onCreatePlayerTeams = /* GraphQL */ `
   subscription OnCreatePlayerTeams {
     onCreatePlayerTeams {
@@ -277,6 +196,87 @@ export const onDeletePlayerTeams = /* GraphQL */ `
           nextToken
           startedAt
         }
+      }
+    }
+  }
+`;
+export const onCreateTeam = /* GraphQL */ `
+  subscription OnCreateTeam {
+    onCreateTeam {
+      id
+      gameID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      players {
+        items {
+          id
+          playerID
+          teamID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onUpdateTeam = /* GraphQL */ `
+  subscription OnUpdateTeam {
+    onUpdateTeam {
+      id
+      gameID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      players {
+        items {
+          id
+          playerID
+          teamID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteTeam = /* GraphQL */ `
+  subscription OnDeleteTeam {
+    onDeleteTeam {
+      id
+      gameID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      players {
+        items {
+          id
+          playerID
+          teamID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
       }
     }
   }

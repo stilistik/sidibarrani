@@ -89,96 +89,6 @@ export const deleteGame = /* GraphQL */ `
     }
   }
 `;
-export const createTeam = /* GraphQL */ `
-  mutation CreateTeam(
-    $input: CreateTeamInput!
-    $condition: ModelTeamConditionInput
-  ) {
-    createTeam(input: $input, condition: $condition) {
-      id
-      gameID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      players {
-        items {
-          id
-          playerID
-          teamID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const updateTeam = /* GraphQL */ `
-  mutation UpdateTeam(
-    $input: UpdateTeamInput!
-    $condition: ModelTeamConditionInput
-  ) {
-    updateTeam(input: $input, condition: $condition) {
-      id
-      gameID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      players {
-        items {
-          id
-          playerID
-          teamID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
-export const deleteTeam = /* GraphQL */ `
-  mutation DeleteTeam(
-    $input: DeleteTeamInput!
-    $condition: ModelTeamConditionInput
-  ) {
-    deleteTeam(input: $input, condition: $condition) {
-      id
-      gameID
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      players {
-        items {
-          id
-          playerID
-          teamID
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-        nextToken
-        startedAt
-      }
-    }
-  }
-`;
 export const createPlayerTeams = /* GraphQL */ `
   mutation CreatePlayerTeams(
     $input: CreatePlayerTeamsInput!
@@ -304,6 +214,96 @@ export const deletePlayerTeams = /* GraphQL */ `
           nextToken
           startedAt
         }
+      }
+    }
+  }
+`;
+export const createTeam = /* GraphQL */ `
+  mutation CreateTeam(
+    $input: CreateTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    createTeam(input: $input, condition: $condition) {
+      id
+      gameID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      players {
+        items {
+          id
+          playerID
+          teamID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const updateTeam = /* GraphQL */ `
+  mutation UpdateTeam(
+    $input: UpdateTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    updateTeam(input: $input, condition: $condition) {
+      id
+      gameID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      players {
+        items {
+          id
+          playerID
+          teamID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const deleteTeam = /* GraphQL */ `
+  mutation DeleteTeam(
+    $input: DeleteTeamInput!
+    $condition: ModelTeamConditionInput
+  ) {
+    deleteTeam(input: $input, condition: $condition) {
+      id
+      gameID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      players {
+        items {
+          id
+          playerID
+          teamID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
       }
     }
   }
