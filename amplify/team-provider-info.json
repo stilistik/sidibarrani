@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sidibarrani-dev-154244-authRole",
+      "UnauthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-154244-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-154244-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-sidibarrani-dev-154244-deployment",
+      "UnauthRoleName": "amplify-sidibarrani-dev-154244-unauthRole",
+      "StackName": "amplify-sidibarrani-dev-154244",
+      "StackId": "arn:aws:cloudformation:eu-central-1:875427163685:stack/amplify-sidibarrani-dev-154244/b63e7010-e184-11eb-b86d-0ac31c9bb5d8",
+      "AmplifyAppId": "d241dpptb98uz0"
+    }
+  }
+}
