@@ -2,13 +2,23 @@
 import { initSchema } from '@aws-amplify/datastore';
 import { schema } from './schema';
 
+const CardSuit = {
+  "HEARTS": "HEARTS",
+  "CLUBS": "CLUBS",
+  "SPADES": "SPADES",
+  "DIAMONDS": "DIAMONDS"
+};
 
-
-const { Game, Team, PlayerTeams, Player } = initSchema(schema);
+const { Team, TeamPlayer, Player, Round, Deck, DeckCard, Card, Game } = initSchema(schema);
 
 export {
-  Game,
   Team,
-  PlayerTeams,
-  Player
+  TeamPlayer,
+  Player,
+  Round,
+  Deck,
+  DeckCard,
+  Card,
+  Game,
+  CardSuit
 };

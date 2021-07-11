@@ -1,36 +1,67 @@
-type Game @model @auth(rules: [{ allow: public }]) {
-  id: ID!
-  name: String!
-  teams: [Team] @connection(keyName: "byGame", fields: ["id"])
+enum CardSuit {
+  HEARTS
+  CLUBS
+  SPADES
+  DIAMONDS
 }
 
-type PlayerTeams
-  @model(queries: null)
-  @key(name: "byPlayer", fields: ["playerID", "teamID"])
-  @key(name: "byTeam", fields: ["teamID", "playerID"])
-  @auth(rules: [{ allow: public }]) {
+type Team @model @auth(rules: [{allow: public}]) @key(name: "byGame", fields: ["gameID"]) {
   id: ID!
-  playerID: ID!
-  teamID: ID!
-  player: Player! @connection(fields: ["playerID"])
-  team: Team! @connection(fields: ["teamID"])
+  color: String
+  name: String
+  TeamPlayers: [TeamPlayer] @connection(keyName: "byTeam", fields: ["id"])
+  gameID: ID
 }
 
-type Team
-  @model
-  @key(name: "byGame", fields: ["gameID"])
-  @auth(rules: [{ allow: public }]) {
+type Player @model @auth(rules: [{allow: public}]) {
   id: ID!
-  gameID: ID!
-  players: [PlayerTeams] @connection(keyName: "byTeam", fields: ["id"])
+  teams: [TeamPlayer] @connection(keyName: "byPlayer", fields: ["id"])
+  name: String
 }
 
-type Player @model @auth(rules: [{ allow: public }]) {
+type Round @model @auth(rules: [{allow: public}]) @key(name: "byGame", fields: ["gameID"]) {
   id: ID!
-  name: String!
-  teams: [PlayerTeams] @connection(keyName: "byPlayer", fields: ["id"])
+  gameID: ID
+  result: String
+  Deck: Deck @connection
+}
+
+type Deck @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  DeckCards: [DeckCard] @connection(keyName: "byDeck", fields: ["id"])
+}
+
+type Card @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  decks: [DeckCard] @connection(keyName: "byCard", fields: ["id"])
+  rank: Int
+  suit: CardSuit
+}
+
+type Game @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  Teams: [Team] @connection(keyName: "byGame", fields: ["id"])
+  Rounds: [Round] @connection(keyName: "byGame", fields: ["id"])
 }
 
 type Query {
   echo(msg: String): String @function(name: "echo-${env}")
 }
+
+type TeamPlayer @model(queries: null) @key(name: "byTeam", fields: ["teamID", "playerID"]) @key(name: "byPlayer", fields: ["playerID", "teamID"]) @auth(rules: [{allow: public}, {allow: public}]) {
+  id: ID!
+  teamID: ID!
+  playerID: ID!
+  team: Team! @connection(fields: ["teamID"])
+  player: Player! @connection(fields: ["playerID"])
+}
+
+type DeckCard @model(queries: null) @key(name: "byDeck", fields: ["deckID", "cardID"]) @key(name: "byCard", fields: ["cardID", "deckID"]) @auth(rules: [{allow: public}, {allow: public}]) {
+  id: ID!
+  deckID: ID!
+  cardID: ID!
+  deck: Deck! @connection(fields: ["deckID"])
+  card: Card! @connection(fields: ["cardID"])
+}
+ 
