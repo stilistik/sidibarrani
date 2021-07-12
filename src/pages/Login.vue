@@ -1,50 +1,13 @@
 <template>
-  <page-container>
-    <page-header>Sidi Barrani</page-header>
-    <div class="flex flex-col col-span-4 items-center w-full my-10 gap-5">
-      <input
-        v-model="name"
-        type="text"
-        placeholder="Username"
-        class="rounded-xl text-3xl font-bold shadow-xl"
-      />
-      <input
-        v-model="password"
-        type="password"
-        placeholder="Password"
-        class="rounded-xl text-3xl font-bold shadow-xl"
-      />
+  <PageContainer>
+    <PageHeader>Sidi Barrani</PageHeader>
+    <div class="flex flex-col col-span-4 items-center w-full my-20 gap-8">
+      <Input v-model="name" type="text" placeholder="Username" />
+      <Input v-model="password" type="password" placeholder="Password" />
+      <Button @click="login()">Login</Button>
+      <Link @click="signup()"> Sign Up </Link>
     </div>
-    <div class="flex flex-col col-span-4 items-center w-full gap-y-5">
-      <button
-        @click="login()"
-        style="width: 250px"
-        class="
-          text-center
-          bg-gradient-to-r
-          from-green-400
-          hover:from-green-300
-          to-blue-500
-          hover:to-blue-400
-          text-6xl
-          font-extrabold
-          rounded-xl
-          shadow-2xl
-          p-4
-          mx-2
-        "
-      >
-        Login
-      </button>
-      <a
-        class="text-blue-400 hover:text-white font-bold text-xl cursor-pointer"
-        @click="signup()"
-      >
-        Sign Up
-      </a>
-    </div>
-    <span class="text-white" v-if="loading">Loading...</span>
-  </page-container>
+  </PageContainer>
 </template>
 
 <script lang="ts">
@@ -53,18 +16,26 @@ import { API, graphqlOperation } from "aws-amplify";
 import { createPlayer } from "../graphql/mutations";
 import PageContainer from "../components/PageContainer.vue";
 import PageHeader from "../components/PageHeader.vue";
+import Button from "../components/Button.vue";
+import Link from "../components/Link.vue";
+import Input from "../components/Input.vue";
 
 export default defineComponent({
   name: "Login",
   components: {
     PageContainer,
     PageHeader,
+    Button,
+    Link,
+    Input,
   },
   data: function () {
     return { name: "", password: "", loading: false };
   },
   methods: {
-    login: async function () {},
+    login: function () {
+      console.log("click!");
+    },
     signup: function () {
       this.$router.push("/signup");
     },
