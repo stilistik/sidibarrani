@@ -53,7 +53,7 @@ export default defineComponent({
       const data = new FormData(event.currentTarget as HTMLFormElement);
       try {
         const result = await Auth.signUp({
-          username: data.get("email") as string,
+          username: data.get("username") as string,
           password: data.get("password") as string,
           attributes: {
             email: data.get("email") as string,

@@ -12,7 +12,17 @@ projects:
         docsFilePath: src/graphql
         region: eu-central-1
         maxDepth: 2
-
+  sidibarrani:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src/graphql
 extensions:
   amplify:
     version: 3
