@@ -5,7 +5,7 @@
       @submit.prevent="login"
       class="flex flex-col col-span-4 items-center w-full my-20 gap-8"
     >
-      <Input v-model="email" name="email" type="email" placeholder="Username" />
+      <Input v-model="email" name="email" type="email" placeholder="Email" />
       <Input
         v-model="password"
         name="password"
