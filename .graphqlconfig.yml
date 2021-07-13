@@ -1,40 +1,18 @@
 projects:
-  SidiBarrani:
-    schemaPath: amplify/backend/api/SidiBarrani/build/schema.graphql
-    includes:
-      - src/graphql/**/*.ts
-    excludes:
-      - ./amplify/**
-    extensions:
-      amplify:
-        codeGenTarget: typescript
-        generatedFileName: src/API.ts
-        docsFilePath: src/graphql
-        region: eu-central-1
-        apiId: null
-        maxDepth: 2
-  sidibarrani:
-    schemaPath: src/graphql/schema.json
-    includes:
-      - src/graphql/**/*.ts
-    excludes:
-      - ./amplify/**
-    extensions:
-      amplify:
-        codeGenTarget: typescript
-        generatedFileName: src/api.ts
-        docsFilePath: src/graphql
   apisidibarrani:
     schemaPath: src/graphql/schema.json
     includes:
-      - ''
+      - src/graphql/**/*.ts
     excludes:
       - ./amplify/**
     extensions:
       amplify:
         codeGenTarget: typescript
         generatedFileName: src/api.ts
-        docsFilePath: .
+        docsFilePath: src/graphql
+        region: eu-central-1
+        maxDepth: 2
+
 extensions:
   amplify:
     version: 3
