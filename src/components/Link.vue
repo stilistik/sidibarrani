@@ -1,6 +1,13 @@
 <template>
   <a
-    class="text-green-500 hover:text-green-300 font-bold text-xl cursor-pointer"
+    class="
+      transition-all
+      text-green-500
+      hover:text-green-300
+      font-bold
+      text-xl
+      cursor-pointer
+    "
   >
     <slot />
   </a>

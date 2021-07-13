@@ -2,6 +2,7 @@
   <button
     v-bind="$props"
     class="
+      transition-all
       text-center
       bg-green-500
       hover:bg-green-300
