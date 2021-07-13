@@ -12,22 +12,22 @@
         type="password"
         placeholder="Password"
       />
-      <div class="flex">
-        <Button type="submit">Login</Button>
-      </div>
+      <Button type="submit">Login</Button>
       <Link @click="signup()"> Sign Up </Link>
+      <Loading v-if="loading" />
     </form>
   </PageContainer>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from "vue";
+import { defineComponent } from "vue";
 import { Auth } from "aws-amplify";
 import PageContainer from "../components/PageContainer.vue";
 import PageHeader from "../components/PageHeader.vue";
 import Button from "../components/Button.vue";
 import Link from "../components/Link.vue";
 import Input from "../components/Input.vue";
+import Loading from "../components/Loading.vue";
 
 export default defineComponent({
   name: "Login",
@@ -37,6 +37,7 @@ export default defineComponent({
     Button,
     Link,
     Input,
+    Loading,
   },
   data: function () {
     return { email: "", password: "", loading: false };
