@@ -17,6 +17,9 @@
           "deploymentBucketName": "amplify-sidibarrani-dev-154244-deployment",
           "s3Key": "amplify-builds/echo-74713859496342377a6b-build.zip"
         }
+      },
+      "auth": {
+        "sidibarrani6a349a2d": {}
       }
     }
   }

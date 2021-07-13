@@ -27,5 +27,13 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
+  },
+  "auth": {
+    "sidibarrani6a349a2d": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
   }
 }

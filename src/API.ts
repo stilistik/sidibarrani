@@ -7,7 +7,6 @@ export type CreateTeamInput = {
   color?: string | null,
   name?: string | null,
   gameID?: string | null,
-  _version?: number | null,
 };
 
 export type ModelTeamConditionInput = {
@@ -81,9 +80,6 @@ export type Team = {
   color?: string | null,
   name?: string | null,
   gameID?: string | null,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
   TeamPlayers?: ModelTeamPlayerConnection | null,
@@ -93,7 +89,6 @@ export type ModelTeamPlayerConnection = {
   __typename: "ModelTeamPlayerConnection",
   items?:  Array<TeamPlayer | null > | null,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type TeamPlayer = {
@@ -101,9 +96,6 @@ export type TeamPlayer = {
   id: string,
   teamID: string,
   playerID: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
   team: Team,
@@ -114,9 +106,6 @@ export type Player = {
   __typename: "Player",
   id: string,
   name?: string | null,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
   teams?: ModelTeamPlayerConnection | null,
@@ -127,18 +116,15 @@ export type UpdateTeamInput = {
   color?: string | null,
   name?: string | null,
   gameID?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteTeamInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreatePlayerInput = {
   id?: string | null,
   name?: string | null,
-  _version?: number | null,
 };
 
 export type ModelPlayerConditionInput = {
@@ -151,19 +137,16 @@ export type ModelPlayerConditionInput = {
 export type UpdatePlayerInput = {
   id: string,
   name?: string | null,
-  _version?: number | null,
 };
 
 export type DeletePlayerInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateRoundInput = {
   id?: string | null,
   gameID?: string | null,
   result?: string | null,
-  _version?: number | null,
   roundDeckId?: string | null,
 };
 
@@ -180,9 +163,6 @@ export type Round = {
   id: string,
   gameID?: string | null,
   result?: string | null,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
   Deck?: Deck | null,
@@ -191,9 +171,6 @@ export type Round = {
 export type Deck = {
   __typename: "Deck",
   id: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
   DeckCards?: ModelDeckCardConnection | null,
@@ -203,7 +180,6 @@ export type ModelDeckCardConnection = {
   __typename: "ModelDeckCardConnection",
   items?:  Array<DeckCard | null > | null,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type DeckCard = {
@@ -211,9 +187,6 @@ export type DeckCard = {
   id: string,
   deckID: string,
   cardID: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
   deck: Deck,
@@ -225,9 +198,6 @@ export type Card = {
   id: string,
   rank?: number | null,
   suit?: CardSuit | null,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
   decks?: ModelDeckCardConnection | null,
@@ -245,18 +215,15 @@ export type UpdateRoundInput = {
   id: string,
   gameID?: string | null,
   result?: string | null,
-  _version?: number | null,
   roundDeckId?: string | null,
 };
 
 export type DeleteRoundInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateDeckInput = {
   id?: string | null,
-  _version?: number | null,
 };
 
 export type ModelDeckConditionInput = {
@@ -267,19 +234,16 @@ export type ModelDeckConditionInput = {
 
 export type UpdateDeckInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type DeleteDeckInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateCardInput = {
   id?: string | null,
   rank?: number | null,
   suit?: CardSuit | null,
-  _version?: number | null,
 };
 
 export type ModelCardConditionInput = {
@@ -311,18 +275,15 @@ export type UpdateCardInput = {
   id: string,
   rank?: number | null,
   suit?: CardSuit | null,
-  _version?: number | null,
 };
 
 export type DeleteCardInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateGameInput = {
   id?: string | null,
   name?: string | null,
-  _version?: number | null,
 };
 
 export type ModelGameConditionInput = {
@@ -336,9 +297,6 @@ export type Game = {
   __typename: "Game",
   id: string,
   name?: string | null,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
   Teams?: ModelTeamConnection | null,
@@ -349,32 +307,27 @@ export type ModelTeamConnection = {
   __typename: "ModelTeamConnection",
   items?:  Array<Team | null > | null,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelRoundConnection = {
   __typename: "ModelRoundConnection",
   items?:  Array<Round | null > | null,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type UpdateGameInput = {
   id: string,
   name?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteGameInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateTeamPlayerInput = {
   id?: string | null,
   teamID: string,
   playerID: string,
-  _version?: number | null,
 };
 
 export type ModelTeamPlayerConditionInput = {
@@ -389,19 +342,16 @@ export type UpdateTeamPlayerInput = {
   id: string,
   teamID?: string | null,
   playerID?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteTeamPlayerInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateDeckCardInput = {
   id?: string | null,
   deckID: string,
   cardID: string,
-  _version?: number | null,
 };
 
 export type ModelDeckCardConditionInput = {
@@ -416,12 +366,10 @@ export type UpdateDeckCardInput = {
   id: string,
   deckID?: string | null,
   cardID?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteDeckCardInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type ModelTeamFilterInput = {
@@ -446,7 +394,6 @@ export type ModelPlayerConnection = {
   __typename: "ModelPlayerConnection",
   items?:  Array<Player | null > | null,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelRoundFilterInput = {
@@ -469,7 +416,6 @@ export type ModelDeckConnection = {
   __typename: "ModelDeckConnection",
   items?:  Array<Deck | null > | null,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelCardFilterInput = {
@@ -485,7 +431,6 @@ export type ModelCardConnection = {
   __typename: "ModelCardConnection",
   items?:  Array<Card | null > | null,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelGameFilterInput = {
@@ -500,25 +445,6 @@ export type ModelGameConnection = {
   __typename: "ModelGameConnection",
   items?:  Array<Game | null > | null,
   nextToken?: string | null,
-  startedAt?: number | null,
-};
-
-export type ModelTeamPlayerFilterInput = {
-  id?: ModelIDInput | null,
-  teamID?: ModelIDInput | null,
-  playerID?: ModelIDInput | null,
-  and?: Array< ModelTeamPlayerFilterInput | null > | null,
-  or?: Array< ModelTeamPlayerFilterInput | null > | null,
-  not?: ModelTeamPlayerFilterInput | null,
-};
-
-export type ModelDeckCardFilterInput = {
-  id?: ModelIDInput | null,
-  deckID?: ModelIDInput | null,
-  cardID?: ModelIDInput | null,
-  and?: Array< ModelDeckCardFilterInput | null > | null,
-  or?: Array< ModelDeckCardFilterInput | null > | null,
-  not?: ModelDeckCardFilterInput | null,
 };
 
 export type CreateTeamMutationVariables = {
@@ -533,9 +459,6 @@ export type CreateTeamMutation = {
     color?: string | null,
     name?: string | null,
     gameID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     TeamPlayers?:  {
@@ -545,14 +468,10 @@ export type CreateTeamMutation = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -569,9 +488,6 @@ export type UpdateTeamMutation = {
     color?: string | null,
     name?: string | null,
     gameID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     TeamPlayers?:  {
@@ -581,14 +497,10 @@ export type UpdateTeamMutation = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -605,9 +517,6 @@ export type DeleteTeamMutation = {
     color?: string | null,
     name?: string | null,
     gameID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     TeamPlayers?:  {
@@ -617,14 +526,10 @@ export type DeleteTeamMutation = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -639,9 +544,6 @@ export type CreatePlayerMutation = {
     __typename: "Player",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     teams?:  {
@@ -651,14 +553,10 @@ export type CreatePlayerMutation = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -673,9 +571,6 @@ export type UpdatePlayerMutation = {
     __typename: "Player",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     teams?:  {
@@ -685,14 +580,10 @@ export type UpdatePlayerMutation = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -707,9 +598,6 @@ export type DeletePlayerMutation = {
     __typename: "Player",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     teams?:  {
@@ -719,14 +607,10 @@ export type DeletePlayerMutation = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -742,23 +626,16 @@ export type CreateRoundMutation = {
     id: string,
     gameID?: string | null,
     result?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Deck?:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null,
   } | null,
@@ -775,23 +652,16 @@ export type UpdateRoundMutation = {
     id: string,
     gameID?: string | null,
     result?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Deck?:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null,
   } | null,
@@ -808,23 +678,16 @@ export type DeleteRoundMutation = {
     id: string,
     gameID?: string | null,
     result?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Deck?:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null,
   } | null,
@@ -839,9 +702,6 @@ export type CreateDeckMutation = {
   createDeck?:  {
     __typename: "Deck",
     id: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     DeckCards?:  {
@@ -851,14 +711,10 @@ export type CreateDeckMutation = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -872,9 +728,6 @@ export type UpdateDeckMutation = {
   updateDeck?:  {
     __typename: "Deck",
     id: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     DeckCards?:  {
@@ -884,14 +737,10 @@ export type UpdateDeckMutation = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -905,9 +754,6 @@ export type DeleteDeckMutation = {
   deleteDeck?:  {
     __typename: "Deck",
     id: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     DeckCards?:  {
@@ -917,14 +763,10 @@ export type DeleteDeckMutation = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -940,9 +782,6 @@ export type CreateCardMutation = {
     id: string,
     rank?: number | null,
     suit?: CardSuit | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     decks?:  {
@@ -952,14 +791,10 @@ export type CreateCardMutation = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -975,9 +810,6 @@ export type UpdateCardMutation = {
     id: string,
     rank?: number | null,
     suit?: CardSuit | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     decks?:  {
@@ -987,14 +819,10 @@ export type UpdateCardMutation = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -1010,9 +838,6 @@ export type DeleteCardMutation = {
     id: string,
     rank?: number | null,
     suit?: CardSuit | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     decks?:  {
@@ -1022,14 +847,10 @@ export type DeleteCardMutation = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -1044,9 +865,6 @@ export type CreateGameMutation = {
     __typename: "Game",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Teams?:  {
@@ -1057,14 +875,10 @@ export type CreateGameMutation = {
         color?: string | null,
         name?: string | null,
         gameID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     Rounds?:  {
       __typename: "ModelRoundConnection",
@@ -1073,14 +887,10 @@ export type CreateGameMutation = {
         id: string,
         gameID?: string | null,
         result?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -1095,9 +905,6 @@ export type UpdateGameMutation = {
     __typename: "Game",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Teams?:  {
@@ -1108,14 +915,10 @@ export type UpdateGameMutation = {
         color?: string | null,
         name?: string | null,
         gameID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     Rounds?:  {
       __typename: "ModelRoundConnection",
@@ -1124,14 +927,10 @@ export type UpdateGameMutation = {
         id: string,
         gameID?: string | null,
         result?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -1146,9 +945,6 @@ export type DeleteGameMutation = {
     __typename: "Game",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Teams?:  {
@@ -1159,14 +955,10 @@ export type DeleteGameMutation = {
         color?: string | null,
         name?: string | null,
         gameID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     Rounds?:  {
       __typename: "ModelRoundConnection",
@@ -1175,14 +967,10 @@ export type DeleteGameMutation = {
         id: string,
         gameID?: string | null,
         result?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -1198,9 +986,6 @@ export type CreateTeamPlayerMutation = {
     id: string,
     teamID: string,
     playerID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     team:  {
@@ -1209,30 +994,22 @@ export type CreateTeamPlayerMutation = {
       color?: string | null,
       name?: string | null,
       gameID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       TeamPlayers?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     player:  {
       __typename: "Player",
       id: string,
       name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       teams?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -1249,9 +1026,6 @@ export type UpdateTeamPlayerMutation = {
     id: string,
     teamID: string,
     playerID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     team:  {
@@ -1260,30 +1034,22 @@ export type UpdateTeamPlayerMutation = {
       color?: string | null,
       name?: string | null,
       gameID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       TeamPlayers?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     player:  {
       __typename: "Player",
       id: string,
       name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       teams?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -1300,9 +1066,6 @@ export type DeleteTeamPlayerMutation = {
     id: string,
     teamID: string,
     playerID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     team:  {
@@ -1311,30 +1074,22 @@ export type DeleteTeamPlayerMutation = {
       color?: string | null,
       name?: string | null,
       gameID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       TeamPlayers?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     player:  {
       __typename: "Player",
       id: string,
       name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       teams?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -1351,23 +1106,16 @@ export type CreateDeckCardMutation = {
     id: string,
     deckID: string,
     cardID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     deck:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     card:  {
@@ -1375,15 +1123,11 @@ export type CreateDeckCardMutation = {
       id: string,
       rank?: number | null,
       suit?: CardSuit | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       decks?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -1400,23 +1144,16 @@ export type UpdateDeckCardMutation = {
     id: string,
     deckID: string,
     cardID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     deck:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     card:  {
@@ -1424,15 +1161,11 @@ export type UpdateDeckCardMutation = {
       id: string,
       rank?: number | null,
       suit?: CardSuit | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       decks?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -1449,23 +1182,16 @@ export type DeleteDeckCardMutation = {
     id: string,
     deckID: string,
     cardID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     deck:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     card:  {
@@ -1473,15 +1199,11 @@ export type DeleteDeckCardMutation = {
       id: string,
       rank?: number | null,
       suit?: CardSuit | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       decks?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -1506,9 +1228,6 @@ export type GetTeamQuery = {
     color?: string | null,
     name?: string | null,
     gameID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     TeamPlayers?:  {
@@ -1518,14 +1237,10 @@ export type GetTeamQuery = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -1545,51 +1260,14 @@ export type ListTeamsQuery = {
       color?: string | null,
       name?: string | null,
       gameID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       TeamPlayers?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null > | null,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncTeamsQueryVariables = {
-  filter?: ModelTeamFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncTeamsQuery = {
-  syncTeams?:  {
-    __typename: "ModelTeamConnection",
-    items?:  Array< {
-      __typename: "Team",
-      id: string,
-      color?: string | null,
-      name?: string | null,
-      gameID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      TeamPlayers?:  {
-        __typename: "ModelTeamPlayerConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1602,9 +1280,6 @@ export type GetPlayerQuery = {
     __typename: "Player",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     teams?:  {
@@ -1614,14 +1289,10 @@ export type GetPlayerQuery = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -1639,49 +1310,14 @@ export type ListPlayersQuery = {
       __typename: "Player",
       id: string,
       name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       teams?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null > | null,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncPlayersQueryVariables = {
-  filter?: ModelPlayerFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncPlayersQuery = {
-  syncPlayers?:  {
-    __typename: "ModelPlayerConnection",
-    items?:  Array< {
-      __typename: "Player",
-      id: string,
-      name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      teams?:  {
-        __typename: "ModelTeamPlayerConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1695,23 +1331,16 @@ export type GetRoundQuery = {
     id: string,
     gameID?: string | null,
     result?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Deck?:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null,
   } | null,
@@ -1731,58 +1360,16 @@ export type ListRoundsQuery = {
       id: string,
       gameID?: string | null,
       result?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       Deck?:  {
         __typename: "Deck",
         id: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null,
     } | null > | null,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncRoundsQueryVariables = {
-  filter?: ModelRoundFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncRoundsQuery = {
-  syncRounds?:  {
-    __typename: "ModelRoundConnection",
-    items?:  Array< {
-      __typename: "Round",
-      id: string,
-      gameID?: string | null,
-      result?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      Deck?:  {
-        __typename: "Deck",
-        id: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1794,9 +1381,6 @@ export type GetDeckQuery = {
   getDeck?:  {
     __typename: "Deck",
     id: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     DeckCards?:  {
@@ -1806,14 +1390,10 @@ export type GetDeckQuery = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -1830,48 +1410,14 @@ export type ListDecksQuery = {
     items?:  Array< {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null > | null,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncDecksQueryVariables = {
-  filter?: ModelDeckFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncDecksQuery = {
-  syncDecks?:  {
-    __typename: "ModelDeckConnection",
-    items?:  Array< {
-      __typename: "Deck",
-      id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      DeckCards?:  {
-        __typename: "ModelDeckCardConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1885,9 +1431,6 @@ export type GetCardQuery = {
     id: string,
     rank?: number | null,
     suit?: CardSuit | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     decks?:  {
@@ -1897,14 +1440,10 @@ export type GetCardQuery = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -1923,50 +1462,14 @@ export type ListCardsQuery = {
       id: string,
       rank?: number | null,
       suit?: CardSuit | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       decks?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null > | null,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncCardsQueryVariables = {
-  filter?: ModelCardFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncCardsQuery = {
-  syncCards?:  {
-    __typename: "ModelCardConnection",
-    items?:  Array< {
-      __typename: "Card",
-      id: string,
-      rank?: number | null,
-      suit?: CardSuit | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      decks?:  {
-        __typename: "ModelDeckCardConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -1979,9 +1482,6 @@ export type GetGameQuery = {
     __typename: "Game",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Teams?:  {
@@ -1992,14 +1492,10 @@ export type GetGameQuery = {
         color?: string | null,
         name?: string | null,
         gameID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     Rounds?:  {
       __typename: "ModelRoundConnection",
@@ -2008,14 +1504,10 @@ export type GetGameQuery = {
         id: string,
         gameID?: string | null,
         result?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2033,153 +1525,18 @@ export type ListGamesQuery = {
       __typename: "Game",
       id: string,
       name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       Teams?:  {
         __typename: "ModelTeamConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
       Rounds?:  {
         __typename: "ModelRoundConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null > | null,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncGamesQueryVariables = {
-  filter?: ModelGameFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncGamesQuery = {
-  syncGames?:  {
-    __typename: "ModelGameConnection",
-    items?:  Array< {
-      __typename: "Game",
-      id: string,
-      name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      Teams?:  {
-        __typename: "ModelTeamConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-      Rounds?:  {
-        __typename: "ModelRoundConnection",
-        nextToken?: string | null,
-        startedAt?: number | null,
-      } | null,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncTeamPlayersQueryVariables = {
-  filter?: ModelTeamPlayerFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncTeamPlayersQuery = {
-  syncTeamPlayers?:  {
-    __typename: "ModelTeamPlayerConnection",
-    items?:  Array< {
-      __typename: "TeamPlayer",
-      id: string,
-      teamID: string,
-      playerID: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      team:  {
-        __typename: "Team",
-        id: string,
-        color?: string | null,
-        name?: string | null,
-        gameID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-      player:  {
-        __typename: "Player",
-        id: string,
-        name?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncDeckCardsQueryVariables = {
-  filter?: ModelDeckCardFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncDeckCardsQuery = {
-  syncDeckCards?:  {
-    __typename: "ModelDeckCardConnection",
-    items?:  Array< {
-      __typename: "DeckCard",
-      id: string,
-      deckID: string,
-      cardID: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-      deck:  {
-        __typename: "Deck",
-        id: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-      card:  {
-        __typename: "Card",
-        id: string,
-        rank?: number | null,
-        suit?: CardSuit | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      },
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -2190,9 +1547,6 @@ export type OnCreateTeamSubscription = {
     color?: string | null,
     name?: string | null,
     gameID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     TeamPlayers?:  {
@@ -2202,14 +1556,10 @@ export type OnCreateTeamSubscription = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2221,9 +1571,6 @@ export type OnUpdateTeamSubscription = {
     color?: string | null,
     name?: string | null,
     gameID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     TeamPlayers?:  {
@@ -2233,14 +1580,10 @@ export type OnUpdateTeamSubscription = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2252,9 +1595,6 @@ export type OnDeleteTeamSubscription = {
     color?: string | null,
     name?: string | null,
     gameID?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     TeamPlayers?:  {
@@ -2264,14 +1604,10 @@ export type OnDeleteTeamSubscription = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2281,9 +1617,6 @@ export type OnCreatePlayerSubscription = {
     __typename: "Player",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     teams?:  {
@@ -2293,14 +1626,10 @@ export type OnCreatePlayerSubscription = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2310,9 +1639,6 @@ export type OnUpdatePlayerSubscription = {
     __typename: "Player",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     teams?:  {
@@ -2322,14 +1648,10 @@ export type OnUpdatePlayerSubscription = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2339,9 +1661,6 @@ export type OnDeletePlayerSubscription = {
     __typename: "Player",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     teams?:  {
@@ -2351,14 +1670,10 @@ export type OnDeletePlayerSubscription = {
         id: string,
         teamID: string,
         playerID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2369,23 +1684,16 @@ export type OnCreateRoundSubscription = {
     id: string,
     gameID?: string | null,
     result?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Deck?:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null,
   } | null,
@@ -2397,23 +1705,16 @@ export type OnUpdateRoundSubscription = {
     id: string,
     gameID?: string | null,
     result?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Deck?:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null,
   } | null,
@@ -2425,23 +1726,16 @@ export type OnDeleteRoundSubscription = {
     id: string,
     gameID?: string | null,
     result?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Deck?:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     } | null,
   } | null,
@@ -2451,9 +1745,6 @@ export type OnCreateDeckSubscription = {
   onCreateDeck?:  {
     __typename: "Deck",
     id: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     DeckCards?:  {
@@ -2463,14 +1754,10 @@ export type OnCreateDeckSubscription = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2479,9 +1766,6 @@ export type OnUpdateDeckSubscription = {
   onUpdateDeck?:  {
     __typename: "Deck",
     id: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     DeckCards?:  {
@@ -2491,14 +1775,10 @@ export type OnUpdateDeckSubscription = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2507,9 +1787,6 @@ export type OnDeleteDeckSubscription = {
   onDeleteDeck?:  {
     __typename: "Deck",
     id: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     DeckCards?:  {
@@ -2519,14 +1796,10 @@ export type OnDeleteDeckSubscription = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2537,9 +1810,6 @@ export type OnCreateCardSubscription = {
     id: string,
     rank?: number | null,
     suit?: CardSuit | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     decks?:  {
@@ -2549,14 +1819,10 @@ export type OnCreateCardSubscription = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2567,9 +1833,6 @@ export type OnUpdateCardSubscription = {
     id: string,
     rank?: number | null,
     suit?: CardSuit | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     decks?:  {
@@ -2579,14 +1842,10 @@ export type OnUpdateCardSubscription = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2597,9 +1856,6 @@ export type OnDeleteCardSubscription = {
     id: string,
     rank?: number | null,
     suit?: CardSuit | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     decks?:  {
@@ -2609,14 +1865,10 @@ export type OnDeleteCardSubscription = {
         id: string,
         deckID: string,
         cardID: string,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2626,9 +1878,6 @@ export type OnCreateGameSubscription = {
     __typename: "Game",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Teams?:  {
@@ -2639,14 +1888,10 @@ export type OnCreateGameSubscription = {
         color?: string | null,
         name?: string | null,
         gameID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     Rounds?:  {
       __typename: "ModelRoundConnection",
@@ -2655,14 +1900,10 @@ export type OnCreateGameSubscription = {
         id: string,
         gameID?: string | null,
         result?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2672,9 +1913,6 @@ export type OnUpdateGameSubscription = {
     __typename: "Game",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Teams?:  {
@@ -2685,14 +1923,10 @@ export type OnUpdateGameSubscription = {
         color?: string | null,
         name?: string | null,
         gameID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     Rounds?:  {
       __typename: "ModelRoundConnection",
@@ -2701,14 +1935,10 @@ export type OnUpdateGameSubscription = {
         id: string,
         gameID?: string | null,
         result?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2718,9 +1948,6 @@ export type OnDeleteGameSubscription = {
     __typename: "Game",
     id: string,
     name?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     Teams?:  {
@@ -2731,14 +1958,10 @@ export type OnDeleteGameSubscription = {
         color?: string | null,
         name?: string | null,
         gameID?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     Rounds?:  {
       __typename: "ModelRoundConnection",
@@ -2747,14 +1970,10 @@ export type OnDeleteGameSubscription = {
         id: string,
         gameID?: string | null,
         result?: string | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
         createdAt: string,
         updatedAt: string,
       } | null > | null,
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
   } | null,
 };
@@ -2765,9 +1984,6 @@ export type OnCreateTeamPlayerSubscription = {
     id: string,
     teamID: string,
     playerID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     team:  {
@@ -2776,30 +1992,22 @@ export type OnCreateTeamPlayerSubscription = {
       color?: string | null,
       name?: string | null,
       gameID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       TeamPlayers?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     player:  {
       __typename: "Player",
       id: string,
       name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       teams?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -2811,9 +2019,6 @@ export type OnUpdateTeamPlayerSubscription = {
     id: string,
     teamID: string,
     playerID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     team:  {
@@ -2822,30 +2027,22 @@ export type OnUpdateTeamPlayerSubscription = {
       color?: string | null,
       name?: string | null,
       gameID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       TeamPlayers?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     player:  {
       __typename: "Player",
       id: string,
       name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       teams?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -2857,9 +2054,6 @@ export type OnDeleteTeamPlayerSubscription = {
     id: string,
     teamID: string,
     playerID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     team:  {
@@ -2868,30 +2062,22 @@ export type OnDeleteTeamPlayerSubscription = {
       color?: string | null,
       name?: string | null,
       gameID?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       TeamPlayers?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     player:  {
       __typename: "Player",
       id: string,
       name?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       teams?:  {
         __typename: "ModelTeamPlayerConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -2903,23 +2089,16 @@ export type OnCreateDeckCardSubscription = {
     id: string,
     deckID: string,
     cardID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     deck:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     card:  {
@@ -2927,15 +2106,11 @@ export type OnCreateDeckCardSubscription = {
       id: string,
       rank?: number | null,
       suit?: CardSuit | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       decks?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -2947,23 +2122,16 @@ export type OnUpdateDeckCardSubscription = {
     id: string,
     deckID: string,
     cardID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     deck:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     card:  {
@@ -2971,15 +2139,11 @@ export type OnUpdateDeckCardSubscription = {
       id: string,
       rank?: number | null,
       suit?: CardSuit | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       decks?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,
@@ -2991,23 +2155,16 @@ export type OnDeleteDeckCardSubscription = {
     id: string,
     deckID: string,
     cardID: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
     deck:  {
       __typename: "Deck",
       id: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       DeckCards?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
     card:  {
@@ -3015,15 +2172,11 @@ export type OnDeleteDeckCardSubscription = {
       id: string,
       rank?: number | null,
       suit?: CardSuit | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
       decks?:  {
         __typename: "ModelDeckCardConnection",
         nextToken?: string | null,
-        startedAt?: number | null,
       } | null,
     },
   } | null,

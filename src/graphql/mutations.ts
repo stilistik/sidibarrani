@@ -12,9 +12,6 @@ export const createTeam = /* GraphQL */ `
       color
       name
       gameID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       TeamPlayers {
@@ -22,14 +19,10 @@ export const createTeam = /* GraphQL */ `
           id
           teamID
           playerID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -44,9 +37,6 @@ export const updateTeam = /* GraphQL */ `
       color
       name
       gameID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       TeamPlayers {
@@ -54,14 +44,10 @@ export const updateTeam = /* GraphQL */ `
           id
           teamID
           playerID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -76,9 +62,6 @@ export const deleteTeam = /* GraphQL */ `
       color
       name
       gameID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       TeamPlayers {
@@ -86,14 +69,10 @@ export const deleteTeam = /* GraphQL */ `
           id
           teamID
           playerID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -106,9 +85,6 @@ export const createPlayer = /* GraphQL */ `
     createPlayer(input: $input, condition: $condition) {
       id
       name
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       teams {
@@ -116,14 +92,10 @@ export const createPlayer = /* GraphQL */ `
           id
           teamID
           playerID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -136,9 +108,6 @@ export const updatePlayer = /* GraphQL */ `
     updatePlayer(input: $input, condition: $condition) {
       id
       name
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       teams {
@@ -146,14 +115,10 @@ export const updatePlayer = /* GraphQL */ `
           id
           teamID
           playerID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -166,9 +131,6 @@ export const deletePlayer = /* GraphQL */ `
     deletePlayer(input: $input, condition: $condition) {
       id
       name
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       teams {
@@ -176,14 +138,10 @@ export const deletePlayer = /* GraphQL */ `
           id
           teamID
           playerID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -197,21 +155,14 @@ export const createRound = /* GraphQL */ `
       id
       gameID
       result
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       Deck {
         id
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         DeckCards {
           nextToken
-          startedAt
         }
       }
     }
@@ -226,21 +177,14 @@ export const updateRound = /* GraphQL */ `
       id
       gameID
       result
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       Deck {
         id
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         DeckCards {
           nextToken
-          startedAt
         }
       }
     }
@@ -255,21 +199,14 @@ export const deleteRound = /* GraphQL */ `
       id
       gameID
       result
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       Deck {
         id
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         DeckCards {
           nextToken
-          startedAt
         }
       }
     }
@@ -282,9 +219,6 @@ export const createDeck = /* GraphQL */ `
   ) {
     createDeck(input: $input, condition: $condition) {
       id
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       DeckCards {
@@ -292,14 +226,10 @@ export const createDeck = /* GraphQL */ `
           id
           deckID
           cardID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -311,9 +241,6 @@ export const updateDeck = /* GraphQL */ `
   ) {
     updateDeck(input: $input, condition: $condition) {
       id
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       DeckCards {
@@ -321,14 +248,10 @@ export const updateDeck = /* GraphQL */ `
           id
           deckID
           cardID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -340,9 +263,6 @@ export const deleteDeck = /* GraphQL */ `
   ) {
     deleteDeck(input: $input, condition: $condition) {
       id
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       DeckCards {
@@ -350,14 +270,10 @@ export const deleteDeck = /* GraphQL */ `
           id
           deckID
           cardID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -371,9 +287,6 @@ export const createCard = /* GraphQL */ `
       id
       rank
       suit
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       decks {
@@ -381,14 +294,10 @@ export const createCard = /* GraphQL */ `
           id
           deckID
           cardID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -402,9 +311,6 @@ export const updateCard = /* GraphQL */ `
       id
       rank
       suit
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       decks {
@@ -412,14 +318,10 @@ export const updateCard = /* GraphQL */ `
           id
           deckID
           cardID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -433,9 +335,6 @@ export const deleteCard = /* GraphQL */ `
       id
       rank
       suit
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       decks {
@@ -443,14 +342,10 @@ export const deleteCard = /* GraphQL */ `
           id
           deckID
           cardID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -463,9 +358,6 @@ export const createGame = /* GraphQL */ `
     createGame(input: $input, condition: $condition) {
       id
       name
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       Teams {
@@ -474,28 +366,20 @@ export const createGame = /* GraphQL */ `
           color
           name
           gameID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
       Rounds {
         items {
           id
           gameID
           result
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -508,9 +392,6 @@ export const updateGame = /* GraphQL */ `
     updateGame(input: $input, condition: $condition) {
       id
       name
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       Teams {
@@ -519,28 +400,20 @@ export const updateGame = /* GraphQL */ `
           color
           name
           gameID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
       Rounds {
         items {
           id
           gameID
           result
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -553,9 +426,6 @@ export const deleteGame = /* GraphQL */ `
     deleteGame(input: $input, condition: $condition) {
       id
       name
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       Teams {
@@ -564,28 +434,20 @@ export const deleteGame = /* GraphQL */ `
           color
           name
           gameID
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
       Rounds {
         items {
           id
           gameID
           result
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -599,9 +461,6 @@ export const createTeamPlayer = /* GraphQL */ `
       id
       teamID
       playerID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       team {
@@ -609,27 +468,19 @@ export const createTeamPlayer = /* GraphQL */ `
         color
         name
         gameID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         TeamPlayers {
           nextToken
-          startedAt
         }
       }
       player {
         id
         name
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         teams {
           nextToken
-          startedAt
         }
       }
     }
@@ -644,9 +495,6 @@ export const updateTeamPlayer = /* GraphQL */ `
       id
       teamID
       playerID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       team {
@@ -654,27 +502,19 @@ export const updateTeamPlayer = /* GraphQL */ `
         color
         name
         gameID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         TeamPlayers {
           nextToken
-          startedAt
         }
       }
       player {
         id
         name
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         teams {
           nextToken
-          startedAt
         }
       }
     }
@@ -689,9 +529,6 @@ export const deleteTeamPlayer = /* GraphQL */ `
       id
       teamID
       playerID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       team {
@@ -699,27 +536,19 @@ export const deleteTeamPlayer = /* GraphQL */ `
         color
         name
         gameID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         TeamPlayers {
           nextToken
-          startedAt
         }
       }
       player {
         id
         name
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         teams {
           nextToken
-          startedAt
         }
       }
     }
@@ -734,35 +563,24 @@ export const createDeckCard = /* GraphQL */ `
       id
       deckID
       cardID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       deck {
         id
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         DeckCards {
           nextToken
-          startedAt
         }
       }
       card {
         id
         rank
         suit
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         decks {
           nextToken
-          startedAt
         }
       }
     }
@@ -777,35 +595,24 @@ export const updateDeckCard = /* GraphQL */ `
       id
       deckID
       cardID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       deck {
         id
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         DeckCards {
           nextToken
-          startedAt
         }
       }
       card {
         id
         rank
         suit
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         decks {
           nextToken
-          startedAt
         }
       }
     }
@@ -820,35 +627,24 @@ export const deleteDeckCard = /* GraphQL */ `
       id
       deckID
       cardID
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       deck {
         id
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         DeckCards {
           nextToken
-          startedAt
         }
       }
       card {
         id
         rank
         suit
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         decks {
           nextToken
-          startedAt
         }
       }
     }

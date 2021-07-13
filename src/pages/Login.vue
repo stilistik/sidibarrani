@@ -1,19 +1,28 @@
 <template>
   <PageContainer>
     <PageHeader>Sidi Barrani</PageHeader>
-    <div class="flex flex-col col-span-4 items-center w-full my-20 gap-8">
-      <Input v-model="name" type="text" placeholder="Username" />
-      <Input v-model="password" type="password" placeholder="Password" />
-      <Button @click="login()">Login</Button>
+    <form
+      @submit.prevent="login"
+      class="flex flex-col col-span-4 items-center w-full my-20 gap-8"
+    >
+      <Input v-model="email" name="email" type="email" placeholder="Username" />
+      <Input
+        v-model="password"
+        name="password"
+        type="password"
+        placeholder="Password"
+      />
+      <div class="flex">
+        <Button type="submit">Login</Button>
+      </div>
       <Link @click="signup()"> Sign Up </Link>
-    </div>
+    </form>
   </PageContainer>
 </template>
 
 <script lang="ts">
 import { defineComponent, inject } from "vue";
-import { API, graphqlOperation } from "aws-amplify";
-import { createPlayer } from "../graphql/mutations";
+import { Auth } from "aws-amplify";
 import PageContainer from "../components/PageContainer.vue";
 import PageHeader from "../components/PageHeader.vue";
 import Button from "../components/Button.vue";
@@ -30,25 +39,26 @@ export default defineComponent({
     Input,
   },
   data: function () {
-    return { name: "", password: "", loading: false };
+    return { email: "", password: "", loading: false };
   },
   methods: {
-    login: function () {
-      console.log("click!");
+    login: async function (event: Event) {
+      this.loading = true;
+      const data = new FormData(event.currentTarget as HTMLFormElement);
+      try {
+        const res = await Auth.signIn({
+          username: data.get("email") as string,
+          password: data.get("password") as string,
+        });
+        console.log(res);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.loading = false;
+      }
     },
     signup: function () {
       this.$router.push("/signup");
-    },
-    createPlayer: async function (redirectTo: string) {
-      this.loading = true;
-      const res = (await API.graphql(
-        graphqlOperation(createPlayer, {
-          input: {
-            name: this.name,
-          },
-        })
-      )) as any;
-      this.loading = false;
     },
   },
 });
