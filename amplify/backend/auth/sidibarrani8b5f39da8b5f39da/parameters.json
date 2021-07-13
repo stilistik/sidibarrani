@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "sidibarrani6a349a2d_identitypool_6a349a2d",
+    "identityPoolName": "sidibarrani8b5f39da_identitypool_8b5f39da",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "sidiba6a349a2d",
-    "userPoolName": "sidibarrani6a349a2d_userpool_6a349a2d",
+    "resourceNameTruncated": "sidiba8b5f39da",
+    "userPoolName": "sidibarrani8b5f39da_userpool_8b5f39da",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "sidiba6a349a2d_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "sidiba8b5f39da_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "6a349a2d",
-    "resourceName": "sidibarrani6a349a2d",
+    "sharedId": "8b5f39da",
+    "resourceName": "sidibarrani8b5f39da8b5f39da",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -45,12 +45,33 @@
             "Arn"
         ]
     },
-    "useDefault": "default",
+    "useDefault": "manual",
+    "thirdPartyAuth": false,
     "usernameAttributes": [
         "email"
     ],
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": "{\n  \"PostConfirmation\": [\n    \"custom\"\n  ]\n}",
+    "hostedUI": false,
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
-    "dependsOn": []
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "authTriggerConnections": "[\n  {\n    \"triggerType\": \"PostConfirmation\",\n    \"lambdaFunctionName\": \"sidibarrani8b5f39da8b5f39daPostConfirmation\"\n  }\n]",
+    "breakCircularDependency": true,
+    "permissions": [],
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "sidibarrani8b5f39da8b5f39daPostConfirmation",
+            "triggerProvider": "Cognito",
+            "attributes": [
+                "Arn",
+                "Name"
+            ]
+        }
+    ]
 }

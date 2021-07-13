@@ -24,6 +24,17 @@ projects:
         codeGenTarget: typescript
         generatedFileName: src/api.ts
         docsFilePath: src/graphql
+  apisidibarrani:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - ''
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: typescript
+        generatedFileName: src/api.ts
+        docsFilePath: .
 extensions:
   amplify:
     version: 3

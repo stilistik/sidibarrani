@@ -1,25 +1,25 @@
 {
-  "dev": {
+  "staging": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-sidibarrani-dev-154244-authRole",
-      "UnauthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-154244-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-154244-authRole",
+      "AuthRoleName": "amplify-sidibarrani-staging-130151-authRole",
+      "UnauthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-staging-130151-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-staging-130151-authRole",
       "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-sidibarrani-dev-154244-deployment",
-      "UnauthRoleName": "amplify-sidibarrani-dev-154244-unauthRole",
-      "StackName": "amplify-sidibarrani-dev-154244",
-      "StackId": "arn:aws:cloudformation:eu-central-1:875427163685:stack/amplify-sidibarrani-dev-154244/b63e7010-e184-11eb-b86d-0ac31c9bb5d8",
-      "AmplifyAppId": "d241dpptb98uz0"
+      "DeploymentBucketName": "amplify-sidibarrani-staging-130151-deployment",
+      "UnauthRoleName": "amplify-sidibarrani-staging-130151-unauthRole",
+      "StackName": "amplify-sidibarrani-staging-130151",
+      "StackId": "arn:aws:cloudformation:eu-central-1:875427163685:stack/amplify-sidibarrani-staging-130151/7dc06ab0-e3da-11eb-bd8b-066aeef25c22",
+      "AmplifyAppId": "dq33za2k6kr0w"
     },
     "categories": {
       "function": {
-        "echo": {
-          "deploymentBucketName": "amplify-sidibarrani-dev-154244-deployment",
-          "s3Key": "amplify-builds/echo-74713859496342377a6b-build.zip"
+        "sidibarrani8b5f39da8b5f39daPostConfirmation": {
+          "deploymentBucketName": "amplify-sidibarrani-staging-130151-deployment",
+          "s3Key": "amplify-builds/sidibarrani8b5f39da8b5f39daPostConfirmation-47615762646e54354f63-build.zip"
         }
       },
       "auth": {
-        "sidibarrani6a349a2d": {}
+        "sidibarrani8b5f39da8b5f39da": {}
       }
     }
   }
