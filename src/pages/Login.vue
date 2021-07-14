@@ -42,7 +42,6 @@ export default defineComponent({
     Loading,
   },
   setup: function () {
-    Message.success("hello");
     return { store: useStore(), actions: useActions() };
   },
   data: function () {
