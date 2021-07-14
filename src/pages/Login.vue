@@ -60,7 +60,7 @@ export default defineComponent({
         this.actions.setIsAuthenticated(true);
         this.$router.push("/");
       } catch (error) {
-        console.error(error);
+        Message.error("Error during login");
       } finally {
         this.loading = false;
       }
