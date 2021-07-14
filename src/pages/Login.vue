@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { Auth } from "aws-amplify";
-import { useStore } from "../store/Store";
+import { useActions, useStore } from "../store/Store";
 import PageContainer from "../components/PageContainer.vue";
 import PageHeader from "../components/PageHeader.vue";
 import Button from "../components/Button.vue";
@@ -40,8 +40,8 @@ export default defineComponent({
     Input,
     Loading,
   },
-  setup() {
-    return { store: useStore() };
+  setup: function () {
+    return { store: useStore(), actions: useActions() };
   },
   data: function () {
     return { email: "", password: "", loading: false };
@@ -55,8 +55,8 @@ export default defineComponent({
           username: data.get("email") as string,
           password: data.get("password") as string,
         });
-        this.store.setIsAuthenticated(true);
-        console.log(this.store);
+        this.actions.setIsAuthenticated(true);
+        this.$router.push("/");
       } catch (error) {
         console.error(error);
       } finally {

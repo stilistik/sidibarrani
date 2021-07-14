@@ -1,22 +1,25 @@
-import { InjectionKey, reactive, inject, readonly } from 'vue';
+import { InjectionKey, reactive, inject, readonly } from "vue";
 
 interface Store {
-  store: {
-    readonly isAuthenticated: boolean;
-  },
+  readonly isAuthenticated: boolean;
+}
+
+interface Dispatch {
   setIsAuthenticated: (value: boolean) => void;
 }
 
-export const storeKey: InjectionKey<Store> = Symbol('Store');
+export const storeKey: InjectionKey<Store> = Symbol("Store");
+export const actionsKey: InjectionKey<Dispatch> = Symbol("Actions");
 
-export const createStore = () => {
-  const store = reactive({ isAuthenticated: false });
+export const store = reactive({ isAuthenticated: false });
 
-  const setIsAuthenticated = (isAuthenticated: boolean) => {
-    store.isAuthenticated = isAuthenticated;
-  }
+const setIsAuthenticated = (isAuthenticated: boolean) => {
+  store.isAuthenticated = isAuthenticated;
+};
 
-  return { store: readonly(store), setIsAuthenticated}
-}
+export const actions = {
+  setIsAuthenticated,
+};
 
 export const useStore = () => inject(storeKey);
+export const useActions = () => inject(actionsKey);
