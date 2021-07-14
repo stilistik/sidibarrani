@@ -29,6 +29,7 @@ import Button from "../components/Button.vue";
 import Link from "../components/Link.vue";
 import Input from "../components/Input.vue";
 import Loading from "../components/Loading.vue";
+import { Message } from "../components/NotificationHub.vue";
 
 export default defineComponent({
   name: "Login",
@@ -41,6 +42,7 @@ export default defineComponent({
     Loading,
   },
   setup: function () {
+    Message.success("hello");
     return { store: useStore(), actions: useActions() };
   },
   data: function () {
