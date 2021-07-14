@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "sidibarrani76d4ecdc": {}
+      },
+      "function": {
+        "sidibarrani76d4ecdcPostConfirmation": {
+          "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
+          "s3Key": "amplify-builds/sidibarrani76d4ecdcPostConfirmation-61616a63554f39467763-build.zip"
+        }
       }
     }
   }

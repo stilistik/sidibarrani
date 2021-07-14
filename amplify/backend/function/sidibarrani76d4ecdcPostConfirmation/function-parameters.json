@@ -1,0 +1,17 @@
+{
+  "trigger": true,
+  "modules": [
+    "custom"
+  ],
+  "parentResource": "sidibarrani76d4ecdc",
+  "functionName": "sidibarrani76d4ecdcPostConfirmation",
+  "resourceName": "sidibarrani76d4ecdcPostConfirmation",
+  "parentStack": "auth",
+  "triggerEnvs": "[]",
+  "triggerDir": "/snapshot/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/PostConfirmation",
+  "triggerTemplate": "PostConfirmation.json.ejs",
+  "triggerEventPath": "PostConfirmation.event.json",
+  "roleName": "sidibarrani76d4ecdcPostConfirmation",
+  "skipEdit": true,
+  "enableCors": false
+}
