@@ -1,12 +1,16 @@
+/* tslint:disable */
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($owner: String!) {
+  subscription OnCreateUser($owner: String) {
     onCreateUser(owner: $owner) {
       id
       email
       username
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -14,11 +18,14 @@ export const onCreateUser = /* GraphQL */ `
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($owner: String!) {
+  subscription OnUpdateUser($owner: String) {
     onUpdateUser(owner: $owner) {
       id
       email
       username
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -26,11 +33,14 @@ export const onUpdateUser = /* GraphQL */ `
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($owner: String!) {
+  subscription OnDeleteUser($owner: String) {
     onDeleteUser(owner: $owner) {
       id
       email
       username
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner

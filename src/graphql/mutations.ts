@@ -1,3 +1,4 @@
+/* tslint:disable */
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
@@ -10,6 +11,9 @@ export const createUser = /* GraphQL */ `
       id
       email
       username
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -25,6 +29,9 @@ export const updateUser = /* GraphQL */ `
       id
       email
       username
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -40,6 +47,9 @@ export const deleteUser = /* GraphQL */ `
       id
       email
       username
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
