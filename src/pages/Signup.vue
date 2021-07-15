@@ -29,6 +29,7 @@
           required
         />
         <Button type="submit">Confirm</Button>
+        <Loading v-if="loading" />
       </form>
     </template>
   </PageContainer>
@@ -40,18 +41,25 @@ import PageContainer from "../components/PageContainer.vue";
 import PageHeader from "../components/PageHeader.vue";
 import Input from "../components/Input.vue";
 import Button from "../components/Button.vue";
+import Message from "../components/NotificationHub.vue";
+import Loading from "../components/Loading.vue";
 import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
 
 export default defineComponent({
-  components: { PageContainer, PageHeader, Input, Button },
+  components: { PageContainer, PageHeader, Input, Button, Loading },
   data() {
-    return { stage: "signup", user: null as CognitoUser | null };
+    return {
+      stage: "signup",
+      user: null as CognitoUser | null,
+      loading: false,
+    };
   },
   methods: {
     signup: async function (event: Event) {
       const data = new FormData(event.currentTarget as HTMLFormElement);
       try {
+        this.loading = true;
         const result = await Auth.signUp({
           username: data.get("email") as string,
           password: data.get("password") as string,
@@ -62,22 +70,26 @@ export default defineComponent({
         });
         this.stage = "confirm";
         this.user = result.user;
-        console.log(result);
       } catch (error) {
-        console.error(error);
+        Message.error("Error during sign up process");
+      } finally {
+        this.loading = false;
       }
     },
     confirm: async function (event: Event) {
       const data = new FormData(event.currentTarget as HTMLFormElement);
       if (!this.user) return;
       try {
+        this.loading = true;
         const result = await Auth.confirmSignUp(
           this.user.getUsername(),
           data.get("code") as string
         );
         this.$router.push("/");
       } catch (error) {
-        console.error(error);
+        Message.error("Error during email verification");
+      } finally {
+        this.loading = false;
       }
     },
   },
