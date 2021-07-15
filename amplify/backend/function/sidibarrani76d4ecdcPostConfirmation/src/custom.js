@@ -15,6 +15,8 @@ exports.handler = async (event, context, callback) => {
           email: { S: event.request.userAttributes.email },
           createdAt: { S: date.toISOString() },
           updatedAt: { S: date.toISOString() },
+          _lastChangedAt: { N: date.valueOf().toString() },
+          _version: { N: "1" },
         },
         TableName: process.env.USERTABLE,
       };
