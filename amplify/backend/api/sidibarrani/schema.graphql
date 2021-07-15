@@ -10,22 +10,24 @@ enum GameStatus {
   ENDED
 }
 
-type Round @model @auth(rules: [{allow: private}]) @key(name: "byGame", fields: ["gameID"]) {
+type Round
+  @model
+  @auth(rules: [{ allow: private }])
+  @key(name: "byGame", fields: ["gameID"]) {
   id: ID!
   gameID: ID
   status: RoundStatus
 }
 
-type Game @model @auth(rules: [{allow: private}]) {
+type Game @model @auth(rules: [{ allow: private }]) {
   id: ID!
   private: Boolean
   Rounds: [Round] @connection(keyName: "byGame", fields: ["id"])
   status: GameStatus
 }
 
-type User @model @auth(rules: [{allow: owner, ownerField: "id", operations: [read]}]) {
+type User @model @auth(rules: [{ allow: private }]) {
   id: ID!
   email: String!
   username: String!
 }
- 

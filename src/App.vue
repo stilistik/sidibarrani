@@ -11,6 +11,7 @@ import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
 import NotificationHub from "./components/NotificationHub.vue";
 import { checkExistingSession } from "./utils/Auth";
+import { useQueryProvider } from "vue-query";
 Amplify.configure(awsconfig);
 
 export default defineComponent({
@@ -18,6 +19,7 @@ export default defineComponent({
   name: "App",
   setup() {
     checkExistingSession();
+    useQueryProvider();
   },
 });
 </script>

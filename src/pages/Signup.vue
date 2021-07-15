@@ -75,6 +75,7 @@ export default defineComponent({
       const code = data.get("code") as string;
       const ok = await confirmEmail(this.user.getUsername(), code);
       if (ok) this.$router.push("/");
+      this.loading = false;
     },
   },
 });
