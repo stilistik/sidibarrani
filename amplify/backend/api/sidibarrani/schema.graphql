@@ -1,6 +1,7 @@
-type User @model @auth(rules: [{ allow: owner }]) {
+type User
+  @model
+  @auth(rules: [{ allow: owner, ownerField: "id", operations: [read] }]) {
   id: ID!
   email: String!
   username: String!
 }
- 

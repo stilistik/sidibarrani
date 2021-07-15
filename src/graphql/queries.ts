@@ -13,7 +13,6 @@ export const getUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -33,7 +32,6 @@ export const listUsers = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
       }
       nextToken
       startedAt
@@ -62,7 +60,6 @@ export const syncUsers = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
-        owner
       }
       nextToken
       startedAt

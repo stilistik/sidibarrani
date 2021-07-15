@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($owner: String) {
-    onCreateUser(owner: $owner) {
+  subscription OnCreateUser($id: String) {
+    onCreateUser(id: $id) {
       id
       email
       username
@@ -13,13 +13,12 @@ export const onCreateUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($owner: String) {
-    onUpdateUser(owner: $owner) {
+  subscription OnUpdateUser($id: String) {
+    onUpdateUser(id: $id) {
       id
       email
       username
@@ -28,13 +27,12 @@ export const onUpdateUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($owner: String) {
-    onDeleteUser(owner: $owner) {
+  subscription OnDeleteUser($id: String) {
+    onDeleteUser(id: $id) {
       id
       email
       username
@@ -43,7 +41,6 @@ export const onDeleteUser = /* GraphQL */ `
       _lastChangedAt
       createdAt
       updatedAt
-      owner
     }
   }
 `;
