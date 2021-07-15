@@ -1,6 +1,6 @@
 <template>
   <PageContainer>
-    <PageHeader>Sidi Barrani</PageHeader>
+    <PageTitle>Sidi Barrani</PageTitle>
     <form
       @submit.prevent="login"
       class="flex flex-col col-span-4 items-center w-full my-20 gap-8"
@@ -23,7 +23,7 @@
 import { defineComponent } from "vue";
 import { useActions, useStore } from "../store/Store";
 import PageContainer from "../components/PageContainer.vue";
-import PageHeader from "../components/PageHeader.vue";
+import PageTitle from "../components/PageTitle.vue";
 import Button from "../components/Button.vue";
 import Link from "../components/Link.vue";
 import Input from "../components/Input.vue";
@@ -34,7 +34,7 @@ export default defineComponent({
   name: "Login",
   components: {
     PageContainer,
-    PageHeader,
+    PageTitle,
     Button,
     Link,
     Input,

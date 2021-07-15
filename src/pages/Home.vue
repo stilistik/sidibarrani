@@ -1,6 +1,7 @@
 <template>
+  <AppHeader />
   <PageContainer>
-    <PageHeader>Home</PageHeader>
+    <PageTitle>Home</PageTitle>
     <div class="text-white">
       <span v-if="isLoading">Loading</span>
       <span v-if="isError">Error</span>
@@ -16,7 +17,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import PageContainer from "../components/PageContainer.vue";
-import PageHeader from "../components/PageHeader.vue";
+import AppHeader from "../components/AppHeader.vue";
+import PageTitle from "../components/PageTitle.vue";
 import Button from "../components/Button.vue";
 import Link from "../components/Link.vue";
 import Input from "../components/Input.vue";
@@ -29,13 +31,14 @@ export default defineComponent({
   name: "Home",
   components: {
     PageContainer,
-    PageHeader,
+    PageTitle,
     Button,
     Link,
     Input,
     Loading,
     Hand,
     User,
+    AppHeader,
   },
   setup() {
     return useListUsersQuery();

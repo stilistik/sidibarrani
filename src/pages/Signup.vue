@@ -1,6 +1,6 @@
 <template>
   <PageContainer>
-    <PageHeader>Sign Up</PageHeader>
+    <PageTitle>Sign Up</PageTitle>
     <template v-if="stage === 'signup'">
       <form
         @submit.prevent="signup"
@@ -38,7 +38,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import PageContainer from "../components/PageContainer.vue";
-import PageHeader from "../components/PageHeader.vue";
+import PageTitle from "../components/PageTitle.vue";
 import Input from "../components/Input.vue";
 import Button from "../components/Button.vue";
 import Loading from "../components/Loading.vue";
@@ -46,7 +46,7 @@ import { CognitoUser } from "@aws-amplify/auth";
 import { confirmEmail, signUp } from "../utils/Auth";
 
 export default defineComponent({
-  components: { PageContainer, PageHeader, Input, Button, Loading },
+  components: { PageContainer, PageTitle, Input, Button, Loading },
   data() {
     return {
       stage: "signup",

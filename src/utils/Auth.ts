@@ -58,3 +58,13 @@ export async function confirmEmail(username: string, code: string) {
     Message.error("Error during email verification");
   }
 }
+
+export async function logout() {
+  try {
+    await Auth.signOut({ global: true });
+  } catch (err) {
+    console.log(err);
+
+    Message.error("Error during logout process");
+  }
+}

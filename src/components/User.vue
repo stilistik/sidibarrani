@@ -3,19 +3,19 @@
     <div
       class="
         p-5
-        w-20
-        h-20
+        w-14
+        h-14
         flex
         items-center
         justify-center
         rounded-full
-        text-white text-4xl
+        text-white text-2xl
       "
       :class="gradient"
     >
       {{ firstLetter }}
     </div>
-    <span class="text-3xl">{{ username }}</span>
+    <span class="text-xl text-white">{{ username }}</span>
   </div>
 </template>
 
