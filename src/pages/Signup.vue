@@ -41,10 +41,9 @@ import PageContainer from "../components/PageContainer.vue";
 import PageHeader from "../components/PageHeader.vue";
 import Input from "../components/Input.vue";
 import Button from "../components/Button.vue";
-import Message from "../components/NotificationHub.vue";
 import Loading from "../components/Loading.vue";
-import { Auth } from "aws-amplify";
 import { CognitoUser } from "@aws-amplify/auth";
+import { confirmEmail, signUp } from "../utils/Auth";
 
 export default defineComponent({
   components: { PageContainer, PageHeader, Input, Button, Loading },
@@ -57,40 +56,25 @@ export default defineComponent({
   },
   methods: {
     signup: async function (event: Event) {
+      this.loading = true;
       const data = new FormData(event.currentTarget as HTMLFormElement);
-      try {
-        this.loading = true;
-        const result = await Auth.signUp({
-          username: data.get("email") as string,
-          password: data.get("password") as string,
-          attributes: {
-            email: data.get("email") as string,
-            nickname: data.get("username") as string,
-          },
-        });
+      const email = data.get("email") as string;
+      const password = data.get("password") as string;
+      const username = data.get("username") as string;
+      const user = await signUp(email, password, username);
+      if (user) {
         this.stage = "confirm";
-        this.user = result.user;
-      } catch (error) {
-        Message.error("Error during sign up process");
-      } finally {
-        this.loading = false;
+        this.user = user;
       }
+      this.loading = false;
     },
     confirm: async function (event: Event) {
-      const data = new FormData(event.currentTarget as HTMLFormElement);
       if (!this.user) return;
-      try {
-        this.loading = true;
-        const result = await Auth.confirmSignUp(
-          this.user.getUsername(),
-          data.get("code") as string
-        );
-        this.$router.push("/");
-      } catch (error) {
-        Message.error("Error during email verification");
-      } finally {
-        this.loading = false;
-      }
+      this.loading = true;
+      const data = new FormData(event.currentTarget as HTMLFormElement);
+      const code = data.get("code") as string;
+      const ok = await confirmEmail(this.user.getUsername(), code);
+      if (ok) this.$router.push("/");
     },
   },
 });

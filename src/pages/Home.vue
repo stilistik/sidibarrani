@@ -1,12 +1,7 @@
 <template>
   <PageContainer>
     <PageHeader>Home</PageHeader>
-    <div class="flex gap-2 justify-center mt-10">
-      <C10 />
-      <H10 />
-      <D10 />
-      <S10 />
-    </div>
+    <Hand />
   </PageContainer>
 </template>
 
@@ -18,7 +13,7 @@ import Button from "../components/Button.vue";
 import Link from "../components/Link.vue";
 import Input from "../components/Input.vue";
 import Loading from "../components/Loading.vue";
-import * as Cards from "../cards";
+import Hand from "../components/Hand.vue";
 
 export default defineComponent({
   name: "Home",
@@ -29,7 +24,7 @@ export default defineComponent({
     Link,
     Input,
     Loading,
-    ...Cards,
+    Hand,
   },
 });
 </script>

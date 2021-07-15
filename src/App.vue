@@ -7,24 +7,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Amplify, { Auth } from "aws-amplify";
+import Amplify from "aws-amplify";
 import awsconfig from "./aws-exports";
-import { useActions } from "./store/Store";
 import NotificationHub from "./components/NotificationHub.vue";
+import { checkExistingSession } from "./utils/Auth";
 Amplify.configure(awsconfig);
 
 export default defineComponent({
   components: { NotificationHub },
   name: "App",
   setup() {
-    const { setIsAuthenticated } = useActions();
-    Auth.currentAuthenticatedUser().then((user) => {
-      if (user) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
-    });
+    checkExistingSession();
   },
 });
 </script>

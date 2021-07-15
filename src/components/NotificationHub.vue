@@ -29,15 +29,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onUpdated, reactive } from "vue";
-
-interface Message {
-  success?: (msg: string) => void;
-  error?: (msg: string) => void;
-  warning?: (msg: string) => void;
-  info?: (msg: string) => void;
-}
-
-export const Message: Message = {};
+import { Message } from "../utils/Message";
 
 export default defineComponent({
   name: "NotificationHub",

@@ -21,7 +21,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Auth } from "aws-amplify";
 import { useActions, useStore } from "../store/Store";
 import PageContainer from "../components/PageContainer.vue";
 import PageHeader from "../components/PageHeader.vue";
@@ -29,7 +28,7 @@ import Button from "../components/Button.vue";
 import Link from "../components/Link.vue";
 import Input from "../components/Input.vue";
 import Loading from "../components/Loading.vue";
-import { Message } from "../components/NotificationHub.vue";
+import { login } from "../utils/Auth";
 
 export default defineComponent({
   name: "Login",
@@ -51,18 +50,11 @@ export default defineComponent({
     login: async function (event: Event) {
       this.loading = true;
       const data = new FormData(event.currentTarget as HTMLFormElement);
-      try {
-        const res = await Auth.signIn({
-          username: data.get("email") as string,
-          password: data.get("password") as string,
-        });
-        this.actions.setIsAuthenticated(true);
-        this.$router.push("/");
-      } catch (error) {
-        Message.error("Error during login");
-      } finally {
-        this.loading = false;
-      }
+      const email = data.get("email") as string;
+      const password = data.get("password") as string;
+      await login(email, password);
+      this.loading = false;
+      this.$router.push("/");
     },
     signup: function () {
       this.$router.push("/signup");
