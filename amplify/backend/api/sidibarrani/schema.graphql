@@ -3,3 +3,4 @@ type User @model @auth(rules: [{ allow: owner }]) {
   email: String!
   username: String!
 }
+ 
