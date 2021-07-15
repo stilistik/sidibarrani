@@ -57,6 +57,7 @@ export default defineComponent({
           password: data.get("password") as string,
           attributes: {
             email: data.get("email") as string,
+            nickname: data.get("username") as string,
           },
         });
         this.stage = "confirm";
