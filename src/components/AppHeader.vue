@@ -12,7 +12,7 @@
       bg-gray-900
     "
   >
-    <User :username="'Stilistik'" />
+    <User :username="data?.username || ''" />
     <LogoutButton />
   </div>
 </template>
@@ -21,12 +21,16 @@
 import { defineComponent } from "vue";
 import User from "./User.vue";
 import LogoutButton from "./LogoutButton.vue";
+import { useCurrentUserQuery } from "../api/queries";
 
 export default defineComponent({
   name: "AppHeader",
   components: {
     User,
     LogoutButton,
+  },
+  setup() {
+    return useCurrentUserQuery();
   },
 });
 </script>

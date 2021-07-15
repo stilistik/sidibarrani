@@ -9,6 +9,7 @@
         v-for="item in data?.items"
         :key="item.id"
         :username="item.username"
+        class="mb-4"
       />
     </div>
   </PageContainer>

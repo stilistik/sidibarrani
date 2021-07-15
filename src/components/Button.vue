@@ -4,8 +4,8 @@
     class="
       transition-all
       text-center
-      bg-green-500
-      hover:bg-green-300
+      bg-green-400
+      hover:bg-pink-400
       text-4xl
       font-extrabold
       rounded-xl

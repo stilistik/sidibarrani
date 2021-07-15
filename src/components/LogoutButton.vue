@@ -1,9 +1,8 @@
 <template>
   <button
     class="
-      text-white
-      bg-green-500
-      hover:bg-green-400
+      bg-green-400
+      hover:bg-pink-400
       p-5
       h-14
       w-14
