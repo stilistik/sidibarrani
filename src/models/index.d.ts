@@ -1,8 +1,39 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
+export enum RoundStatus {
+  DEAL = "DEAL",
+  BET = "BET",
+  PLAY = "PLAY"
+}
+
+export enum GameStatus {
+  STARTED = "STARTED",
+  CREATED = "CREATED",
+  ENDED = "ENDED"
+}
 
 
 
+export declare class Round {
+  readonly id: string;
+  readonly gameID?: string;
+  readonly status?: RoundStatus | keyof typeof RoundStatus;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Round>);
+  static copyOf(source: Round, mutator: (draft: MutableModel<Round>) => MutableModel<Round> | void): Round;
+}
+
+export declare class Game {
+  readonly id: string;
+  readonly private?: boolean;
+  readonly Rounds?: (Round | null)[];
+  readonly status?: GameStatus | keyof typeof GameStatus;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<Game>);
+  static copyOf(source: Game, mutator: (draft: MutableModel<Game>) => MutableModel<Game> | void): Game;
+}
 
 export declare class User {
   readonly id: string;

@@ -1,7 +1,31 @@
-type User
-  @model
-  @auth(rules: [{ allow: owner, ownerField: "id", operations: [read] }]) {
+enum RoundStatus {
+  DEAL
+  BET
+  PLAY
+}
+
+enum GameStatus {
+  STARTED
+  CREATED
+  ENDED
+}
+
+type Round @model @auth(rules: [{allow: private}]) @key(name: "byGame", fields: ["gameID"]) {
+  id: ID!
+  gameID: ID
+  status: RoundStatus
+}
+
+type Game @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  private: Boolean
+  Rounds: [Round] @connection(keyName: "byGame", fields: ["id"])
+  status: GameStatus
+}
+
+type User @model @auth(rules: [{allow: owner, ownerField: "id", operations: [read]}]) {
   id: ID!
   email: String!
   username: String!
 }
+ 
