@@ -2,7 +2,7 @@
   <a
     class="
       transition-all
-      text-green-400
+      text-teal-400
       hover:text-pink-400
       font-bold
       text-xl

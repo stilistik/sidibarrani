@@ -4,7 +4,7 @@
     class="
       transition-all
       text-center
-      bg-green-400
+      bg-teal-400
       hover:bg-pink-400
       text-4xl
       font-extrabold

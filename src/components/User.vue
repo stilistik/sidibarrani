@@ -11,7 +11,7 @@
         rounded-full
         text-white text-2xl
       "
-      :class="gradient"
+      :class="color"
     >
       {{ firstLetter }}
     </div>
@@ -22,14 +22,16 @@
 <script lang="ts">
 import { computed, defineComponent } from "vue";
 
-const gradients: string[] = [
-  "bg-gradient-to-br from-green-400 to-blue-500",
-  "bg-gradient-to-br from-yellow-400 to-red-500",
-  "bg-gradient-to-br from-purple-400 to-indigo-500",
-  "bg-gradient-to-br from-pink-400 to-red-500",
-  "bg-gradient-to-br from-blue-400 to-red-500",
-  "bg-gradient-to-br from-green-400 to-yellow-500",
-  "bg-gradient-to-br from-red-400 to-green-500",
+const colors: string[] = [
+  "bg-green-400",
+  "bg-red-400",
+  "bg-purple-400",
+  "bg-pink-400",
+  "bg-blue-400",
+  "bg-yellow-400",
+  "bg-indigo-400",
+  "bg-teal-400",
+  "bg-orange-400",
 ];
 
 export default defineComponent({
@@ -40,11 +42,11 @@ export default defineComponent({
   },
   setup(props) {
     const firstLetter = computed(() => props.username.charAt(0).toUpperCase());
-    const gradient = computed(() => {
-      const idx = props.username.charCodeAt(0) % gradients.length;
-      return gradients[idx];
+    const color = computed(() => {
+      const idx = props.username.charCodeAt(0) % colors.length;
+      return colors[idx];
     });
-    return { firstLetter, gradient };
+    return { firstLetter, color };
   },
 });
 </script>
