@@ -47,7 +47,7 @@ export default defineComponent({
   },
   setup() {
     const query = useListOnlineUsersQuery({
-      refetchInterval: 5000,
+      refetchInterval: 10000,
     });
     const updateSelfMutation = useUpdateSelfMutation();
     return {

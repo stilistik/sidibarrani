@@ -26,7 +26,7 @@ export const useListOnlineUsersQuery = (
     async () => {
       const { data } = (await API.graphql(
         graphqlOperation(listUsers, {
-          filter: { lastOnline: { gt: getAWSTimeStamp() - 10 } },
+          filter: { lastOnline: { gt: getAWSTimeStamp() - 30 } },
         })
       )) as any;
       return data.listUsers;
