@@ -39,7 +39,7 @@ export declare class User {
   readonly id: string;
   readonly email: string;
   readonly username: string;
-  readonly lastOnline?: number;
+  readonly lastOnline: string;
   readonly teams?: (TeamUser | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;

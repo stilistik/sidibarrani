@@ -15,9 +15,7 @@ exports.handler = async (event, context, callback) => {
           email: { S: event.request.userAttributes.email },
           createdAt: { S: date.toISOString() },
           updatedAt: { S: date.toISOString() },
-          lastOnline: { N: date.valueOf().toString() }, // aws timestamp in seconds
-          _lastChangedAt: { N: date.valueOf().toString() }, // timestamp in milliseconds
-          _version: { N: "1" },
+          lastOnline: { N: Math.floor(date.valueOf() / 1000) }, // aws timestamp in seconds
         },
         TableName: process.env.USERTABLE,
       };

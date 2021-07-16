@@ -2,15 +2,75 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateTeam = /* GraphQL */ `
+  subscription OnCreateTeam {
+    onCreateTeam {
+      id
+      gameID
+      name
+      createdAt
+      updatedAt
+      TeamUsers {
+        items {
+          id
+          teamID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onUpdateTeam = /* GraphQL */ `
+  subscription OnUpdateTeam {
+    onUpdateTeam {
+      id
+      gameID
+      name
+      createdAt
+      updatedAt
+      TeamUsers {
+        items {
+          id
+          teamID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteTeam = /* GraphQL */ `
+  subscription OnDeleteTeam {
+    onDeleteTeam {
+      id
+      gameID
+      name
+      createdAt
+      updatedAt
+      TeamUsers {
+        items {
+          id
+          teamID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const onCreateRound = /* GraphQL */ `
   subscription OnCreateRound {
     onCreateRound {
       id
       gameID
       status
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -22,9 +82,6 @@ export const onUpdateRound = /* GraphQL */ `
       id
       gameID
       status
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -36,9 +93,6 @@ export const onDeleteRound = /* GraphQL */ `
       id
       gameID
       status
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -50,24 +104,28 @@ export const onCreateGame = /* GraphQL */ `
       id
       private
       status
-      _version
-      _deleted
-      _lastChangedAt
+      name
       createdAt
       updatedAt
+      Teams {
+        items {
+          id
+          gameID
+          name
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       Rounds {
         items {
           id
           gameID
           status
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -78,24 +136,28 @@ export const onUpdateGame = /* GraphQL */ `
       id
       private
       status
-      _version
-      _deleted
-      _lastChangedAt
+      name
       createdAt
       updatedAt
+      Teams {
+        items {
+          id
+          gameID
+          name
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       Rounds {
         items {
           id
           gameID
           status
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -106,67 +168,191 @@ export const onDeleteGame = /* GraphQL */ `
       id
       private
       status
-      _version
-      _deleted
-      _lastChangedAt
+      name
       createdAt
       updatedAt
+      Teams {
+        items {
+          id
+          gameID
+          name
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       Rounds {
         items {
           id
           gameID
           status
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
 `;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($id: String) {
-    onCreateUser(id: $id) {
+  subscription OnCreateUser {
+    onCreateUser {
       id
       email
       username
-      _version
-      _deleted
-      _lastChangedAt
+      lastOnline
       createdAt
       updatedAt
+      teams {
+        items {
+          id
+          teamID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($id: String) {
-    onUpdateUser(id: $id) {
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
       email
       username
-      _version
-      _deleted
-      _lastChangedAt
+      lastOnline
       createdAt
       updatedAt
+      teams {
+        items {
+          id
+          teamID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($id: String) {
-    onDeleteUser(id: $id) {
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
       email
       username
-      _version
-      _deleted
-      _lastChangedAt
+      lastOnline
       createdAt
       updatedAt
+      teams {
+        items {
+          id
+          teamID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateTeamUser = /* GraphQL */ `
+  subscription OnCreateTeamUser {
+    onCreateTeamUser {
+      id
+      teamID
+      userID
+      createdAt
+      updatedAt
+      team {
+        id
+        gameID
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateTeamUser = /* GraphQL */ `
+  subscription OnUpdateTeamUser {
+    onUpdateTeamUser {
+      id
+      teamID
+      userID
+      createdAt
+      updatedAt
+      team {
+        id
+        gameID
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteTeamUser = /* GraphQL */ `
+  subscription OnDeleteTeamUser {
+    onDeleteTeamUser {
+      id
+      teamID
+      userID
+      createdAt
+      updatedAt
+      team {
+        id
+        gameID
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
     }
   }
 `;

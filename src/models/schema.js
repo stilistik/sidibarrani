@@ -225,8 +225,8 @@ export const schema = {
                 "lastOnline": {
                     "name": "lastOnline",
                     "isArray": false,
-                    "type": "Int",
-                    "isRequired": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "teams": {
@@ -485,5 +485,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "bef4602fa83ba24eacb4a42551d5e06f"
+    "version": "45a47cc48c5a0dafd1c154293ccae943"
 };

@@ -60,8 +60,6 @@ export default defineComponent({
   methods: {
     updateSelf() {
       const timestamp = getAWSTimeStamp();
-      console.log(timestamp);
-
       this.updateSelfMutation.mutate(
         {
           input: {

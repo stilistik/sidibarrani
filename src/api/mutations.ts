@@ -9,8 +9,6 @@ export const useUpdateSelfMutation = () => {
       ...(variables?.input || {}),
       id: cognitoUser.attributes.sub,
     };
-    console.log(input);
-
     const { data } = (await API.graphql(
       graphqlOperation(updateUser, {
         input,

@@ -2,15 +2,54 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getTeam = /* GraphQL */ `
+  query GetTeam($id: ID!) {
+    getTeam(id: $id) {
+      id
+      gameID
+      name
+      createdAt
+      updatedAt
+      TeamUsers {
+        items {
+          id
+          teamID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listTeams = /* GraphQL */ `
+  query ListTeams(
+    $filter: ModelTeamFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        gameID
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const getRound = /* GraphQL */ `
   query GetRound($id: ID!) {
     getRound(id: $id) {
       id
       gameID
       status
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -27,42 +66,10 @@ export const listRounds = /* GraphQL */ `
         id
         gameID
         status
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncRounds = /* GraphQL */ `
-  query SyncRounds(
-    $filter: ModelRoundFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncRounds(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        gameID
-        status
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -72,24 +79,28 @@ export const getGame = /* GraphQL */ `
       id
       private
       status
-      _version
-      _deleted
-      _lastChangedAt
+      name
       createdAt
       updatedAt
+      Teams {
+        items {
+          id
+          gameID
+          name
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       Rounds {
         items {
           id
           gameID
           status
-          _version
-          _deleted
-          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
-        startedAt
       }
     }
   }
@@ -105,50 +116,17 @@ export const listGames = /* GraphQL */ `
         id
         private
         status
-        _version
-        _deleted
-        _lastChangedAt
+        name
         createdAt
         updatedAt
+        Teams {
+          nextToken
+        }
         Rounds {
           nextToken
-          startedAt
         }
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncGames = /* GraphQL */ `
-  query SyncGames(
-    $filter: ModelGameFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncGames(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        private
-        status
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        Rounds {
-          nextToken
-          startedAt
-        }
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -158,11 +136,19 @@ export const getUser = /* GraphQL */ `
       id
       email
       username
-      _version
-      _deleted
-      _lastChangedAt
+      lastOnline
       createdAt
       updatedAt
+      teams {
+        items {
+          id
+          teamID
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -177,42 +163,14 @@ export const listUsers = /* GraphQL */ `
         id
         email
         username
-        _version
-        _deleted
-        _lastChangedAt
+        lastOnline
         createdAt
         updatedAt
+        teams {
+          nextToken
+        }
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUsers = /* GraphQL */ `
-  query SyncUsers(
-    $filter: ModelUserFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUsers(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        email
-        username
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
