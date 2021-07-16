@@ -1,8 +1,8 @@
 type Team @model @auth(rules: [{allow: private}]) @key(name: "byGame", fields: ["gameID"]) {
   id: ID!
-  Users: [User] @connection(keyName: "byTeam", fields: ["id"])
   gameID: ID
   name: String
+  TeamUsers: [TeamUser] @connection(keyName: "byTeam", fields: ["id"])
 }
 
 enum RoundStatus {
@@ -32,11 +32,19 @@ type Game @model @auth(rules: [{allow: private}]) {
   name: String
 }
 
-type User @model @auth(rules: [{allow: private}]) @key(name: "byTeam", fields: ["teamID"]) {
+type User @model @auth(rules: [{allow: private}]) {
   id: ID!
   email: String!
   username: String!
-  lastOnline: AWSTimestamp
-  teamID: ID
+  lastOnline: Int
+  teams: [TeamUser] @connection(keyName: "byUser", fields: ["id"])
+}
+
+type TeamUser @model(queries: null) @key(name: "byTeam", fields: ["teamID", "userID"]) @key(name: "byUser", fields: ["userID", "teamID"]) @auth(rules: [{allow: private}, {allow: private}]) {
+  id: ID!
+  teamID: ID!
+  userID: ID!
+  team: Team! @connection(fields: ["teamID"])
+  user: User! @connection(fields: ["userID"])
 }
  

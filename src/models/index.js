@@ -14,10 +14,11 @@ const GameStatus = {
   "ENDED": "ENDED"
 };
 
-const { Team, User, Round, Game } = initSchema(schema);
+const { Team, TeamUser, User, Round, Game } = initSchema(schema);
 
 export {
   Team,
+  TeamUser,
   User,
   Round,
   Game,

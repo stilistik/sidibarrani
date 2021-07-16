@@ -16,13 +16,23 @@ export enum GameStatus {
 
 export declare class Team {
   readonly id: string;
-  readonly Users?: (User | null)[];
   readonly gameID?: string;
   readonly name?: string;
+  readonly TeamUsers?: (TeamUser | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Team>);
   static copyOf(source: Team, mutator: (draft: MutableModel<Team>) => MutableModel<Team> | void): Team;
+}
+
+export declare class TeamUser {
+  readonly id: string;
+  readonly team: Team;
+  readonly user: User;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<TeamUser>);
+  static copyOf(source: TeamUser, mutator: (draft: MutableModel<TeamUser>) => MutableModel<TeamUser> | void): TeamUser;
 }
 
 export declare class User {
@@ -30,7 +40,7 @@ export declare class User {
   readonly email: string;
   readonly username: string;
   readonly lastOnline?: number;
-  readonly teamID?: string;
+  readonly teams?: (TeamUser | null)[];
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User>);

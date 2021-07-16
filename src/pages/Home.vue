@@ -12,6 +12,7 @@
         class="mb-4"
       />
     </div>
+    <Button @click="updateSelf">I'm online!</Button>
   </PageContainer>
 </template>
 
@@ -26,7 +27,10 @@ import Input from "../components/Input.vue";
 import Loading from "../components/Loading.vue";
 import Hand from "../components/Hand.vue";
 import User from "../components/User.vue";
-import { useListUsersQuery } from "../api/queries";
+import { useListOnlineUsersQuery } from "../api/queries";
+import { useUpdateSelfMutation } from "../api/mutations";
+import { getAWSTimeStamp } from "../utils/Utils";
+import { Message } from "../utils/Message";
 
 export default defineComponent({
   name: "Home",
@@ -42,7 +46,38 @@ export default defineComponent({
     AppHeader,
   },
   setup() {
-    return useListUsersQuery();
+    const query = useListOnlineUsersQuery({
+      refetchInterval: 5000,
+    });
+    const updateSelfMutation = useUpdateSelfMutation();
+    return {
+      isLoading: query.isLoading,
+      isError: query.isError,
+      data: query.data,
+      updateSelfMutation,
+    };
+  },
+  methods: {
+    updateSelf() {
+      const timestamp = getAWSTimeStamp();
+      console.log(timestamp);
+
+      this.updateSelfMutation.mutate(
+        {
+          input: {
+            lastOnline: timestamp,
+          },
+        },
+        {
+          onSuccess: () => {
+            Message.success("Updated lastOnline: " + timestamp);
+          },
+          onError: () => {
+            Message.error("Error");
+          },
+        }
+      );
+    },
   },
 });
 </script>

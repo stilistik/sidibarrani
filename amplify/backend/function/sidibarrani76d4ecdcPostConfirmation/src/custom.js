@@ -15,7 +15,8 @@ exports.handler = async (event, context, callback) => {
           email: { S: event.request.userAttributes.email },
           createdAt: { S: date.toISOString() },
           updatedAt: { S: date.toISOString() },
-          _lastChangedAt: { N: date.valueOf().toString() },
+          lastOnline: { N: date.valueOf().toString() }, // aws timestamp in seconds
+          _lastChangedAt: { N: date.valueOf().toString() }, // timestamp in milliseconds
           _version: { N: "1" },
         },
         TableName: process.env.USERTABLE,
@@ -27,6 +28,7 @@ exports.handler = async (event, context, callback) => {
       console.log("Nothing was added to DynamoDB");
     }
   } catch (err) {
+    console.error(err);
   } finally {
     callback(null, event);
   }
