@@ -1,6 +1,9 @@
 <template>
   <PageContainer>
-    <PageTitle>Sidi Barrani</PageTitle>
+    <div class="flex items-center gap-10 mt-20">
+      <Logo />
+      <PageTitle>Sidi Barrani</PageTitle>
+    </div>
     <form
       @submit.prevent="login"
       class="flex flex-col col-span-4 items-center w-full my-20 gap-8"
@@ -28,6 +31,7 @@ import Button from "../components/Button.vue";
 import Link from "../components/Link.vue";
 import Input from "../components/Input.vue";
 import Loading from "../components/Loading.vue";
+import Logo from "../components/Logo.vue";
 import { login } from "../utils/Auth";
 
 export default defineComponent({
@@ -39,6 +43,7 @@ export default defineComponent({
     Link,
     Input,
     Loading,
+    Logo,
   },
   setup: function () {
     return { store: useStore(), actions: useActions() };

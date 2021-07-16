@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <h1 class="text-9xl font-extrabold mt-20 text-white"><slot /></h1>
+    <h1 class="text-9xl font-thin text-white"><slot /></h1>
   </div>
 </template>
 

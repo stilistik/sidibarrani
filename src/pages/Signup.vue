@@ -1,6 +1,6 @@
 <template>
   <PageContainer>
-    <PageTitle>Sign Up</PageTitle>
+    <PageTitle class="mt-20">Sign Up</PageTitle>
     <template v-if="stage === 'signup'">
       <form
         @submit.prevent="signup"
