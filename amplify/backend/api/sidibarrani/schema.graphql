@@ -1,3 +1,10 @@
+type Team @model @auth(rules: [{allow: private}]) @key(name: "byGame", fields: ["gameID"]) {
+  id: ID!
+  Users: [User] @connection(keyName: "byTeam", fields: ["id"])
+  gameID: ID
+  name: String
+}
+
 enum RoundStatus {
   DEAL
   BET
@@ -10,24 +17,26 @@ enum GameStatus {
   ENDED
 }
 
-type Round
-  @model
-  @auth(rules: [{ allow: private }])
-  @key(name: "byGame", fields: ["gameID"]) {
+type Round @model @auth(rules: [{allow: private}]) @key(name: "byGame", fields: ["gameID"]) {
   id: ID!
   gameID: ID
   status: RoundStatus
 }
 
-type Game @model @auth(rules: [{ allow: private }]) {
+type Game @model @auth(rules: [{allow: private}]) {
   id: ID!
   private: Boolean
   Rounds: [Round] @connection(keyName: "byGame", fields: ["id"])
   status: GameStatus
+  Teams: [Team] @connection(keyName: "byGame", fields: ["id"])
+  name: String
 }
 
-type User @model @auth(rules: [{ allow: private }]) {
+type User @model @auth(rules: [{allow: private}]) @key(name: "byTeam", fields: ["teamID"]) {
   id: ID!
   email: String!
   username: String!
+  lastOnline: AWSTimestamp
+  teamID: ID
 }
+ 
