@@ -2,6 +2,38 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createNewGame = /* GraphQL */ `
+  mutation CreateNewGame($name: String!) {
+    createNewGame(name: $name) {
+      id
+      private
+      status
+      name
+      createdAt
+      updatedAt
+      Teams {
+        items {
+          id
+          gameID
+          name
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      Rounds {
+        items {
+          id
+          gameID
+          status
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const createTeam = /* GraphQL */ `
   mutation CreateTeam(
     $input: CreateTeamInput!

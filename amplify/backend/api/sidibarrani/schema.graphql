@@ -50,10 +50,16 @@ type TeamUser
   @model(queries: null)
   @key(name: "byTeam", fields: ["teamID", "userID"])
   @key(name: "byUser", fields: ["userID", "teamID"])
-  @auth(rules: [{ allow: private }, { allow: private }]) {
+  @auth(rules: [{ allow: private }]) {
   id: ID!
   teamID: ID!
   userID: ID!
   team: Team! @connection(fields: ["teamID"])
   user: User! @connection(fields: ["userID"])
+}
+
+type Mutation {
+  createNewGame(name: String!, team1name: String, team2name: String): Game!
+    @function(name: "createNewGame-${env}")
+    @auth(rules: [{ allow: private }])
 }
