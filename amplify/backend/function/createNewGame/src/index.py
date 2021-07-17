@@ -4,6 +4,9 @@ import uuid
 
 client = boto3.client('dynamodb')
 
+game_table_name = os.environ.get("GAMETABLE")
+team_table_name = os.environ.get("TEAMTABLE")
+
 
 def main(event, context):
     game = {
@@ -14,7 +17,7 @@ def main(event, context):
     }
 
     client.put_item(
-        TableName=os.environ.get('GAMETABLE'),
+        TableName=game_table_name,
         Item={
             'id': {
                 'S': game['id']
@@ -32,7 +35,7 @@ def main(event, context):
     )
 
     client.put_item(
-        TableName=os.environ.get('TEAMTABLE'),
+        TableName=team_table_name,
         Item={
             'id': {
                 'S': str(uuid.uuid4()),
@@ -47,7 +50,7 @@ def main(event, context):
     )
 
     client.put_item(
-        TableName=os.environ.get('TEAMTABLE'),
+        TableName=team_table_name,
         Item={
             'id': {
                 'S': str(uuid.uuid4()),
