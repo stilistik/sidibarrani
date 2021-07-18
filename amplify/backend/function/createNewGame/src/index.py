@@ -8,12 +8,14 @@ game_table_name = os.environ.get("GAMETABLE")
 team_table_name = os.environ.get("TEAMTABLE")
 
 
-def main(event, context):
+def main(event):
+    input = event['arguments'].get('input', {})
+
     game = {
         'id': str(uuid.uuid4()),
-        'name': event['arguments']['name'],
+        'name': input.get('name', 'New Game'),
         'status': 'STARTED',
-        'private': False,
+        'private': input.get('private', False),
     }
 
     client.put_item(
@@ -41,7 +43,7 @@ def main(event, context):
                 'S': str(uuid.uuid4()),
             },
             'name': {
-                'S': event['arguments'].get('team1name', 'Team 1'),
+                'S': input.get('team1name', 'Team 1'),
             },
             'gameID': {
                 'S': game['id'],
@@ -56,7 +58,7 @@ def main(event, context):
                 'S': str(uuid.uuid4()),
             },
             'name': {
-                'S': event['arguments'].get('team2name', 'Team 2'),
+                'S': input.get('team2name', 'Team 2'),
             },
             'gameID': {
                 'S': game['id'],
@@ -71,6 +73,6 @@ def handler(event, context):
     print('received event:')
     print(event)
 
-    game = main(event, context)
+    game = main(event)
 
     return game

@@ -58,8 +58,15 @@ type TeamUser
   user: User! @connection(fields: ["userID"])
 }
 
+input CreateNewGameInput {
+  name: String
+  team1name: String
+  team2name: String
+  private: Boolean
+}
+
 type Mutation {
-  createNewGame(name: String!, team1name: String, team2name: String): Game!
+  createNewGame(input: CreateNewGameInput): Game!
     @function(name: "createNewGame-${env}")
     @auth(rules: [{ allow: private }])
 }
