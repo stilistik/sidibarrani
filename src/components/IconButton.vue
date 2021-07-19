@@ -1,15 +1,20 @@
 <template>
   <button
     v-bind="$props"
+    style="width: 60px; height: 60px"
     class="
       transition-all
-      text-center
+      flex
+      items-center
+      justify-center
       bg-teal-400
       hover:bg-pink-400
-      rounded-xl
+      text-xl
+      rounded-full
       shadow-2xl
+      p-4
+      overflow-hidden
     "
-    :class="classes"
   >
     <slot />
   </button>
@@ -19,17 +24,5 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "Button",
-  props: {
-    size: String,
-  },
-  computed: {
-    classes: function () {
-      if (this.$props.size === "large") {
-        return "text-4xl font-extrabold py-4 px-10";
-      } else {
-        return "text-xl py-2 px-5";
-      }
-    },
-  },
 });
 </script>

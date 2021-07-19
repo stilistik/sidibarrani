@@ -1,28 +1,19 @@
 <template>
-  <button
-    class="
-      bg-teal-400
-      hover:bg-pink-400
-      p-5
-      h-14
-      w-14
-      rounded-full
-      flex
-      items-center
-      justify-center
-    "
-    @click="handleLogout"
-  >
+  <IconButton @click="handleLogout">
     <Icon icon="sign-out-alt" />
-  </button>
+  </IconButton>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import IconButton from "./IconButton.vue";
 import { logout } from "../utils/Auth";
 
 export default defineComponent({
   name: "LogoutButton",
+  components: {
+    IconButton,
+  },
   methods: {
     handleLogout: async function () {
       console.log("test");

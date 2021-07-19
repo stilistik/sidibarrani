@@ -1,0 +1,27 @@
+<template>
+  <div v-if="isLoading">Loading</div>
+  <div v-if="isError">Error</div>
+  <div class="flex flex-col gap-5">
+    <Game
+      v-for="(game, index) in data?.items"
+      :key="game.id"
+      :name="game.name"
+      :index="index"
+    />
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import Game from "./Game.vue";
+import { useListGamesQuery } from "../api/queries";
+
+export default defineComponent({
+  components: {
+    Game,
+  },
+  setup() {
+    return useListGamesQuery();
+  },
+});
+</script>

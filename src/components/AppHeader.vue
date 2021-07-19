@@ -2,6 +2,7 @@
   <div
     class="
       absolute
+      top-0
       w-full
       h-20
       flex

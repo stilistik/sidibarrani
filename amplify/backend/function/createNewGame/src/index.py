@@ -26,6 +26,8 @@ def main(event):
         'name': input.get('name', getRandomName()),
         'status': 'CREATED',
         'private': input.get('private', False),
+        'createdAt': date_now,
+        'updatedAt': date_now,
     }
 
     client.put_item(
@@ -44,10 +46,10 @@ def main(event):
                 'BOOL': game['private']
             },
             'createdAt': {
-                'S': date_now,
+                'S': game['createdAt']
             },
             'updatedAt': {
-                'S': date_now,
+                'S': game['updatedAt']
             },
         }
     )

@@ -1,19 +1,23 @@
 <template>
-  <div v-show="false">
-    <Input v-model="name" type="text" placeholder="Game Name" />
-    <Input v-model="team1name" type="text" placeholder="Team 1 Name" />
-    <Input v-model="team2name" type="text" placeholder="Team 2 Name" />
-    <Checkbox name="private" />
+  <div class="flex flex-col items-start gap-5">
+    <div class="flex flex-col items-start gap-2">
+      <Input v-model="name" type="text" placeholder="Game Name" />
+      <Input v-model="team1name" type="text" placeholder="Team 1 Name" />
+      <Input v-model="team2name" type="text" placeholder="Team 2 Name" />
+      <Checkbox name="private" label="Private" />
+    </div>
+    <div class="flex">
+      <Button @click="create" size="large">Create Game</Button>
+    </div>
   </div>
-
-  <Button @click="create">Create Game</Button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import Checkbox from "./Checkbox.vue";
 import Input from "./Input.vue";
 import Button from "./Button.vue";
+import IconButton from "./IconButton.vue";
 import { Message } from "../utils/Message";
 import { useCreateNewGameMutation } from "../api/mutations";
 
@@ -23,10 +27,15 @@ export default defineComponent({
     Checkbox,
     Input,
     Button,
+    IconButton,
   },
   setup() {
+    const state = reactive({
+      show: false,
+    });
     const createGameMutation = useCreateNewGameMutation();
     return {
+      state,
       createGameMutation,
       name: undefined,
       team1name: undefined,
@@ -35,6 +44,9 @@ export default defineComponent({
     };
   },
   methods: {
+    toggle: function () {
+      this.state.show = !this.state.show;
+    },
     create: function () {
       this.createGameMutation.mutate(
         {

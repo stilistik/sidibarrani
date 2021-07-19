@@ -15,7 +15,7 @@
     >
       {{ firstLetter }}
     </div>
-    <span class="text-xl text-white">{{ username }}</span>
+    <span class="text-xl font-thin text-white">{{ username }}</span>
   </div>
 </template>
 

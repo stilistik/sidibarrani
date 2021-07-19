@@ -31,13 +31,15 @@ export default defineComponent({
   computed: {
     color(): string {
       const gradients: string[] = [
-        "bg-gradient-to-r from-green-400 to-blue-500",
-        "bg-gradient-to-r from-yellow-400 to-red-500",
-        "bg-gradient-to-r from-purple-400 to-indigo-500",
-        "bg-gradient-to-r from-pink-400 to-red-500",
-        "bg-gradient-to-r from-blue-400 to-red-500",
-        "bg-gradient-to-r from-green-400 to-yellow-500",
-        "bg-gradient-to-r from-red-400 to-green-500",
+        "bg-green-400",
+        "bg-red-400",
+        "bg-purple-400",
+        "bg-pink-400",
+        "bg-blue-400",
+        "bg-yellow-400",
+        "bg-indigo-400",
+        "bg-teal-400",
+        "bg-orange-400",
       ];
       const indexInBounds = this.$props.index % gradients.length;
       return gradients[indexInBounds];

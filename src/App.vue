@@ -1,8 +1,6 @@
 <template>
-  <div class="h-screen w-screen">
-    <NotificationHub />
-    <router-view />
-  </div>
+  <NotificationHub />
+  <router-view />
 </template>
 
 <script lang="ts">

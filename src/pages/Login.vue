@@ -15,7 +15,7 @@
         type="password"
         placeholder="Password"
       />
-      <Button type="submit">Login</Button>
+      <Button type="submit" size="large">Login</Button>
       <Link @click="signup()"> Sign Up </Link>
       <Loading v-if="loading" />
     </form>

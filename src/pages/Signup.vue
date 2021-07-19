@@ -14,7 +14,7 @@
           placeholder="Password"
           required
         />
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit" size="large">Sign Up</Button>
       </form>
     </template>
     <template v-if="stage === 'confirm'">

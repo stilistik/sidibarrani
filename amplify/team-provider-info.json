@@ -22,7 +22,7 @@
         },
         "createNewGame": {
           "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-          "s3Key": "amplify-builds/createNewGame-365456394b623031614a-build.zip"
+          "s3Key": "amplify-builds/createNewGame-756830733865376c784b-build.zip"
         }
       }
     }
