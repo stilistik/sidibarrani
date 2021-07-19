@@ -7,6 +7,7 @@
       :key="game.id"
       :name="game.name"
       :index="index"
+      :id="game.id"
       :team1name="game.Teams.items[0].name"
       :team2name="game.Teams.items[1].name"
     />

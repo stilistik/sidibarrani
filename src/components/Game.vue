@@ -19,6 +19,7 @@
         hover:bg-gray-700
         transition-all
       "
+      @click="join"
     >
       Join
     </button>
@@ -46,6 +47,11 @@ export default defineComponent({
       ];
       const indexInBounds = this.$props.index % gradients.length;
       return gradients[indexInBounds];
+    },
+  },
+  methods: {
+    join() {
+      this.$router.push({ path: "/lobby", query: { gameId: this.$props.id } });
     },
   },
 });

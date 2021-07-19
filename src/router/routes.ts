@@ -1,6 +1,7 @@
 import Login from "/src/pages/Login.vue";
 import Signup from "/src/pages/Signup.vue";
 import Home from "/src/pages/Home.vue";
+import Lobby from "/src/pages/Lobby.vue";
 
 const routes = [
   {
@@ -23,6 +24,14 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/lobby",
+    name: "Lobby",
+    component: Lobby,
     meta: {
       requiresAuth: true,
     },
