@@ -1,6 +1,9 @@
 <template>
   <div class="relative p-8 space-y-4 shadow-xl rounded-xl h-48" :class="color">
-    <h3 class="text-3xl font-bold leading-tight">{{ name }}</h3>
+    <h3 class="text-3xl font-extrabold leading-tight">{{ name }}</h3>
+    <h3 class="text-2xl font-bold leading-tight">
+      {{ team1name }} VS {{ team2name }}
+    </h3>
     <button
       class="
         absolute
@@ -27,7 +30,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Game",
-  props: ["name", "id", "index"],
+  props: ["name", "id", "index", "team1name", "team2name"],
   computed: {
     color(): string {
       const gradients: string[] = [

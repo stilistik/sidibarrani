@@ -1,6 +1,6 @@
 <template>
   <PageContainer>
-    <div class="flex items-center gap-10 mt-20">
+    <div class="flex justify-center items-center gap-10 mt-20">
       <Logo />
       <PageTitle>Sidi Barrani</PageTitle>
     </div>

@@ -37,7 +37,7 @@ export const useListOnlineUsersQuery = (
 };
 
 export const useListGamesQuery = () => {
-  const res = useQuery("games", async () => {
+  const res = useQuery("listGames", async () => {
     const { data } = (await API.graphql(graphqlOperation(listGames))) as any;
     return data.listGames;
   });

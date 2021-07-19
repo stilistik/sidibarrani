@@ -7,6 +7,8 @@
       :key="game.id"
       :name="game.name"
       :index="index"
+      :team1name="game.Teams.items[0].name"
+      :team2name="game.Teams.items[1].name"
     />
   </div>
 </template>

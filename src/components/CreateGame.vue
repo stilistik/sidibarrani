@@ -20,6 +20,7 @@ import Button from "./Button.vue";
 import IconButton from "./IconButton.vue";
 import { Message } from "../utils/Message";
 import { useCreateNewGameMutation } from "../api/mutations";
+import { useQueryClient } from "vue-query";
 
 export default defineComponent({
   name: "CreateGame",
@@ -30,42 +31,34 @@ export default defineComponent({
     IconButton,
   },
   setup() {
-    const state = reactive({
-      show: false,
-    });
     const createGameMutation = useCreateNewGameMutation();
+    const qclient = useQueryClient();
     return {
-      state,
       createGameMutation,
-      name: undefined,
-      team1name: undefined,
-      team2name: undefined,
+      qclient,
       private: false,
+      name: "",
+      team1name: "",
+      team2name: "",
     };
   },
   methods: {
-    toggle: function () {
-      this.state.show = !this.state.show;
-    },
     create: function () {
       this.createGameMutation.mutate(
         {
           input: {
-            name: this.name,
-            team1name: this.team1name,
-            team2name: this.team2name,
+            name: this.name || undefined,
+            team1name: this.team1name || undefined,
+            team2name: this.team2name || undefined,
             private: this.private,
           },
         },
         {
           onSuccess: () => {
-            console.log(Message);
-
+            this.qclient.invalidateQueries("listGames");
             Message.success("Game created!");
           },
           onError: () => {
-            console.log(Message);
-
             Message.error("Error creating game");
           },
         }

@@ -121,6 +121,10 @@ export const listGames = /* GraphQL */ `
         updatedAt
         Teams {
           nextToken
+          items {
+            id
+            name
+          }
         }
         Rounds {
           nextToken
