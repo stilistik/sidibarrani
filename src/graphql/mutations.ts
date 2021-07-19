@@ -3,8 +3,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const createNewGame = /* GraphQL */ `
-  mutation CreateNewGame($name: String!) {
-    createNewGame(name: $name) {
+  mutation CreateNewGame($input: CreateNewGameInput) {
+    createNewGame(input: $input) {
       id
       private
       status

@@ -1,20 +1,30 @@
-import boto3
 import os
 import uuid
+import boto3
+from faker import Faker
+from datetime import datetime
 
 client = boto3.client('dynamodb')
+fake = Faker()
 
 game_table_name = os.environ.get("GAMETABLE")
 team_table_name = os.environ.get("TEAMTABLE")
 
 
+def getRandomName(num_words=3):
+    result = ' '
+    fakeWords = map(lambda x: x.capitalize(), fake.words(num_words))
+    return result.join(fakeWords)
+
+
 def main(event):
+    date_now = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ") 
     input = event['arguments'].get('input', {})
 
     game = {
         'id': str(uuid.uuid4()),
-        'name': input.get('name', 'New Game'),
-        'status': 'STARTED',
+        'name': input.get('name', getRandomName()),
+        'status': 'CREATED',
         'private': input.get('private', False),
     }
 
@@ -32,7 +42,13 @@ def main(event):
             },
             'private': {
                 'BOOL': game['private']
-            }
+            },
+            'createdAt': {
+                'S': date_now,
+            },
+            'updatedAt': {
+                'S': date_now,
+            },
         }
     )
 
@@ -43,11 +59,17 @@ def main(event):
                 'S': str(uuid.uuid4()),
             },
             'name': {
-                'S': input.get('team1name', 'Team 1'),
+                'S': input.get('team1name', getRandomName()),
             },
             'gameID': {
                 'S': game['id'],
-            }
+            },
+            'createdAt': {
+                'S': date_now,
+            },
+            'updatedAt': {
+                'S': date_now,
+            },
         }
     )
 
@@ -58,11 +80,17 @@ def main(event):
                 'S': str(uuid.uuid4()),
             },
             'name': {
-                'S': input.get('team2name', 'Team 2'),
+                'S': input.get('team2name', getRandomName()),
             },
             'gameID': {
                 'S': game['id'],
-            }
+            },
+            'createdAt': {
+                'S': date_now,
+            },
+            'updatedAt': {
+                'S': date_now,
+            },
         }
     )
 

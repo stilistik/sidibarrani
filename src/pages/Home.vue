@@ -3,7 +3,7 @@
   <PageContainer>
     <PageTitle>Home</PageTitle>
     <OnlineUsersList />
-    <Hand />
+    <CreateGame />
   </PageContainer>
 </template>
 
@@ -13,7 +13,7 @@ import PageContainer from "../components/PageContainer.vue";
 import AppHeader from "../components/AppHeader.vue";
 import PageTitle from "../components/PageTitle.vue";
 import OnlineUsersList from "../components/OnlineUsersList.vue";
-import Hand from "../components/Hand.vue";
+import CreateGame from "../components/CreateGame.vue";
 
 export default defineComponent({
   name: "Home",
@@ -22,7 +22,7 @@ export default defineComponent({
     PageTitle,
     AppHeader,
     OnlineUsersList,
-    Hand,
+    CreateGame,
   },
 });
 </script>

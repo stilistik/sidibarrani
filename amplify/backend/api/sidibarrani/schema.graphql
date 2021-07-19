@@ -15,8 +15,8 @@ enum RoundStatus {
 }
 
 enum GameStatus {
-  STARTED
   CREATED
+  STARTED
   ENDED
 }
 
