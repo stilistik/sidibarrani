@@ -1,7 +1,14 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
+import { reactive, Ref } from "vue";
 import { useQuery } from "vue-query";
 import { UseQueryOptions, QueryKey } from "vue-query/types";
-import { listUsers, listGames, getUser, getGame } from "../graphql/queries";
+import {
+  listUsers,
+  listGames,
+  getUser,
+  getGame,
+  getTeam,
+} from "../graphql/queries";
 import { getAWSTimeStamp } from "../utils/Utils";
 
 export const useListUsersQuery = (
@@ -45,13 +52,32 @@ export const useListGamesQuery = () => {
 };
 
 export const useLobbyQuery = (gameId: string) => {
-  const res = useQuery(["lobby", gameId], async () => {
+  const res = useQuery(
+    ["lobby", gameId],
+    async () => {
+      const { data } = (await API.graphql(
+        graphqlOperation(getGame, {
+          id: gameId,
+        })
+      )) as any;
+      return data.getGame;
+    },
+    {
+      enabled: Boolean(gameId),
+    }
+  );
+  return res;
+};
+
+export const useTeamQuery = (teamId: Ref<string>) => {
+  const key = reactive(["team", { teamId }]);
+  const res = useQuery(key, async () => {
     const { data } = (await API.graphql(
-      graphqlOperation(getGame, {
-        id: gameId,
+      graphqlOperation(getTeam, {
+        id: teamId.value,
       })
     )) as any;
-    return data.getGame;
+    return data.getTeam;
   });
   return res;
 };

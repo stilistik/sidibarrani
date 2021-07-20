@@ -7,9 +7,9 @@
       flex
       items-center
       justify-center
-      bg-teal-400
-      hover:bg-pink-400
-      text-xl
+      bg-gray-800
+      hover:bg-gray-700
+      text-white text-xl
       rounded-full
       shadow-2xl
       p-4

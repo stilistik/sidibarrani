@@ -20,7 +20,7 @@
     />
     <label
       :for="id"
-      class="text-white text-3xl font-bold cursor-pointer select-none"
+      class="text-white text-3xl font-thin cursor-pointer select-none"
       >{{ label }}</label
     >
   </div>

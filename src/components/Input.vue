@@ -4,7 +4,7 @@
     class="
       rounded-xl
       text-3xl
-      font-bold
+      font-thin
       shadow-xl
       focus:outline-none focus:ring-teal-400 focus:border-teal-400
     "

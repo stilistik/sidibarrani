@@ -34,6 +34,8 @@ import { Message } from "../utils/Message";
 export default defineComponent({
   name: "NotificationHub",
   setup() {
+    console.log("test");
+
     const state = reactive({ message: null as string, type: null as string });
 
     Message.success = (msg: string) => {

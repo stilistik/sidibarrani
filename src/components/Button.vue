@@ -4,10 +4,11 @@
     class="
       transition-all
       text-center
-      bg-teal-400
-      hover:bg-pink-400
-      rounded-xl
+      bg-gray-800
+      hover:bg-gray-700
+      text-white
       shadow-2xl
+      font-bold
     "
     :class="classes"
   >
@@ -25,9 +26,9 @@ export default defineComponent({
   computed: {
     classes: function () {
       if (this.$props.size === "large") {
-        return "text-4xl font-extrabold py-4 px-10";
+        return "text-4xl py-4 px-10 rounded-xl";
       } else {
-        return "text-xl py-2 px-5";
+        return "text-xl py-2 px-5 rounded-lg";
       }
     },
   },

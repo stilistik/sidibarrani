@@ -65,8 +65,17 @@ input CreateNewGameInput {
   private: Boolean
 }
 
+input JoinTeamInput {
+  userID: String!
+  teamID: String!
+}
+
 type Mutation {
   createNewGame(input: CreateNewGameInput): Game!
     @function(name: "createNewGame-${env}")
+    @auth(rules: [{ allow: private }])
+
+  joinTeam(input: JoinTeamInput!): TeamUser!
+    @function(name: "joinTeam-${env}")
     @auth(rules: [{ allow: private }])
 }

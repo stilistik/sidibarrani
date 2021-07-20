@@ -2,8 +2,8 @@
   <a
     class="
       transition-all
-      text-teal-400
-      hover:text-pink-400
+      text-white
+      hover:text-teal-400
       font-bold
       text-xl
       cursor-pointer

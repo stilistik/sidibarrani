@@ -7,13 +7,13 @@
       <Checkbox name="private" label="Private" />
     </div>
     <div class="flex">
-      <Button @click="create" size="large">Create Game</Button>
+      <Button @click="create" size="large">Create</Button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
 import Checkbox from "./Checkbox.vue";
 import Input from "./Input.vue";
 import Button from "./Button.vue";

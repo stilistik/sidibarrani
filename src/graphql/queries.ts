@@ -17,6 +17,10 @@ export const getTeam = /* GraphQL */ `
           userID
           createdAt
           updatedAt
+          user {
+            id
+            username
+          }
         }
         nextToken
       }
@@ -44,6 +48,7 @@ export const listTeams = /* GraphQL */ `
     }
   }
 `;
+
 export const getRound = /* GraphQL */ `
   query GetRound($id: ID!) {
     getRound(id: $id) {

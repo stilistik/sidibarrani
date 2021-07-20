@@ -1,3 +1,12 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer utilities {
+  .teal-shadow {
+    box-shadow: 0 25px 50px -12px #2dd4bf;
+  }
+  .pink-shadow {
+    box-shadow: 0 25px 50px -12px #f472b6;
+  }
+}

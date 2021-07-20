@@ -1,36 +1,20 @@
 <template>
   <div class="relative p-8 space-y-4 shadow-xl rounded-xl h-48" :class="color">
-    <h3 class="text-3xl font-extrabold leading-tight">{{ name }}</h3>
-    <h3 class="text-2xl font-bold leading-tight">
-      {{ team1name }} VS {{ team2name }}
-    </h3>
-    <button
-      class="
-        absolute
-        bottom-2
-        right-2
-        bg-gray-800
-        text-white
-        font-bold
-        px-4
-        py-2
-        text-3xl
-        rounded-lg
-        hover:bg-gray-700
-        transition-all
-      "
-      @click="join"
-    >
-      Join
-    </button>
+    <h3 class="text-4xl font-thin">{{ name }}</h3>
+    <h3 class="text-2xl font-thin">{{ team1name }} VS {{ team2name }}</h3>
+    <Button @click="join">Join</Button>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Button from "./Button.vue";
 
 export default defineComponent({
   name: "Game",
+  components: {
+    Button,
+  },
   props: ["name", "id", "index", "team1name", "team2name"],
   computed: {
     color(): string {

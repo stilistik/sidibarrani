@@ -51,6 +51,9 @@ def main(event):
             'updatedAt': {
                 'S': game['updatedAt']
             },
+            '__typename': {
+                'S': 'Game'
+            }
         }
     )
 
@@ -72,6 +75,9 @@ def main(event):
             'updatedAt': {
                 'S': date_now,
             },
+            '__typename': {
+                'S': 'Team'
+            }
         }
     )
 
@@ -93,6 +99,9 @@ def main(event):
             'updatedAt': {
                 'S': date_now,
             },
+            '__typename': {
+                'S': 'Team'
+            }
         }
     )
 

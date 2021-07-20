@@ -3,11 +3,17 @@
   <PageContainer>
     <PageTitle class="mt-10">{{ data?.name }}</PageTitle>
     <div class="text-white">
-      <Loading v-if="isLoading">Loading</Loading>
       <p v-if="isError">Error</p>
-      <p>{{ data?.Teams?.items[0].name }}</p>
-      <p>VS</p>
-      <p>{{ data?.Teams?.items[1].name }}</p>
+      <Loading v-else-if="isLoading">Loading</Loading>
+      <div v-else class="flex mt-20">
+        <Team :id="data?.Teams?.items[0].id" class="flex-1 teal-shadow" />
+        <p class="font-extrabold text-8xl p-10">VS</p>
+        <Team :id="data?.Teams?.items[1].id" class="flex-1 pink-shadow" />
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-32">
+      <StartGame />
     </div>
   </PageContainer>
 </template>
@@ -18,6 +24,8 @@ import PageContainer from "../components/PageContainer.vue";
 import AppHeader from "../components/AppHeader.vue";
 import PageTitle from "../components/PageTitle.vue";
 import Loading from "../components/Loading.vue";
+import Team from "../components/Team.vue";
+import StartGame from "../components/StartGame.vue";
 import { useLobbyQuery } from "../api/queries";
 import router from "../router";
 
@@ -28,6 +36,8 @@ export default defineComponent({
     PageContainer,
     PageTitle,
     Loading,
+    Team,
+    StartGame,
   },
   setup() {
     const gameId = router.currentRoute.value.query.gameId as string;

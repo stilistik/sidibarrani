@@ -34,6 +34,38 @@ export const createNewGame = /* GraphQL */ `
     }
   }
 `;
+export const joinTeam = /* GraphQL */ `
+  mutation JoinTeam($input: JoinTeamInput!) {
+    joinTeam(input: $input) {
+      id
+      teamID
+      userID
+      createdAt
+      updatedAt
+      team {
+        id
+        gameID
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
 export const createTeam = /* GraphQL */ `
   mutation CreateTeam(
     $input: CreateTeamInput!
