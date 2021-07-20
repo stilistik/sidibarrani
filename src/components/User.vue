@@ -32,6 +32,7 @@ const colors: string[] = [
   "bg-indigo-400",
   "bg-teal-400",
   "bg-orange-400",
+  "bg-cyan-400",
 ];
 
 export default defineComponent({

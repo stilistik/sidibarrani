@@ -6,7 +6,7 @@
       text-3xl
       font-thin
       shadow-xl
-      focus:outline-none focus:ring-teal-400 focus:border-teal-400
+      focus:outline-none focus:ring-primary focus:border-primary
     "
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"

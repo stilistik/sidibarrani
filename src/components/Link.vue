@@ -3,7 +3,7 @@
     class="
       transition-all
       text-white
-      hover:text-teal-400
+      hover:text-primary
       font-bold
       text-xl
       cursor-pointer

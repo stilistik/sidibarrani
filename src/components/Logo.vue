@@ -1,5 +1,5 @@
 <template>
-  <div class="text-orange-400">
+  <div class="text-primary">
     <svg
       width="177"
       height="177"

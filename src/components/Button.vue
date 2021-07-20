@@ -7,6 +7,7 @@
       bg-gray-800
       hover:bg-gray-700
       text-white
+      hover:text-primary
       shadow-2xl
       font-bold
     "

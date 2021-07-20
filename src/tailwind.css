@@ -3,10 +3,59 @@
 @import "tailwindcss/utilities";
 
 @layer utilities {
-  .teal-shadow {
-    box-shadow: 0 25px 50px -12px #2dd4bf;
+  .primary-color-red {
+    --color-primary: theme("colors.red.400");
   }
-  .pink-shadow {
-    box-shadow: 0 25px 50px -12px #f472b6;
+
+  .primary-color-orange {
+    --color-primary: theme("colors.orange.400");
+  }
+
+  .primary-color-yellow {
+    --color-primary: theme("colors.yellow.400");
+  }
+
+  .primary-color-green {
+    --color-primary: theme("colors.green.400");
+  }
+
+  .primary-color-teal {
+    --color-primary: theme("colors.teal.400");
+  }
+
+  .primary-color-cyan {
+    --color-primary: theme("colors.cyan.400");
+  }
+
+  .primary-color-blue {
+    --color-primary: theme("colors.blue.400");
+  }
+
+  .primary-color-purple {
+    --color-primary: theme("colors.purple.400");
+  }
+
+  .primary-color-pink {
+    --color-primary: theme("colors.pink.400");
+  }
+
+  .color-shadow {
+    box-shadow: 0 25px 50px -12px var(--color-primary);
+  }
+
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .bg-primary {
+    color: var(--color-primary);
+  }
+
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+
+  .ring-primary {
+    --tw-ring-color: var(--color-primary);
   }
 }
