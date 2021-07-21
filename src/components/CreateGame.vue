@@ -60,6 +60,8 @@ export default defineComponent({
             name: this.name || undefined,
             team1name: this.team1name || undefined,
             team2name: this.team2name || undefined,
+            team1color: this.team1color || undefined,
+            team2color: this.team2color || undefined,
             private: this.private,
           },
         },

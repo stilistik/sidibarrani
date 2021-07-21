@@ -53,6 +53,7 @@ const getGame = /* GraphQL */ `
           id
           gameID
           name
+          color
           createdAt
           updatedAt
         }

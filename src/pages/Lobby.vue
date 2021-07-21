@@ -5,10 +5,18 @@
     <div class="text-white">
       <p v-if="isError">Error</p>
       <Loading v-else-if="isLoading">Loading</Loading>
-      <div v-else class="flex items-center mt-20">
-        <Team :id="data?.Teams?.items[0].id" class="flex-1 shadow-primary" />
-        <p class="font-extrabold text-8xl p-10">VS</p>
-        <Team :id="data?.Teams?.items[1].id" class="flex-1 shadow-primary" />
+      <div v-else class="flex items-start mt-20">
+        <Team
+          :id="data?.Teams?.items[0].id"
+          class="flex-1"
+          :class="`shadow-${data?.Teams?.items[0].color}`"
+        />
+        <p class="font-extrabold text-8xl p-10 mt-4">VS</p>
+        <Team
+          :id="data?.Teams?.items[1].id"
+          class="flex-1"
+          :class="`shadow-${data?.Teams?.items[1].color}`"
+        />
       </div>
     </div>
 
