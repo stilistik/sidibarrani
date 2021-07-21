@@ -18,3 +18,21 @@ export const useCreateNewGameMutation = () => {
   });
   return res;
 };
+
+const startGame = /* GraphQL */ `
+  mutation StartGame($id: String!) {
+    startGame(id: $id) {
+      id
+    }
+  }
+`;
+
+export const useStartGameMutation = () => {
+  const res = useMutation(async (variables: any) => {
+    const { data } = (await API.graphql(
+      graphqlOperation(startGame, variables)
+    )) as any;
+    return data.startGame;
+  });
+  return res;
+};

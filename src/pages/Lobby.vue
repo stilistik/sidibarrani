@@ -21,7 +21,7 @@
     </div>
 
     <div class="flex justify-center mt-32">
-      <StartGame />
+      <StartGame :id="data?.id" />
     </div>
   </PageContainer>
 </template>

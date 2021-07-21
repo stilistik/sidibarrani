@@ -27,6 +27,10 @@
         "joinTeam": {
           "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
           "s3Key": "amplify-builds/joinTeam-776d3855663251637932-build.zip"
+        },
+        "startGame": {
+          "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
+          "s3Key": "amplify-builds/startGame-515a6e77362f30344f64-build.zip"
         }
       }
     }

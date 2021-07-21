@@ -4,19 +4,37 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useStartGameMutation } from "../api";
 import { Message } from "../utils/Message";
 import Button from "./Button.vue";
 
 export default defineComponent({
   name: "StartGame",
+  props: {
+    id: String!,
+  },
   components: {
     Button,
   },
-  setup() {},
+  setup() {
+    const startGameMutation = useStartGameMutation();
+    return { startGameMutation };
+  },
   methods: {
     start() {
-      console.log("start");
-      Message.success("Started the game");
+      this.startGameMutation.mutate(
+        {
+          id: this.$props.id,
+        },
+        {
+          onSuccess: () => {
+            Message.success("Game started");
+          },
+          onError: ({ errors }: any) => {
+            Message.error("Error starting game: " + errors[0].message);
+          },
+        }
+      );
     },
   },
 });

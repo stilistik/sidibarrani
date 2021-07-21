@@ -36,16 +36,16 @@
 import { defineComponent, reactive } from "vue";
 
 const colors: string[] = [
-  "green",
   "red",
+  "orange",
+  "yellow",
+  "green",
+  "teal",
+  "cyan",
+  "blue",
+  "indigo",
   "purple",
   "pink",
-  "blue",
-  "yellow",
-  "indigo",
-  "teal",
-  "orange",
-  "cyan",
 ];
 
 export default defineComponent({

@@ -81,4 +81,8 @@ type Mutation {
   joinTeam(input: JoinTeamInput!): TeamUser!
     @function(name: "joinTeam-${env}")
     @auth(rules: [{ allow: private }])
+
+  startGame(id: String!): Game!
+    @function(name: "startGame-${env}")
+    @auth(rules: [{ allow: private }])
 }
