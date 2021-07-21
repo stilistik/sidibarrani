@@ -9,11 +9,12 @@
       duration-500
       -translate-y-full
       origin-top
+      z-50
     "
     :class="{ 'transform-none': hasMessage }"
   >
     <div
-      class="py-5 px-5 font-extrabold flex justify-between"
+      class="py-5 px-5 font-extrabold flex justify-between items-center h-20"
       :class="{
         'bg-green-400': state.type === 'success',
         'bg-red-400': state.type === 'error',
@@ -22,7 +23,9 @@
       }"
     >
       <span>{{ state.message }}</span>
-      <button @click="close"><Icon icon="times" /></button>
+      <IconButton @click="close">
+        <Icon icon="times" />
+      </IconButton>
     </div>
   </div>
 </template>
@@ -30,12 +33,14 @@
 <script lang="ts">
 import { computed, defineComponent, onUpdated, reactive } from "vue";
 import { Message } from "../utils/Message";
+import IconButton from "./IconButton.vue";
 
 export default defineComponent({
   name: "NotificationHub",
+  components: {
+    IconButton,
+  },
   setup() {
-    console.log("test");
-
     const state = reactive({ message: null as string, type: null as string });
 
     Message.success = (msg: string) => {

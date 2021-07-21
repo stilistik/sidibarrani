@@ -9,7 +9,8 @@
         items-center
         justify-center
         rounded-full
-        text-white text-2xl
+        font-thin
+        text-2xl text-white
       "
       :class="color"
     >
