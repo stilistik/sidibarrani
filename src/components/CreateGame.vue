@@ -2,8 +2,14 @@
   <div class="flex flex-col items-start gap-5">
     <div class="flex flex-col items-start gap-2">
       <Input v-model="name" type="text" placeholder="Game Name" />
-      <Input v-model="team1name" type="text" placeholder="Team 1 Name" />
-      <Input v-model="team2name" type="text" placeholder="Team 2 Name" />
+      <div class="flex items-center gap-3">
+        <Input v-model="team1name" type="text" placeholder="Team 1 Name" />
+        <ColorPicker v-model="team1color" />
+      </div>
+      <div class="flex items-center gap-3">
+        <Input v-model="team2name" type="text" placeholder="Team 2 Name" />
+        <ColorPicker v-model="team2color" />
+      </div>
       <Checkbox name="private" label="Private" />
     </div>
     <div class="flex">
@@ -13,10 +19,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import Checkbox from "./Checkbox.vue";
 import Input from "./Input.vue";
 import Button from "./Button.vue";
+import ColorPicker from "./ColorPicker.vue";
 import IconButton from "./IconButton.vue";
 import { Message } from "../utils/Message";
 import { useCreateNewGameMutation } from "../api";
@@ -29,18 +36,21 @@ export default defineComponent({
     Input,
     Button,
     IconButton,
+    ColorPicker,
   },
   setup() {
     const createGameMutation = useCreateNewGameMutation();
     const qclient = useQueryClient();
-    return {
+    return reactive({
       createGameMutation,
       qclient,
       private: false,
       name: "",
       team1name: "",
       team2name: "",
-    };
+      team1color: "red",
+      team2color: "blue",
+    });
   },
   methods: {
     create: function () {
