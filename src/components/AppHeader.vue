@@ -22,7 +22,7 @@
 import { defineComponent } from "vue";
 import User from "./User.vue";
 import LogoutButton from "./LogoutButton.vue";
-import { useCurrentUserQuery } from "../api/queries";
+import { useCurrentUserQuery } from "../api";
 
 export default defineComponent({
   name: "AppHeader",

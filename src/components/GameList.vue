@@ -17,7 +17,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import Game from "./Game.vue";
-import { useListGamesQuery } from "../api/queries";
+import { useListGamesQuery } from "../api";
 
 export default defineComponent({
   components: {

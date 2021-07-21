@@ -26,7 +26,7 @@ import PageTitle from "../components/PageTitle.vue";
 import Loading from "../components/Loading.vue";
 import Team from "../components/Team.vue";
 import StartGame from "../components/StartGame.vue";
-import { useLobbyQuery } from "../api/queries";
+import { useLobbyQuery } from "../api";
 import router from "../router";
 
 export default defineComponent({

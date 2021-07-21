@@ -19,7 +19,7 @@
 import { defineComponent, toRef } from "vue";
 import User from "./User.vue";
 import JoinTeam from "./JoinTeam.vue";
-import { useTeamQuery } from "../api/queries";
+import { useTeamQuery } from "../api";
 
 export default defineComponent({
   components: {
