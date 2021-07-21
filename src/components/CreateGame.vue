@@ -19,7 +19,7 @@ import Input from "./Input.vue";
 import Button from "./Button.vue";
 import IconButton from "./IconButton.vue";
 import { Message } from "../utils/Message";
-import { useCreateNewGameMutation } from "../api/mutations";
+import { useCreateNewGameMutation } from "../api";
 import { useQueryClient } from "vue-query";
 
 export default defineComponent({

@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useJoinTeamMutation } from "../api/mutations";
+import { useJoinTeamMutation } from "../api";
 import { useQueryClient } from "vue-query";
 import Button from "./Button.vue";
 
