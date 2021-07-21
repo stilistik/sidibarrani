@@ -4,11 +4,14 @@ import boto3
 from faker import Faker
 from datetime import datetime
 
-client = boto3.client('dynamodb')
+client = boto3.resource('dynamodb')
 fake = Faker()
 
 game_table_name = os.environ.get("GAMETABLE")
 team_table_name = os.environ.get("TEAMTABLE")
+
+game_table = client.Table(game_table_name)
+team_table = client.Table(team_table_name)
 
 
 def getRandomName(num_words=3):
@@ -28,80 +31,34 @@ def main(event):
         'private': input.get('private', False),
         'createdAt': date_now,
         'updatedAt': date_now,
+        '__typename': 'Game'
     }
 
-    client.put_item(
-        TableName=game_table_name,
+    game_table.put_item(
+        Item=game
+    )
+
+    team_table.put_item(
         Item={
-            'id': {
-                'S': game['id']
-            },
-            'name': {
-                'S': game['name']
-            },
-            'status': {
-                'S': game['status']
-            },
-            'private': {
-                'BOOL': game['private']
-            },
-            'createdAt': {
-                'S': game['createdAt']
-            },
-            'updatedAt': {
-                'S': game['updatedAt']
-            },
-            '__typename': {
-                'S': 'Game'
-            }
+            'id': str(uuid.uuid4()),
+            'name':input.get('team1name', getRandomName()),
+            'gameID': game['id'],
+            'createdAt':date_now,
+            'updatedAt': date_now,
+            'color': input.get('team1color', 'red'),
+            '__typename': 'Team'
         }
     )
 
-    client.put_item(
-        TableName=team_table_name,
+    team_table.put_item(
         Item={
-            'id': {
-                'S': str(uuid.uuid4()),
-            },
-            'name': {
-                'S': input.get('team1name', getRandomName()),
-            },
-            'gameID': {
-                'S': game['id'],
-            },
-            'createdAt': {
-                'S': date_now,
-            },
-            'updatedAt': {
-                'S': date_now,
-            },
-            '__typename': {
-                'S': 'Team'
-            }
-        }
-    )
-
-    client.put_item(
-        TableName=team_table_name,
-        Item={
-            'id': {
-                'S': str(uuid.uuid4()),
-            },
-            'name': {
-                'S': input.get('team2name', getRandomName()),
-            },
-            'gameID': {
-                'S': game['id'],
-            },
-            'createdAt': {
-                'S': date_now,
-            },
-            'updatedAt': {
-                'S': date_now,
-            },
-            '__typename': {
-                'S': 'Team'
-            }
+            'id':  str(uuid.uuid4()),
+            'name': input.get('team2name', getRandomName()),
+            'gameID':game['id'],
+            'createdAt':date_now,
+            'updatedAt':date_now,
+            'color': input.get('team2color', 'blue'),
+            '__typename':'Team'
         }
     )
 

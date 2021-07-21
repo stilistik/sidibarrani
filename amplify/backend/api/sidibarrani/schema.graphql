@@ -63,6 +63,8 @@ input CreateNewGameInput {
   name: String
   team1name: String
   team2name: String
+  team1color: String
+  team2color: String
   private: Boolean
 }
 
