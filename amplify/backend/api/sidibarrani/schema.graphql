@@ -5,6 +5,7 @@ type Team
   id: ID!
   gameID: ID
   name: String
+  color: String
   TeamUsers: [TeamUser] @connection(keyName: "byTeam", fields: ["id"])
 }
 
