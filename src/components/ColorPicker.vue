@@ -2,7 +2,7 @@
   <div class="relative">
     <button
       class="rounded-full p-6"
-      :class="`bg-${modelValue}-400`"
+      :class="[`bg-${modelValue}-400`, `hover:bg-${modelValue}-300`]"
       @click.stop="openPicker"
     />
     <div
@@ -24,7 +24,7 @@
       <button
         v-for="color in colors"
         :key="color"
-        :class="`bg-${color}-400`"
+        :class="[`bg-${color}-400`, `hover:bg-${color}-300`]"
         class="rounded-full p-6 my-1"
         @click.stop="changeColor(color)"
       />
