@@ -10,6 +10,7 @@ import {
   faSignOutAlt,
   faChevronDown,
   faChevronUp,
+  faCopy,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -17,6 +18,7 @@ library.add(faTimes);
 library.add(faSignOutAlt);
 library.add(faChevronDown);
 library.add(faChevronUp);
+library.add(faCopy);
 
 const app = createApp(App);
 

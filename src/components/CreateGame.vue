@@ -10,7 +10,7 @@
         <Input v-model="team2name" type="text" placeholder="Team 2 Name" />
         <ColorPicker v-model="team2color" />
       </div>
-      <Checkbox name="private" label="Private" />
+      <Checkbox v-model="isPrivate" name="private" label="Private" />
     </div>
     <div class="flex">
       <Button @click="create" size="large">Create</Button>
@@ -44,7 +44,7 @@ export default defineComponent({
     return reactive({
       createGameMutation,
       qclient,
-      private: false,
+      isPrivate: false,
       name: "",
       team1name: "",
       team2name: "",
@@ -54,17 +54,16 @@ export default defineComponent({
   },
   methods: {
     create: function () {
+      const input = {
+        name: this.name || undefined,
+        team1name: this.team1name || undefined,
+        team2name: this.team2name || undefined,
+        team1color: this.team1color || undefined,
+        team2color: this.team2color || undefined,
+        private: this.isPrivate || false,
+      };
       this.createGameMutation.mutate(
-        {
-          input: {
-            name: this.name || undefined,
-            team1name: this.team1name || undefined,
-            team2name: this.team2name || undefined,
-            team1color: this.team1color || undefined,
-            team2color: this.team2color || undefined,
-            private: this.private,
-          },
-        },
+        { input },
         {
           onSuccess: (game) => {
             this.qclient.invalidateQueries("listGames");

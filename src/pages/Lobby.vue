@@ -2,6 +2,9 @@
   <AppHeader />
   <PageContainer>
     <PageTitle class="mt-10">{{ data?.name }}</PageTitle>
+    <div class="w-full flex justify-center mt-10">
+      <CopyJoinLink />
+    </div>
     <div class="text-white">
       <p v-if="isError">Error</p>
       <Loading v-else-if="isLoading">Loading</Loading>
@@ -20,7 +23,7 @@
       </div>
     </div>
 
-    <div class="flex justify-center mt-32">
+    <div class="flex justify-center mt-20">
       <StartGame :id="data?.id" />
     </div>
   </PageContainer>
@@ -34,6 +37,7 @@ import PageTitle from "../components/PageTitle.vue";
 import Loading from "../components/Loading.vue";
 import Team from "../components/Team.vue";
 import StartGame from "../components/StartGame.vue";
+import CopyJoinLink from "../components/CopyJoinLink.vue";
 import { useLobbyQuery } from "../api";
 import router from "../router";
 
@@ -46,6 +50,7 @@ export default defineComponent({
     Loading,
     Team,
     StartGame,
+    CopyJoinLink,
   },
   setup() {
     const gameId = router.currentRoute.value.query.gameId as string;

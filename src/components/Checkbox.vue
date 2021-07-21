@@ -4,6 +4,8 @@
       :id="id"
       type="checkbox"
       v-bind="$props"
+      :checked="modelValue"
+      @input="$emit('update:modelValue', $event.target.checked)"
       class="
         rounded-lg
         text-3xl
@@ -30,6 +32,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "Checkbox",
   props: { label: String },
+  emits: ["update:modelValue"],
   setup() {
     return {
       id: uuid(),
