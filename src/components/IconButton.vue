@@ -10,6 +10,7 @@
       bg-gray-800
       hover:bg-gray-700
       text-white text-xl
+      hover:text-primary
       rounded-full
       shadow-2xl
       p-4

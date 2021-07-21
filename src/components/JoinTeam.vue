@@ -1,28 +1,17 @@
 <template>
-  <button
-    class="
-      bg-gray-800
-      hover:bg-gray-700
-      text-white
-      font-bold
-      px-4
-      py-2
-      text-3xl
-      rounded-lg
-      transition-all
-    "
-    @click="join"
-  >
-    Join
-  </button>
+  <Button @click="join">Join</Button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useJoinTeamMutation } from "../api/mutations";
 import { useQueryClient } from "vue-query";
+import Button from "./Button.vue";
 
 export default defineComponent({
+  components: {
+    Button,
+  },
   props: {
     teamID: String,
   },

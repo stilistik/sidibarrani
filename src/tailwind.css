@@ -3,6 +3,13 @@
 @import "tailwindcss/utilities";
 
 @layer utilities {
+  /* 
+   * PRIMARY COLORS
+   * ---------------
+   * these classes should be set on the root element to define the primary color
+   * This way the primary color can be exchanged dynamically
+   */
+
   .primary-color-red {
     --color-primary: theme("colors.red.400");
   }
@@ -39,7 +46,14 @@
     --color-primary: theme("colors.pink.400");
   }
 
-  .color-shadow {
+  /* 
+   * PRIMARY COLOR UTILITIES
+   * ------------------------
+   * Those are the basic color utilities that are routed to using 
+   * the current primary color
+   */
+
+  .shadow-primary {
     box-shadow: 0 25px 50px -12px var(--color-primary);
   }
 
@@ -57,5 +71,47 @@
 
   .ring-primary {
     --tw-ring-color: var(--color-primary);
+  }
+
+  /*
+   * COLOR SHADOWS
+   * --------------
+   * Shadows in all the primary colors 
+   */
+
+  .shadow-red {
+    box-shadow: 0 25px 50px -12px theme("colors.red.400");
+  }
+
+  .shadow-orange {
+    box-shadow: 0 25px 50px -12px theme("colors.orange.400");
+  }
+
+  .shadow-yellow {
+    box-shadow: 0 25px 50px -12px theme("colors.yellow.400");
+  }
+
+  .shadow-green {
+    box-shadow: 0 25px 50px -12px theme("colors.green.400");
+  }
+
+  .shadow-teal {
+    box-shadow: 0 25px 50px -12px theme("colors.teal.400");
+  }
+
+  .shadow-cyan {
+    box-shadow: 0 25px 50px -12px theme("colors.cyan.400");
+  }
+
+  .shadow-blue {
+    box-shadow: 0 25px 50px -12px theme("colors.blue.400");
+  }
+
+  .shadow-purple {
+    box-shadow: 0 25px 50px -12px theme("colors.purple.400");
+  }
+
+  .shadow-pink {
+    box-shadow: 0 25px 50px -12px theme("colors.pink.400");
   }
 }

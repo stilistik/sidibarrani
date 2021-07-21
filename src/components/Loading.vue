@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="lds-grid">
-      <div class="bg-teal-400"></div>
-      <div class="bg-teal-400"></div>
-      <div class="bg-teal-400"></div>
-      <div class="bg-teal-400"></div>
-      <div class="bg-teal-400"></div>
-      <div class="bg-teal-400"></div>
-      <div class="bg-teal-400"></div>
-      <div class="bg-teal-400"></div>
-      <div class="bg-teal-400"></div>
+      <div class="bg-primary"></div>
+      <div class="bg-primary"></div>
+      <div class="bg-primary"></div>
+      <div class="bg-primary"></div>
+      <div class="bg-primary"></div>
+      <div class="bg-primary"></div>
+      <div class="bg-primary"></div>
+      <div class="bg-primary"></div>
+      <div class="bg-primary"></div>
     </div>
   </div>
 </template>

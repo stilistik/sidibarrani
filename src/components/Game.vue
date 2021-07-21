@@ -1,5 +1,8 @@
 <template>
-  <div class="relative p-8 space-y-4 shadow-xl rounded-xl h-48" :class="color">
+  <div
+    class="w-full p-8 space-y-4 shadow-xl rounded-xl text-white"
+    :class="color"
+  >
     <h3 class="text-4xl font-thin">{{ name }}</h3>
     <h3 class="text-2xl font-thin">{{ team1name }} VS {{ team2name }}</h3>
     <Button @click="join">Join</Button>
@@ -19,15 +22,15 @@ export default defineComponent({
   computed: {
     color(): string {
       const gradients: string[] = [
-        "bg-green-400",
-        "bg-red-400",
-        "bg-purple-400",
-        "bg-pink-400",
-        "bg-blue-400",
-        "bg-yellow-400",
-        "bg-indigo-400",
-        "bg-teal-400",
-        "bg-orange-400",
+        "shadow-green",
+        "shadow-red",
+        "shadow-purple",
+        "shadow-pink",
+        "shadow-blue",
+        "shadow-yellow",
+        "shadow-indigo",
+        "shadow-teal",
+        "shadow-orange",
       ];
       const indexInBounds = this.$props.index % gradients.length;
       return gradients[indexInBounds];

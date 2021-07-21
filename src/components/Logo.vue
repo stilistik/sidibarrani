@@ -24,7 +24,7 @@
         cy="88.5"
         r="85"
         stroke="currentColor"
-        stroke-width="7"
+        stroke-width="2"
       />
     </svg>
   </div>

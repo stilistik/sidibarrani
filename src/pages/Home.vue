@@ -4,7 +4,7 @@
     <PageTitle class="mt-10">Welcome</PageTitle>
     <div class="flex gap-10 mt-20">
       <div class="flex-1 flex items-start justify-end">
-        <div class="flex flex-col gap-5">
+        <div class="w-full flex flex-col gap-5">
           <h1 class="text-white text-4xl font-thin">Join Game</h1>
           <GameList />
         </div>

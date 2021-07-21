@@ -5,16 +5,13 @@
       type="checkbox"
       v-bind="$props"
       class="
-        rounded-xl
+        rounded-lg
         text-3xl
         shadow-xl
-        h-12
-        w-12
-        text-teal-400
-        focus:outline-none
-        focus:ring-inset
-        focus:ring-teal-400
-        focus:border-none
+        h-8
+        w-8
+        text-primary
+        focus:outline-none focus:ring-inset focus:ring-primary focus:border-none
         cursor-pointer
       "
     />
