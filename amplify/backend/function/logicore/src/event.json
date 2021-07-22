@@ -1,1 +1,5 @@
-{ "typeName": "Mutation", "fieldName": "createNewGame", "arguments": {} }
+{
+  "typeName": "Mutation",
+  "fieldName": "leaveTeam",
+  "arguments": { "input": { "teamID": "abc", "userID": "abcd" } }
+}

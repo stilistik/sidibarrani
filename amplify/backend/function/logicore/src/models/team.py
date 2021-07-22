@@ -53,6 +53,9 @@ class TeamModel:
                     'id': found_in_team['id']
                 }
             )
+            return True
+
+        return False
 
     @staticmethod
     def add_user(team_id, user_id):
