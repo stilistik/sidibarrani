@@ -8,5 +8,9 @@
     "amplify/backend/amplify-meta.json": true,
     "amplify/backend/awscloudformation": true
   },
+  "[python]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+  },
   "python.pythonPath": "/Library/Developer/CommandLineTools/usr/bin/python3"
 }

@@ -20,21 +20,9 @@
           "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
           "s3Key": "amplify-builds/sidibarrani76d4ecdcPostConfirmation-5a44654f384633594861-build.zip"
         },
-        "createNewGame": {
-          "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-          "s3Key": "amplify-builds/createNewGame-68344a73577270464554-build.zip"
-        },
-        "joinTeam": {
-          "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-          "s3Key": "amplify-builds/joinTeam-776d3855663251637932-build.zip"
-        },
-        "startGame": {
-          "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-          "s3Key": "amplify-builds/startGame-39484663626245316835-build.zip"
-        },
         "logicore": {
           "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-          "s3Key": "amplify-builds/logicore-37504b526e45497a3674-build.zip"
+          "s3Key": "amplify-builds/logicore-59674c34427a61345739-build.zip"
         }
       }
     }

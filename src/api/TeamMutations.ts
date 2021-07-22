@@ -16,8 +16,6 @@ export const useJoinTeamMutation = () => {
       ...(variables.input || {}),
       userID: cognitoUser.attributes.sub,
     };
-    console.log(input);
-
     const { data } = (await API.graphql(
       graphqlOperation(joinTeam, { input })
     )) as any;

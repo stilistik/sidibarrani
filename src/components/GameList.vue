@@ -1,7 +1,7 @@
 <template>
   <div v-if="isLoading">Loading</div>
   <div v-else-if="isError">Error</div>
-  <div v-else class="w-full flex flex-col gap-10">
+  <div v-else class="w-full flex flex-col gap-10 pb-20">
     <Game
       v-for="(game, index) in data?.items"
       :key="game.id"
