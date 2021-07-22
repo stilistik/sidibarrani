@@ -30,7 +30,11 @@
         },
         "startGame": {
           "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-          "s3Key": "amplify-builds/startGame-515a6e77362f30344f64-build.zip"
+          "s3Key": "amplify-builds/startGame-39484663626245316835-build.zip"
+        },
+        "logicore": {
+          "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
+          "s3Key": "amplify-builds/logicore-37504b526e45497a3674-build.zip"
         }
       }
     }

@@ -75,14 +75,14 @@ input JoinTeamInput {
 
 type Mutation {
   createNewGame(input: CreateNewGameInput): Game!
-    @function(name: "createNewGame-${env}")
+    @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
   joinTeam(input: JoinTeamInput!): TeamUser!
-    @function(name: "joinTeam-${env}")
+    @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
   startGame(id: String!): Game!
-    @function(name: "startGame-${env}")
+    @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 }
