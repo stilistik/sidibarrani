@@ -31,7 +31,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "Checkbox",
-  props: { label: String, modelValue: String },
+  props: { label: String, modelValue: Boolean },
   emits: ["update:modelValue"],
   setup() {
     return {
