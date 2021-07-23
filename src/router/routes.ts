@@ -1,13 +1,13 @@
-import Login from "/src/pages/Login.vue";
-import Signup from "/src/pages/Signup.vue";
-import Home from "/src/pages/Home.vue";
-import Lobby from "/src/pages/Lobby.vue";
+import LoginPage from "/src/pages/LoginPage.vue";
+import SignupPage from "/src/pages/SignupPage.vue";
+import HomePage from "/src/pages/HomePage.vue";
+import LobbyPage from "/src/pages/LobbyPage.vue";
 
 const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: LoginPage,
     meta: {
       requiresAuth: false,
     },
@@ -15,7 +15,7 @@ const routes = [
   {
     path: "/signup",
     name: "Signup",
-    component: Signup,
+    component: SignupPage,
     meta: {
       requiresAuth: false,
     },
@@ -23,7 +23,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: HomePage,
     meta: {
       requiresAuth: true,
     },
@@ -31,7 +31,7 @@ const routes = [
   {
     path: "/lobby",
     name: "Lobby",
-    component: Lobby,
+    component: LobbyPage,
     meta: {
       requiresAuth: true,
     },
