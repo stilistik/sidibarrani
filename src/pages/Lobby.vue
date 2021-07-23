@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onBeforeUnmount, onMounted, reactive } from "vue";
 import PageContainer from "../components/PageContainer.vue";
 import AppHeader from "../components/AppHeader.vue";
 import PageTitle from "../components/PageTitle.vue";
@@ -38,8 +38,10 @@ import Loading from "../components/Loading.vue";
 import Team from "../components/Team.vue";
 import StartGame from "../components/StartGame.vue";
 import CopyJoinLink from "../components/CopyJoinLink.vue";
-import { useLobbyQuery } from "../api";
+import { useLeaveTeamMutation, useLobbyQuery } from "../api";
 import router from "../router";
+import { useQueryClient } from "vue-query";
+import { Message } from "../utils/Message";
 
 export default defineComponent({
   name: "Lobby",
@@ -53,8 +55,31 @@ export default defineComponent({
     CopyJoinLink,
   },
   setup() {
+    const leaveGameMutation = useLeaveTeamMutation();
+    const qclient = useQueryClient();
     const gameId = router.currentRoute.value.query.gameId as string;
-    return useLobbyQuery(gameId);
+
+    async function leaveGame() {
+      try {
+        await leaveGameMutation.mutateAsync({
+          input: { gameID: gameId },
+        });
+        qclient.invalidateQueries("lobby");
+      } catch (err) {
+        Message.error("Could not leave the game");
+      }
+    }
+
+    return reactive({
+      ...useLobbyQuery(gameId),
+      gameId,
+      qclient,
+      leaveGame,
+      leaveGameMutation,
+    });
+  },
+  beforeRouteLeave() {
+    this.leaveGame();
   },
 });
 </script>

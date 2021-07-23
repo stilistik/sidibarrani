@@ -33,7 +33,11 @@ const listGames = /* GraphQL */ `
 
 export const useListGamesQuery = () => {
   const res = useQuery("listGames", async () => {
-    const { data } = (await API.graphql(graphqlOperation(listGames))) as any;
+    const { data } = (await API.graphql(
+      graphqlOperation(listGames, {
+        filter: { private: { eq: false } },
+      })
+    )) as any;
     return data.listGames;
   });
   return res;

@@ -68,9 +68,14 @@ input CreateNewGameInput {
   private: Boolean
 }
 
-input JoinLeaveTeamInput {
+input JoinTeamInput {
   userID: String!
   teamID: String!
+}
+
+input LeaveGameInput {
+  userID: String!
+  gameID: String!
 }
 
 type Mutation {
@@ -78,11 +83,11 @@ type Mutation {
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  joinTeam(input: JoinLeaveTeamInput!): TeamUser!
+  joinTeam(input: JoinTeamInput!): TeamUser!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  leaveTeam(input: JoinLeaveTeamInput!): Boolean!
+  leaveGame(input: LeaveGameInput!): Boolean!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 

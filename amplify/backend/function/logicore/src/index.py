@@ -1,14 +1,14 @@
 from resolvers.start_game import start_game
 from resolvers.create_game import create_game
 from resolvers.join_team import join_team
-from resolvers.leave_team import leave_team
+from resolvers.leave_game import leave_game
 
 resolvers = {
     'Mutation': {
         'joinTeam': join_team,
         'createNewGame': create_game,
         'startGame': start_game,
-        'leaveTeam': leave_team,
+        'leaveGame': leave_game,
     }
 }
 
@@ -23,4 +23,4 @@ def handler(event, context):
         if resolver:
             return resolver(event)
 
-    raise Exception("Resolver not found.")
+    raise Exception("Resolver not found")

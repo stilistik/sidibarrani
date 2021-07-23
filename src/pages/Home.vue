@@ -2,6 +2,7 @@
   <AppHeader />
   <PageContainer>
     <PageTitle class="mt-10">Welcome</PageTitle>
+
     <div class="flex gap-10 mt-20">
       <div class="flex-1 flex items-start justify-end">
         <div class="w-full flex flex-col gap-5">
@@ -10,7 +11,7 @@
         </div>
       </div>
       <div class="flex-1 flex items-start justify-start">
-        <div class="flex flex-col gap-5">
+        <div class="sticky top-10 flex flex-col gap-5">
           <h1 class="text-white text-4xl font-thin">Create Game</h1>
           <CreateGame />
         </div>

@@ -1,4 +1,4 @@
-import { API, graphqlOperation } from "aws-amplify";
+import { API, Auth, graphqlOperation } from "aws-amplify";
 import { useMutation } from "vue-query";
 
 const createNewGame = /* GraphQL */ `
@@ -33,6 +33,27 @@ export const useStartGameMutation = () => {
       graphqlOperation(startGame, variables)
     )) as any;
     return data.startGame;
+  });
+  return res;
+};
+
+const leaveGame = /* GraphQL */ `
+  mutation LeaveGame($input: LeaveGameInput!) {
+    leaveGame(input: $input)
+  }
+`;
+
+export const useLeaveTeamMutation = () => {
+  const res = useMutation(async (variables: any) => {
+    const cognitoUser = await Auth.currentAuthenticatedUser();
+    const input = {
+      ...(variables.input || {}),
+      userID: cognitoUser.attributes.sub,
+    };
+    const { data } = (await API.graphql(
+      graphqlOperation(leaveGame, { input })
+    )) as any;
+    return data.leaveGame;
   });
   return res;
 };
