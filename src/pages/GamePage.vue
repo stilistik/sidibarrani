@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div class="text-white">game</div>
+</template>
 
 <script lang="ts">
 import { defineComponent } from "vue";

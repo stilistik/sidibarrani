@@ -1,10 +1,7 @@
 {
   "typeName": "Mutation",
-  "fieldName": "leaveGame",
+  "fieldName": "startGame",
   "arguments": {
-    "input": {
-      "gameID": "36b56769-c07a-4024-a901-8fc41e82a690",
-      "userID": "ba605d00-045a-453d-a274-2e768916fd58"
-    }
+    "id": "6b06ecf4-3bd3-4a73-b585-3a2e437aa392"
   }
 }

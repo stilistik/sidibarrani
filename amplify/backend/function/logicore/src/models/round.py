@@ -23,7 +23,7 @@ class RoundModel:
         round = {
             'id': str(uuid()),
             'gameID': game_id,
-            'status': RoundStatus.DEAL,
+            'status': RoundStatus.DEAL.name,
             'createdAt': date_now,
             'updatedAt': date_now
         }

@@ -22,7 +22,7 @@
         },
         "logicore": {
           "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-          "s3Key": "amplify-builds/logicore-6b474236315861677456-build.zip"
+          "s3Key": "amplify-builds/logicore-46304c30595964756272-build.zip"
         }
       }
     }

@@ -2,11 +2,12 @@ import LoginPage from "/src/pages/LoginPage.vue";
 import SignupPage from "/src/pages/SignupPage.vue";
 import HomePage from "/src/pages/HomePage.vue";
 import LobbyPage from "/src/pages/LobbyPage.vue";
+import GamePage from "/src/pages/GamePage.vue";
 
 const routes = [
   {
     path: "/login",
-    name: "Login",
+    name: "LoginPage",
     component: LoginPage,
     meta: {
       requiresAuth: false,
@@ -14,7 +15,7 @@ const routes = [
   },
   {
     path: "/signup",
-    name: "Signup",
+    name: "SignupPage",
     component: SignupPage,
     meta: {
       requiresAuth: false,
@@ -22,7 +23,7 @@ const routes = [
   },
   {
     path: "/",
-    name: "Home",
+    name: "HomePage",
     component: HomePage,
     meta: {
       requiresAuth: true,
@@ -30,8 +31,16 @@ const routes = [
   },
   {
     path: "/lobby",
-    name: "Lobby",
+    name: "LobbyPage",
     component: LobbyPage,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/game",
+    name: "GamePage",
+    component: GamePage,
     meta: {
       requiresAuth: true,
     },
