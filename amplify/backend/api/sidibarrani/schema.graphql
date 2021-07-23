@@ -33,7 +33,7 @@ type Hand
   @model
   @key(name: "byRound", fields: ["roundID", "userID"])
   @key(name: "byUser", fields: ["userID", "roundID"])
-  @auth(rules: [{ allow: private }]) {
+  @auth(rules: [{ allow: owner, ownerField: "userID" }]) {
   id: ID!
   roundID: ID
   userID: ID

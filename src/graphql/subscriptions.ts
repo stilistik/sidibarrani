@@ -69,8 +69,8 @@ export const onDeleteTeam = /* GraphQL */ `
   }
 `;
 export const onCreateHand = /* GraphQL */ `
-  subscription OnCreateHand {
-    onCreateHand {
+  subscription OnCreateHand($userID: String) {
+    onCreateHand(userID: $userID) {
       id
       roundID
       userID
@@ -102,8 +102,8 @@ export const onCreateHand = /* GraphQL */ `
   }
 `;
 export const onUpdateHand = /* GraphQL */ `
-  subscription OnUpdateHand {
-    onUpdateHand {
+  subscription OnUpdateHand($userID: String) {
+    onUpdateHand(userID: $userID) {
       id
       roundID
       userID
@@ -135,8 +135,8 @@ export const onUpdateHand = /* GraphQL */ `
   }
 `;
 export const onDeleteHand = /* GraphQL */ `
-  subscription OnDeleteHand {
-    onDeleteHand {
+  subscription OnDeleteHand($userID: String) {
+    onDeleteHand(userID: $userID) {
       id
       roundID
       userID
