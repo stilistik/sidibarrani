@@ -1,9 +1,10 @@
-from models.game import GameModel
+from models.game import GameModel, GameStatus
 from models.team import TeamModel
+from models.round import RoundModel
 
 
 def validate_team_config(game_id):
-    teams = GameModel.get_teams(game_id)
+    teams = TeamModel.get_teams(game_id)
 
     if len(teams) != 2:
         raise Exception("Game did not have 2 teams")
@@ -17,9 +18,20 @@ def validate_team_config(game_id):
     return
 
 
+def validate_game_status(game_id):
+    game = GameModel.find_by_id(game_id)
+
+    if game['status'] != GameStatus.CREATED:
+        raise Exception("Game already started")
+
+
 def start_game(event):
-    gameID = event['arguments'].get('id')
+    game_id = event['arguments'].get('id')
 
-    validate_team_config(gameID)
+    validate_game_status(game_id)
+    validate_team_config(game_id)
 
-    return GameModel.start(gameID)
+    round = RoundModel.create(game_id)
+    GameModel.set_active_round(game_id, round['id'])
+
+    return GameModel.start(game_id)

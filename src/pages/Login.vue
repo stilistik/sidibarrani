@@ -33,6 +33,7 @@ import Input from "../components/Input.vue";
 import Loading from "../components/Loading.vue";
 import Logo from "../components/Logo.vue";
 import { login } from "../utils/Auth";
+import { Auth } from "aws-amplify";
 
 export default defineComponent({
   name: "Login",
@@ -64,6 +65,11 @@ export default defineComponent({
     signup: function () {
       this.$router.push("/signup");
     },
+  },
+  mounted() {
+    Auth.currentAuthenticatedUser().then((user) => {
+      if (user) this.$router.push("/");
+    });
   },
 });
 </script>

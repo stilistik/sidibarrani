@@ -1,5 +1,4 @@
 from models.team import TeamModel
-from models.game import GameModel
 
 
 def leave_game(event):
@@ -7,7 +6,7 @@ def leave_game(event):
     game_id = input.get('gameID')
     user_id = input.get('userID')
 
-    teams = GameModel.get_teams(game_id)
+    teams = TeamModel.get_teams(game_id)
 
     team1users = TeamModel.get_team_users(teams[0]['id'])
     team2users = TeamModel.get_team_users(teams[1]['id'])

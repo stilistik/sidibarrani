@@ -5,11 +5,8 @@ from boto3.dynamodb.conditions import Key
 from utils.utils import get_iso_date_string, get_random_name
 
 ddb = boto3.resource('dynamodb')
-
 teamuser_table_name = os.environ.get("TEAMUSERTABLE")
 team_table_name = os.environ.get('TEAMTABLE')
-
-# get the tables
 team_table = ddb.Table(team_table_name)
 teamuser_table = ddb.Table(teamuser_table_name)
 
@@ -73,6 +70,14 @@ class TeamModel:
         )
 
         return team_user
+
+    @staticmethod
+    def get_teams(game_id):
+        response = team_table.query(
+            IndexName="byGame",
+            KeyConditionExpression=Key("gameID").eq(game_id)
+        )
+        return response['Items']
 
     @staticmethod
     def get_team_users(team_id):

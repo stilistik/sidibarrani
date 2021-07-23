@@ -1,13 +1,6 @@
-type Team
-  @model
-  @auth(rules: [{ allow: private }])
-  @key(name: "byGame", fields: ["gameID"]) {
-  id: ID!
-  gameID: ID
-  name: String
-  color: String
-  TeamUsers: [TeamUser] @connection(keyName: "byTeam", fields: ["id"])
-}
+##########################
+# ENUMS
+##########################
 
 enum RoundStatus {
   DEAL
@@ -21,6 +14,34 @@ enum GameStatus {
   ENDED
 }
 
+##########################
+# MODELS
+##########################
+
+type Team
+  @model
+  @auth(rules: [{ allow: private }])
+  @key(name: "byGame", fields: ["gameID"]) {
+  id: ID!
+  gameID: ID
+  name: String
+  color: String
+  TeamUsers: [TeamUser] @connection(keyName: "byTeam", fields: ["id"])
+}
+
+type Hand
+  @model
+  @key(name: "byRound", fields: ["roundID", "userID"])
+  @key(name: "byUser", fields: ["userID", "roundID"])
+  @auth(rules: [{ allow: private }]) {
+  id: ID!
+  roundID: ID
+  userID: ID
+  user: User @connection(fields: ["userID"])
+  round: Round @connection(fields: ["roundID"])
+  cards: [String]
+}
+
 type Round
   @model
   @auth(rules: [{ allow: private }])
@@ -28,11 +49,13 @@ type Round
   id: ID!
   gameID: ID
   status: RoundStatus
+  hands: [Hand] @connection(keyName: "byRound", fields: ["id"])
 }
 
 type Game @model @auth(rules: [{ allow: private }]) {
   id: ID!
   private: Boolean
+  activeRoundID: ID
   Rounds: [Round] @connection(keyName: "byGame", fields: ["id"])
   status: GameStatus
   Teams: [Team] @connection(keyName: "byGame", fields: ["id"])
@@ -58,6 +81,10 @@ type TeamUser
   team: Team! @connection(fields: ["teamID"])
   user: User! @connection(fields: ["userID"])
 }
+
+##########################
+# MUTATIONS
+##########################
 
 input CreateNewGameInput {
   name: String
