@@ -29,6 +29,10 @@ export default defineComponent({
         {
           onSuccess: () => {
             Message.success("Game started");
+            this.$router.push({
+              path: "/game",
+              query: { gameId: this.$props.id },
+            });
           },
           onError: ({ errors }: any) => {
             Message.error("Error starting game: " + errors[0].message);

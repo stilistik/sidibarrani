@@ -8,6 +8,7 @@ export const getTeam = /* GraphQL */ `
       id
       gameID
       name
+      color
       createdAt
       updatedAt
       TeamUsers {
@@ -34,10 +35,78 @@ export const listTeams = /* GraphQL */ `
         id
         gameID
         name
+        color
         createdAt
         updatedAt
         TeamUsers {
           nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getHand = /* GraphQL */ `
+  query GetHand($id: ID!) {
+    getHand(id: $id) {
+      id
+      roundID
+      userID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listHands = /* GraphQL */ `
+  query ListHands(
+    $filter: ModelHandFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listHands(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        roundID
+        userID
+        cards
+        createdAt
+        updatedAt
+        round {
+          id
+          gameID
+          status
+          createdAt
+          updatedAt
+        }
+        user {
+          id
+          email
+          username
+          lastOnline
+          createdAt
+          updatedAt
         }
       }
       nextToken
@@ -52,6 +121,17 @@ export const getRound = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      hands {
+        items {
+          id
+          roundID
+          userID
+          cards
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -68,6 +148,9 @@ export const listRounds = /* GraphQL */ `
         status
         createdAt
         updatedAt
+        hands {
+          nextToken
+        }
       }
       nextToken
     }
@@ -78,6 +161,7 @@ export const getGame = /* GraphQL */ `
     getGame(id: $id) {
       id
       private
+      activeRoundID
       status
       name
       createdAt
@@ -87,10 +171,21 @@ export const getGame = /* GraphQL */ `
           id
           gameID
           name
+          color
           createdAt
           updatedAt
         }
         nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
       }
       Rounds {
         items {
@@ -115,12 +210,20 @@ export const listGames = /* GraphQL */ `
       items {
         id
         private
+        activeRoundID
         status
         name
         createdAt
         updatedAt
         Teams {
           nextToken
+        }
+        ActiveRound {
+          id
+          gameID
+          status
+          createdAt
+          updatedAt
         }
         Rounds {
           nextToken

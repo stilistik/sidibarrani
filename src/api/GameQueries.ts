@@ -52,6 +52,20 @@ const getGame = /* GraphQL */ `
       name
       createdAt
       updatedAt
+      ActiveRound {
+        id
+        hands {
+          items {
+            id
+            userID
+            cards
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
       Teams {
         items {
           id
@@ -77,9 +91,9 @@ const getGame = /* GraphQL */ `
   }
 `;
 
-export const useLobbyQuery = (gameId: string) => {
+export const useGameQuery = (gameId: string) => {
   const res = useQuery(
-    ["lobby", gameId],
+    ["getGame", gameId],
     async () => {
       const { data } = (await API.graphql(
         graphqlOperation(getGame, {

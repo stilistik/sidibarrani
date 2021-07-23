@@ -7,6 +7,7 @@ export const createNewGame = /* GraphQL */ `
     createNewGame(input: $input) {
       id
       private
+      activeRoundID
       status
       name
       createdAt
@@ -16,10 +17,21 @@ export const createNewGame = /* GraphQL */ `
           id
           gameID
           name
+          color
           createdAt
           updatedAt
         }
         nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
       }
       Rounds {
         items {
@@ -46,6 +58,7 @@ export const joinTeam = /* GraphQL */ `
         id
         gameID
         name
+        color
         createdAt
         updatedAt
         TeamUsers {
@@ -66,6 +79,55 @@ export const joinTeam = /* GraphQL */ `
     }
   }
 `;
+export const leaveGame = /* GraphQL */ `
+  mutation LeaveGame($input: LeaveGameInput!) {
+    leaveGame(input: $input)
+  }
+`;
+export const startGame = /* GraphQL */ `
+  mutation StartGame($id: String!) {
+    startGame(id: $id) {
+      id
+      private
+      activeRoundID
+      status
+      name
+      createdAt
+      updatedAt
+      Teams {
+        items {
+          id
+          gameID
+          name
+          color
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+      Rounds {
+        items {
+          id
+          gameID
+          status
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const createTeam = /* GraphQL */ `
   mutation CreateTeam(
     $input: CreateTeamInput!
@@ -75,6 +137,7 @@ export const createTeam = /* GraphQL */ `
       id
       gameID
       name
+      color
       createdAt
       updatedAt
       TeamUsers {
@@ -99,6 +162,7 @@ export const updateTeam = /* GraphQL */ `
       id
       gameID
       name
+      color
       createdAt
       updatedAt
       TeamUsers {
@@ -123,6 +187,7 @@ export const deleteTeam = /* GraphQL */ `
       id
       gameID
       name
+      color
       createdAt
       updatedAt
       TeamUsers {
@@ -138,6 +203,114 @@ export const deleteTeam = /* GraphQL */ `
     }
   }
 `;
+export const createHand = /* GraphQL */ `
+  mutation CreateHand(
+    $input: CreateHandInput!
+    $condition: ModelHandConditionInput
+  ) {
+    createHand(input: $input, condition: $condition) {
+      id
+      roundID
+      userID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const updateHand = /* GraphQL */ `
+  mutation UpdateHand(
+    $input: UpdateHandInput!
+    $condition: ModelHandConditionInput
+  ) {
+    updateHand(input: $input, condition: $condition) {
+      id
+      roundID
+      userID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const deleteHand = /* GraphQL */ `
+  mutation DeleteHand(
+    $input: DeleteHandInput!
+    $condition: ModelHandConditionInput
+  ) {
+    deleteHand(input: $input, condition: $condition) {
+      id
+      roundID
+      userID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
 export const createRound = /* GraphQL */ `
   mutation CreateRound(
     $input: CreateRoundInput!
@@ -149,6 +322,17 @@ export const createRound = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      hands {
+        items {
+          id
+          roundID
+          userID
+          cards
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -163,6 +347,17 @@ export const updateRound = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      hands {
+        items {
+          id
+          roundID
+          userID
+          cards
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -177,6 +372,17 @@ export const deleteRound = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      hands {
+        items {
+          id
+          roundID
+          userID
+          cards
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -188,6 +394,7 @@ export const createGame = /* GraphQL */ `
     createGame(input: $input, condition: $condition) {
       id
       private
+      activeRoundID
       status
       name
       createdAt
@@ -197,10 +404,21 @@ export const createGame = /* GraphQL */ `
           id
           gameID
           name
+          color
           createdAt
           updatedAt
         }
         nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
       }
       Rounds {
         items {
@@ -223,6 +441,7 @@ export const updateGame = /* GraphQL */ `
     updateGame(input: $input, condition: $condition) {
       id
       private
+      activeRoundID
       status
       name
       createdAt
@@ -232,10 +451,21 @@ export const updateGame = /* GraphQL */ `
           id
           gameID
           name
+          color
           createdAt
           updatedAt
         }
         nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
       }
       Rounds {
         items {
@@ -258,6 +488,7 @@ export const deleteGame = /* GraphQL */ `
     deleteGame(input: $input, condition: $condition) {
       id
       private
+      activeRoundID
       status
       name
       createdAt
@@ -267,10 +498,21 @@ export const deleteGame = /* GraphQL */ `
           id
           gameID
           name
+          color
           createdAt
           updatedAt
         }
         nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
       }
       Rounds {
         items {
@@ -375,6 +617,7 @@ export const createTeamUser = /* GraphQL */ `
         id
         gameID
         name
+        color
         createdAt
         updatedAt
         TeamUsers {
@@ -410,6 +653,7 @@ export const updateTeamUser = /* GraphQL */ `
         id
         gameID
         name
+        color
         createdAt
         updatedAt
         TeamUsers {
@@ -445,6 +689,7 @@ export const deleteTeamUser = /* GraphQL */ `
         id
         gameID
         name
+        color
         createdAt
         updatedAt
         TeamUsers {

@@ -8,6 +8,7 @@ export const onCreateTeam = /* GraphQL */ `
       id
       gameID
       name
+      color
       createdAt
       updatedAt
       TeamUsers {
@@ -29,6 +30,7 @@ export const onUpdateTeam = /* GraphQL */ `
       id
       gameID
       name
+      color
       createdAt
       updatedAt
       TeamUsers {
@@ -50,6 +52,7 @@ export const onDeleteTeam = /* GraphQL */ `
       id
       gameID
       name
+      color
       createdAt
       updatedAt
       TeamUsers {
@@ -65,6 +68,105 @@ export const onDeleteTeam = /* GraphQL */ `
     }
   }
 `;
+export const onCreateHand = /* GraphQL */ `
+  subscription OnCreateHand {
+    onCreateHand {
+      id
+      roundID
+      userID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateHand = /* GraphQL */ `
+  subscription OnUpdateHand {
+    onUpdateHand {
+      id
+      roundID
+      userID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteHand = /* GraphQL */ `
+  subscription OnDeleteHand {
+    onDeleteHand {
+      id
+      roundID
+      userID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
 export const onCreateRound = /* GraphQL */ `
   subscription OnCreateRound {
     onCreateRound {
@@ -73,6 +175,17 @@ export const onCreateRound = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      hands {
+        items {
+          id
+          roundID
+          userID
+          cards
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -84,6 +197,17 @@ export const onUpdateRound = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      hands {
+        items {
+          id
+          roundID
+          userID
+          cards
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -95,6 +219,17 @@ export const onDeleteRound = /* GraphQL */ `
       status
       createdAt
       updatedAt
+      hands {
+        items {
+          id
+          roundID
+          userID
+          cards
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -103,6 +238,7 @@ export const onCreateGame = /* GraphQL */ `
     onCreateGame {
       id
       private
+      activeRoundID
       status
       name
       createdAt
@@ -112,10 +248,21 @@ export const onCreateGame = /* GraphQL */ `
           id
           gameID
           name
+          color
           createdAt
           updatedAt
         }
         nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
       }
       Rounds {
         items {
@@ -135,6 +282,7 @@ export const onUpdateGame = /* GraphQL */ `
     onUpdateGame {
       id
       private
+      activeRoundID
       status
       name
       createdAt
@@ -144,10 +292,21 @@ export const onUpdateGame = /* GraphQL */ `
           id
           gameID
           name
+          color
           createdAt
           updatedAt
         }
         nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
       }
       Rounds {
         items {
@@ -167,6 +326,7 @@ export const onDeleteGame = /* GraphQL */ `
     onDeleteGame {
       id
       private
+      activeRoundID
       status
       name
       createdAt
@@ -176,10 +336,21 @@ export const onDeleteGame = /* GraphQL */ `
           id
           gameID
           name
+          color
           createdAt
           updatedAt
         }
         nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
       }
       Rounds {
         items {
@@ -272,6 +443,7 @@ export const onCreateTeamUser = /* GraphQL */ `
         id
         gameID
         name
+        color
         createdAt
         updatedAt
         TeamUsers {
@@ -304,6 +476,7 @@ export const onUpdateTeamUser = /* GraphQL */ `
         id
         gameID
         name
+        color
         createdAt
         updatedAt
         TeamUsers {
@@ -336,6 +509,7 @@ export const onDeleteTeamUser = /* GraphQL */ `
         id
         gameID
         name
+        color
         createdAt
         updatedAt
         TeamUsers {
