@@ -11,17 +11,22 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-import * as Cards from "../cards";
+import { defineComponent, computed } from "vue";
+import { CardComponents, cardsByCode } from "../cards";
 
 export default defineComponent({
   name: "Hand",
   components: {
-    ...Cards,
+    ...CardComponents,
+  },
+  props: {
+    cards: Array,
   },
   setup(props) {
-    const cards = ["H10", "D10", "C10", "S10"];
-    return { cards };
+    const cards = computed(() =>
+      props.cards.map((code) => cardsByCode[code as string])
+    );
+    return { cards: cards };
   },
   methods: {
     computeStyle(index: number) {

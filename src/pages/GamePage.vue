@@ -1,20 +1,20 @@
 <template>
   <div class="text-white">
-    <p v-for="hand in hands" :key="hand.id">
-      {{ hand?.user?.username }}
-
-      {{ hand.cards }}
-    </p>
+    <Hand v-for="hand in hands" :key="hand.id" :cards="hand.cards"> </Hand>
   </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, reactive } from "vue";
 import { useGameQuery } from "../api";
+import Hand from "../components/Hand.vue";
 import router from "../router";
 
 export default defineComponent({
   name: "GamePage",
+  components: {
+    Hand,
+  },
   setup() {
     const gameId = router.currentRoute.value.query.gameId as string;
     const { data, isLoading, isError } = useGameQuery(gameId);
