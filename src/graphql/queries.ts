@@ -113,6 +113,52 @@ export const listHands = /* GraphQL */ `
     }
   }
 `;
+export const getStack = /* GraphQL */ `
+  query GetStack($id: ID!) {
+    getStack(id: $id) {
+      id
+      roundID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listStacks = /* GraphQL */ `
+  query ListStacks(
+    $filter: ModelStackFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStacks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        roundID
+        cards
+        createdAt
+        updatedAt
+        round {
+          id
+          gameID
+          status
+          createdAt
+          updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const getRound = /* GraphQL */ `
   query GetRound($id: ID!) {
     getRound(id: $id) {

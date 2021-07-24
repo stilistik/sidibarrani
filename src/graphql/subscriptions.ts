@@ -167,6 +167,69 @@ export const onDeleteHand = /* GraphQL */ `
     }
   }
 `;
+export const onCreateStack = /* GraphQL */ `
+  subscription OnCreateStack {
+    onCreateStack {
+      id
+      roundID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateStack = /* GraphQL */ `
+  subscription OnUpdateStack {
+    onUpdateStack {
+      id
+      roundID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteStack = /* GraphQL */ `
+  subscription OnDeleteStack {
+    onDeleteStack {
+      id
+      roundID
+      cards
+      createdAt
+      updatedAt
+      round {
+        id
+        gameID
+        status
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+      }
+    }
+  }
+`;
 export const onCreateRound = /* GraphQL */ `
   subscription OnCreateRound {
     onCreateRound {

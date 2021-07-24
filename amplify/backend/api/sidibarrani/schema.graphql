@@ -42,6 +42,16 @@ type Hand
   cards: [String]
 }
 
+type Stack
+  @model
+  @auth(rules: [{ allow: private }])
+  @key(name: "byRound", fields: ["roundID"]) {
+  id: ID!
+  roundID: ID
+  round: Round @connection(fields: ["roundID"])
+  cards: [String]
+}
+
 type Round
   @model
   @auth(rules: [{ allow: private }])
