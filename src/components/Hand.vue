@@ -3,7 +3,9 @@
     v-for="(card, idx) in cards"
     :key="card"
     :card="card"
-    :style="`transform: translateX(${idx * 100}px) translateY(800px)`"
+    :style="getComputedStyle(idx)"
+    :width="cardWidth"
+    :height="cardHeight"
   />
 </template>
 
@@ -18,6 +20,25 @@ export default defineComponent({
   },
   props: {
     cards: Array,
+  },
+  data() {
+    return {
+      cardWidth: 210,
+      cardHeight: 300,
+    };
+  },
+  methods: {
+    getComputedStyle(idx: number) {
+      const cardCount = this.$props.cards.length;
+      const offset = 100;
+      const startX =
+        window.innerWidth / 2 -
+        Math.floor(cardCount / 2) * offset -
+        this.cardWidth / 2;
+      return `transform: translateX(${
+        startX + idx * offset
+      }px) translateY(100vh)`;
+    },
   },
 });
 </script>
