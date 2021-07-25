@@ -1,0 +1,69 @@
+<template>
+  <div ref="cardRef">
+    <component
+      class="absolute bottom-0 left-0 shadow-2xl rounded-xl"
+      :is="card"
+      :style="style"
+      @mousemove="onMouseMove"
+      @mouseenter="onMouseEnter"
+      @mouseleave="onMouseLeave"
+    />
+  </div>
+</template>
+
+<script lang="ts">
+import { computed, defineComponent, reactive, ref } from "vue";
+import { cardsByCode } from "../cards";
+import { spring } from "vue3-spring";
+
+const calcX = (y: number) => -y / 15;
+const calcY = (x: number) => x / 15;
+
+export default defineComponent({
+  props: {
+    card: String,
+    width: Number,
+    height: Number,
+  },
+  setup(props) {
+    const cardRef = ref(null);
+    const card = computed(() => cardsByCode[props.card as string]);
+
+    const scale = spring(1, { damping: 12, precision: 8 });
+    const p = spring({ x: 0, y: 0 }, { damping: 20 });
+
+    function onMouseMove(event: any) {
+      const rect = cardRef.value.getBoundingClientRect();
+      p.x = event.pageX - rect.left - 100;
+      p.y = event.pageY - rect.top + 150;
+    }
+
+    function onMouseEnter(event: Event) {
+      scale.value = 1.1;
+    }
+
+    function onMouseLeave(event: Event) {
+      scale.value = 1.0;
+      p.x = 0;
+      p.y = 0;
+    }
+
+    const style = computed(() => {
+      return `width:${props.width}px; height:${
+        props.height
+      }px; transform: perspective(800px) scale(${scale.value}) rotateX(${calcX(
+        p.y
+      )}deg) rotateY(${calcY(p.x)}deg)`;
+    });
+
+    return reactive({
+      cardRef,
+      card: card,
+      style,
+      onMouseMove,
+      onMouseEnter,
+      onMouseLeave,
+    });
+  },
+});
+</script>

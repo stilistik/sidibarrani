@@ -102,7 +102,6 @@
       rx="12"
       ry="12"
       fill="white"
-      stroke="black"
     />
     <use width="164.8" height="260.8" x="-82.4" y="-130.4" xlink:href="#CQ1" />
     <use

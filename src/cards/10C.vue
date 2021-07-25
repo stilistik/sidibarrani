@@ -37,7 +37,6 @@
       rx="12"
       ry="12"
       fill="white"
-      stroke="black"
     />
     <use xlink:href="#CT" height="32" width="32" x="-114.4" y="-156" />
     <use xlink:href="#C" height="26.769" width="26.769" x="-111.784" y="-119" />

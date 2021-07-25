@@ -36,7 +36,6 @@
       rx="12"
       ry="12"
       fill="white"
-      stroke="black"
     />
     <use
       xlink:href="#S"

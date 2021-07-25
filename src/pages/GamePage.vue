@@ -1,5 +1,5 @@
 <template>
-  <div class="text-white">
+  <div class="relative w-screen h-screen overflow-visible text-white">
     <Hand v-for="hand in hands" :key="hand.id" :cards="hand.cards"> </Hand>
   </div>
 </template>
