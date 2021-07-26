@@ -56,7 +56,7 @@ type Action
   type: ActionType!
   stackID: ID
   userID: ID
-  card: String
+  value: String
 }
 
 type Stack
@@ -77,6 +77,9 @@ type Round
   gameID: ID
   status: RoundStatus
   hands: [Hand] @connection(keyName: "byRound", fields: ["id"])
+  stacks: [Stack] @connection(keyName: "byRound", fields: ["id"])
+  activeStackID: ID
+  activeStack: Stack @connection(fields: ["activeStackID"])
 }
 
 type Game @model @auth(rules: [{ allow: private }]) {
@@ -147,6 +150,10 @@ type Mutation {
     @auth(rules: [{ allow: private }])
 
   startGame(id: String!): Game!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
+
+  playCard(value: String): Action!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 }

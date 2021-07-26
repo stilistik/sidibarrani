@@ -59,10 +59,20 @@ export const getHand = /* GraphQL */ `
         id
         gameID
         status
+        activeStackID
         createdAt
         updatedAt
         hands {
           nextToken
+        }
+        stacks {
+          nextToken
+        }
+        activeStack {
+          id
+          roundID
+          createdAt
+          updatedAt
         }
       }
       user {
@@ -97,6 +107,7 @@ export const listHands = /* GraphQL */ `
           id
           gameID
           status
+          activeStackID
           createdAt
           updatedAt
         }
@@ -120,7 +131,7 @@ export const getAction = /* GraphQL */ `
       type
       stackID
       userID
-      card
+      value
       createdAt
       updatedAt
     }
@@ -138,7 +149,7 @@ export const listActions = /* GraphQL */ `
         type
         stackID
         userID
-        card
+        value
         createdAt
         updatedAt
       }
@@ -159,7 +170,7 @@ export const getStack = /* GraphQL */ `
           type
           stackID
           userID
-          card
+          value
           createdAt
           updatedAt
         }
@@ -169,10 +180,20 @@ export const getStack = /* GraphQL */ `
         id
         gameID
         status
+        activeStackID
         createdAt
         updatedAt
         hands {
           nextToken
+        }
+        stacks {
+          nextToken
+        }
+        activeStack {
+          id
+          roundID
+          createdAt
+          updatedAt
         }
       }
     }
@@ -197,6 +218,7 @@ export const listStacks = /* GraphQL */ `
           id
           gameID
           status
+          activeStackID
           createdAt
           updatedAt
         }
@@ -211,6 +233,7 @@ export const getRound = /* GraphQL */ `
       id
       gameID
       status
+      activeStackID
       createdAt
       updatedAt
       hands {
@@ -223,6 +246,32 @@ export const getRound = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      stacks {
+        items {
+          id
+          roundID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      activeStack {
+        id
+        roundID
+        createdAt
+        updatedAt
+        actions {
+          nextToken
+        }
+        round {
+          id
+          gameID
+          status
+          activeStackID
+          createdAt
+          updatedAt
+        }
       }
     }
   }
@@ -238,10 +287,20 @@ export const listRounds = /* GraphQL */ `
         id
         gameID
         status
+        activeStackID
         createdAt
         updatedAt
         hands {
           nextToken
+        }
+        stacks {
+          nextToken
+        }
+        activeStack {
+          id
+          roundID
+          createdAt
+          updatedAt
         }
       }
       nextToken
@@ -273,10 +332,20 @@ export const getGame = /* GraphQL */ `
         id
         gameID
         status
+        activeStackID
         createdAt
         updatedAt
         hands {
           nextToken
+        }
+        stacks {
+          nextToken
+        }
+        activeStack {
+          id
+          roundID
+          createdAt
+          updatedAt
         }
       }
       Rounds {
@@ -284,6 +353,7 @@ export const getGame = /* GraphQL */ `
           id
           gameID
           status
+          activeStackID
           createdAt
           updatedAt
         }
@@ -314,6 +384,7 @@ export const listGames = /* GraphQL */ `
           id
           gameID
           status
+          activeStackID
           createdAt
           updatedAt
         }

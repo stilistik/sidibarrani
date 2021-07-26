@@ -32,6 +32,7 @@ class RoundModel:
         )
         return round
 
+    @staticmethod
     def set_round_status(round_id, status: RoundStatus):
         date_now = get_iso_date_string()
         response = round_table.update_item(
@@ -41,6 +42,25 @@ class RoundModel:
             AttributeUpdates={
                 'status': {
                     'Value': status
+                },
+                'updatedAt': {
+                    'Value': date_now
+                }
+            },
+            ReturnValues="ALL_NEW"
+        )
+        return response['Attributes']
+
+    @staticmethod
+    def set_active_stack(round_id, stack_id):
+        date_now = get_iso_date_string()
+        response = round_table.update_item(
+            Key={
+                'id': round_id,
+            },
+            AttributeUpdates={
+                'activeStackID': {
+                    'Value': stack_id
                 },
                 'updatedAt': {
                     'Value': date_now

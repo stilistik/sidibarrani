@@ -3,6 +3,7 @@ from models.team import TeamModel
 from models.round import RoundModel
 from models.deck import Deck
 from models.hand import HandModel
+from models.stack import StackModel
 
 
 def validate_team_config(game_id):
@@ -35,6 +36,9 @@ def start_game(event):
 
     deck = Deck()
     round = RoundModel.create(game_id)
+    stack = StackModel.create(round['id'])
+
+    RoundModel.set_active_stack(round['id'], stack['id'])
 
     for team_user in team_users:
         cards = deck.deal_hand()
