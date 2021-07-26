@@ -167,14 +167,64 @@ export const onDeleteHand = /* GraphQL */ `
     }
   }
 `;
+export const onCreateAction = /* GraphQL */ `
+  subscription OnCreateAction {
+    onCreateAction {
+      id
+      type
+      stackID
+      userID
+      card
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAction = /* GraphQL */ `
+  subscription OnUpdateAction {
+    onUpdateAction {
+      id
+      type
+      stackID
+      userID
+      card
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAction = /* GraphQL */ `
+  subscription OnDeleteAction {
+    onDeleteAction {
+      id
+      type
+      stackID
+      userID
+      card
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateStack = /* GraphQL */ `
   subscription OnCreateStack {
     onCreateStack {
       id
       roundID
-      cards
       createdAt
       updatedAt
+      actions {
+        items {
+          id
+          type
+          stackID
+          userID
+          card
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       round {
         id
         gameID
@@ -193,9 +243,20 @@ export const onUpdateStack = /* GraphQL */ `
     onUpdateStack {
       id
       roundID
-      cards
       createdAt
       updatedAt
+      actions {
+        items {
+          id
+          type
+          stackID
+          userID
+          card
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       round {
         id
         gameID
@@ -214,9 +275,20 @@ export const onDeleteStack = /* GraphQL */ `
     onDeleteStack {
       id
       roundID
-      cards
       createdAt
       updatedAt
+      actions {
+        items {
+          id
+          type
+          stackID
+          userID
+          card
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       round {
         id
         gameID

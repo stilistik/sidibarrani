@@ -311,6 +311,54 @@ export const deleteHand = /* GraphQL */ `
     }
   }
 `;
+export const createAction = /* GraphQL */ `
+  mutation CreateAction(
+    $input: CreateActionInput!
+    $condition: ModelActionConditionInput
+  ) {
+    createAction(input: $input, condition: $condition) {
+      id
+      type
+      stackID
+      userID
+      card
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAction = /* GraphQL */ `
+  mutation UpdateAction(
+    $input: UpdateActionInput!
+    $condition: ModelActionConditionInput
+  ) {
+    updateAction(input: $input, condition: $condition) {
+      id
+      type
+      stackID
+      userID
+      card
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAction = /* GraphQL */ `
+  mutation DeleteAction(
+    $input: DeleteActionInput!
+    $condition: ModelActionConditionInput
+  ) {
+    deleteAction(input: $input, condition: $condition) {
+      id
+      type
+      stackID
+      userID
+      card
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createStack = /* GraphQL */ `
   mutation CreateStack(
     $input: CreateStackInput!
@@ -319,9 +367,20 @@ export const createStack = /* GraphQL */ `
     createStack(input: $input, condition: $condition) {
       id
       roundID
-      cards
       createdAt
       updatedAt
+      actions {
+        items {
+          id
+          type
+          stackID
+          userID
+          card
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       round {
         id
         gameID
@@ -343,9 +402,20 @@ export const updateStack = /* GraphQL */ `
     updateStack(input: $input, condition: $condition) {
       id
       roundID
-      cards
       createdAt
       updatedAt
+      actions {
+        items {
+          id
+          type
+          stackID
+          userID
+          card
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       round {
         id
         gameID
@@ -367,9 +437,20 @@ export const deleteStack = /* GraphQL */ `
     deleteStack(input: $input, condition: $condition) {
       id
       roundID
-      cards
       createdAt
       updatedAt
+      actions {
+        items {
+          id
+          type
+          stackID
+          userID
+          card
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       round {
         id
         gameID

@@ -113,14 +113,58 @@ export const listHands = /* GraphQL */ `
     }
   }
 `;
+export const getAction = /* GraphQL */ `
+  query GetAction($id: ID!) {
+    getAction(id: $id) {
+      id
+      type
+      stackID
+      userID
+      card
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listActions = /* GraphQL */ `
+  query ListActions(
+    $filter: ModelActionFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        stackID
+        userID
+        card
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getStack = /* GraphQL */ `
   query GetStack($id: ID!) {
     getStack(id: $id) {
       id
       roundID
-      cards
       createdAt
       updatedAt
+      actions {
+        items {
+          id
+          type
+          stackID
+          userID
+          card
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       round {
         id
         gameID
@@ -144,9 +188,11 @@ export const listStacks = /* GraphQL */ `
       items {
         id
         roundID
-        cards
         createdAt
         updatedAt
+        actions {
+          nextToken
+        }
         round {
           id
           gameID

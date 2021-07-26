@@ -14,6 +14,12 @@ enum GameStatus {
   ENDED
 }
 
+enum ActionType {
+  PLAY
+  BET
+  SKIP
+}
+
 ##########################
 # MODELS
 ##########################
@@ -42,6 +48,17 @@ type Hand
   cards: [String]
 }
 
+type Action
+  @model
+  @auth(rules: [{ allow: private }])
+  @key(name: "byStack", fields: ["stackID"]) {
+  id: ID!
+  type: ActionType!
+  stackID: ID
+  userID: ID
+  card: String
+}
+
 type Stack
   @model
   @auth(rules: [{ allow: private }])
@@ -49,7 +66,7 @@ type Stack
   id: ID!
   roundID: ID
   round: Round @connection(fields: ["roundID"])
-  cards: [String]
+  actions: [Action] @connection(keyName: "byStack", fields: ["id"])
 }
 
 type Round
