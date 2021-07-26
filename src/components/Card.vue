@@ -7,14 +7,23 @@
       @mousemove="onMouseMove"
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
+      @mousedown="onMouseDown"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  ref,
+} from "vue";
 import { cardsByCode } from "../cards";
 import { spring } from "vue3-spring";
+import { useEventListener } from "../utils/UseEventListener";
 
 const calcX = (y: number) => -y / 15;
 const calcY = (x: number) => x / 15;
@@ -31,11 +40,26 @@ export default defineComponent({
 
     const scale = spring(1, { damping: 12, precision: 8 });
     const p = spring({ x: 0, y: 0 }, { damping: 20 });
+    const pos = reactive({ x: 0, y: 0 });
+    const down = ref(false);
 
     function onMouseMove(event: any) {
-      const rect = cardRef.value.getBoundingClientRect();
-      p.x = event.pageX - rect.left - 100;
-      p.y = event.pageY - rect.top + 150;
+      if (down.value) {
+        pos.x += event.movementX;
+        pos.y += event.movementY;
+      } else {
+        const rect = cardRef.value.getBoundingClientRect();
+        p.x = event.pageX - rect.left - pos.x - 100;
+        p.y = event.pageY - rect.top - pos.y + 150;
+      }
+    }
+
+    function onMouseDown() {
+      down.value = true;
+    }
+
+    function onMouseUp() {
+      down.value = false;
     }
 
     function onMouseEnter(event: Event) {
@@ -48,12 +72,16 @@ export default defineComponent({
       p.y = 0;
     }
 
+    useEventListener(document, "mouseup", onMouseUp);
+
     const style = computed(() => {
       return `width:${props.width}px; height:${
         props.height
-      }px; transform: perspective(800px) scale(${scale.value}) rotateX(${calcX(
-        p.y
-      )}deg) rotateY(${calcY(p.x)}deg)`;
+      }px;  transform:  translateX(${pos.x}px) translateY(${pos.y}px) scale(${
+        scale.value
+      }) perspective(800px) rotateX(${calcX(p.y)}deg) rotateY(${calcY(
+        p.x
+      )}deg)`;
     });
 
     return reactive({
@@ -63,6 +91,8 @@ export default defineComponent({
       onMouseMove,
       onMouseEnter,
       onMouseLeave,
+      onMouseDown,
+      onMouseUp,
     });
   },
 });
