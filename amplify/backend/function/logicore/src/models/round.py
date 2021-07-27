@@ -33,6 +33,15 @@ class RoundModel:
         return round
 
     @staticmethod
+    def find_by_id(round_id):
+        response = round_table.get_item(
+            Key={
+                'id': round_id,
+            }
+        )
+        return response['Item']
+
+    @staticmethod
     def set_round_status(round_id, status: RoundStatus):
         date_now = get_iso_date_string()
         response = round_table.update_item(

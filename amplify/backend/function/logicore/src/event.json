@@ -1,7 +1,13 @@
 {
   "typeName": "Mutation",
-  "fieldName": "startGame",
+  "fieldName": "playCard",
   "arguments": {
-    "id": "6b06ecf4-3bd3-4a73-b585-3a2e437aa392"
+    "roundID": "a2453553-a1b7-478c-82e3-76009c3700fc",
+    "value": "6D"
+  },
+  "identity": {
+    "claims": {
+      "sub": "8ff7c546-0b9f-4e61-93a5-716ed3358ad6"
+    }
   }
 }

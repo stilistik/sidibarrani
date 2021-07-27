@@ -1,3 +1,4 @@
+from resolvers.play_card import play_card
 from resolvers.start_game import start_game
 from resolvers.create_game import create_game
 from resolvers.join_team import join_team
@@ -9,6 +10,7 @@ resolvers = {
         'createNewGame': create_game,
         'startGame': start_game,
         'leaveGame': leave_game,
+        'playCard': play_card,
     }
 }
 
