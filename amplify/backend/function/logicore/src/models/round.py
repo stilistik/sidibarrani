@@ -110,7 +110,7 @@ class RoundModel:
         turn = response['Item']['turn']
 
         idx = turn_sequence.index(turn)
-        next_turn = idx + 1 % len(turn_sequence)
+        next_turn = turn_sequence[(idx + 1) % len(turn_sequence)]
         response = round_table.update_item(
             Key={
                 'id': round_id,
