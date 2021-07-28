@@ -1,5 +1,9 @@
 <template>
-  <div class="absolute bottom-0 left-0">
+  <div
+    class="absolute bottom-0 left-0 h-40 w-screen"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+  >
     <Card
       v-for="(card, idx) in cards"
       :key="card"
@@ -13,7 +17,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref, toRef } from "vue";
+import { computed, defineComponent, reactive } from "vue";
+import { spring } from "vue3-spring";
 import { usePlayCardMutation, useHandQuery } from "../api";
 import { useCurrentUser } from "../utils/Auth";
 import { Message } from "../utils/Message";
@@ -30,11 +35,24 @@ export default defineComponent({
   setup(props) {
     const user = useCurrentUser();
 
+    const cardWidth = 210;
+    const cardHeight = 300;
+
     const roundId = computed(() => props.round.id);
     const playCardMutation = usePlayCardMutation();
 
     const { data, isLoading, isError } = useHandQuery(roundId);
     const cards = computed(() => data?.value?.cards);
+
+    const yTranslation = spring(0);
+
+    function onMouseEnter() {
+      yTranslation.value = -cardHeight / 2;
+    }
+
+    function onMouseLeave() {
+      yTranslation.value = 0;
+    }
 
     return reactive({
       cardWidth: 210,
@@ -44,6 +62,9 @@ export default defineComponent({
       isError,
       cards,
       user,
+      onMouseEnter,
+      onMouseLeave,
+      yTranslation,
     });
   },
   methods: {
@@ -74,9 +95,9 @@ export default defineComponent({
         window.innerWidth / 2 -
         Math.floor(cardCount / 2) * offset -
         this.cardWidth / 2;
-      return `transform: translateX(${
-        startX + idx * offset
-      }px) translateY(${-this.cardHeight}px)`;
+      return `transform: translateX(${startX + idx * offset}px) translateY(${
+        this.yTranslation
+      }px)`;
     },
   },
 });

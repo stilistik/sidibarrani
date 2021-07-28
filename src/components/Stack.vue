@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute top-0 left-0">
+  <div class="absolute top-40 left-0">
     <Card
       v-for="(action, idx) in stack?.actions?.items"
       :key="action.value"
