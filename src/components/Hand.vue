@@ -1,24 +1,21 @@
 <template>
-  <div
-    class="absolute bottom-0 left-0 h-40 w-screen"
+  <Card
+    v-for="(card, idx) in cards"
+    class="absolute"
+    :key="card"
+    :card="card"
+    :width="cardWidth"
+    :height="cardHeight"
+    :x="getXPosition(idx)"
+    :y="getYPosition() + yTranslation"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
-  >
-    <Card
-      v-for="(card, idx) in cards"
-      :key="card"
-      :card="card"
-      :style="getComputedStyle(idx)"
-      :width="cardWidth"
-      :height="cardHeight"
-      @click="click"
-    />
-  </div>
+    @click="click"
+  />
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
-import { spring } from "vue3-spring";
+import { computed, defineComponent, reactive, ref } from "vue";
 import { usePlayCardMutation, useHandQuery } from "../api";
 import { useCurrentUser } from "../utils/Auth";
 import { Message } from "../utils/Message";
@@ -44,8 +41,7 @@ export default defineComponent({
     const { data, isLoading, isError } = useHandQuery(roundId);
     const cards = computed(() => data?.value?.cards);
 
-    const yTranslation = spring(0);
-
+    const yTranslation = ref(0);
     function onMouseEnter() {
       yTranslation.value = -cardHeight / 2;
     }
@@ -54,26 +50,12 @@ export default defineComponent({
       yTranslation.value = 0;
     }
 
-    return reactive({
-      cardWidth: 210,
-      cardHeight: 300,
-      playCardMutation,
-      isLoading,
-      isError,
-      cards,
-      user,
-      onMouseEnter,
-      onMouseLeave,
-      yTranslation,
-    });
-  },
-  methods: {
-    click(card: string) {
-      if (this.$props.round.turn === this.user.id) {
-        this.playCardMutation.mutate(
+    function click(card: string) {
+      if (props.round.turn === user.id) {
+        playCardMutation.mutate(
           {
             value: card,
-            roundID: this.$props.round.id,
+            roundID: props.round.id,
           },
           {
             onError: ({ errors }: any) => {
@@ -84,18 +66,37 @@ export default defineComponent({
       } else {
         Message.error("It's not your turn");
       }
-    },
-    getComputedStyle(idx: number) {
-      const cardCount = this.cards.length;
+    }
+
+    function getXPosition(idx: number) {
+      const cardCount = cards.value.length;
       const offset = 100;
       const startX =
         window.innerWidth / 2 -
         Math.floor(cardCount / 2) * offset -
-        this.cardWidth / 2;
-      return `transform: translateX(${startX + idx * offset}px) translateY(${
-        this.yTranslation
-      }px)`;
-    },
+        cardWidth / 2;
+
+      return startX + idx * offset;
+    }
+
+    function getYPosition() {
+      return window.innerHeight - cardHeight / 2;
+    }
+
+    return reactive({
+      cardWidth,
+      cardHeight,
+      isLoading,
+      isError,
+      cards,
+      user,
+      click,
+      onMouseEnter,
+      onMouseLeave,
+      yTranslation,
+      getXPosition,
+      getYPosition,
+    });
   },
 });
 </script>

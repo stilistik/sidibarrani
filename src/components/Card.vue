@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, ref, toRefs, watch } from "vue";
 import { cardsByCode } from "../cards";
 import { spring } from "vue3-spring";
 
@@ -25,6 +25,8 @@ export default defineComponent({
     card: String,
     width: Number,
     height: Number,
+    x: Number,
+    y: Number,
   },
   setup(props, context) {
     const cardRef = ref(null);
@@ -32,7 +34,15 @@ export default defineComponent({
 
     const scale = spring(1, { damping: 12, precision: 8 });
     const p = spring({ x: 0, y: 0 }, { damping: 20 });
-    const pos = reactive({ x: 0, y: 0 });
+    const pos = spring({ x: props.x, y: props.y });
+
+    const { x, y } = toRefs(props);
+    watch(x, (newValue) => {
+      pos.x = newValue;
+    });
+    watch(y, (newValue) => {
+      pos.y = newValue;
+    });
 
     function onMouseMove(event: any) {
       const rect = cardRef.value.getBoundingClientRect();
@@ -42,12 +52,14 @@ export default defineComponent({
 
     function onMouseEnter(event: Event) {
       scale.value = 1.1;
+      context.emit("mouseenter", event);
     }
 
     function onMouseLeave(event: Event) {
       scale.value = 1.0;
       p.x = 0;
       p.y = 0;
+      context.emit("mouseleave", event);
     }
 
     function onClick(event: Event) {
