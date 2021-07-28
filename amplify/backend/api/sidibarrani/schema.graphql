@@ -51,12 +51,14 @@ type Hand
 type Action
   @model
   @auth(rules: [{ allow: private }])
-  @key(name: "byStack", fields: ["stackID"]) {
+  @key(name: "byStack", fields: ["stackID", "updatedAt"]) {
   id: ID!
   type: ActionType!
   stackID: ID
   userID: ID
   value: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
 }
 
 type Stack

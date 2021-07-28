@@ -55,6 +55,10 @@ def start_game(event):
         HandModel.create(round['id'], team_user['userID'], cards)
 
     turn_sequence = list(map(lambda x: x['userID'], team_users))
+
+    if not starting_player_id:
+        starting_player_id = turn_sequence[0]
+
     RoundModel.set_turn_sequence(round['id'], turn_sequence)
     RoundModel.set_turn(round['id'], starting_player_id)
     GameModel.set_active_round(game_id, round['id'])

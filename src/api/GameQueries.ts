@@ -55,14 +55,15 @@ const getGame = /* GraphQL */ `
       updatedAt
       ActiveRound {
         id
-        hands {
-          items {
-            id
-            userID
-            cards
-            user {
+        turn
+        activeStack {
+          id
+          actions(sortDirection: ASC) {
+            items {
               id
-              username
+              type
+              value
+              updatedAt
             }
           }
         }

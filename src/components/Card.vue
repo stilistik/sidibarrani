@@ -1,7 +1,7 @@
 <template>
-  <div ref="cardRef">
+  <div ref="cardRef" class="absolute top-0 left-0">
     <component
-      class="absolute bottom-0 left-0 shadow-2xl rounded-xl"
+      class="shadow-2xl rounded-xl"
       :is="card"
       :style="style"
       @mousemove="onMouseMove"
@@ -43,8 +43,8 @@ export default defineComponent({
         pos.y += event.movementY;
       } else {
         const rect = cardRef.value.getBoundingClientRect();
-        p.x = event.pageX - rect.left - pos.x - 100;
-        p.y = event.pageY - rect.top - pos.y + 150;
+        p.x = event.pageX - rect.left - pos.x - props.width / 2;
+        p.y = event.pageY - rect.top - pos.y - props.height / 2;
       }
     }
 

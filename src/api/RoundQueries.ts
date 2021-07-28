@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { computed, reactive, Ref } from "vue";
+import { reactive, Ref } from "vue";
 import { useQuery } from "vue-query";
 
 const getUserHand = /* GraphQL */ `

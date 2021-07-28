@@ -1,4 +1,6 @@
-import { Auth } from "aws-amplify";
+import { API, Auth, graphqlOperation } from "aws-amplify";
+import { ref } from "vue";
+import { getUser } from "../graphql/queries";
 import { actions } from "../store/Store";
 import { Message } from "../utils/Message";
 
@@ -68,3 +70,19 @@ export async function logout() {
     Message.error("Error during logout process");
   }
 }
+
+async function getCurrentAppUser() {
+  const cognitoUser = await Auth.currentAuthenticatedUser();
+  const res = (await API.graphql(
+    graphqlOperation(getUser, { id: cognitoUser.attributes.sub })
+  )) as any;
+  return res.data.getUser;
+}
+
+const userRef = ref(null);
+export const useCurrentUser = () => {
+  if (!userRef.value) {
+    getCurrentAppUser().then((user) => (userRef.value = user));
+  }
+  return userRef;
+};
