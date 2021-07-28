@@ -7,3 +7,4 @@ export * from "./GameMutations";
 export * from "./TeamMutations";
 export * from "./UserMutations";
 export * from "./PlayCardMutation";
+export * from "./ClearStackMutation";

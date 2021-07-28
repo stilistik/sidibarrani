@@ -36,8 +36,6 @@ export default defineComponent({
     const { data, isLoading, isError } = useHandQuery(roundId);
     const cards = computed(() => data?.value?.cards);
 
-    console.log(user);
-
     return reactive({
       cardWidth: 210,
       cardHeight: 300,
@@ -50,7 +48,7 @@ export default defineComponent({
   },
   methods: {
     click(card: string) {
-      if (this.$props.round.turn === this.user.id)
+      if (this.$props.round.turn === this.user.id) {
         this.playCardMutation.mutate(
           {
             value: card,
@@ -65,7 +63,9 @@ export default defineComponent({
             },
           }
         );
-      else Message.error("its not your turn");
+      } else {
+        Message.error("It's not your turn");
+      }
     },
     getComputedStyle(idx: number) {
       const cardCount = this.cards.length;

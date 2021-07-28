@@ -67,6 +67,7 @@ type Stack
   @key(name: "byRound", fields: ["roundID"]) {
   id: ID!
   roundID: ID
+  size: Int!
   round: Round @connection(fields: ["roundID"])
   actions: [Action] @connection(keyName: "byStack", fields: ["id"])
 }
@@ -168,6 +169,10 @@ type Mutation {
     @auth(rules: [{ allow: private }])
 
   playCard(roundID: String!, value: String!): Action!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
+
+  clearStack(roundID: String!): Stack!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 }

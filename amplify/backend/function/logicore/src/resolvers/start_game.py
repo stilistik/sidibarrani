@@ -38,10 +38,11 @@ def start_game(event):
 
     # validate_game_status(game_id)
     team_users = validate_team_config(game_id)
+    stack_size = len(team_users)
 
     deck = Deck()
     round = RoundModel.create(game_id)
-    stack = StackModel.create(round['id'])
+    stack = StackModel.create(round['id'], stack_size)
 
     RoundModel.set_active_stack(round['id'], stack['id'])
 

@@ -58,6 +58,7 @@ const getGame = /* GraphQL */ `
         turn
         activeStack {
           id
+          size
           actions(sortDirection: ASC) {
             items {
               id

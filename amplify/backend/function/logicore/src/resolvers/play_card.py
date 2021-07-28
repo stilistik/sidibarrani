@@ -9,18 +9,16 @@ def play_card(event):
     user_id = event['identity']['claims'].get('sub')
 
     round = RoundModel.find_by_id(round_id)
-
-    if round['turn'] != user_id:
-        raise Exception("Its not your turn to play")
-
+    stack = StackModel.find_by_id(round['activeStackID'])
     hands = HandModel.find_by_round(round_id)
 
+    if round['turn'] != user_id:
+        raise Exception("It's not your turn to play")
+
+    if (StackModel.is_complete(stack['id'])):
+        raise Exception("Stack is complete. Please clear the current stack")
+
     user_hand = next(hand for hand in hands if hand['userID'] == user_id)
-
     HandModel.remove_card(user_hand['id'], value)
-
-    stack_id = round['activeStackID']
-
     RoundModel.next_turn(round_id)
-
-    return StackModel.add_action(ActionType.PLAY.name, user_id, stack_id, value)
+    return StackModel.add_action(ActionType.PLAY.name, user_id, stack['id'], value)
