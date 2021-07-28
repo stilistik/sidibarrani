@@ -1,7 +1,7 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { useQuery } from "vue-query";
 import { QueryKey, UseQueryOptions } from "vue-query/types";
-import { getAWSTimeStamp } from "../utils/Utils";
+import { getAWSTimeStamp } from "../../utils/Utils";
 
 const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {

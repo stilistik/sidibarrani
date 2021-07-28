@@ -1,12 +1,14 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { useMutation, useQueryClient } from "vue-query";
+import { gameFragment } from "../fragments/GameFragment";
 
 const clearStack = /* GraphQL */ `
   mutation ClearStack($roundID: String!) {
     clearStack(roundID: $roundID) {
-      id
+      ...GameFragment
     }
   }
+  ${gameFragment}
 `;
 
 export const useClearStackMutation = () => {

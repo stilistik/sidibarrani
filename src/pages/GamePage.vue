@@ -8,10 +8,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, onBeforeUnmount, reactive } from "vue";
 import {
   useClearStackMutation,
   useGameQuery,
+  useGameSubscription,
   useNewRoundMutation,
 } from "../api";
 import Hand from "../components/Hand.vue";
@@ -53,6 +54,12 @@ export default defineComponent({
         roundID: activeRound.value.id,
       });
     }
+
+    const subscription = useGameSubscription(gameId.value);
+
+    onBeforeUnmount(() => {
+      subscription.unsubscribe();
+    });
 
     return reactive({
       isLoading,

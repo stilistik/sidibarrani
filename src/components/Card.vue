@@ -7,7 +7,6 @@
       @mousemove="onMouseMove"
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
-      @mousedown="onMouseDown"
       @click.stop.prevent="onClick"
     />
   </div>
@@ -17,7 +16,6 @@
 import { computed, defineComponent, reactive, ref } from "vue";
 import { cardsByCode } from "../cards";
 import { spring } from "vue3-spring";
-import { useEventListener } from "../utils/UseEventListener";
 
 const calcX = (y: number) => -y / 15;
 const calcY = (x: number) => x / 15;
@@ -35,25 +33,11 @@ export default defineComponent({
     const scale = spring(1, { damping: 12, precision: 8 });
     const p = spring({ x: 0, y: 0 }, { damping: 20 });
     const pos = reactive({ x: 0, y: 0 });
-    const down = ref(false);
 
     function onMouseMove(event: any) {
-      if (down.value) {
-        pos.x += event.movementX;
-        pos.y += event.movementY;
-      } else {
-        const rect = cardRef.value.getBoundingClientRect();
-        p.x = event.pageX - rect.left - pos.x - props.width / 2;
-        p.y = event.pageY - rect.top - pos.y - props.height / 2;
-      }
-    }
-
-    function onMouseDown() {
-      down.value = true;
-    }
-
-    function onMouseUp() {
-      down.value = false;
+      const rect = cardRef.value.getBoundingClientRect();
+      p.x = event.pageX - rect.left - pos.x - props.width / 2;
+      p.y = event.pageY - rect.top - pos.y - props.height / 2;
     }
 
     function onMouseEnter(event: Event) {
@@ -69,8 +53,6 @@ export default defineComponent({
     function onClick(event: Event) {
       context.emit("click", props.card, event);
     }
-
-    useEventListener(document, "mouseup", onMouseUp);
 
     const style = computed(() => {
       return `width:${props.width}px; height:${
@@ -89,8 +71,6 @@ export default defineComponent({
       onMouseMove,
       onMouseEnter,
       onMouseLeave,
-      onMouseDown,
-      onMouseUp,
       onClick,
     });
   },

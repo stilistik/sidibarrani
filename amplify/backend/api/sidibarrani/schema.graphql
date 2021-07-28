@@ -156,11 +156,11 @@ type Mutation {
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  joinTeam(input: JoinTeamInput!): TeamUser!
+  joinTeam(input: JoinTeamInput!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  leaveGame(input: LeaveGameInput!): Boolean!
+  leaveGame(input: LeaveGameInput!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
@@ -168,15 +168,28 @@ type Mutation {
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  playCard(roundID: String!, value: String!): Action!
+  playCard(roundID: String!, value: String!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  clearStack(roundID: String!): Stack!
+  clearStack(roundID: String!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  newRound(gameID: String!): Round!
+  newRound(gameID: String!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
+}
+
+type Subscription {
+  onUpdateGameState(id: ID!): Game
+    @aws_subscribe(
+      mutations: [
+        "startGame"
+        "leaveGame"
+        "playCard"
+        "clearStack"
+        "newRound"
+      ]
+    )
 }

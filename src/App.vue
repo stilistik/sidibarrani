@@ -29,7 +29,13 @@ export default defineComponent({
   name: "App",
   setup() {
     checkExistingSession();
-    useQueryProvider();
+    useQueryProvider({
+      defaultOptions: {
+        queries: {
+          refetchOnWindowFocus: false,
+        },
+      },
+    });
 
     const root = document.documentElement;
     const rndIndex = Math.floor(Math.random() * classList.length);

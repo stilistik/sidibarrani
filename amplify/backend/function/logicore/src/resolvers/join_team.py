@@ -1,3 +1,4 @@
+from models.game import GameModel
 from models.team import TeamModel
 
 
@@ -11,4 +12,5 @@ def join_team(event):
     TeamModel.remove_user(team_id, user_id)
     TeamModel.remove_user(other_team['id'], user_id)
 
-    return TeamModel.add_user(team_id, user_id)
+    TeamModel.add_user(team_id, user_id)
+    return GameModel.find_by_id(other_team['gameID'])

@@ -62,9 +62,7 @@ def new_round(event):
 
     RoundModel.set_turn_sequence(round['id'], turn_sequence)
     RoundModel.set_turn(round['id'], starting_player_id)
-    GameModel.set_active_round(game_id, round['id'])
-
-    return round
+    return GameModel.set_active_round(game_id, round['id'])
 
 
 def start_game(event):

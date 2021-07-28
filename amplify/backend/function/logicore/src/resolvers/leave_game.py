@@ -1,4 +1,5 @@
 from models.team import TeamModel
+from models.game import GameModel
 
 
 def leave_game(event):
@@ -21,4 +22,4 @@ def leave_game(event):
     if found_in_team_2:
         return TeamModel.remove_user(teams[1]['id'], user_id)
 
-    return False
+    return GameModel.find_by_id(game_id)

@@ -1,6 +1,7 @@
 from models.stack import StackModel, ActionType
 from models.round import RoundModel
 from models.hand import HandModel
+from models.game import GameModel
 
 
 def play_card(event):
@@ -21,4 +22,5 @@ def play_card(event):
     user_hand = next(hand for hand in hands if hand['userID'] == user_id)
     HandModel.remove_card(user_hand['id'], value)
     RoundModel.next_turn(round_id)
-    return StackModel.add_action(ActionType.PLAY.name, user_id, stack['id'], value)
+    StackModel.add_action(ActionType.PLAY.name, user_id, stack['id'], value)
+    return GameModel.find_by_id(round['gameID'])

@@ -1,6 +1,7 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { computed, ComputedRef, reactive } from "vue-demi";
+import { ComputedRef, reactive } from "vue-demi";
 import { useQuery } from "vue-query";
+import { gameFragment } from "../fragments/GameFragment";
 
 const listGames = /* GraphQL */ `
   query ListGames(
@@ -47,51 +48,10 @@ export const useListGamesQuery = () => {
 const getGame = /* GraphQL */ `
   query GetGame($id: ID!) {
     getGame(id: $id) {
-      id
-      private
-      status
-      name
-      createdAt
-      updatedAt
-      ActiveRound {
-        id
-        turn
-        activeStack {
-          id
-          size
-          actions(sortDirection: ASC) {
-            items {
-              id
-              type
-              value
-              updatedAt
-            }
-          }
-        }
-      }
-      Teams {
-        items {
-          id
-          gameID
-          name
-          color
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      Rounds {
-        items {
-          id
-          gameID
-          status
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
+      ...GameFragment
     }
   }
+  ${gameFragment}
 `;
 
 export const useGameQuery = (gameId: ComputedRef<string>) => {

@@ -60,6 +60,14 @@ class StackModel:
         return len(actions) >= size
 
     @staticmethod
+    def get_actions(stack_id):
+        response = action_table.query(
+            IndexName="byStack",
+            KeyConditionExpression=Key("stackID").eq(stack_id)
+        )
+        return response['Items']
+
+    @staticmethod
     def add_action(type: ActionType, user_id, stack_id, value):
         date_now = get_iso_date_string()
         action = {

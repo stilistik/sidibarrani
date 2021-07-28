@@ -1,14 +1,16 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { computed, ComputedRef, reactive, ref } from "vue";
 import { QueryClient, useMutation, useQueryClient } from "vue-query";
-import router from "../router";
+import { gameFragment } from "../fragments/GameFragment";
+import router from "../../router";
 
 const playCard = /* GraphQL */ `
   mutation PlayCard($roundID: String!, $value: String!) {
     playCard(roundID: $roundID, value: $value) {
-      id
+      ...GameFragment
     }
   }
+  ${gameFragment}
 `;
 
 async function getGameOptimisticUpdate(

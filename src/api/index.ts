@@ -1,11 +1,13 @@
-export * from "./GameQueries";
-export * from "./TeamQueries";
-export * from "./UserQueries";
-export * from "./RoundQueries";
+export * from "./queries/GameQueries";
+export * from "./queries/TeamQueries";
+export * from "./queries/UserQueries";
+export * from "./queries/RoundQueries";
 
-export * from "./GameMutations";
-export * from "./TeamMutations";
-export * from "./UserMutations";
-export * from "./PlayCardMutation";
-export * from "./ClearStackMutation";
-export * from "./NewRoundMutation";
+export * from "./mutations/GameMutations";
+export * from "./mutations/TeamMutations";
+export * from "./mutations/UserMutations";
+export * from "./mutations/PlayCardMutation";
+export * from "./mutations/ClearStackMutation";
+export * from "./mutations/NewRoundMutation";
+
+export * from "./subscriptions/GameSubscription";
