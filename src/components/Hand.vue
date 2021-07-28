@@ -76,9 +76,6 @@ export default defineComponent({
             roundID: this.$props.round.id,
           },
           {
-            onSuccess: () => {
-              console.log("success");
-            },
             onError: ({ errors }: any) => {
               Message.error(errors[0].message);
             },

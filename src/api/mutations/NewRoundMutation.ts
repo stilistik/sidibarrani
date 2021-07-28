@@ -1,12 +1,14 @@
 import { API, graphqlOperation } from "aws-amplify";
 import { useMutation, useQueryClient } from "vue-query";
+import { gameFragment } from "../fragments/GameFragment";
 
 const newRound = /* GraphQL */ `
   mutation NewRound($gameID: String!) {
     newRound(gameID: $gameID) {
-      id
+      ...GameFragment
     }
   }
+  ${gameFragment}
 `;
 
 export const useNewRoundMutation = () => {
