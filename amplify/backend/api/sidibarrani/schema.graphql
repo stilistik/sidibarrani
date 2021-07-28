@@ -80,6 +80,8 @@ type Round
   stacks: [Stack] @connection(keyName: "byRound", fields: ["id"])
   activeStackID: ID
   activeStack: Stack @connection(fields: ["activeStackID"])
+  turnSequence: [ID]
+  turn: ID
 }
 
 type Game @model @auth(rules: [{ allow: private }]) {
@@ -111,6 +113,16 @@ type TeamUser
   userID: ID!
   team: Team! @connection(fields: ["teamID"])
   user: User! @connection(fields: ["userID"])
+}
+
+##########################
+# QUERIES
+##########################
+
+type Query {
+  getUserHand(roundID: String!): Hand!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
 }
 
 ##########################
@@ -153,7 +165,7 @@ type Mutation {
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  playCard(stackId: String!, value: String!): Action!
+  playCard(roundID: String!, value: String!): Action!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 }

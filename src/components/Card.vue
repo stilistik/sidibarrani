@@ -8,19 +8,13 @@
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
       @mousedown="onMouseDown"
+      @click.stop.prevent="onClick"
     />
   </div>
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onBeforeUnmount,
-  onMounted,
-  reactive,
-  ref,
-} from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 import { cardsByCode } from "../cards";
 import { spring } from "vue3-spring";
 import { useEventListener } from "../utils/UseEventListener";
@@ -34,7 +28,7 @@ export default defineComponent({
     width: Number,
     height: Number,
   },
-  setup(props) {
+  setup(props, context) {
     const cardRef = ref(null);
     const card = computed(() => cardsByCode[props.card as string]);
 
@@ -72,6 +66,10 @@ export default defineComponent({
       p.y = 0;
     }
 
+    function onClick(event: Event) {
+      context.emit("click", props.card, event);
+    }
+
     useEventListener(document, "mouseup", onMouseUp);
 
     const style = computed(() => {
@@ -93,6 +91,7 @@ export default defineComponent({
       onMouseLeave,
       onMouseDown,
       onMouseUp,
+      onClick,
     });
   },
 });

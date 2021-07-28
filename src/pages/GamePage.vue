@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-screen h-screen overflow-visible text-white">
-    <Hand v-for="hand in hands" :key="hand.id" :cards="hand.cards"> </Hand>
+    <Hand v-if="Boolean(roundID)" :roundID="roundID" />
   </div>
 </template>
 
@@ -16,15 +16,15 @@ export default defineComponent({
     Hand,
   },
   setup() {
-    const gameId = router.currentRoute.value.query.gameId as string;
+    const gameId = computed(
+      () => router.currentRoute.value.query.gameId as string
+    );
     const { data, isLoading, isError } = useGameQuery(gameId);
-
-    const hands = computed(() => data.value?.ActiveRound?.hands?.items || []);
-
+    const roundID = computed(() => data.value?.ActiveRound?.id);
     return reactive({
       isLoading,
       isError,
-      hands,
+      roundID,
     });
   },
 });

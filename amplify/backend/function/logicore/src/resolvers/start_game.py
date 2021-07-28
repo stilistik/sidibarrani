@@ -40,10 +40,16 @@ def start_game(event):
 
     RoundModel.set_active_stack(round['id'], stack['id'])
 
+    starting_player_id = None
     for team_user in team_users:
         cards = deck.deal_hand()
+
+        if '7D' in cards:
+            starting_player_id = team_user['userID']
+
         HandModel.create(round['id'], team_user['userID'], cards)
 
+    RoundModel.set_turn(round['id'], starting_player_id)
     GameModel.set_active_round(game_id, round['id'])
 
     return GameModel.start(game_id)

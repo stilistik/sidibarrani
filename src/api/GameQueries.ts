@@ -1,4 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
+import { computed, ComputedRef, reactive } from "vue-demi";
 import { useQuery } from "vue-query";
 
 const listGames = /* GraphQL */ `
@@ -91,20 +92,20 @@ const getGame = /* GraphQL */ `
   }
 `;
 
-export const useGameQuery = (gameId: string) => {
+export const useGameQuery = (gameId: ComputedRef<string>) => {
+  const key = reactive(["getGame", { gameId }]);
+  const options = reactive({ enabled: gameId.value && true });
   const res = useQuery(
-    ["getGame", gameId],
+    key,
     async () => {
       const { data } = (await API.graphql(
         graphqlOperation(getGame, {
-          id: gameId,
+          id: gameId.value,
         })
       )) as any;
       return data.getGame;
     },
-    {
-      enabled: Boolean(gameId),
-    }
+    options
   );
   return res;
 };

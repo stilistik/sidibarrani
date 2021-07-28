@@ -3,6 +3,7 @@ from resolvers.start_game import start_game
 from resolvers.create_game import create_game
 from resolvers.join_team import join_team
 from resolvers.leave_game import leave_game
+from resolvers.get_user_hand import get_user_hand
 
 resolvers = {
     'Mutation': {
@@ -11,6 +12,9 @@ resolvers = {
         'startGame': start_game,
         'leaveGame': leave_game,
         'playCard': play_card,
+    },
+    'Query': {
+        'getUserHand': get_user_hand,
     }
 }
 

@@ -78,3 +78,22 @@ class RoundModel:
             ReturnValues="ALL_NEW"
         )
         return response['Attributes']
+
+    @staticmethod
+    def set_turn(round_id, user_id):
+        date_now = get_iso_date_string()
+        response = round_table.update_item(
+            Key={
+                'id': round_id,
+            },
+            AttributeUpdates={
+                'turn': {
+                    'Value': user_id
+                },
+                'updatedAt': {
+                    'Value': date_now
+                }
+            },
+            ReturnValues="ALL_NEW"
+        )
+        return response['Attributes']
