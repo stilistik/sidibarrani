@@ -18,7 +18,12 @@ def validate_team_config(game_id):
     if len(team1users) != len(team2users):
         raise Exception("Teams must have the same number of players")
 
-    return team1users + team2users
+    shuffled_teams = []
+    for pair in zip(team1users, team2users):
+        shuffled_teams.append(pair[0])
+        shuffled_teams.append(pair[1])
+
+    return shuffled_teams
 
 
 def validate_game_status(game_id):
@@ -49,6 +54,8 @@ def start_game(event):
 
         HandModel.create(round['id'], team_user['userID'], cards)
 
+    turn_sequence = list(map(lambda x: x['userID'], team_users))
+    RoundModel.set_turn_sequence(round['id'], turn_sequence)
     RoundModel.set_turn(round['id'], starting_player_id)
     GameModel.set_active_round(game_id, round['id'])
 

@@ -1,4 +1,5 @@
 import os
+from re import M
 from uuid import uuid4 as uuid
 import boto3
 from enum import Enum
@@ -89,6 +90,52 @@ class RoundModel:
             AttributeUpdates={
                 'turn': {
                     'Value': user_id
+                },
+                'updatedAt': {
+                    'Value': date_now
+                }
+            },
+            ReturnValues="ALL_NEW"
+        )
+        return response['Attributes']
+
+    def next_turn(round_id):
+        date_now = get_iso_date_string()
+        response = round_table.get_item(
+            Key={
+                'id': round_id
+            }
+        )
+        turn_sequence = response['Item']['turnSequence']
+        turn = response['Item']['turn']
+
+        idx = turn_sequence.index(turn)
+        next_turn = idx + 1 % len(turn_sequence)
+        response = round_table.update_item(
+            Key={
+                'id': round_id,
+            },
+            AttributeUpdates={
+                'turn': {
+                    'Value': next_turn,
+                },
+                'updatedAt': {
+                    'Value': date_now,
+                },
+            },
+            ReturnValues="ALL_NEW"
+        )
+        return response['Attributes']
+
+    def set_turn_sequence(round_id, user_ids):
+        date_now = get_iso_date_string()
+        response = round_table.update_item(
+            Key={
+                'id': round_id,
+            },
+            AttributeUpdates={
+                'turnSequence': {
+                    'Value': user_ids
                 },
                 'updatedAt': {
                     'Value': date_now

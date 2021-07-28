@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, onMounted, reactive } from "vue";
+import { computed, defineComponent, reactive } from "vue";
 import PageContainer from "../components/PageContainer.vue";
 import AppHeader from "../components/AppHeader.vue";
 import PageTitle from "../components/PageTitle.vue";
@@ -57,12 +57,14 @@ export default defineComponent({
   setup() {
     const leaveGameMutation = useLeaveTeamMutation();
     const qclient = useQueryClient();
-    const gameId = router.currentRoute.value.query.gameId as string;
+    const gameId = computed(
+      () => router.currentRoute.value.query.gameId as string
+    );
 
     async function leaveGame() {
       try {
         await leaveGameMutation.mutateAsync({
-          input: { gameID: gameId },
+          input: { gameID: gameId.value },
         });
         qclient.invalidateQueries("getGame");
       } catch (err) {
