@@ -1,7 +1,9 @@
 <template>
   <div class="relative w-screen h-screen overflow-visible text-white">
-    <Button @click="newRound">New Round</Button>
-    <Button v-if="isClearable" @click="clear">Clear</Button>
+    <div class="absolute">
+      <Button @click="newRound">New Round</Button>
+      <Button v-if="isClearable" @click="clear">Clear</Button>
+    </div>
     <Stack v-if="Boolean(activeStack)" :stack="activeStack" />
     <Hand v-if="Boolean(activeRound)" :round="activeRound" />
   </div>

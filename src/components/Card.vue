@@ -1,15 +1,13 @@
 <template>
-  <div ref="cardRef" class="absolute top-0 left-0">
-    <component
-      class="shadow-2xl rounded-xl"
-      :is="card"
-      :style="style"
-      @mousemove="onMouseMove"
-      @mouseenter="onMouseEnter"
-      @mouseleave="onMouseLeave"
-      @click.stop.prevent="onClick"
-    />
-  </div>
+  <component
+    class="absolute shadow-2xl rounded-xl"
+    :is="card"
+    :style="style"
+    @mousemove="onMouseMove"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
+    @click.stop.prevent="onClick"
+  />
 </template>
 
 <script lang="ts">
@@ -45,9 +43,8 @@ export default defineComponent({
     });
 
     function onMouseMove(event: any) {
-      const rect = cardRef.value.getBoundingClientRect();
-      p.x = event.pageX - rect.left - pos.x - props.width / 2;
-      p.y = event.pageY - rect.top - pos.y - props.height / 2;
+      p.x = event.pageX - pos.x - props.width / 2;
+      p.y = event.pageY - pos.y - props.height / 2;
     }
 
     function onMouseEnter(event: Event) {
@@ -63,7 +60,7 @@ export default defineComponent({
     }
 
     function onClick(event: Event) {
-      context.emit("click", props.card, event);
+      context.emit("onClick", props.card, event);
     }
 
     const style = computed(() => {

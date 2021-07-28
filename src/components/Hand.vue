@@ -10,7 +10,7 @@
     :y="getYPosition() + yTranslation"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
-    @click="click"
+    @onClick="onClick"
   />
 </template>
 
@@ -50,8 +50,8 @@ export default defineComponent({
       yTranslation.value = 0;
     }
 
-    function click(card: string) {
-      if (props.round.turn === user.id) {
+    function onClick(card: string) {
+      if (props.round.turn === user.value.id) {
         playCardMutation.mutate(
           {
             value: card,
@@ -90,7 +90,7 @@ export default defineComponent({
       isError,
       cards,
       user,
-      click,
+      onClick,
       onMouseEnter,
       onMouseLeave,
       yTranslation,
