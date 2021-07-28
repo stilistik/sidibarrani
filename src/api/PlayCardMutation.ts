@@ -1,5 +1,4 @@
-import { API, Auth, graphqlOperation } from "aws-amplify";
-import { randomUUID } from "crypto";
+import { API, graphqlOperation } from "aws-amplify";
 import { computed, ComputedRef, reactive, ref } from "vue";
 import { QueryClient, useMutation, useQueryClient } from "vue-query";
 import router from "../router";

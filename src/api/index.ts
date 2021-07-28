@@ -6,4 +6,4 @@ export * from "./RoundQueries";
 export * from "./GameMutations";
 export * from "./TeamMutations";
 export * from "./UserMutations";
-export * from "./RoundMutations";
+export * from "./PlayCardMutation";
