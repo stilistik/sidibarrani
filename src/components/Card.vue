@@ -32,7 +32,10 @@ export default defineComponent({
 
     const scale = spring(1, { damping: 12, precision: 8 });
     const p = spring({ x: 0, y: 0 }, { damping: 20 });
-    const pos = spring({ x: props.x, y: props.y });
+    const pos = spring(
+      { x: props.x, y: props.y },
+      { from: { x: props.x, y: props.y } }
+    );
 
     const { x, y } = toRefs(props);
     watch(x, (newValue) => {
