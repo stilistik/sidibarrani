@@ -1,5 +1,5 @@
 from resolvers.play_card import play_card
-from resolvers.start_game import start_game
+from resolvers.start_game import start_game, new_round
 from resolvers.create_game import create_game
 from resolvers.join_team import join_team
 from resolvers.leave_game import leave_game
@@ -13,7 +13,8 @@ resolvers = {
         'startGame': start_game,
         'leaveGame': leave_game,
         'playCard': play_card,
-        'clearStack': clear_stack
+        'clearStack': clear_stack,
+        'newRound': new_round,
     },
     'Query': {
         'getUserHand': get_user_hand,

@@ -8,3 +8,4 @@ export * from "./TeamMutations";
 export * from "./UserMutations";
 export * from "./PlayCardMutation";
 export * from "./ClearStackMutation";
+export * from "./NewRoundMutation";

@@ -80,8 +80,8 @@ export default defineComponent({
       leaveGameMutation,
     });
   },
-  beforeRouteLeave() {
-    this.leaveGame();
+  beforeRouteLeave(to) {
+    if (to.name !== "GamePage") this.leaveGame();
   },
 });
 </script>

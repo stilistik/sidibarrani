@@ -17,6 +17,7 @@ async function getGameOptimisticUpdate(
   variables: any
 ) {
   const key = reactive(["getGame", { gameId }]);
+  qc.cancelQueries(key);
   const data = reactive(await qc.getQueryData(key)) as any;
   data.ActiveRound.activeStack.actions.items.push({
     id: "abcdefg",
@@ -29,6 +30,7 @@ async function getGameOptimisticUpdate(
 async function getHandOptimisticUpdate(qc: QueryClient, variables: any) {
   const roundID = ref(variables.roundID);
   const key = reactive(["hand", { roundID }]);
+  qc.cancelQueries(key);
   const data = reactive(await qc.getQueryData(key)) as any;
   data.cards = data.cards.filter((el: string) => el !== variables.value);
   qc.setQueryData(key, data);

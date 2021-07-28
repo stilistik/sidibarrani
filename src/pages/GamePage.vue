@@ -1,5 +1,6 @@
 <template>
   <div class="relative w-screen h-screen overflow-visible text-white">
+    <Button @click="newRound">New Round</Button>
     <Button v-if="isClearable" @click="clear">Clear</Button>
     <Stack v-if="Boolean(activeStack)" :stack="activeStack" />
     <Hand v-if="Boolean(activeRound)" :round="activeRound" />
@@ -8,7 +9,11 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive } from "vue";
-import { useClearStackMutation, useGameQuery } from "../api";
+import {
+  useClearStackMutation,
+  useGameQuery,
+  useNewRoundMutation,
+} from "../api";
 import Hand from "../components/Hand.vue";
 import Button from "../components/Button.vue";
 import Stack from "../components/Stack.vue";
@@ -35,6 +40,13 @@ export default defineComponent({
     );
 
     const clearStackMutation = useClearStackMutation();
+    const newRoundMutation = useNewRoundMutation();
+
+    function newRound() {
+      newRoundMutation.mutate({
+        gameID: gameId.value,
+      });
+    }
 
     function clear() {
       clearStackMutation.mutate({
@@ -49,6 +61,7 @@ export default defineComponent({
       activeStack,
       isClearable,
       clear,
+      newRound,
     });
   },
 });

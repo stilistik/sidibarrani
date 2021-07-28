@@ -24,7 +24,7 @@ export default defineComponent({
     start() {
       this.startGameMutation.mutate(
         {
-          id: this.$props.id,
+          gameID: this.$props.id,
         },
         {
           onSuccess: () => {

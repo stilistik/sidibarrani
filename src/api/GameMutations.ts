@@ -20,8 +20,8 @@ export const useCreateNewGameMutation = () => {
 };
 
 const startGame = /* GraphQL */ `
-  mutation StartGame($id: String!) {
-    startGame(id: $id) {
+  mutation StartGame($gameID: String!) {
+    startGame(gameID: $gameID) {
       id
     }
   }

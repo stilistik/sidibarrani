@@ -33,8 +33,8 @@ def validate_game_status(game_id):
         raise Exception("Game already started")
 
 
-def start_game(event):
-    game_id = event['arguments'].get('id')
+def new_round(event):
+    game_id = event['arguments'].get('gameID')
 
     # validate_game_status(game_id)
     team_users = validate_team_config(game_id)
@@ -63,5 +63,13 @@ def start_game(event):
     RoundModel.set_turn_sequence(round['id'], turn_sequence)
     RoundModel.set_turn(round['id'], starting_player_id)
     GameModel.set_active_round(game_id, round['id'])
+
+    return round
+
+
+def start_game(event):
+    game_id = event['arguments'].get('gameID')
+
+    new_round(event)
 
     return GameModel.start(game_id)

@@ -164,7 +164,7 @@ type Mutation {
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  startGame(id: String!): Game!
+  startGame(gameID: String!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
@@ -173,6 +173,10 @@ type Mutation {
     @auth(rules: [{ allow: private }])
 
   clearStack(roundID: String!): Stack!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
+
+  newRound(gameID: String!): Round!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 }
