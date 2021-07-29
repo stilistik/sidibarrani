@@ -1,7 +1,7 @@
 <template>
   <div
     :style="`transform-origin:center; transform: scale(${scale});`"
-    class="absolute top-1/3 w-full flex justify-center z-10"
+    class="absolute top-28 w-full flex justify-center z-10"
   >
     <h3
       class="
@@ -38,16 +38,11 @@ export default defineComponent({
     });
 
     const scale = spring(0, { damping: 8 });
-    const timeoutRef = ref(null);
     watchEffect(() => {
       if (isUsersTurn.value) {
         scale.value = 1;
-        timeoutRef.value = setTimeout(() => {
-          scale.value = 0;
-        }, 3000);
       } else {
         scale.value = 0;
-        clearTimeout(timeoutRef.value);
       }
     });
 

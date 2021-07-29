@@ -2,7 +2,7 @@
   <AppHeader />
 
   <div class="relative w-screen h-screen overflow-visible text-white">
-    <div class="absolute top-20">
+    <div class="absolute top-20 flex gap-3 p-3">
       <Button @click="newRound">New Round</Button>
       <Button v-if="isClearable" @click="clear">Clear</Button>
     </div>
