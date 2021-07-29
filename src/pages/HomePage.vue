@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="flex-1 flex items-start justify-start">
-        <div class="sticky top-10 flex flex-col gap-5">
+        <div class="sticky top-32 flex flex-col gap-5">
           <h1 class="text-white text-4xl font-thin">Create Game</h1>
           <CreateGame />
         </div>

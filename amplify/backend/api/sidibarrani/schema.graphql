@@ -64,13 +64,14 @@ type Action
 type Stack
   @model
   @auth(rules: [{ allow: private }])
-  @key(name: "byRound", fields: ["roundID"]) {
+  @key(name: "byRound", fields: ["roundID", "createdAt"]) {
   id: ID!
   roundID: ID
   size: Int!
   round: Round @connection(fields: ["roundID"])
   actions: [Action] @connection(keyName: "byStack", fields: ["id"])
   winnerID: ID
+  createdAt: AWSDateTime
 }
 
 type Round

@@ -25,7 +25,7 @@ class StackModel:
         date_now = get_iso_date_string()
         stack = {
             'id': str(uuid()),
-            'gameID': round_id,
+            'roundID': round_id,
             'createdAt': date_now,
             'updatedAt': date_now,
             'size': size,

@@ -24,7 +24,7 @@ def set_winner(stack):
             if rank > get_rank(winner):
                 winner = action
 
-    StackModel.set_winner(stack['id'], winner['userID'])
+    return winner
 
 
 def clear_stack(event):
@@ -35,7 +35,9 @@ def clear_stack(event):
     stack_complete = StackModel.is_complete(stack['id'])
 
     if stack_complete:
-        set_winner(stack)
+        winner = set_winner(stack)
+        StackModel.set_winner(stack['id'], winner['userID'])
+        RoundModel.set_turn(round_id, winner['userID'])
         new_stack = StackModel.create(round_id, stack['size'])
         RoundModel.set_active_stack(round_id, new_stack['id'])
 

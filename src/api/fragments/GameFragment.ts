@@ -9,9 +9,24 @@ export const gameFragment = /* GraphQL */ `
     ActiveRound {
       id
       turn
+      stacks {
+        items {
+          id
+          size
+          actions(sortDirection: ASC) {
+            items {
+              id
+              type
+              value
+              updatedAt
+            }
+          }
+        }
+      }
       activeStack {
         id
         size
+        winnerID
         actions(sortDirection: ASC) {
           items {
             id
