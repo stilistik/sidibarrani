@@ -7,6 +7,7 @@
     :height="300"
     :x="getXPosition(idx)"
     :y="getYPosition()"
+    :initY="-100"
   />
 </template>
 

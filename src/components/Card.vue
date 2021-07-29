@@ -25,16 +25,18 @@ export default defineComponent({
     height: Number,
     x: Number,
     y: Number,
+    initX: Number,
+    initY: Number,
   },
   setup(props, context) {
     const cardRef = ref(null);
     const card = computed(() => cardsByCode[props.card as string]);
 
-    const scale = spring(1, { damping: 12, precision: 8 });
+    const scale = spring(1, { damping: 12, precision: 8, from: 0 });
     const p = spring({ x: 0, y: 0 }, { damping: 20 });
     const pos = spring(
       { x: props.x, y: props.y },
-      { from: { x: props.x, y: props.y } }
+      { from: { x: props.initX || props.x, y: props.initY || props.y } }
     );
 
     const { x, y } = toRefs(props);

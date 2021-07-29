@@ -1,5 +1,11 @@
 <template>
   <div class="relative w-screen h-screen overflow-visible text-white">
+    <div
+      v-if="displayYourTurn"
+      class="absolute top-0 left-0 w-full h-40 flex justify-center"
+    >
+      <h3 class="text-4xl font-black text-white">Its Your Turn!</h3>
+    </div>
     <div class="absolute">
       <Button @click="newRound">New Round</Button>
       <Button v-if="isClearable" @click="clear">Clear</Button>
@@ -10,7 +16,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, reactive } from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeUnmount,
+  reactive,
+  ref,
+  watchEffect,
+} from "vue";
 import {
   useClearStackMutation,
   useGameQuery,
@@ -21,6 +34,7 @@ import Hand from "../components/Hand.vue";
 import Button from "../components/Button.vue";
 import Stack from "../components/Stack.vue";
 import router from "../router";
+import { useCurrentUser } from "../utils/Auth";
 
 export default defineComponent({
   name: "GamePage",
@@ -33,6 +47,7 @@ export default defineComponent({
     const gameId = computed(
       () => router.currentRoute.value.query.gameId as string
     );
+    const user = useCurrentUser();
     const { data, isLoading, isError } = useGameQuery(gameId);
     const activeRound = computed(() => data.value?.ActiveRound);
     const activeStack = computed(() => data.value?.ActiveRound?.activeStack);
@@ -41,6 +56,23 @@ export default defineComponent({
       () =>
         activeStack?.value?.actions?.items?.length >= activeStack?.value?.size
     );
+
+    const isUsersTurn = computed(() => {
+      const turn = activeRound?.value?.turn;
+      const userId = user?.value?.id;
+      return Boolean(turn) && Boolean(userId) && turn === userId;
+    });
+
+    const displayYourTurn = ref(false);
+
+    watchEffect(() => {
+      if (isUsersTurn.value) {
+        displayYourTurn.value = true;
+        setTimeout(() => {
+          displayYourTurn.value = false;
+        }, 3000);
+      }
+    });
 
     const clearStackMutation = useClearStackMutation();
     const newRoundMutation = useNewRoundMutation();
@@ -71,6 +103,7 @@ export default defineComponent({
       isClearable,
       clear,
       newRound,
+      displayYourTurn,
     });
   },
 });

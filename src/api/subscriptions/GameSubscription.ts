@@ -26,7 +26,5 @@ export const useGameSubscription = (gameId: string) => {
     },
     error: (error: any) => console.warn(error),
   });
-  console.log(subscription);
-
   return subscription;
 };

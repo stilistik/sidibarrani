@@ -8,6 +8,8 @@
     :height="cardHeight"
     :x="getXPosition(idx)"
     :y="getYPosition() + yTranslation"
+    :initX="getXPosition(idx)"
+    :initY="1000"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
     @onClick="onClick"
