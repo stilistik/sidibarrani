@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview"
   },
@@ -19,8 +19,7 @@
     "uuid": "^8.3.2",
     "vue": "^3.0.5",
     "vue-query": "^1.8.0",
-    "vue-router": "^4.0.0",
-    "vue3-spring": "^0.0.2"
+    "vue-router": "^4.0.0"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.2.1",

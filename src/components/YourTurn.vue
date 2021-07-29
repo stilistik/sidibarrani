@@ -24,7 +24,7 @@
 import { computed, defineComponent, reactive, ref, watchEffect } from "vue";
 import { useActiveRound } from "../api";
 import { useCurrentUser } from "../utils/Auth";
-import { spring } from "vue3-spring";
+import { spring } from "../spring/spring";
 
 export default defineComponent({
   setup() {
@@ -37,11 +37,17 @@ export default defineComponent({
       return Boolean(turn) && Boolean(userId) && turn === userId;
     });
 
-    const scale = spring(0, { damping: 8 });
+    const springProps = reactive({ damping: 8, stiffness: 170 });
+    const scale = spring(0, springProps);
+
     watchEffect(() => {
       if (isUsersTurn.value) {
+        springProps.damping = 8;
+        springProps.stiffness = 170;
         scale.value = 1;
       } else {
+        springProps.damping = 100;
+        springProps.stiffness = 1000;
         scale.value = 0;
       }
     });

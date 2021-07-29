@@ -3104,11 +3104,6 @@ vue-tsc@^0.0.24:
   dependencies:
     unzipper "0.10.11"
 
-vue3-spring@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/vue3-spring/-/vue3-spring-0.0.2.tgz#3e2d9291ae68c0dd3459d9ba44a0b257282f1fb2"
-  integrity sha512-fBH6fxzJiB/ZtcuTqlzUWCgoo9Hx1dclFPzYCjz/DNOFqTzKKmcuIRObl/Y262h8TIski1z1+FiKnviCGN2U5Q==
-
 vue@^3.0.5:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.1.4.tgz#120d6818c51eaa35d0879e5bc1cff60135bc69fd"

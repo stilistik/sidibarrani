@@ -23,7 +23,7 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref, watchEffect } from "vue";
 import { useActiveStack } from "../api";
-import { spring } from "vue3-spring";
+import { spring } from "../spring/spring";
 import { useCurrentUser } from "../utils/Auth";
 
 export default defineComponent({
@@ -31,7 +31,8 @@ export default defineComponent({
     const activeStack = useActiveStack();
     const user = useCurrentUser();
 
-    const scale = spring(0, { damping: 8 });
+    const springProps = reactive({ damping: 8, mass: 1, stiffness: 170 });
+    const scale = spring(0, springProps);
     const timeoutRef = ref(null);
 
     const stackWinner = computed(() => activeStack?.value?.winner);
@@ -44,13 +45,14 @@ export default defineComponent({
 
     watchEffect(() => {
       if (hasWinner.value) {
+        springProps.stiffness = 170;
+        springProps.damping = 8;
         scale.value = 1;
         timeoutRef.value = setTimeout(() => {
+          springProps.damping = 100;
+          springProps.stiffness = 1000;
           scale.value = 0;
-        }, 3000);
-      } else {
-        scale.value = 0;
-        clearTimeout(timeoutRef.value);
+        }, 2000);
       }
     });
 
