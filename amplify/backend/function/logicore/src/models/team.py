@@ -13,9 +13,9 @@ teamuser_table = ddb.Table(teamuser_table_name)
 
 class TeamModel:
     @staticmethod
-    def create(game_id, name=get_random_name(), color="red"):
+    def create(game_id, name=None, color="red"):
         date_now = get_iso_date_string()
-
+        name = get_random_name() if name is None else name
         team = {
             'id': str(uuid()),
             'name': name,

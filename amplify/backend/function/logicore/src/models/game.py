@@ -18,9 +18,9 @@ class GameStatus(Enum):
 
 class GameModel:
     @staticmethod
-    def create(name=get_random_name(), private=False):
+    def create(name=None, private=False):
         date_now = get_iso_date_string()
-
+        name = get_random_name() if name is None else name
         game = {
             'id': str(uuid()),
             'name': name,
