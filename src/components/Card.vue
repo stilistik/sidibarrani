@@ -13,7 +13,7 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref, toRefs, watch } from "vue";
 import { cardsByCode } from "../cards";
-import { spring } from "../spring/spring";
+import { spring } from "../spring";
 
 const calcX = (y: number) => -y / 15;
 const calcY = (x: number) => x / 15;

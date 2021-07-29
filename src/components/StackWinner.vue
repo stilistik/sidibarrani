@@ -23,7 +23,7 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref, watchEffect } from "vue";
 import { useActiveStack } from "../api";
-import { spring } from "../spring/spring";
+import { spring } from "../spring";
 import { useCurrentUser } from "../utils/Auth";
 
 export default defineComponent({

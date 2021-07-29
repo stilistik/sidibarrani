@@ -24,7 +24,7 @@
 import { computed, defineComponent, reactive, ref, watchEffect } from "vue";
 import { useActiveRound } from "../api";
 import { useCurrentUser } from "../utils/Auth";
-import { spring } from "../spring/spring";
+import { spring } from "../spring";
 
 export default defineComponent({
   setup() {
