@@ -85,3 +85,22 @@ class StackModel:
         )
 
         return action
+
+    @staticmethod
+    def set_winner(stack_id, user_id):
+        date_now = get_iso_date_string()
+        response = stack_table.update_item(
+            Key={
+                'id': stack_id
+            },
+            AttributeUpdates={
+                'winnerID': {
+                    'Value': user_id,
+                },
+                'updatedAt': {
+                    'Value': date_now
+                }
+            },
+            ReturnValues="ALL_NEW"
+        )
+        return response['Attributes']

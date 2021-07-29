@@ -70,6 +70,7 @@ type Stack
   size: Int!
   round: Round @connection(fields: ["roundID"])
   actions: [Action] @connection(keyName: "byStack", fields: ["id"])
+  winnerID: ID
 }
 
 type Round

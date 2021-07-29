@@ -1,9 +1,8 @@
 {
   "typeName": "Mutation",
-  "fieldName": "playCard",
+  "fieldName": "clearStack",
   "arguments": {
-    "roundID": "a2453553-a1b7-478c-82e3-76009c3700fc",
-    "value": "6D"
+    "roundID": "64210aee-f591-49b7-99dd-95dec0b67fde"
   },
   "identity": {
     "claims": {

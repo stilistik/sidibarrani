@@ -4,16 +4,16 @@ from models.game import GameModel
 
 
 def get_rank(action):
-    return action.value[0:-1]
+    return action['value'][0:-1]
 
 
 def get_suit(action):
-    return action.value[-1]
+    return action['value'][-1]
 
 
 def set_winner(stack):
     actions = StackModel.get_actions(stack['id'])
-    suit_played = actions[0].value[-1]
+    suit_played = actions[0]['value'][-1]
     winner = actions[0]
 
     for action in actions:
@@ -24,7 +24,7 @@ def set_winner(stack):
             if rank > get_rank(winner):
                 winner = action
 
-    return winner
+    StackModel.set_winner(stack['id'], winner['userID'])
 
 
 def clear_stack(event):
@@ -35,7 +35,7 @@ def clear_stack(event):
     stack_complete = StackModel.is_complete(stack['id'])
 
     if stack_complete:
-        # set_winner(stack)
+        set_winner(stack)
         new_stack = StackModel.create(round_id, stack['size'])
         RoundModel.set_active_stack(round_id, new_stack['id'])
 
