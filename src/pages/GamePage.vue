@@ -1,10 +1,13 @@
 <template>
+  <AppHeader />
+
   <div class="relative w-screen h-screen overflow-visible text-white">
-    <div class="absolute">
+    <div class="absolute top-20">
       <Button @click="newRound">New Round</Button>
       <Button v-if="isClearable" @click="clear">Clear</Button>
     </div>
     <YourTurn />
+    <StackWinner />
     <Stack v-if="Boolean(activeStack)" :stack="activeStack" />
     <Hand v-if="Boolean(activeRound)" :round="activeRound" />
   </div>
@@ -19,19 +22,23 @@ import {
   useGameSubscription,
   useNewRoundMutation,
 } from "../api";
+import AppHeader from "../components/AppHeader.vue";
 import Hand from "../components/Hand.vue";
 import Button from "../components/Button.vue";
 import Stack from "../components/Stack.vue";
 import YourTurn from "../components/YourTurn.vue";
+import StackWinner from "../components/StackWinner.vue";
 import router from "../router";
 
 export default defineComponent({
   name: "GamePage",
   components: {
+    AppHeader,
     Hand,
     Stack,
     Button,
     YourTurn,
+    StackWinner,
   },
   setup() {
     const gameId = computed(

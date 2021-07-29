@@ -71,6 +71,7 @@ type Stack
   round: Round @connection(fields: ["roundID"])
   actions: [Action] @connection(keyName: "byStack", fields: ["id"])
   winnerID: ID
+  winner: User @connection(fields: ["winnerID"])
   createdAt: AWSDateTime
 }
 

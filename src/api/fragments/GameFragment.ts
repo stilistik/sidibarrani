@@ -26,7 +26,10 @@ export const gameFragment = /* GraphQL */ `
       activeStack {
         id
         size
-        winnerID
+        winner {
+          id
+          username
+        }
         actions(sortDirection: ASC) {
           items {
             id

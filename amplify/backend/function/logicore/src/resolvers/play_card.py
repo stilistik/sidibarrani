@@ -4,6 +4,30 @@ from models.hand import HandModel
 from models.game import GameModel
 
 
+def get_rank(action):
+    return action['value'][0:-1]
+
+
+def get_suit(action):
+    return action['value'][-1]
+
+
+def set_winner(stack):
+    actions = StackModel.get_actions(stack['id'])
+    suit_played = actions[0]['value'][-1]
+    winner = actions[0]
+
+    for action in actions:
+        suit = get_suit(action)
+        rank = get_rank(action)
+
+        if suit == suit_played:
+            if rank > get_rank(winner):
+                winner = action
+
+    return winner
+
+
 def play_card(event):
     round_id = event['arguments'].get('roundID')
     value = event['arguments'].get('value')
@@ -23,4 +47,11 @@ def play_card(event):
     HandModel.remove_card(user_hand['id'], value)
     RoundModel.next_turn(round_id)
     StackModel.add_action(ActionType.PLAY.name, user_id, stack['id'], value)
+
+    stack_complete = StackModel.is_complete(stack['id'])
+    if stack_complete:
+        winner = set_winner(stack)
+        StackModel.set_winner(stack['id'], winner['userID'])
+        RoundModel.set_turn(round_id, winner['userID'])
+
     return GameModel.find_by_id(round['gameID'])
