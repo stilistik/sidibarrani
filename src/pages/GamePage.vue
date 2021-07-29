@@ -47,8 +47,6 @@ export default defineComponent({
     const activeRound = useActiveRound();
     const activeStack = useActiveStack();
 
-    console.log(activeRound);
-
     const isClearable = computed(
       () =>
         activeStack?.value?.actions?.items?.length >= activeStack?.value?.size

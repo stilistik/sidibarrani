@@ -1,7 +1,7 @@
 <template>
   <div
     :style="`transform-origin:center; transform: scale(${scale});`"
-    class="absolute top-1/3 w-full flex justify-center z-10"
+    class="absolute top-1/3 w-full flex justify-center z-10 pointer-events-none"
   >
     <h3
       class="
@@ -33,8 +33,6 @@ export default defineComponent({
 
     const scale = spring(0, { damping: 8 });
     const timeoutRef = ref(null);
-
-    console.log(activeStack);
 
     const stackWinner = computed(() => activeStack?.value?.winner);
     const hasWinner = computed(() => stackWinner?.value && true);
