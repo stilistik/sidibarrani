@@ -3,6 +3,7 @@ import { computed, ComputedRef, reactive, ref } from "vue";
 import { QueryClient, useMutation, useQueryClient } from "vue-query";
 import { gameFragment } from "../fragments/GameFragment";
 import router from "../../router";
+import { Message } from "../../utils/Message";
 
 const playCard = /* GraphQL */ `
   mutation PlayCard($roundID: String!, $value: String!) {
@@ -34,8 +35,23 @@ async function getHandOptimisticUpdate(qc: QueryClient, variables: any) {
   const key = reactive(["hand", { roundID }]);
   qc.cancelQueries(key);
   const data = reactive(await qc.getQueryData(key)) as any;
+  const prevData = Object.assign({}, data);
   data.cards = data.cards.filter((el: string) => el !== variables.value);
   qc.setQueryData(key, data);
+  return prevData;
+}
+
+async function restorePrevStack(qc: QueryClient, gameId: ComputedRef<string>) {
+  const key = reactive(["getGame", { gameId }]);
+  const data = reactive(await qc.getQueryData(key)) as any;
+  data.ActiveRound.activeStack.actions.items.pop();
+  qc.setQueryData(key, data);
+}
+
+async function restorePrevHand(qc: QueryClient, prevHand: any, variables: any) {
+  const roundID = ref(variables.roundID);
+  const key = reactive(["hand", { roundID }]);
+  qc.setQueryData(key, prevHand);
 }
 
 export const usePlayCardMutation = () => {
@@ -53,13 +69,13 @@ export const usePlayCardMutation = () => {
     {
       onMutate: async (variables) => {
         await getGameOptimisticUpdate(qc, gameId, variables);
-        await getHandOptimisticUpdate(qc, variables);
+        const prevData = await getHandOptimisticUpdate(qc, variables);
+        return prevData;
       },
-      onError: async () => {
-        const key = reactive(["getGame", { gameId }]);
-        const data = reactive(await qc.getQueryData(key)) as any;
-        data.ActiveRound.activeStack.actions.items.pop();
-        qc.setQueryData(key, data);
+      onError: async (res: any, variables, prev) => {
+        Message.error(res.errors[0].message);
+        await restorePrevStack(qc, gameId);
+        await restorePrevHand(qc, prev, variables);
       },
     }
   );

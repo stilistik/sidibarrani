@@ -11,7 +11,7 @@
       px-5
       shadow-2xl
       bg-gray-900
-      z-50
+      z-40
     "
   >
     <User :username="data?.username || ''" />

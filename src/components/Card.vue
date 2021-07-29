@@ -1,13 +1,33 @@
 <template>
-  <component
-    class="absolute shadow-2xl rounded-xl"
-    :is="card"
+  <div
+    class="absolute"
     :style="style"
     @mousemove="onMouseMove"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
     @click.stop.prevent="onClick"
-  />
+  >
+    <div
+      class="absolute w-full h-full shadow-2xl rounded-xl"
+      @contextmenu.prevent="onContextMenu"
+      :style="outerStyle"
+    >
+      <component
+        :is="card"
+        class="absolute w-full h-full"
+        style="backface-visibility: hidden; -webkit-backface-visibility: hidden"
+      />
+      <img
+        src="/assets/card_back_2.png"
+        class="absolute w-full h-full p-2 bg-white rounded-xl"
+        style="
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+          transform: rotateY(180deg);
+        "
+      />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -32,6 +52,7 @@ export default defineComponent({
     const cardRef = ref(null);
     const card = computed(() => cardsByCode[props.card as string]);
 
+    const rotation = spring(0, { damping: 12 });
     const scale = spring(1, { damping: 12, precision: 8, from: 0 });
     const p = spring({ x: 0, y: 0 }, { damping: 20 });
     const pos = spring(
@@ -46,6 +67,8 @@ export default defineComponent({
     watch(y, (newValue) => {
       pos.y = newValue;
     });
+
+    const flipped = ref(false);
 
     function onMouseMove(event: any) {
       p.x = event.pageX - pos.x - props.width / 2;
@@ -68,6 +91,16 @@ export default defineComponent({
       context.emit("onClick", props.card, event);
     }
 
+    function onContextMenu() {
+      if (flipped.value) {
+        rotation.value = 0;
+        flipped.value = false;
+      } else {
+        rotation.value = 180;
+        flipped.value = true;
+      }
+    }
+
     const style = computed(() => {
       return `width:${props.width}px; height:${
         props.height
@@ -78,6 +111,10 @@ export default defineComponent({
       )}deg)`;
     });
 
+    const outerStyle = computed(() => {
+      return `transform-style: preserve-3d; transform-origin: center; transition: transform 0.3s ease; transform: perspective(1000px) rotateY(${rotation.value}deg);`;
+    });
+
     return reactive({
       cardRef,
       card: card,
@@ -86,6 +123,8 @@ export default defineComponent({
       onMouseEnter,
       onMouseLeave,
       onClick,
+      onContextMenu,
+      outerStyle,
     });
   },
 });
