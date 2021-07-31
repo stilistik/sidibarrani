@@ -2,7 +2,7 @@ import LoginPage from "/src/pages/LoginPage.vue";
 import SignupPage from "/src/pages/SignupPage.vue";
 import HomePage from "/src/pages/HomePage.vue";
 import LobbyPage from "/src/pages/LobbyPage.vue";
-import GamePage from "/src/pages/GamePage.vue";
+import GamePage from "/src/pages/game/GamePage.vue";
 
 const routes = [
   {

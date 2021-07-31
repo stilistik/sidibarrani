@@ -1,6 +1,4 @@
 <template>
-  <AppHeader />
-
   <div class="relative w-screen h-screen overflow-visible text-white">
     <div class="absolute top-20 flex gap-3 p-3">
       <Button @click="newRound">New Round</Button>
@@ -21,14 +19,14 @@ import {
   useClearStackMutation,
   useGameSubscription,
   useNewRoundMutation,
-} from "../api";
-import AppHeader from "../components/AppHeader.vue";
-import Hand from "../components/Hand.vue";
-import Button from "../components/Button.vue";
-import Stack from "../components/Stack.vue";
-import YourTurn from "../components/YourTurn.vue";
-import StackWinner from "../components/StackWinner.vue";
-import router from "../router";
+} from "../../api";
+import AppHeader from "../../components/AppHeader.vue";
+import Hand from "../../components/Hand.vue";
+import Button from "../../components/Button.vue";
+import Stack from "../../components/Stack.vue";
+import YourTurn from "../../components/YourTurn.vue";
+import StackWinner from "../../components/StackWinner.vue";
+import router from "../../router";
 
 export default defineComponent({
   name: "GamePage",
@@ -46,6 +44,8 @@ export default defineComponent({
     );
     const activeRound = useActiveRound();
     const activeStack = useActiveStack();
+
+    console.log(activeRound);
 
     const isClearable = computed(
       () =>
