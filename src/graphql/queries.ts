@@ -193,6 +193,17 @@ export const getAction = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -211,6 +222,14 @@ export const listActions = /* GraphQL */ `
         value
         createdAt
         updatedAt
+        user {
+          id
+          email
+          username
+          lastOnline
+          createdAt
+          updatedAt
+        }
       }
       nextToken
     }

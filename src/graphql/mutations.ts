@@ -766,6 +766,17 @@ export const createAction = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -782,6 +793,17 @@ export const updateAction = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
     }
   }
 `;
@@ -798,6 +820,17 @@ export const deleteAction = /* GraphQL */ `
       value
       createdAt
       updatedAt
+      user {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
     }
   }
 `;

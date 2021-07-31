@@ -45,6 +45,10 @@ export const gameFragment = /* GraphQL */ `
             type
             value
             updatedAt
+            user {
+              id
+              username
+            }
           }
         }
       }

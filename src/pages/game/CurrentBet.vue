@@ -5,7 +5,7 @@
       text-primary
       bg-gray-800
       py-3
-      px-5
+      px-8
       rounded-full
       shadow-2xl
     "
@@ -28,9 +28,7 @@
       <Icon v-if="mode === 'SLALOM'" icon="arrows-alt-v" style="width: 38" />
       <span>{{ value }}</span>
     </div>
-    <div>
-      {{ action.userID }}
-    </div>
+    <div class="flex justify-center">by {{ action?.user?.username }}</div>
   </div>
 </template>
 
