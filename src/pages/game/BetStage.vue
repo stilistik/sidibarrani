@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-screen h-screen overflow-visible text-white">
-    <div class="flex w-full justify-center gap-3 pt-40">
+    <div class="flex w-full justify-center gap-3 pt-52">
       <Button
         :size="'large'"
         @click="onClickMode('BOTTOM_UP')"
@@ -51,11 +51,15 @@
         <ClubIcon />
       </Button>
     </div>
-    <div class="flex w-full justify-center gap-3 pt-60">
-      <Button :size="'large'">Skip</Button>
-      <Button :size="'large'">+10</Button>
-      <Button :size="'large'">+20</Button>
+    <div class="w-full flex justify-center py-20">
+      <CurrentBet :action="lastAction" />
     </div>
+    <div class="flex w-full justify-center gap-3 py-20">
+      <Button :size="'large'" @click="skip">Skip</Button>
+      <Button :size="'large'" @click="placeBet(10)">+10</Button>
+      <Button :size="'large'" @click="placeBet(20)">+20</Button>
+    </div>
+    <YourTurn />
     <div class="absolute top-0 left-0">
       <Hand v-if="Boolean(activeRound)" :round="activeRound" />
     </div>
@@ -63,14 +67,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 import Button from "../../components/Button.vue";
 import DiamondIcon from "../../components/DiamondIcon.vue";
 import HeartIcon from "../../components/HeartIcon.vue";
 import SpadeIcon from "../../components/SpadeIcon.vue";
 import ClubIcon from "../../components/ClubIcon.vue";
 import Hand from "../../components/Hand.vue";
-import { useActiveRound } from "../../api";
+import YourTurn from "../../components/YourTurn.vue";
+import CurrentBet from "./CurrentBet.vue";
+import { useActiveRound, useActiveStack, usePlaceBetMutation } from "../../api";
 
 export default defineComponent({
   components: {
@@ -80,9 +86,17 @@ export default defineComponent({
     SpadeIcon,
     ClubIcon,
     Hand,
+    YourTurn,
+    CurrentBet,
   },
   setup() {
     const activeRound = useActiveRound();
+    const activeStack = useActiveStack();
+
+    const lastAction = computed(() => {
+      const actions = activeStack.value.actions.items;
+      return actions[actions.length - 1];
+    });
 
     const mode = ref(null);
 
@@ -90,10 +104,37 @@ export default defineComponent({
       mode.value = value;
     }
 
+    const placeBetMutation = usePlaceBetMutation();
+
+    function placeBet(increment: string) {
+      const lastValue = parseInt(lastAction.value.value.split(":")[1]);
+      placeBetMutation.mutate(
+        {
+          roundID: activeRound.value.id,
+          value: mode.value + ":" + (lastValue + increment),
+        },
+        {
+          onSuccess: () => {
+            console.log("success");
+          },
+          onError: (err) => {
+            console.log(err);
+          },
+        }
+      );
+    }
+
+    function skip() {
+      console.log("skip");
+    }
+
     return reactive({
       mode,
       onClickMode,
       activeRound,
+      placeBet,
+      skip,
+      lastAction,
     });
   },
 });

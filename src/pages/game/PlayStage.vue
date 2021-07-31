@@ -12,12 +12,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onBeforeUnmount, reactive } from "vue";
+import { computed, defineComponent, reactive } from "vue";
 import {
   useActiveRound,
   useActiveStack,
   useClearStackMutation,
-  useGameSubscription,
   useNewRoundMutation,
 } from "../../api";
 import AppHeader from "../../components/AppHeader.vue";
@@ -45,8 +44,6 @@ export default defineComponent({
     const activeRound = useActiveRound();
     const activeStack = useActiveStack();
 
-    console.log(activeRound);
-
     const isClearable = computed(
       () =>
         activeStack?.value?.actions?.items?.length >= activeStack?.value?.size
@@ -66,12 +63,6 @@ export default defineComponent({
         roundID: activeRound.value.id,
       });
     }
-
-    const subscription = useGameSubscription(gameId.value);
-
-    onBeforeUnmount(() => {
-      subscription.unsubscribe();
-    });
 
     return reactive({
       activeRound,

@@ -9,5 +9,6 @@ export * from "./mutations/UserMutations";
 export * from "./mutations/PlayCardMutation";
 export * from "./mutations/ClearStackMutation";
 export * from "./mutations/NewRoundMutation";
+export * from "./mutations/PlaceBetMutation";
 
 export * from "./subscriptions/GameSubscription";

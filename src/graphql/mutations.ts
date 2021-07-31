@@ -457,6 +457,71 @@ export const newRound = /* GraphQL */ `
     }
   }
 `;
+export const placeBet = /* GraphQL */ `
+  mutation PlaceBet($roundID: String!, $value: String!) {
+    placeBet(roundID: $roundID, value: $value) {
+      id
+      private
+      activeRoundID
+      status
+      name
+      createdAt
+      updatedAt
+      Teams {
+        items {
+          id
+          gameID
+          name
+          color
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        activeStackID
+        turnSequence
+        turn
+        mode
+        betPoints
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+        stacks {
+          nextToken
+        }
+        activeStack {
+          id
+          roundID
+          size
+          winnerID
+          createdAt
+          updatedAt
+        }
+      }
+      Rounds {
+        items {
+          id
+          gameID
+          status
+          activeStackID
+          turnSequence
+          turn
+          mode
+          betPoints
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const createTeam = /* GraphQL */ `
   mutation CreateTeam(
     $input: CreateTeamInput!

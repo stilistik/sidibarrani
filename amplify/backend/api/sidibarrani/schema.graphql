@@ -67,6 +67,7 @@ type Action
   type: ActionType!
   stackID: ID
   userID: ID
+  user: User @connection(fields: ["userID"])
   value: String
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
@@ -195,6 +196,10 @@ type Mutation {
   newRound(gameID: String!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
+
+  placeBet(roundID: String!, value: String!): Game!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
 }
 
 type Subscription {
@@ -206,6 +211,7 @@ type Subscription {
         "playCard"
         "clearStack"
         "newRound"
+        "placeBet"
       ]
     )
 }

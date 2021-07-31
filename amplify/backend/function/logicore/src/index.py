@@ -1,3 +1,4 @@
+from resolvers.place_bet import place_bet
 from resolvers.play_card import play_card
 from resolvers.start_game import start_game, new_round
 from resolvers.create_game import create_game
@@ -15,6 +16,7 @@ resolvers = {
         'playCard': play_card,
         'clearStack': clear_stack,
         'newRound': new_round,
+        'placeBet': place_bet,
     },
     'Query': {
         'getUserHand': get_user_hand,
