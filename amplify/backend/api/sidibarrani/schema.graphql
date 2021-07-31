@@ -20,6 +20,16 @@ enum ActionType {
   SKIP
 }
 
+enum RoundMode {
+  TOP_DOWN
+  BOTTOM_UP
+  SLALOM
+  TRUMP_D
+  TRUMP_H
+  TRUMP_C
+  TRUMP_S
+}
+
 ##########################
 # MODELS
 ##########################
@@ -88,6 +98,7 @@ type Round
   activeStack: Stack @connection(fields: ["activeStackID"])
   turnSequence: [ID]
   turn: ID
+  mode: RoundMode
   betPoints: Int
 }
 
