@@ -28,7 +28,15 @@ export const gameFragment = /* GraphQL */ `
         size
         winner {
           id
-          username
+          user {
+            id
+            username
+          }
+          team {
+            id
+            name
+            color
+          }
         }
         actions(sortDirection: ASC) {
           items {

@@ -1,3 +1,4 @@
+from models.team import TeamModel
 from models.stack import StackModel, ActionType
 from models.round import RoundModel
 from models.hand import HandModel
@@ -22,7 +23,7 @@ def get_suit(value):
     return value[-1]
 
 
-def set_winner(stack):
+def set_winner(round, stack):
     actions = StackModel.get_actions(stack['id'])
     suit_played = get_suit(actions[0]['value'])
     winner = actions[0]
@@ -35,7 +36,12 @@ def set_winner(stack):
             if rank > get_rank(winner['value']):
                 winner = action
 
-    return winner
+    team_users = TeamModel.find_team_users_by_game(round['gameID'])
+    winner_team_user = next(
+        (team_user for team_user in team_users if team_user['userID'] == winner['userID']), None)
+
+    StackModel.set_winner(stack['id'], winner_team_user['id'])
+    RoundModel.set_turn(round['id'], winner['userID'])
 
 
 def has_suit(hand, suit):
@@ -79,8 +85,6 @@ def play_card(event):
 
     stack_complete = StackModel.is_complete(stack['id'])
     if stack_complete:
-        winner = set_winner(stack)
-        StackModel.set_winner(stack['id'], winner['userID'])
-        RoundModel.set_turn(round_id, winner['userID'])
+        set_winner(round, stack)
 
     return GameModel.find_by_id(round['gameID'])

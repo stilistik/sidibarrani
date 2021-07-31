@@ -1,13 +1,13 @@
 <template>
   <div
-    :style="`transform-origin:center; transform: scale(${scale});`"
     class="absolute top-1/3 w-full flex justify-center z-10 pointer-events-none"
   >
-    <h3
+    <div
+      :style="`transform-origin:center; transform: scale(${scale});`"
       class="
-        text-4xl
-        font-black
-        text-primary
+        flex
+        items-center
+        gap-3
         bg-gray-800
         py-3
         px-5
@@ -15,8 +15,16 @@
         shadow-2xl
       "
     >
-      {{ message }}
-    </h3>
+      <span
+        style="width: 30px; height: 30px"
+        class="rounded-full"
+        :class="`bg-${winnerColor}-400`"
+      />
+
+      <h3 class="text-4xl font-black text-primary">
+        {{ message }}
+      </h3>
+    </div>
   </div>
 </template>
 
@@ -38,10 +46,13 @@ export default defineComponent({
     const stackWinner = computed(() => activeStack?.value?.winner);
     const hasWinner = computed(() => stackWinner?.value && true);
     const message = computed(() =>
-      stackWinner?.value?.id === user?.value?.id
+      stackWinner?.value?.user?.id === user?.value?.id
         ? "You win!"
-        : `${stackWinner?.value?.username} wins!`
+        : `${stackWinner?.value?.user?.username} wins!`
     );
+    const winnerColor = computed(() => {
+      return stackWinner?.value?.team?.color;
+    });
 
     watchEffect(() => {
       if (hasWinner.value) {
@@ -58,6 +69,7 @@ export default defineComponent({
 
     return reactive({
       message,
+      winnerColor,
       scale,
     });
   },

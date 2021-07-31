@@ -2,6 +2,69 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onUpdateGameState = /* GraphQL */ `
+  subscription OnUpdateGameState($id: ID!) {
+    onUpdateGameState(id: $id) {
+      id
+      private
+      activeRoundID
+      status
+      name
+      createdAt
+      updatedAt
+      Teams {
+        items {
+          id
+          gameID
+          name
+          color
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        activeStackID
+        turnSequence
+        turn
+        betPoints
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+        stacks {
+          nextToken
+        }
+        activeStack {
+          id
+          roundID
+          size
+          winnerID
+          createdAt
+          updatedAt
+        }
+      }
+      Rounds {
+        items {
+          id
+          gameID
+          status
+          activeStackID
+          turnSequence
+          turn
+          betPoints
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
 export const onCreateTeam = /* GraphQL */ `
   subscription OnCreateTeam {
     onCreateTeam {
@@ -82,6 +145,9 @@ export const onCreateHand = /* GraphQL */ `
         gameID
         status
         activeStackID
+        turnSequence
+        turn
+        betPoints
         createdAt
         updatedAt
         hands {
@@ -93,6 +159,8 @@ export const onCreateHand = /* GraphQL */ `
         activeStack {
           id
           roundID
+          size
+          winnerID
           createdAt
           updatedAt
         }
@@ -125,6 +193,9 @@ export const onUpdateHand = /* GraphQL */ `
         gameID
         status
         activeStackID
+        turnSequence
+        turn
+        betPoints
         createdAt
         updatedAt
         hands {
@@ -136,6 +207,8 @@ export const onUpdateHand = /* GraphQL */ `
         activeStack {
           id
           roundID
+          size
+          winnerID
           createdAt
           updatedAt
         }
@@ -168,6 +241,9 @@ export const onDeleteHand = /* GraphQL */ `
         gameID
         status
         activeStackID
+        turnSequence
+        turn
+        betPoints
         createdAt
         updatedAt
         hands {
@@ -179,6 +255,8 @@ export const onDeleteHand = /* GraphQL */ `
         activeStack {
           id
           roundID
+          size
+          winnerID
           createdAt
           updatedAt
         }
@@ -241,6 +319,8 @@ export const onCreateStack = /* GraphQL */ `
     onCreateStack {
       id
       roundID
+      size
+      winnerID
       createdAt
       updatedAt
       actions {
@@ -260,6 +340,9 @@ export const onCreateStack = /* GraphQL */ `
         gameID
         status
         activeStackID
+        turnSequence
+        turn
+        betPoints
         createdAt
         updatedAt
         hands {
@@ -271,6 +354,31 @@ export const onCreateStack = /* GraphQL */ `
         activeStack {
           id
           roundID
+          size
+          winnerID
+          createdAt
+          updatedAt
+        }
+      }
+      winner {
+        id
+        teamID
+        userID
+        createdAt
+        updatedAt
+        team {
+          id
+          gameID
+          name
+          color
+          createdAt
+          updatedAt
+        }
+        user {
+          id
+          email
+          username
+          lastOnline
           createdAt
           updatedAt
         }
@@ -283,6 +391,8 @@ export const onUpdateStack = /* GraphQL */ `
     onUpdateStack {
       id
       roundID
+      size
+      winnerID
       createdAt
       updatedAt
       actions {
@@ -302,6 +412,9 @@ export const onUpdateStack = /* GraphQL */ `
         gameID
         status
         activeStackID
+        turnSequence
+        turn
+        betPoints
         createdAt
         updatedAt
         hands {
@@ -313,6 +426,31 @@ export const onUpdateStack = /* GraphQL */ `
         activeStack {
           id
           roundID
+          size
+          winnerID
+          createdAt
+          updatedAt
+        }
+      }
+      winner {
+        id
+        teamID
+        userID
+        createdAt
+        updatedAt
+        team {
+          id
+          gameID
+          name
+          color
+          createdAt
+          updatedAt
+        }
+        user {
+          id
+          email
+          username
+          lastOnline
           createdAt
           updatedAt
         }
@@ -325,6 +463,8 @@ export const onDeleteStack = /* GraphQL */ `
     onDeleteStack {
       id
       roundID
+      size
+      winnerID
       createdAt
       updatedAt
       actions {
@@ -344,6 +484,9 @@ export const onDeleteStack = /* GraphQL */ `
         gameID
         status
         activeStackID
+        turnSequence
+        turn
+        betPoints
         createdAt
         updatedAt
         hands {
@@ -355,6 +498,31 @@ export const onDeleteStack = /* GraphQL */ `
         activeStack {
           id
           roundID
+          size
+          winnerID
+          createdAt
+          updatedAt
+        }
+      }
+      winner {
+        id
+        teamID
+        userID
+        createdAt
+        updatedAt
+        team {
+          id
+          gameID
+          name
+          color
+          createdAt
+          updatedAt
+        }
+        user {
+          id
+          email
+          username
+          lastOnline
           createdAt
           updatedAt
         }
@@ -369,6 +537,9 @@ export const onCreateRound = /* GraphQL */ `
       gameID
       status
       activeStackID
+      turnSequence
+      turn
+      betPoints
       createdAt
       updatedAt
       hands {
@@ -386,6 +557,8 @@ export const onCreateRound = /* GraphQL */ `
         items {
           id
           roundID
+          size
+          winnerID
           createdAt
           updatedAt
         }
@@ -394,6 +567,8 @@ export const onCreateRound = /* GraphQL */ `
       activeStack {
         id
         roundID
+        size
+        winnerID
         createdAt
         updatedAt
         actions {
@@ -404,6 +579,16 @@ export const onCreateRound = /* GraphQL */ `
           gameID
           status
           activeStackID
+          turnSequence
+          turn
+          betPoints
+          createdAt
+          updatedAt
+        }
+        winner {
+          id
+          teamID
+          userID
           createdAt
           updatedAt
         }
@@ -418,6 +603,9 @@ export const onUpdateRound = /* GraphQL */ `
       gameID
       status
       activeStackID
+      turnSequence
+      turn
+      betPoints
       createdAt
       updatedAt
       hands {
@@ -435,6 +623,8 @@ export const onUpdateRound = /* GraphQL */ `
         items {
           id
           roundID
+          size
+          winnerID
           createdAt
           updatedAt
         }
@@ -443,6 +633,8 @@ export const onUpdateRound = /* GraphQL */ `
       activeStack {
         id
         roundID
+        size
+        winnerID
         createdAt
         updatedAt
         actions {
@@ -453,6 +645,16 @@ export const onUpdateRound = /* GraphQL */ `
           gameID
           status
           activeStackID
+          turnSequence
+          turn
+          betPoints
+          createdAt
+          updatedAt
+        }
+        winner {
+          id
+          teamID
+          userID
           createdAt
           updatedAt
         }
@@ -467,6 +669,9 @@ export const onDeleteRound = /* GraphQL */ `
       gameID
       status
       activeStackID
+      turnSequence
+      turn
+      betPoints
       createdAt
       updatedAt
       hands {
@@ -484,6 +689,8 @@ export const onDeleteRound = /* GraphQL */ `
         items {
           id
           roundID
+          size
+          winnerID
           createdAt
           updatedAt
         }
@@ -492,6 +699,8 @@ export const onDeleteRound = /* GraphQL */ `
       activeStack {
         id
         roundID
+        size
+        winnerID
         createdAt
         updatedAt
         actions {
@@ -502,6 +711,16 @@ export const onDeleteRound = /* GraphQL */ `
           gameID
           status
           activeStackID
+          turnSequence
+          turn
+          betPoints
+          createdAt
+          updatedAt
+        }
+        winner {
+          id
+          teamID
+          userID
           createdAt
           updatedAt
         }
@@ -535,6 +754,9 @@ export const onCreateGame = /* GraphQL */ `
         gameID
         status
         activeStackID
+        turnSequence
+        turn
+        betPoints
         createdAt
         updatedAt
         hands {
@@ -546,6 +768,8 @@ export const onCreateGame = /* GraphQL */ `
         activeStack {
           id
           roundID
+          size
+          winnerID
           createdAt
           updatedAt
         }
@@ -556,6 +780,9 @@ export const onCreateGame = /* GraphQL */ `
           gameID
           status
           activeStackID
+          turnSequence
+          turn
+          betPoints
           createdAt
           updatedAt
         }
@@ -590,6 +817,9 @@ export const onUpdateGame = /* GraphQL */ `
         gameID
         status
         activeStackID
+        turnSequence
+        turn
+        betPoints
         createdAt
         updatedAt
         hands {
@@ -601,6 +831,8 @@ export const onUpdateGame = /* GraphQL */ `
         activeStack {
           id
           roundID
+          size
+          winnerID
           createdAt
           updatedAt
         }
@@ -611,6 +843,9 @@ export const onUpdateGame = /* GraphQL */ `
           gameID
           status
           activeStackID
+          turnSequence
+          turn
+          betPoints
           createdAt
           updatedAt
         }
@@ -645,6 +880,9 @@ export const onDeleteGame = /* GraphQL */ `
         gameID
         status
         activeStackID
+        turnSequence
+        turn
+        betPoints
         createdAt
         updatedAt
         hands {
@@ -656,6 +894,8 @@ export const onDeleteGame = /* GraphQL */ `
         activeStack {
           id
           roundID
+          size
+          winnerID
           createdAt
           updatedAt
         }
@@ -666,6 +906,9 @@ export const onDeleteGame = /* GraphQL */ `
           gameID
           status
           activeStackID
+          turnSequence
+          turn
+          betPoints
           createdAt
           updatedAt
         }
