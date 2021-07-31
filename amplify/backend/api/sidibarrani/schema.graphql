@@ -23,7 +23,8 @@ enum ActionType {
 enum RoundMode {
   TOP_DOWN
   BOTTOM_UP
-  SLALOM
+  SLALOM_BOTTOM
+  SLALOM_TOP
   TRUMP_D
   TRUMP_H
   TRUMP_C

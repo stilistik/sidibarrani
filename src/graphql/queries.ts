@@ -18,6 +18,7 @@ export const getUserHand = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -110,6 +111,7 @@ export const getHand = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -163,6 +165,7 @@ export const listHands = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -241,6 +244,7 @@ export const getStack = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -309,6 +313,7 @@ export const listStacks = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -334,6 +339,7 @@ export const getRound = /* GraphQL */ `
       activeStackID
       turnSequence
       turn
+      mode
       betPoints
       createdAt
       updatedAt
@@ -376,6 +382,7 @@ export const getRound = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -405,6 +412,7 @@ export const listRounds = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -455,6 +463,7 @@ export const getGame = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -481,6 +490,7 @@ export const getGame = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -515,6 +525,7 @@ export const listGames = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt

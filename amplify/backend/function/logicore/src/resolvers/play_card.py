@@ -1,6 +1,6 @@
 from models.team import TeamModel
 from models.stack import StackModel, ActionType
-from models.round import RoundModel
+from models.round import RoundModel, RoundMode
 from models.hand import HandModel
 from models.game import GameModel
 
@@ -23,8 +23,7 @@ def get_suit(value):
     return value[-1]
 
 
-def set_winner(round, stack):
-    actions = StackModel.get_actions(stack['id'])
+def get_winner_top_down(actions):
     suit_played = get_suit(actions[0]['value'])
     winner = actions[0]
 
@@ -35,6 +34,69 @@ def set_winner(round, stack):
         if suit == suit_played:
             if rank > get_rank(winner['value']):
                 winner = action
+
+    return winner
+
+
+def get_winner_bottom_up(actions):
+    suit_played = get_suit(actions[0]['value'])
+    winner = actions[0]
+
+    for action in actions:
+        suit = get_suit(action['value'])
+        rank = get_rank(action['value'])
+
+        if suit == suit_played:
+            if rank < get_rank(winner['value']):
+                winner = action
+
+    return winner
+
+
+def get_winner_trump(actions, trump_suit):
+    suit_played = get_suit(actions[0]['value'])
+    winner = actions[0]
+
+    for action in actions:
+        suit = get_suit(action['value'])
+        rank = get_rank(action['value'])
+
+        if suit == trump_suit and get_suit(winner['value']) == trump_suit:
+            if rank > get_rank(winner['value']):
+                winner = action
+
+        elif suit == suit_played and get_suit(winner['value']) != trump_suit:
+            if rank > get_rank(winner['value']):
+                winner = action
+
+    return winner
+
+
+def set_winner(round, stack):
+    actions = StackModel.get_actions(stack['id'])
+    mode = round.get('mode', RoundMode.TOP_DOWN.name)
+
+    winner = None
+    if mode is RoundMode.TOP_DOWN.name:
+        winner = get_winner_top_down(actions)
+    elif mode is RoundMode.BOTTOM_UP.name:
+        winner = get_winner_bottom_up(actions)
+    elif mode is RoundMode.TRUMP_C.name:
+        winner = get_winner_trump(actions, 'C')
+    elif mode is RoundMode.TRUMP_D.name:
+        winner = get_winner_trump(actions, 'D')
+    elif mode is RoundMode.TRUMP_H.name:
+        winner = get_winner_trump(actions, 'H')
+    elif mode is RoundMode.TRUMP_S.name:
+        winner = get_winner_trump(actions, 'S')
+    elif mode is RoundMode.SLALOM_TOP.name:
+        winner = get_winner_top_down(actions)
+        RoundModel.set_mode(round['id'], RoundMode.SLALOM_BOTTOM)
+    elif mode is RoundMode.SLALOM_BOTTOM.name:
+        winner = get_winner_bottom_up(actions)
+        RoundModel.set_mode(round['id'], RoundMode.SLALOM_TOP)
+    else:
+        raise Exception('Unsupported round mode {}'.format(mode))
 
     team_users = TeamModel.find_team_users_by_game(round['gameID'])
     winner_team_user = next(

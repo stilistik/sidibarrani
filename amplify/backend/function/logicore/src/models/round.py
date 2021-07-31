@@ -16,6 +16,17 @@ class RoundStatus(Enum):
     PLAY = 'PLAY'
 
 
+class RoundMode(Enum):
+    TOP_DOWN = 'TOP_DOWN',
+    BOTTOM_UP = 'BOTTOM_UP',
+    SLALOM_TOP = 'SLALOM_TOP',
+    SLALOM_BOTTOM = 'SLALOM_BOTTOM',
+    TRUMP_D = 'TRUMP_D',
+    TRUMP_H = 'TRUMP_H',
+    TRUMP_C = 'TRUMP_C',
+    TRUMP_S = 'TRUMP_S',
+
+
 class RoundModel:
     @staticmethod
     def create(game_id):
@@ -98,6 +109,7 @@ class RoundModel:
         )
         return response['Attributes']
 
+    @staticmethod
     def next_turn(round_id):
         date_now = get_iso_date_string()
         response = round_table.get_item(
@@ -126,6 +138,7 @@ class RoundModel:
         )
         return response['Attributes']
 
+    @staticmethod
     def set_turn_sequence(round_id, user_ids):
         date_now = get_iso_date_string()
         response = round_table.update_item(
@@ -135,6 +148,25 @@ class RoundModel:
             AttributeUpdates={
                 'turnSequence': {
                     'Value': user_ids
+                },
+                'updatedAt': {
+                    'Value': date_now
+                }
+            },
+            ReturnValues="ALL_NEW"
+        )
+        return response['Attributes']
+
+    @staticmethod
+    def set_mode(round_id, mode: RoundMode):
+        date_now = get_iso_date_string()
+        response = round_table.update_item(
+            Key={
+                'id': round_id,
+            },
+            AttributeUpdates={
+                'mode': {
+                    'Value': mode.name
                 },
                 'updatedAt': {
                     'Value': date_now

@@ -700,6 +700,17 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
+          "name" : "mode",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "ENUM",
+            "name" : "RoundMode",
+            "ofType" : null
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "betPoints",
           "description" : null,
           "args" : [ ],
@@ -887,6 +898,55 @@
           "deprecationReason" : null
         }, {
           "name" : "PLAY",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        } ],
+        "possibleTypes" : null
+      }, {
+        "kind" : "ENUM",
+        "name" : "RoundMode",
+        "description" : null,
+        "fields" : null,
+        "inputFields" : null,
+        "interfaces" : null,
+        "enumValues" : [ {
+          "name" : "TOP_DOWN",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "BOTTOM_UP",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "SLALOM_BOTTOM",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "SLALOM_TOP",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "TRUMP_D",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "TRUMP_H",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "TRUMP_C",
+          "description" : null,
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
+          "name" : "TRUMP_S",
           "description" : null,
           "isDeprecated" : false,
           "deprecationReason" : null
@@ -2998,6 +3058,15 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "mode",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelRoundModeInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "betPoints",
           "description" : null,
           "type" : {
@@ -3065,6 +3134,33 @@
           "type" : {
             "kind" : "ENUM",
             "name" : "RoundStatus",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        } ],
+        "interfaces" : null,
+        "enumValues" : null,
+        "possibleTypes" : null
+      }, {
+        "kind" : "INPUT_OBJECT",
+        "name" : "ModelRoundModeInput",
+        "description" : null,
+        "fields" : null,
+        "inputFields" : [ {
+          "name" : "eq",
+          "description" : null,
+          "type" : {
+            "kind" : "ENUM",
+            "name" : "RoundMode",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "ne",
+          "description" : null,
+          "type" : {
+            "kind" : "ENUM",
+            "name" : "RoundMode",
             "ofType" : null
           },
           "defaultValue" : null
@@ -5676,6 +5772,15 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "mode",
+          "description" : null,
+          "type" : {
+            "kind" : "ENUM",
+            "name" : "RoundMode",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
           "name" : "betPoints",
           "description" : null,
           "type" : {
@@ -5735,6 +5840,15 @@
           "type" : {
             "kind" : "INPUT_OBJECT",
             "name" : "ModelIDInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "mode",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "ModelRoundModeInput",
             "ofType" : null
           },
           "defaultValue" : null
@@ -5850,6 +5964,15 @@
           "type" : {
             "kind" : "SCALAR",
             "name" : "ID",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "mode",
+          "description" : null,
+          "type" : {
+            "kind" : "ENUM",
+            "name" : "RoundMode",
             "ofType" : null
           },
           "defaultValue" : null
@@ -7746,6 +7869,14 @@
         "onFragment" : false,
         "onField" : false
       }, {
+        "name" : "aws_iam",
+        "description" : "Tells the service this field/object has access authorized by sigv4 signing.",
+        "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
+        "args" : [ ],
+        "onOperation" : false,
+        "onFragment" : false,
+        "onField" : false
+      }, {
         "name" : "deprecated",
         "description" : null,
         "locations" : [ "FIELD_DEFINITION", "ENUM_VALUE" ],
@@ -7759,14 +7890,6 @@
           },
           "defaultValue" : "\"No longer supported\""
         } ],
-        "onOperation" : false,
-        "onFragment" : false,
-        "onField" : false
-      }, {
-        "name" : "aws_iam",
-        "description" : "Tells the service this field/object has access authorized by sigv4 signing.",
-        "locations" : [ "OBJECT", "FIELD_DEFINITION" ],
-        "args" : [ ],
         "onOperation" : false,
         "onFragment" : false,
         "onField" : false

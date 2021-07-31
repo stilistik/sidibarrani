@@ -30,6 +30,7 @@ export const createNewGame = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -56,6 +57,7 @@ export const createNewGame = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -93,6 +95,7 @@ export const joinTeam = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -119,6 +122,7 @@ export const joinTeam = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -156,6 +160,7 @@ export const leaveGame = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -182,6 +187,7 @@ export const leaveGame = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -219,6 +225,7 @@ export const startGame = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -245,6 +252,7 @@ export const startGame = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -282,6 +290,7 @@ export const playCard = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -308,6 +317,7 @@ export const playCard = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -345,6 +355,7 @@ export const clearStack = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -371,6 +382,7 @@ export const clearStack = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -408,6 +420,7 @@ export const newRound = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -434,6 +447,7 @@ export const newRound = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -537,6 +551,7 @@ export const createHand = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -588,6 +603,7 @@ export const updateHand = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -639,6 +655,7 @@ export const deleteHand = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -750,6 +767,7 @@ export const createStack = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -825,6 +843,7 @@ export const updateStack = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -900,6 +919,7 @@ export const deleteStack = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -956,6 +976,7 @@ export const createRound = /* GraphQL */ `
       activeStackID
       turnSequence
       turn
+      mode
       betPoints
       createdAt
       updatedAt
@@ -998,6 +1019,7 @@ export const createRound = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -1025,6 +1047,7 @@ export const updateRound = /* GraphQL */ `
       activeStackID
       turnSequence
       turn
+      mode
       betPoints
       createdAt
       updatedAt
@@ -1067,6 +1090,7 @@ export const updateRound = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -1094,6 +1118,7 @@ export const deleteRound = /* GraphQL */ `
       activeStackID
       turnSequence
       turn
+      mode
       betPoints
       createdAt
       updatedAt
@@ -1136,6 +1161,7 @@ export const deleteRound = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -1182,6 +1208,7 @@ export const createGame = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -1208,6 +1235,7 @@ export const createGame = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -1248,6 +1276,7 @@ export const updateGame = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -1274,6 +1303,7 @@ export const updateGame = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
@@ -1314,6 +1344,7 @@ export const deleteGame = /* GraphQL */ `
         activeStackID
         turnSequence
         turn
+        mode
         betPoints
         createdAt
         updatedAt
@@ -1340,6 +1371,7 @@ export const deleteGame = /* GraphQL */ `
           activeStackID
           turnSequence
           turn
+          mode
           betPoints
           createdAt
           updatedAt
