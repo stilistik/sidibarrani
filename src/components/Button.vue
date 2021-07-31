@@ -18,20 +18,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, reactive } from "vue";
 export default defineComponent({
   name: "Button",
   props: {
     size: String,
+    active: Boolean,
   },
-  computed: {
-    classes: function () {
-      if (this.$props.size === "large") {
-        return "text-4xl py-4 px-10 rounded-xl";
+  setup(props) {
+    const classes = computed(() => {
+      let classes = props.active
+        ? "border-2 border-primary text-primary shadow-primary "
+        : "border-2 border-transparent ";
+
+      if (props.size === "large") {
+        classes += "text-4xl py-4 px-10 rounded-xl";
       } else {
-        return "text-xl py-2 px-5 rounded-lg";
+        classes += "text-xl py-2 px-5 rounded-lg";
       }
-    },
+      return classes;
+    });
+
+    return reactive({
+      classes,
+    });
   },
 });
 </script>
