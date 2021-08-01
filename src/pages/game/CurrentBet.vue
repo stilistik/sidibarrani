@@ -1,5 +1,6 @@
 <template>
   <div
+    :style="`transform-origin:center; transform: scale(${scale});`"
     class="
       font-black
       text-primary
@@ -8,9 +9,12 @@
       px-8
       rounded-full
       shadow-2xl
+      flex
+      items-center
+      gap-3
     "
   >
-    <div class="flex gap-3 text-4xl">
+    <div class="text-4xl">
       <DiamondIcon v-if="mode === 'TRUMP_D'" />
       <SpadeIcon v-if="mode === 'TRUMP_S'" />
       <HeartIcon v-if="mode === 'TRUMP_H'" />
@@ -26,18 +30,21 @@
         style="width: 38"
       />
       <Icon v-if="mode === 'SLALOM'" icon="arrows-alt-v" style="width: 38" />
-      <span>{{ value }}</span>
     </div>
-    <div class="flex justify-center">by {{ action?.user?.username }}</div>
+    <div>
+      <span class="text-3xl">{{ value }}</span>
+      <div class="flex justify-center">by {{ action?.user?.username }}</div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, reactive, ref, watchEffect } from "vue";
 import DiamondIcon from "../../components/DiamondIcon.vue";
 import HeartIcon from "../../components/HeartIcon.vue";
 import SpadeIcon from "../../components/SpadeIcon.vue";
 import ClubIcon from "../../components/ClubIcon.vue";
+import { spring } from "../../spring";
 
 export default defineComponent({
   components: {
@@ -53,9 +60,22 @@ export default defineComponent({
     const value = computed(() => props.action.value.split(":")[1]);
     const mode = computed(() => props.action.value.split(":")[0]);
 
+    const springProps = reactive({ damping: 8, stiffness: 170 });
+    const scale = spring(1, springProps);
+
+    const prevValue = ref(null);
+
+    watchEffect(() => {
+      if (value.value !== prevValue.value) scale.value = 0.5;
+      setTimeout(() => {
+        scale.value = 1;
+      }, 300);
+    });
+
     return reactive({
       value,
       mode,
+      scale,
     });
   },
 });

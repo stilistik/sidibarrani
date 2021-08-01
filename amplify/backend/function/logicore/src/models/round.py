@@ -61,7 +61,7 @@ class RoundModel:
             },
             AttributeUpdates={
                 'status': {
-                    'Value': status
+                    'Value': status.name
                 },
                 'updatedAt': {
                     'Value': date_now

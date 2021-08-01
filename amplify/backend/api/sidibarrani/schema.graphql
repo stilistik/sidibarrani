@@ -200,6 +200,10 @@ type Mutation {
   placeBet(roundID: String!, value: String!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
+
+  skipBet(roundID: String!): Game!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
 }
 
 type Subscription {
@@ -212,6 +216,7 @@ type Subscription {
         "clearStack"
         "newRound"
         "placeBet"
+        "skipBet"
       ]
     )
 }

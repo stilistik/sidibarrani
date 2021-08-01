@@ -52,7 +52,7 @@
       </Button>
     </div>
     <div class="w-full flex justify-center py-20">
-      <CurrentBet :action="lastAction" />
+      <CurrentBet v-if="Boolean(lastBet)" :action="lastBet" />
     </div>
     <div class="flex w-full justify-center gap-3 py-20">
       <Button :size="'large'" @click="skip">Skip</Button>
@@ -76,7 +76,12 @@ import ClubIcon from "../../components/ClubIcon.vue";
 import Hand from "../../components/Hand.vue";
 import YourTurn from "../../components/YourTurn.vue";
 import CurrentBet from "./CurrentBet.vue";
-import { useActiveRound, useActiveStack, usePlaceBetMutation } from "../../api";
+import {
+  useActiveRound,
+  useActiveStack,
+  usePlaceBetMutation,
+  useSkipBetMutation,
+} from "../../api";
 
 export default defineComponent({
   components: {
@@ -97,6 +102,11 @@ export default defineComponent({
       const actions = activeStack.value.actions.items;
       return actions[actions.length - 1];
     });
+    const lastBet = computed(() => {
+      const actions = activeStack.value.actions.items;
+      const reversed = actions.slice().reverse();
+      return reversed.find((el: any) => el.value !== null);
+    });
 
     const mode = ref(null);
 
@@ -105,27 +115,22 @@ export default defineComponent({
     }
 
     const placeBetMutation = usePlaceBetMutation();
+    const skipBetMutation = useSkipBetMutation();
 
     function placeBet(increment: string) {
-      const lastValue = parseInt(lastAction.value.value.split(":")[1]);
-      placeBetMutation.mutate(
-        {
-          roundID: activeRound.value.id,
-          value: mode.value + ":" + (lastValue + increment),
-        },
-        {
-          onSuccess: () => {
-            console.log("success");
-          },
-          onError: (err) => {
-            console.log(err);
-          },
-        }
-      );
+      const lastValue = lastAction.value
+        ? parseInt(lastAction.value.value.split(":")[1])
+        : 0;
+      placeBetMutation.mutate({
+        roundID: activeRound.value.id,
+        value: mode.value + ":" + (lastValue + increment),
+      });
     }
 
     function skip() {
-      console.log("skip");
+      skipBetMutation.mutate({
+        roundID: activeRound.value.id,
+      });
     }
 
     return reactive({
@@ -135,6 +140,7 @@ export default defineComponent({
       placeBet,
       skip,
       lastAction,
+      lastBet,
     });
   },
 });
