@@ -4,6 +4,10 @@ from models.game import GameModel
 from models.team import TeamModel
 
 
+def round_to_base(x, base=10):
+    return base * round(x/base)
+
+
 def place_bet(event):
     round_id = event['arguments'].get('roundID')
     value = event['arguments'].get('value')
@@ -15,8 +19,21 @@ def place_bet(event):
     if round['turn'] != user_id:
         raise Exception("It's not your turn to place a bet")
 
-    StackModel.add_action(ActionType.BET.name, user_id, stack['id'], value)
-    RoundModel.next_turn(round_id)
+    [mode, amount_str] = value.split(":")
+    amount = int(amount_str)
+    
+    if amount >= 157:
+        amount = 157
+        StackModel.add_action(ActionType.BET.name, user_id,
+                              stack['id'], '{mode}:{amount}'.format(mode=mode, amount=amount))
+        new_stack = StackModel.create(round_id, stack['size'])
+        RoundModel.set_active_stack(round_id, new_stack['id'])
+        RoundModel.set_round_status(round_id, RoundStatus.PLAY)
+    else:
+        amount = round_to_base(amount, 10)
+        StackModel.add_action(ActionType.BET.name, user_id,
+                              stack['id'], '{mode}:{amount}'.format(mode=mode, amount=amount))
+        RoundModel.next_turn(round_id)
 
     return GameModel.find_by_id(round['gameID'])
 
