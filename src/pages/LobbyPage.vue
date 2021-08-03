@@ -30,7 +30,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeUnmount,
+  reactive,
+  watchEffect,
+} from "vue";
 import PageContainer from "../components/PageContainer.vue";
 import AppHeader from "../components/AppHeader.vue";
 import PageTitle from "../components/PageTitle.vue";
@@ -38,7 +44,11 @@ import Loading from "../components/Loading.vue";
 import Team from "../components/Team.vue";
 import StartGame from "../components/StartGame.vue";
 import CopyJoinLink from "../components/CopyJoinLink.vue";
-import { useLeaveTeamMutation, useGameQuery } from "../api";
+import {
+  useLeaveTeamMutation,
+  useGameQuery,
+  useGameSubscription,
+} from "../api";
 import router from "../router";
 import { useQueryClient } from "vue-query";
 import { Message } from "../utils/Message";
@@ -72,8 +82,24 @@ export default defineComponent({
       }
     }
 
+    const subscription = useGameSubscription(gameId.value);
+
+    onBeforeUnmount(() => {
+      subscription.unsubscribe();
+    });
+
+    const { isLoading, isError, data } = useGameQuery(gameId);
+
+    watchEffect(() => {
+      if (data?.value?.status === "STARTED") {
+        router.push({ path: "game", query: { gameId: gameId.value } });
+      }
+    });
+
     return reactive({
-      ...useGameQuery(gameId),
+      isLoading,
+      isError,
+      data,
       gameId,
       qclient,
       leaveGame,
