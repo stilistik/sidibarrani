@@ -1,5 +1,6 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { useMutation } from "vue-query";
+import { gameFragment } from "../fragments/GameFragment";
 
 const createNewGame = /* GraphQL */ `
   mutation CreateNewGame($input: CreateNewGameInput) {
@@ -22,9 +23,10 @@ export const useCreateNewGameMutation = () => {
 const startGame = /* GraphQL */ `
   mutation StartGame($gameID: String!) {
     startGame(gameID: $gameID) {
-      id
+      ...GameFragment
     }
   }
+  ${gameFragment}
 `;
 
 export const useStartGameMutation = () => {
@@ -39,8 +41,11 @@ export const useStartGameMutation = () => {
 
 const leaveGame = /* GraphQL */ `
   mutation LeaveGame($input: LeaveGameInput!) {
-    leaveGame(input: $input)
+    leaveGame(input: $input) {
+      ...GameFragment
+    }
   }
+  ${gameFragment}
 `;
 
 export const useLeaveTeamMutation = () => {

@@ -1,12 +1,14 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { useMutation } from "vue-query";
+import { gameFragment } from "../fragments/GameFragment";
 
 const joinTeam = /* GraphQL */ `
   mutation JoinTeam($input: JoinTeamInput!) {
     joinTeam(input: $input) {
-      id
+      ...GameFragment
     }
   }
+  ${gameFragment}
 `;
 
 export const useJoinTeamMutation = () => {

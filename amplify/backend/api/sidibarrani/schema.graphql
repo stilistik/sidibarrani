@@ -217,6 +217,7 @@ type Subscription {
         "newRound"
         "placeBet"
         "skipBet"
+        "joinTeam"
       ]
     )
 }

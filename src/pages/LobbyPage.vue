@@ -1,30 +1,21 @@
 <template>
   <AppHeader />
   <PageContainer>
-    <PageTitle class="mt-10">{{ data?.name }}</PageTitle>
+    <PageTitle class="mt-10">{{ gameName }}</PageTitle>
     <div class="w-full flex justify-center mt-10">
       <CopyJoinLink />
     </div>
     <div class="text-white">
-      <p v-if="isError">Error</p>
-      <Loading v-else-if="isLoading">Loading</Loading>
-      <div v-else class="flex items-start mt-20">
-        <Team
-          :id="data?.Teams?.items[0].id"
-          class="flex-1"
-          :class="`shadow-${data?.Teams?.items[0].color}`"
-        />
+      <div class="flex items-start mt-20">
+        <Team :team="team1" class="flex-1" :class="`shadow-${team1?.color}`" />
         <p class="font-extrabold text-8xl p-10 mt-4">VS</p>
-        <Team
-          :id="data?.Teams?.items[1].id"
-          class="flex-1"
-          :class="`shadow-${data?.Teams?.items[1].color}`"
-        />
+        <Team :team="team2" class="flex-1" :class="`shadow-${team2?.color}`" />
       </div>
+      <Button @click="leaveGame">Leave Game</Button>
     </div>
 
     <div class="flex justify-center mt-20">
-      <StartGame :id="data?.id" />
+      <StartGame :id="gameId" />
     </div>
   </PageContainer>
 </template>
@@ -41,6 +32,7 @@ import PageContainer from "../components/PageContainer.vue";
 import AppHeader from "../components/AppHeader.vue";
 import PageTitle from "../components/PageTitle.vue";
 import Loading from "../components/Loading.vue";
+import Button from "../components/Button.vue";
 import Team from "../components/Team.vue";
 import StartGame from "../components/StartGame.vue";
 import CopyJoinLink from "../components/CopyJoinLink.vue";
@@ -54,7 +46,7 @@ import { useQueryClient } from "vue-query";
 import { Message } from "../utils/Message";
 
 export default defineComponent({
-  name: "Lobby",
+  name: "LobbyPage",
   components: {
     AppHeader,
     PageContainer,
@@ -63,6 +55,7 @@ export default defineComponent({
     Team,
     StartGame,
     CopyJoinLink,
+    Button,
   },
   setup() {
     const leaveGameMutation = useLeaveTeamMutation();
@@ -88,7 +81,7 @@ export default defineComponent({
       subscription.unsubscribe();
     });
 
-    const { isLoading, isError, data } = useGameQuery(gameId);
+    const { data } = useGameQuery(gameId);
 
     watchEffect(() => {
       if (data?.value?.status === "STARTED") {
@@ -96,18 +89,25 @@ export default defineComponent({
       }
     });
 
-    return reactive({
-      isLoading,
-      isError,
-      data,
-      gameId,
-      qclient,
-      leaveGame,
-      leaveGameMutation,
+    const team1 = computed(() => {
+      return data?.value?.Teams?.items[0];
     });
-  },
-  beforeRouteLeave(to) {
-    if (to.name !== "GamePage") this.leaveGame();
+
+    const team2 = computed(() => {
+      return data?.value?.Teams?.items[1];
+    });
+
+    const gameName = computed(() => {
+      return data?.value?.name;
+    });
+
+    return reactive({
+      team1,
+      team2,
+      gameName,
+      gameId,
+      leaveGame,
+    });
   },
 });
 </script>

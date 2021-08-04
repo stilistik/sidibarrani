@@ -61,6 +61,15 @@ export const gameFragment = /* GraphQL */ `
         color
         createdAt
         updatedAt
+        TeamUsers {
+          items {
+            id
+            user {
+              id
+              username
+            }
+          }
+        }
       }
       nextToken
     }
