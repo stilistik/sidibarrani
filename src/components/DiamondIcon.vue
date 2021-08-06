@@ -1,5 +1,9 @@
 <template>
-  <svg width="38px" height="38px" viewbox="0 0 38 38">
+  <svg
+    :width="`${size}px`"
+    :height="`${size}px`"
+    :viewbox="`0 0 ${size} ${size}`"
+  >
     <symbol
       id="diamond_icon"
       viewBox="-600 -600 1200 1200"
@@ -10,16 +14,22 @@
         fill="currentColor"
       />
     </symbol>
-    <g transform="scale(0.6)">
-      <use xlink:href="#diamond_icon" height="70" width="70" x="-3" y="-4" />
-    </g>
+    <use xlink:href="#diamond_icon" :height="size" :width="size" />
   </svg>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 
 export default defineComponent({
   name: "DiamondIcon",
+  props: {
+    size: Number,
+  },
+  setup(props) {
+    return reactive({
+      size: props.size || 38,
+    });
+  },
 });
 </script>

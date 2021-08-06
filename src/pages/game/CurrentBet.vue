@@ -14,23 +14,7 @@
       gap-3
     "
   >
-    <div class="text-4xl">
-      <DiamondIcon v-if="mode === 'TRUMP_D'" />
-      <SpadeIcon v-if="mode === 'TRUMP_S'" />
-      <HeartIcon v-if="mode === 'TRUMP_H'" />
-      <ClubIcon v-if="mode === 'TRUMP_C'" />
-      <Icon
-        v-if="mode === 'BOTTOM_UP'"
-        icon="long-arrow-alt-up"
-        style="width: 38"
-      />
-      <Icon
-        v-if="mode === 'TOP_DOWN'"
-        icon="long-arrow-alt-down"
-        style="width: 38"
-      />
-      <Icon v-if="mode === 'SLALOM'" icon="arrows-alt-v" style="width: 38" />
-    </div>
+    <ModeIcon :mode="mode" />
     <div>
       <span class="text-3xl">{{ value }}</span>
       <div class="flex justify-center">by {{ action?.user?.username }}</div>
@@ -40,18 +24,12 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive, ref, watchEffect } from "vue";
-import DiamondIcon from "../../components/DiamondIcon.vue";
-import HeartIcon from "../../components/HeartIcon.vue";
-import SpadeIcon from "../../components/SpadeIcon.vue";
-import ClubIcon from "../../components/ClubIcon.vue";
+import ModeIcon from "./ModeIcon.vue";
 import { spring } from "../../spring";
 
 export default defineComponent({
   components: {
-    DiamondIcon,
-    HeartIcon,
-    SpadeIcon,
-    ClubIcon,
+    ModeIcon,
   },
   props: {
     action: Object,

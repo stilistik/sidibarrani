@@ -1,55 +1,9 @@
 <template>
   <div class="relative w-screen h-screen overflow-visible text-white">
-    <div class="flex w-full justify-center gap-3 pt-52">
-      <Button
-        :size="'large'"
-        @click="onClickMode('BOTTOM_UP')"
-        :active="mode === 'BOTTOM_UP'"
-      >
-        <Icon icon="long-arrow-alt-up" style="width: 38" />
-      </Button>
-      <Button
-        :size="'large'"
-        @click="onClickMode('TOP_DOWN')"
-        :active="mode === 'TOP_DOWN'"
-      >
-        <Icon icon="long-arrow-alt-down" style="width: 38" />
-      </Button>
-      <Button
-        :size="'large'"
-        @click="onClickMode('SLALOM')"
-        :active="mode === 'SLALOM'"
-      >
-        <Icon icon="arrows-alt-v" style="width: 38" />
-      </Button>
-      <Button
-        :size="'large'"
-        @click="onClickMode('TRUMP_D')"
-        :active="mode === 'TRUMP_D'"
-      >
-        <DiamondIcon />
-      </Button>
-      <Button
-        :size="'large'"
-        @click="onClickMode('TRUMP_H')"
-        :active="mode === 'TRUMP_H'"
-      >
-        <HeartIcon />
-      </Button>
-      <Button
-        :size="'large'"
-        @click="onClickMode('TRUMP_S')"
-        :active="mode === 'TRUMP_S'"
-      >
-        <SpadeIcon />
-      </Button>
-      <Button
-        :size="'large'"
-        @click="onClickMode('TRUMP_C')"
-        :active="mode === 'TRUMP_C'"
-      >
-        <ClubIcon />
-      </Button>
+    <ModeSelector :selectedMode="mode" @modeChange="onModeChange" />
+    <div class="absolute left-10 top-20 py-20">
+      <h3 class="font-black text-3xl mb-5">History</h3>
+      <PreviousBets />
     </div>
     <div class="w-full flex justify-center py-20">
       <CurrentBet v-if="Boolean(lastBet)" :action="lastBet" />
@@ -69,30 +23,27 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref } from "vue";
 import Button from "../../components/Button.vue";
-import DiamondIcon from "../../components/DiamondIcon.vue";
-import HeartIcon from "../../components/HeartIcon.vue";
-import SpadeIcon from "../../components/SpadeIcon.vue";
-import ClubIcon from "../../components/ClubIcon.vue";
 import Hand from "../../components/Hand.vue";
 import YourTurn from "../../components/YourTurn.vue";
 import CurrentBet from "./CurrentBet.vue";
+import PreviousBets from "./PreviousBets.vue";
+import ModeSelector from "./ModeSelector.vue";
 import {
   useActiveRound,
   useActiveStack,
   usePlaceBetMutation,
   useSkipBetMutation,
 } from "../../api";
+import { Message } from "../../utils/Message";
 
 export default defineComponent({
   components: {
     Button,
-    DiamondIcon,
-    HeartIcon,
-    SpadeIcon,
-    ClubIcon,
     Hand,
     YourTurn,
     CurrentBet,
+    PreviousBets,
+    ModeSelector,
   },
   setup() {
     const activeRound = useActiveRound();
@@ -110,7 +61,7 @@ export default defineComponent({
 
     const mode = ref(null);
 
-    function onClickMode(value: string) {
+    function onModeChange(value: string) {
       mode.value = value;
     }
 
@@ -118,6 +69,10 @@ export default defineComponent({
     const skipBetMutation = useSkipBetMutation();
 
     function placeBet(increment: string) {
+      if (!mode.value) {
+        Message.error("You have to select a mode.");
+        return;
+      }
       const lastValue = lastAction.value
         ? parseInt(lastAction.value.value.split(":")[1])
         : 0;
@@ -135,7 +90,7 @@ export default defineComponent({
 
     return reactive({
       mode,
-      onClickMode,
+      onModeChange,
       activeRound,
       placeBet,
       skip,
