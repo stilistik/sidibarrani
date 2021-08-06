@@ -20,8 +20,14 @@ def place_bet(event):
         raise Exception("It's not your turn to place a bet")
 
     [mode, amount_str] = value.split(":")
+
+    if not mode:
+        raise Exception("Mode must be defined")
+    if not amount_str:
+        raise Exception("Bet amount must be defined")
+
     amount = int(amount_str)
-    
+
     if amount >= 157:
         amount = 157
         StackModel.add_action(ActionType.BET.name, user_id,
