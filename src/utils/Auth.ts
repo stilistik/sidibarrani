@@ -1,6 +1,7 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { ref } from "vue";
 import { getUser } from "../graphql/queries";
+import router from "../router";
 import { actions } from "../store/Store";
 import { Message } from "../utils/Message";
 
@@ -26,9 +27,12 @@ export async function checkExistingSession() {
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
+      router.replace({ path: "/login" });
     }
   } catch (err) {
     Message.error("Error during check for existing session");
+    setIsAuthenticated(false);
+    router.replace({ path: "/login" });
   }
 }
 

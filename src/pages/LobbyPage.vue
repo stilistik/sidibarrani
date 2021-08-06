@@ -85,7 +85,7 @@ export default defineComponent({
 
     watchEffect(() => {
       if (data?.value?.status === "STARTED") {
-        router.push({ path: "game", query: { gameId: gameId.value } });
+        router.replace({ path: "game", query: { gameId: gameId.value } });
       }
     });
 

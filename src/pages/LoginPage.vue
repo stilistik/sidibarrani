@@ -5,26 +5,19 @@
       <PageTitle>Sidi Barrani</PageTitle>
     </div>
     <form
-      @submit.prevent="login"
+      @submit.prevent="handleLogin"
       class="flex flex-col col-span-4 items-center w-full my-20 gap-8"
     >
-      <Input v-model="email" name="email" type="email" placeholder="Email" />
-      <Input
-        v-model="password"
-        name="password"
-        type="password"
-        placeholder="Password"
-      />
-      <Button type="submit" size="large">Login</Button>
-      <Link @click="signup()"> Sign Up </Link>
-      <Loading v-if="loading" />
+      <Input name="email" type="email" placeholder="Email" />
+      <Input name="password" type="password" placeholder="Password" />
+      <Button type="submit" size="large" :isLoading="isLoading">Login</Button>
+      <Link @click="handleSignup()"> Sign Up </Link>
     </form>
   </PageContainer>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { useActions, useStore } from "../store/Store";
+import { defineComponent, reactive, ref } from "vue";
 import PageContainer from "../components/PageContainer.vue";
 import PageTitle from "../components/PageTitle.vue";
 import Button from "../components/Button.vue";
@@ -33,7 +26,7 @@ import Input from "../components/Input.vue";
 import Loading from "../components/Loading.vue";
 import Logo from "../components/Logo.vue";
 import { login } from "../utils/Auth";
-import { Auth } from "aws-amplify";
+import router from "../router";
 
 export default defineComponent({
   name: "Login",
@@ -47,28 +40,26 @@ export default defineComponent({
     Logo,
   },
   setup: function () {
-    return { store: useStore(), actions: useActions() };
-  },
-  data: function () {
-    return { email: "", password: "", loading: false };
-  },
-  methods: {
-    login: async function (event: Event) {
-      this.loading = true;
+    const isLoading = ref(false);
+
+    async function handleLogin(event: Event) {
+      isLoading.value = true;
       const data = new FormData(event.currentTarget as HTMLFormElement);
       const email = data.get("email") as string;
       const password = data.get("password") as string;
       await login(email, password);
-      this.loading = false;
-      this.$router.push("/");
-    },
-    signup: function () {
-      this.$router.push("/signup");
-    },
-  },
-  mounted() {
-    Auth.currentAuthenticatedUser().then((user) => {
-      if (user) this.$router.push("/");
+      isLoading.value = false;
+      router.push("/");
+    }
+
+    function handleSignup() {
+      router.push("/signup");
+    }
+
+    return reactive({
+      handleLogin,
+      handleSignup,
+      isLoading,
     });
   },
 });

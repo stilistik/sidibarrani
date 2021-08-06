@@ -10,20 +10,28 @@
       hover:text-primary
       shadow-2xl
       font-bold
+      flex
     "
     :class="classes"
   >
     <slot />
+    <Loading v-if="isLoading" class="ml-2" />
   </button>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, reactive } from "vue";
+import Loading from "./Loading.vue";
+
 export default defineComponent({
   name: "Button",
+  components: {
+    Loading,
+  },
   props: {
     size: String,
     active: Boolean,
+    isLoading: Boolean,
   },
   setup(props) {
     const classes = computed(() => {

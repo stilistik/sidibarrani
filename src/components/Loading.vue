@@ -1,86 +1,61 @@
 <template>
-  <div>
-    <div class="lds-grid">
-      <div class="bg-primary"></div>
-      <div class="bg-primary"></div>
-      <div class="bg-primary"></div>
-      <div class="bg-primary"></div>
-      <div class="bg-primary"></div>
-      <div class="bg-primary"></div>
-      <div class="bg-primary"></div>
-      <div class="bg-primary"></div>
-      <div class="bg-primary"></div>
-    </div>
+  <div
+    class="relative inline-block"
+    :style="{ width: `${size}px`, height: `${size}px` }"
+  >
+    <div
+      v-for="i in Math.pow(count, 2)"
+      :key="i"
+      class="animated bg-primary"
+      :style="getStyle(i - 1)"
+    />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent, reactive } from "vue";
 
 export default defineComponent({
   name: "Loading",
+  props: {
+    size: Number,
+    count: Number,
+    gap: Number,
+  },
+  setup(props) {
+    const count = computed(() => props.count || 3);
+    const size = computed(() => props.size || 40);
+    const gap = computed(() => props.gap || 3);
+
+    function getStyle(childIndex: number) {
+      const dotSize = Math.floor(size.value / count.value - gap.value);
+      const yIndex = Math.floor(childIndex / count.value);
+      const xIndex = childIndex % count.value;
+      return {
+        position: "absolute",
+        width: `${dotSize}px`,
+        height: `${dotSize}px`,
+        borderRadius: "50%",
+        top: `${gap.value * 0.5 + yIndex * dotSize + yIndex * gap.value}px`,
+        left: `${gap.value * 0.5 + xIndex * dotSize + xIndex * gap.value}px`,
+        animationDelay: `${-0.2 * childIndex}s`,
+      };
+    }
+
+    return reactive({
+      getStyle,
+      count,
+      size,
+    });
+  },
 });
 </script>
 
 <style scoped>
-.lds-grid {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-grid div {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
+.animated {
   animation: lds-grid 1.2s linear infinite;
 }
-.lds-grid div:nth-child(1) {
-  top: 8px;
-  left: 8px;
-  animation-delay: 0s;
-}
-.lds-grid div:nth-child(2) {
-  top: 8px;
-  left: 32px;
-  animation-delay: -0.4s;
-}
-.lds-grid div:nth-child(3) {
-  top: 8px;
-  left: 56px;
-  animation-delay: -0.8s;
-}
-.lds-grid div:nth-child(4) {
-  top: 32px;
-  left: 8px;
-  animation-delay: -0.4s;
-}
-.lds-grid div:nth-child(5) {
-  top: 32px;
-  left: 32px;
-  animation-delay: -0.8s;
-}
-.lds-grid div:nth-child(6) {
-  top: 32px;
-  left: 56px;
-  animation-delay: -1.2s;
-}
-.lds-grid div:nth-child(7) {
-  top: 56px;
-  left: 8px;
-  animation-delay: -0.8s;
-}
-.lds-grid div:nth-child(8) {
-  top: 56px;
-  left: 32px;
-  animation-delay: -1.2s;
-}
-.lds-grid div:nth-child(9) {
-  top: 56px;
-  left: 56px;
-  animation-delay: -1.6s;
-}
+
 @keyframes lds-grid {
   0%,
   100% {
