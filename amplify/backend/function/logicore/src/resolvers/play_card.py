@@ -1,3 +1,4 @@
+from amplify.backend.function.logicore.src.models.game import GameStatus
 from models.team import TeamModel
 from models.stack import StackModel, ActionType
 from models.round import RoundModel, RoundMode
@@ -131,13 +132,17 @@ def play_card(event):
     round = RoundModel.find_by_id(round_id)
     stack = StackModel.find_by_id(round['activeStackID'])
     hands = HandModel.find_by_round(round_id)
+    game = GameModel.find_by_id(round['gameID'])
     hand = next(hand for hand in hands if hand['userID'] == user_id)
 
+    if game['status'] is not GameStatus.STARTED.name:
+        raise Exception("Game has not started yet. Cards cannot yet be played.")
+
     if round['turn'] != user_id:
-        raise Exception("It's not your turn to play")
+        raise Exception("It's not your turn to play.")
 
     if (StackModel.is_complete(stack['id'])):
-        raise Exception("Stack is complete. Please clear the current stack")
+        raise Exception("Stack is complete. Please clear the current stack.")
 
     validate_card_played(stack['id'], hand, value)
 
