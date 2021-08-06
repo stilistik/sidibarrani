@@ -77,6 +77,7 @@ def get_winner_trump(actions, trump_suit):
                 winner = action
 
         elif suit == suit_played and get_suit(winner['value']) != trump_suit:
+            rank = get_rank(action['value'])
             if rank > get_rank(winner['value']):
                 winner = action
 
@@ -170,7 +171,8 @@ def play_card(event):
         raise Exception("It's not your turn to play")
 
     if (StackModel.is_complete(stack['id'])):
-        raise Exception("Stack is complete. Please clear the current stack")
+        new_stack = StackModel.create(round_id, stack['size'])
+        RoundModel.set_active_stack(round_id, new_stack['id'])
 
     validate_card_played(stack['id'], round, hand, value)
 
