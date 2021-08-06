@@ -173,6 +173,7 @@ def play_card(event):
     if (StackModel.is_complete(stack['id'])):
         new_stack = StackModel.create(round_id, stack['size'])
         RoundModel.set_active_stack(round_id, new_stack['id'])
+        stack = new_stack
 
     validate_card_played(stack['id'], round, hand, value)
 
