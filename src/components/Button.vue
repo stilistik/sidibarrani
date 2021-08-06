@@ -11,6 +11,8 @@
       shadow-2xl
       font-bold
       flex
+      items-center
+      justify-center
     "
     :class="classes"
   >

@@ -15,6 +15,8 @@ export async function login(email: string, password: string) {
     setIsAuthenticated(true);
   } catch (err) {
     Message.error("Error during login");
+    setIsAuthenticated(false);
+    router.replace({ path: "/login" });
   }
 }
 
@@ -34,7 +36,7 @@ export async function checkExistingSession() {
     setIsAuthenticated(false);
     router.replace({ path: "/login" });
   }
-}
+}\
 
 export async function signUp(
   email: string,
