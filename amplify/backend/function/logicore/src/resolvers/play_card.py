@@ -5,10 +5,18 @@ from models.hand import HandModel
 from models.game import GameModel
 
 
-def get_rank(value):
+def get_rank(value, is_trump=False):
     rank_str = value[0:-1]
+    if rank_str == '9':
+        if is_trump:
+            return 50
+        else:
+            return 9
     if rank_str == 'J':
-        return 11
+        if is_trump:
+            return 100
+        else:
+            return 11
     elif rank_str == 'Q':
         return 12
     elif rank_str == 'K':
@@ -59,11 +67,11 @@ def get_winner_trump(actions, trump_suit):
 
     for action in actions:
         suit = get_suit(action['value'])
-        rank = get_rank(action['value'])
 
         if suit == trump_suit:
+            rank = get_rank(action['value'], is_trump=True)
             if get_suit(winner['value']) == trump_suit:
-                if rank > get_rank(winner['value']):
+                if rank > get_rank(winner['value'], is_trump=True):
                     winner = action
             else:
                 winner = action
