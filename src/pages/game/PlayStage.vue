@@ -1,7 +1,10 @@
 <template>
   <div class="relative w-screen h-screen overflow-visible text-white">
     <div class="absolute top-20 flex gap-3 p-3">
-      <div>{{ activeRound?.mode }}</div>
+      <div class="flex items-center font-black text-2xl gap-2">
+        <span>Play Mode:</span>
+        <ModeIcon :mode="activeRound.mode" />
+      </div>
       <Button @click="newRound">New Round</Button>
       <Button v-if="isClearable" @click="clear">Clear</Button>
     </div>
@@ -26,6 +29,7 @@ import Button from "../../components/Button.vue";
 import Stack from "../../components/Stack.vue";
 import YourTurn from "../../components/YourTurn.vue";
 import StackWinner from "../../components/StackWinner.vue";
+import ModeIcon from "./ModeIcon.vue";
 import router from "../../router";
 
 export default defineComponent({
@@ -37,6 +41,7 @@ export default defineComponent({
     Button,
     YourTurn,
     StackWinner,
+    ModeIcon,
   },
   setup() {
     const gameId = computed(
