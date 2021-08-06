@@ -61,8 +61,11 @@ def get_winner_trump(actions, trump_suit):
         suit = get_suit(action['value'])
         rank = get_rank(action['value'])
 
-        if suit == trump_suit and get_suit(winner['value']) == trump_suit:
-            if rank > get_rank(winner['value']):
+        if suit == trump_suit:
+            if get_suit(winner['value']) == trump_suit:
+                if rank > get_rank(winner['value']):
+                    winner = action
+            else:
                 winner = action
 
         elif suit == suit_played and get_suit(winner['value']) != trump_suit:
@@ -77,22 +80,22 @@ def set_winner(round, stack):
     mode = round.get('mode', RoundMode.TOP_DOWN.name)
 
     winner = None
-    if mode is RoundMode.TOP_DOWN.name:
+    if mode == RoundMode.TOP_DOWN.name:
         winner = get_winner_top_down(actions)
-    elif mode is RoundMode.BOTTOM_UP.name:
+    elif mode == RoundMode.BOTTOM_UP.name:
         winner = get_winner_bottom_up(actions)
-    elif mode is RoundMode.TRUMP_C.name:
+    elif mode == RoundMode.TRUMP_C.name:
         winner = get_winner_trump(actions, 'C')
-    elif mode is RoundMode.TRUMP_D.name:
+    elif mode == RoundMode.TRUMP_D.name:
         winner = get_winner_trump(actions, 'D')
-    elif mode is RoundMode.TRUMP_H.name:
+    elif mode == RoundMode.TRUMP_H.name:
         winner = get_winner_trump(actions, 'H')
-    elif mode is RoundMode.TRUMP_S.name:
+    elif mode == RoundMode.TRUMP_S.name:
         winner = get_winner_trump(actions, 'S')
-    elif mode is RoundMode.SLALOM_TOP.name:
+    elif mode == RoundMode.SLALOM_TOP.name:
         winner = get_winner_top_down(actions)
         RoundModel.set_mode(round['id'], RoundMode.SLALOM_BOTTOM)
-    elif mode is RoundMode.SLALOM_BOTTOM.name:
+    elif mode == RoundMode.SLALOM_BOTTOM.name:
         winner = get_winner_bottom_up(actions)
         RoundModel.set_mode(round['id'], RoundMode.SLALOM_TOP)
     else:
