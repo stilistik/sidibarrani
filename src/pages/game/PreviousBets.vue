@@ -15,8 +15,9 @@
       "
     >
       <span>{{ action.username }}</span>
-      <ModeIcon :mode="action.mode" :size="20" />
-      <span>{{ action.amount }}</span>
+      <span v-if="action.skip">Skip</span>
+      <ModeIcon v-if="action.mode !== null" :mode="action.mode" :size="20" />
+      <span v-if="action.amount !== null">{{ action.amount }}</span>
     </div>
   </div>
 </template>
@@ -34,10 +35,23 @@ export default defineComponent({
     const activeStack = useActiveStack();
     const actions = computed(() =>
       activeStack.value?.actions?.items.map((item: any) => {
-        const mode = item.value.split(":")[0];
-        const amount = item.value.split(":")[1];
-        const username = item.user.username;
-        return { id: item.id, mode, amount, username };
+        if (item.type === "BET") {
+          return {
+            id: item.id,
+            skip: false,
+            mode: item.value.split(":")[0],
+            amount: item.value.split(":")[1],
+            username: item.user.username,
+          };
+        } else if (item.type === "SKIP") {
+          return {
+            id: item.id,
+            skip: true,
+            mode: null as string,
+            amount: null as string,
+            username: item.user.username,
+          };
+        }
       })
     );
 

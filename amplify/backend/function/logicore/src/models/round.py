@@ -4,7 +4,7 @@ from uuid import uuid4 as uuid
 import boto3
 from enum import Enum
 from boto3.dynamodb.conditions import Key
-from utils.utils import get_iso_date_string, get_random_name
+from utils.utils import get_iso_date_string
 
 ddb = boto3.resource('dynamodb')
 round_table_name = os.environ.get("ROUNDTABLE")
@@ -25,6 +25,27 @@ class RoundMode(Enum):
     TRUMP_H = 'TRUMP_H',
     TRUMP_C = 'TRUMP_C',
     TRUMP_S = 'TRUMP_S',
+
+    @staticmethod
+    def from_str(label):
+        if label == 'TOP_DOWN':
+            return RoundMode.TOP_DOWN
+        elif label == 'BOTTOM_UP':
+            return RoundMode.BOTTOM_UP
+        elif label == 'SLALOM_TOP':
+            return RoundMode.SLALOM_TOP
+        elif label == 'SLALOM_BOTTOM':
+            return RoundMode.SLALOM_BOTTOM
+        elif label == 'TRUMP_D':
+            return RoundMode.TRUMP_D
+        elif label == 'TRUMP_H':
+            return RoundMode.TRUMP_H
+        elif label == 'TRUMP_S':
+            return RoundMode.TRUMP_S
+        elif label == 'TRUMP_C':
+            return RoundMode.TRUMP_C
+        else:
+            raise NotImplementedError
 
 
 class RoundModel:

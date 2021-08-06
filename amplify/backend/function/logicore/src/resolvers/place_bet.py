@@ -1,4 +1,4 @@
-from models.round import RoundModel, RoundStatus
+from models.round import RoundModel, RoundStatus, RoundMode
 from models.stack import StackModel, ActionType
 from models.game import GameModel
 from models.team import TeamModel
@@ -45,7 +45,15 @@ def place_bet(event):
     return GameModel.find_by_id(round['gameID'])
 
 
+def get_max_action(action):
+    if action['type'] == ActionType.SKIP.name:
+        return -1
+    else:
+        return int(action['value'].split(":")[1])
+
+
 def skip_bet(event):
+
     round_id = event['arguments'].get('roundID')
     user_id = event['identity']['claims'].get('sub')
 
@@ -63,12 +71,13 @@ def skip_bet(event):
     game_user_count = len(TeamModel.find_team_users_by_game(game_id))
 
     last_actions = actions[-game_user_count:]
-    max_amount_action = max(int(action['value'].split(":")[1]) for action in actions)
+    max_amount_action = max(actions, key=get_max_action)
+    mode = max_amount_action['value'].split(":")[0]
 
     if all(action['type'] == ActionType.SKIP.name for action in last_actions):
         RoundModel.set_round_status(round_id, RoundStatus.PLAY)
         new_stack = StackModel.create(round_id, stack['size'])
         RoundModel.set_active_stack(round_id, new_stack['id'])
-        RoundModel.set_mode(round_id, max_amount_action['value'].split(":")[0])
+        RoundModel.set_mode(round_id, RoundMode.from_str(mode))
 
     return GameModel.find_by_id(game_id)
