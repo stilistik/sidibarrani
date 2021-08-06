@@ -36,7 +36,7 @@ export async function checkExistingSession() {
     setIsAuthenticated(false);
     router.replace({ path: "/login" });
   }
-}\
+}
 
 export async function signUp(
   email: string,

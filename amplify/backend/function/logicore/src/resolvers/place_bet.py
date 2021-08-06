@@ -35,6 +35,7 @@ def place_bet(event):
         new_stack = StackModel.create(round_id, stack['size'])
         RoundModel.set_active_stack(round_id, new_stack['id'])
         RoundModel.set_round_status(round_id, RoundStatus.PLAY)
+        RoundModel.set_mode(round_id, mode)
     else:
         amount = round_to_base(amount, 10)
         StackModel.add_action(ActionType.BET.name, user_id,
@@ -62,10 +63,12 @@ def skip_bet(event):
     game_user_count = len(TeamModel.find_team_users_by_game(game_id))
 
     last_actions = actions[-game_user_count:]
+    max_amount_action = max(int(action['value'].split(":")[1]) for action in actions)
 
     if all(action['type'] == ActionType.SKIP.name for action in last_actions):
         RoundModel.set_round_status(round_id, RoundStatus.PLAY)
         new_stack = StackModel.create(round_id, stack['size'])
         RoundModel.set_active_stack(round_id, new_stack['id'])
+        RoundModel.set_mode(round_id, max_amount_action['value'].split(":")[0])
 
     return GameModel.find_by_id(game_id)

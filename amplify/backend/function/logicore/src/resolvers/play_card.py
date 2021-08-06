@@ -1,7 +1,6 @@
-from amplify.backend.function.logicore.src.models.round import RoundStatus
 from models.team import TeamModel
 from models.stack import StackModel, ActionType
-from models.round import RoundModel, RoundMode
+from models.round import RoundModel, RoundMode, RoundStatus
 from models.hand import HandModel
 from models.game import GameModel
 
@@ -115,8 +114,27 @@ def has_suit(hand, suit):
         return False
 
 
-def validate_card_played(stack_id, hand, value):
+def is_trump(round, value):
+    mode = round.get('mode', RoundMode.TOP_DOWN.name)
+    suit = get_suit(value)
+    if mode == RoundMode.TRUMP_C.name and suit == 'C':
+        return True
+    elif mode == RoundMode.TRUMP_D.name and suit == 'D':
+        return True
+    elif mode == RoundMode.TRUMP_H.name and suit == 'H':
+        return True
+    elif mode == RoundMode.TRUMP_S.name and suit == 'S':
+        return True
+    else:
+        return False
+
+
+def validate_card_played(stack_id, round, hand, value):
     actions = StackModel.get_actions(stack_id)
+
+    if is_trump(round, value):
+        return True
+
     first_played = actions[0]['value'] if len(actions) > 0 else None
     if first_played:
         if get_suit(first_played) != get_suit(value):
@@ -143,7 +161,7 @@ def play_card(event):
     if (StackModel.is_complete(stack['id'])):
         raise Exception("Stack is complete. Please clear the current stack")
 
-    validate_card_played(stack['id'], hand, value)
+    validate_card_played(stack['id'], round, hand, value)
 
     HandModel.remove_card(hand['id'], value)
     RoundModel.next_turn(round_id)
