@@ -16,6 +16,7 @@ const classList = [
   "primary-color-red",
   "primary-color-orange",
   "primary-color-yellow",
+  "primary-color-lime",
   "primary-color-green",
   "primary-color-teal",
   "primary-color-cyan",

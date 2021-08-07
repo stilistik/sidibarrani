@@ -22,6 +22,10 @@
     --color-primary: theme("colors.yellow.400");
   }
 
+  .primary-color-lime {
+    --color-primary: theme("colors.lime.400");
+  }
+
   .primary-color-green {
     --color-primary: theme("colors.green.400");
   }
@@ -91,6 +95,10 @@
     box-shadow: 0 25px 50px -12px theme("colors.yellow.400");
   }
 
+  .shadow-lime {
+    box-shadow: 0 25px 50px -12px theme("colors.lime.400");
+  }
+
   .shadow-green {
     box-shadow: 0 25px 50px -12px theme("colors.green.400");
   }
@@ -113,5 +121,9 @@
 
   .shadow-pink {
     box-shadow: 0 25px 50px -12px theme("colors.pink.400");
+  }
+
+  .shadow-white {
+    box-shadow: 0 25px 50px -12px theme("colors.gray.400");
   }
 }

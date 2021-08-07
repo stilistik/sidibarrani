@@ -10,7 +10,7 @@
         absolute
         top-0
         left-0
-        shadow-primary
+        border-2 border-white
         rounded-xl
         p-4
         flex flex-wrap
@@ -34,19 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-
-const colors: string[] = [
-  "red",
-  "orange",
-  "yellow",
-  "green",
-  "teal",
-  "cyan",
-  "blue",
-  "indigo",
-  "purple",
-  "pink",
-];
+import { colors } from "../utils/ColorUtils";
 
 export default defineComponent({
   name: "ColorPicker",
