@@ -1,30 +1,36 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-sidibarrani-dev-94323-authRole",
-      "UnauthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-94323-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-94323-authRole",
-      "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-      "UnauthRoleName": "amplify-sidibarrani-dev-94323-unauthRole",
-      "StackName": "amplify-sidibarrani-dev-94323",
-      "StackId": "arn:aws:cloudformation:eu-central-1:875427163685:stack/amplify-sidibarrani-dev-94323/2c3b3150-e477-11eb-ae5a-023ebec05ecc",
-      "AmplifyAppId": "da3xodyxlcfep"
-    },
-    "categories": {
-      "auth": {
-        "sidibarrani76d4ecdc": {}
-      },
-      "function": {
-        "sidibarrani76d4ecdcPostConfirmation": {
-          "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-          "s3Key": "amplify-builds/sidibarrani76d4ecdcPostConfirmation-5a44654f384633594861-build.zip"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-sidibarrani-dev-94323-authRole",
+            "UnauthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-94323-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-94323-authRole",
+            "Region": "eu-central-1",
+            "DeploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
+            "UnauthRoleName": "amplify-sidibarrani-dev-94323-unauthRole",
+            "StackName": "amplify-sidibarrani-dev-94323",
+            "StackId": "arn:aws:cloudformation:eu-central-1:875427163685:stack/amplify-sidibarrani-dev-94323/2c3b3150-e477-11eb-ae5a-023ebec05ecc",
+            "AmplifyAppId": "da3xodyxlcfep"
         },
-        "logicore": {
-          "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
-          "s3Key": "amplify-builds/logicore-4758725574716f43377a-build.zip"
+        "categories": {
+            "auth": {
+                "sidibarrani76d4ecdc": {}
+            },
+            "function": {
+                "sidibarrani76d4ecdcPostConfirmation": {
+                    "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
+                    "s3Key": "amplify-builds/sidibarrani76d4ecdcPostConfirmation-5a44654f384633594861-build.zip"
+                },
+                "logicore": {
+                    "deploymentBucketName": "amplify-sidibarrani-dev-94323-deployment",
+                    "s3Key": "amplify-builds/logicore-4758725574716f43377a-build.zip"
+                }
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "da3xodyxlcfep",
+                    "type": "manual"
+                }
+            }
         }
-      }
     }
-  }
 }

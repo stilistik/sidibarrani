@@ -3,6 +3,7 @@ import router from "./router";
 import App from "./App.vue";
 import { storeKey, store, actionsKey, actions } from "./store/Store";
 import "./tailwind.css";
+import * as amplify from "aws-amplify";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
