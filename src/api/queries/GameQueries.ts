@@ -62,6 +62,7 @@ export const useGameQuery = (gameId: ComputedRef<string>) => {
   const res = useQuery(
     key,
     async () => {
+      if (!gameId.value) return null;
       const { data } = (await API.graphql(
         graphqlOperation(getGame, {
           id: gameId.value,

@@ -4,23 +4,44 @@
       w-full
       p-8
       space-y-4
-      shadow-xl
       rounded-xl
       text-white
       flex flex-col
       items-center
+      shadow-2xl
     "
-    :class="`border-2 ${getBorder(color)} ${getShadow(color)}`"
   >
-    <h3 class="text-4xl font-black">{{ name }}</h3>
-    <div
-      class="w-full justify-center flex items-center text-2xl font-thin gap-5"
+    <h3
+      class="text-4xl font-black"
+      :style="{ textShadow: '2px 2px 10px black' }"
     >
-      <span>{{ team1name }}</span>
-      <span class="text-4xl font-black">VS</span>
-      <span>{{ team2name }}</span>
+      {{ name }}
+    </h3>
+    <div
+      class="
+        w-full
+        justify-center
+        flex
+        items-center
+        text-2xl
+        font-thin
+        gap-5
+        shadow-xl
+      "
+    >
+      <div class="flex-1 text-left">
+        <span :style="{ textShadow: '1px 1px 5px black' }">{{
+          team1name
+        }}</span>
+      </div>
+      <span class="flex-none text-6xl font-black mix-blend-difference">VS</span>
+      <div class="flex-1 text-right">
+        <span :style="{ textShadow: '1px 1px 5px black' }">{{
+          team2name
+        }}</span>
+      </div>
     </div>
-    <Button @click="join" :hoverColor="color" class="w-full">Join</Button>
+    <Button @click="join" class="w-full">Join</Button>
   </div>
 </template>
 
@@ -28,7 +49,7 @@
 import { defineComponent } from "vue";
 import router from "../router";
 import Button from "./Button.vue";
-import { colors, colorClasses, Color } from "../utils/ColorUtils";
+import { colors } from "../utils/ColorUtils";
 
 export default defineComponent({
   name: "Game",
@@ -43,15 +64,7 @@ export default defineComponent({
       router.push({ path: "/lobby", query: { gameId: props.id } });
     }
 
-    function getBorder(color: Color) {
-      return colorClasses[color].border;
-    }
-
-    function getShadow(color: Color) {
-      return colorClasses[color].shadow;
-    }
-
-    return { color: colors[indexInBounds], join, getBorder, getShadow };
+    return { color: colors[indexInBounds], join };
   },
 });
 </script>

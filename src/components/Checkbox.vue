@@ -13,13 +13,15 @@
         h-8
         w-8
         text-primary
+        bg-gray-800
+        border-none
         focus:outline-none focus:ring-inset focus:ring-primary focus:border-none
         cursor-pointer
       "
     />
     <label
       :for="id"
-      class="text-white text-3xl font-thin cursor-pointer select-none"
+      class="text-gray-400 text-3xl font-thin cursor-pointer select-none"
       >{{ label }}</label
     >
   </div>

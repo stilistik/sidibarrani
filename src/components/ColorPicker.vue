@@ -10,12 +10,12 @@
         absolute
         top-0
         left-0
-        border-2 border-white
+        shadow-2xl
         rounded-xl
         p-4
         flex flex-wrap
         justify-between
-        bg-gray-900
+        bg-gray-800
         z-10
       "
       style="width: 300px"

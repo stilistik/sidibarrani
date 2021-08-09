@@ -76,10 +76,17 @@ export default defineComponent({
       const lastValue = lastAction.value
         ? parseInt(lastAction.value.value.split(":")[1])
         : 0;
-      placeBetMutation.mutate({
-        roundID: activeRound.value.id,
-        value: mode.value + ":" + (lastValue + increment),
-      });
+      placeBetMutation.mutate(
+        {
+          roundID: activeRound.value.id,
+          value: mode.value + ":" + (lastValue + increment),
+        },
+        {
+          onError: ({ errors }: any) => {
+            Message.error(errors[0].message);
+          },
+        }
+      );
     }
 
     function skip() {

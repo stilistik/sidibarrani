@@ -1,9 +1,21 @@
 <template>
   <div class="relative w-screen h-screen overflow-visible text-white">
     <div class="absolute top-20 flex gap-3 p-3">
-      <div class="flex items-center font-black text-2xl gap-2">
+      <div
+        class="
+          flex
+          items-center
+          font-black
+          text-2xl
+          gap-2
+          bg-gray-800
+          rounded-full
+          text-primary
+          px-5
+        "
+      >
         <span>Play Mode:</span>
-        <ModeIcon :mode="activeRound.mode" />
+        <ModeIcon :mode="activeRound.mode" :size="28" />
       </div>
       <Button @click="newRound">New Round</Button>
       <Button v-if="isClearable" @click="clear">Clear</Button>

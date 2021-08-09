@@ -1,5 +1,5 @@
 <template>
-  <Button @click="join">Join</Button>
+  <Button @click="join" :hoverColor="color">Join</Button>
 </template>
 
 <script lang="ts">
@@ -14,6 +14,7 @@ export default defineComponent({
   },
   props: {
     teamID: String,
+    color: String,
   },
   setup() {
     const joinTeamMutation = useJoinTeamMutation();

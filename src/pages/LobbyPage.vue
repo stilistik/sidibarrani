@@ -1,15 +1,21 @@
 <template>
   <AppHeader />
   <PageContainer>
-    <PageTitle class="mt-10">{{ gameName }}</PageTitle>
+    <div class="background text-center">
+      <h1 class="mt-10 text-9xl font-extrabold">
+        {{ gameName }}
+      </h1>
+    </div>
     <div class="w-full flex justify-center mt-10">
       <CopyJoinLink />
     </div>
     <div class="text-white">
       <div class="flex items-start mt-20">
-        <Team :team="team1" class="flex-1" :class="`shadow-${team1?.color}`" />
-        <p class="font-extrabold text-8xl p-10 mt-4">VS</p>
-        <Team :team="team2" class="flex-1" :class="`shadow-${team2?.color}`" />
+        <Team :team="team1" class="flex-1" />
+        <div class="background">
+          <p class="font-extrabold text-9xl p-10 mt-4">VS</p>
+        </div>
+        <Team :team="team2" class="flex-1" />
       </div>
       <Button @click="leaveGame">Leave Game</Button>
     </div>
@@ -111,3 +117,15 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.background {
+  background: url("assets/bg-3.jpeg");
+  background-size: cover;
+  color: #fff;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  padding: 0;
+}
+</style>

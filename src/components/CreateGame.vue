@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-start gap-5">
-    <div class="flex flex-col items-start gap-2">
+    <div class="flex flex-col items-start gap-5">
       <Input v-model="name" type="text" placeholder="Game Name" />
       <div class="flex items-center gap-3">
         <Input v-model="team1name" type="text" placeholder="Team 1 Name" />
