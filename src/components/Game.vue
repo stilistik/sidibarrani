@@ -18,16 +18,7 @@
       {{ name }}
     </h3>
     <div
-      class="
-        w-full
-        justify-center
-        flex
-        items-center
-        text-2xl
-        font-thin
-        gap-5
-        shadow-xl
-      "
+      class="w-full justify-center flex items-center text-2xl font-thin gap-5"
     >
       <div class="flex-1 text-left">
         <span :style="{ textShadow: '1px 1px 5px black' }">{{
