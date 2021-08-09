@@ -10,6 +10,7 @@ export const createNewGame = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -75,6 +76,7 @@ export const joinTeam = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -140,6 +142,7 @@ export const leaveGame = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -205,6 +208,7 @@ export const startGame = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -270,6 +274,7 @@ export const playCard = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -335,6 +340,7 @@ export const clearStack = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -400,6 +406,7 @@ export const newRound = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -465,6 +472,7 @@ export const placeBet = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -530,6 +538,7 @@ export const skipBet = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -1351,6 +1360,7 @@ export const createGame = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -1419,6 +1429,7 @@ export const updateGame = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -1487,6 +1498,7 @@ export const deleteGame = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {

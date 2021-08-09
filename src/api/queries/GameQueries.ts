@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { computed } from "vue";
+import { computed, Ref } from "vue";
 import { ComputedRef, reactive } from "vue-demi";
 import { useQuery } from "vue-query";
 import router from "../../router";
@@ -35,12 +35,18 @@ const listGames = /* GraphQL */ `
   }
 `;
 
-export const useListGamesQuery = () => {
-  const res = useQuery("listGames", async () => {
+export const useListGamesQuery = (searchTerm: Ref<string>) => {
+  const key = reactive(["listGames", { searchTerm }]);
+  const res = useQuery(key, async () => {
+    const filter: any = {
+      private: { eq: false },
+      status: { eq: "CREATED" },
+    };
+    if (searchTerm.value) {
+      filter.nameLowerCase = { contains: searchTerm.value };
+    }
     const { data } = (await API.graphql(
-      graphqlOperation(listGames, {
-        filter: { private: { eq: false } },
-      })
+      graphqlOperation(listGames, { filter })
     )) as any;
     return data.listGames;
   });

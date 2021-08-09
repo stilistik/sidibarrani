@@ -24,6 +24,7 @@ class GameModel:
         game = {
             'id': str(uuid()),
             'name': name,
+            'nameLowerCase': name.lower(),
             'status': 'CREATED',
             'private': private,
             'createdAt': date_now,

@@ -462,6 +462,7 @@ export const getGame = /* GraphQL */ `
       activeRoundID
       status
       name
+      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -532,6 +533,7 @@ export const listGames = /* GraphQL */ `
         activeRoundID
         status
         name
+        nameLowerCase
         createdAt
         updatedAt
         Teams {

@@ -113,6 +113,7 @@ type Game @model @auth(rules: [{ allow: private }]) {
   status: GameStatus
   Teams: [Team] @connection(keyName: "byGame", fields: ["id"])
   name: String
+  nameLowerCase: String
 }
 
 type User @model @auth(rules: [{ allow: private }]) {
