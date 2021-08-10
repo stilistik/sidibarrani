@@ -35,8 +35,12 @@ const listGames = /* GraphQL */ `
   }
 `;
 
-export const useListGamesQuery = (searchTerm: Ref<string>) => {
-  const key = reactive(["listGames", { searchTerm }]);
+export const useListGamesQuery = (
+  searchTerm: Ref<string>,
+  nextToken: Ref<string>,
+  limit: number = 20
+) => {
+  const key = reactive(["listGames", { searchTerm, nextToken, limit }]);
   const res = useQuery(key, async () => {
     const filter: any = {
       private: { eq: false },
@@ -46,7 +50,11 @@ export const useListGamesQuery = (searchTerm: Ref<string>) => {
       filter.nameLowerCase = { contains: searchTerm.value };
     }
     const { data } = (await API.graphql(
-      graphqlOperation(listGames, { filter })
+      graphqlOperation(listGames, {
+        filter,
+        limit,
+        nextToken: nextToken.value,
+      })
     )) as any;
     return data.listGames;
   });

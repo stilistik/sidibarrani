@@ -14,12 +14,17 @@
       :style="getStyle(index)"
     />
   </div>
+  <div class="flex">
+    <Button v-if="hasPrev" @click="prev()">Prev</Button>
+    <Button v-if="hasNext" @click="next()">Next</Button>
+  </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, reactive, ref } from "vue";
 import Game from "./Game.vue";
 import Input from "./Input.vue";
+import Button from "./Button.vue";
 import { useListGamesQuery } from "../api";
 import { useDebouncedRef } from "../utils/UseDebouncedRef";
 import Loading from "./Loading.vue";
@@ -36,9 +41,13 @@ export default defineComponent({
     Game,
     Loading,
     Input,
+    Button,
   },
   setup() {
     const searchTerm = useDebouncedRef("", 500);
+    const nextToken = reactive([]);
+    const prevToken = reactive([]);
+    const token = ref(null);
 
     function getStyle(index: number) {
       const img = images[index % images.length];
@@ -48,7 +57,11 @@ export default defineComponent({
       };
     }
 
-    const { isLoading, isError, data } = useListGamesQuery(searchTerm);
+    const { isLoading, isError, data } = useListGamesQuery(
+      searchTerm,
+      token,
+      1
+    );
 
     const games = computed(() => {
       return data.value?.items.map((game: any) => ({
@@ -59,7 +72,37 @@ export default defineComponent({
       }));
     });
 
-    return reactive({ isLoading, isError, games, getStyle, searchTerm });
+    function next() {
+      const t = data?.value?.nextToken;
+      prevToken.push(token.value);
+      token.value = t;
+    }
+
+    function prev() {
+      const t = prevToken.pop();
+      console.log(t);
+
+      token.value = t;
+    }
+
+    const hasNext = computed(() => {
+      console.log(data.value?.nextToken);
+
+      return Boolean(data.value?.nextToken);
+    });
+    const hasPrev = computed(() => prevToken.length > 0);
+
+    return reactive({
+      isLoading,
+      isError,
+      games,
+      getStyle,
+      searchTerm,
+      next,
+      prev,
+      hasNext,
+      hasPrev,
+    });
   },
 });
 </script>
