@@ -6,7 +6,8 @@
     <div
       v-for="i in Math.pow(count, 2)"
       :key="i"
-      class="animated bg-primary"
+      class="animated"
+      :class="getClass()"
       :style="getStyle(i - 1)"
     />
   </div>
@@ -14,6 +15,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive } from "vue";
+import { Color, colorClasses } from "../utils/ColorUtils";
 
 export default defineComponent({
   name: "Loading",
@@ -21,11 +23,17 @@ export default defineComponent({
     size: Number,
     count: Number,
     gap: Number,
+    color: String,
   },
   setup(props) {
     const count = computed(() => props.count || 3);
     const size = computed(() => props.size || 40);
     const gap = computed(() => props.gap || 3);
+
+    function getClass() {
+      if (props.color) return colorClasses[props.color as Color].bg;
+      else return "bg-primary";
+    }
 
     function getStyle(childIndex: number) {
       const dotSize = Math.floor(size.value / count.value - gap.value);
@@ -44,6 +52,7 @@ export default defineComponent({
 
     return reactive({
       getStyle,
+      getClass,
       count,
       size,
     });

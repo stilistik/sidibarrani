@@ -1,9 +1,9 @@
 <template>
-  <Button @click="join" :hoverColor="color">Join</Button>
+  <Button @click="join" :hoverColor="color" :isLoading="isLoading">Join</Button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import { useJoinTeamMutation } from "../api";
 import { useQueryClient } from "vue-query";
 import Button from "./Button.vue";
@@ -16,26 +16,32 @@ export default defineComponent({
     teamID: String,
     color: String,
   },
-  setup() {
+  setup(props) {
     const joinTeamMutation = useJoinTeamMutation();
     const qclient = useQueryClient();
-    return { joinTeamMutation, qclient };
-  },
-  methods: {
-    join() {
-      this.joinTeamMutation.mutate(
+
+    const isLoading = ref(false);
+
+    function join() {
+      isLoading.value = true;
+      joinTeamMutation.mutate(
         {
           input: {
-            teamID: this.$props.teamID,
+            teamID: props.teamID,
           },
         },
         {
           onSuccess: () => {
-            this.qclient.invalidateQueries("team");
+            qclient.invalidateQueries("team");
+          },
+          onSettled: () => {
+            isLoading.value = false;
           },
         }
       );
-    },
+    }
+
+    return reactive({ join, isLoading });
   },
 });
 </script>

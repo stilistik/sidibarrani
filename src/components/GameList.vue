@@ -57,11 +57,7 @@ export default defineComponent({
       };
     }
 
-    const { isLoading, isError, data } = useListGamesQuery(
-      searchTerm,
-      token,
-      1
-    );
+    const { isLoading, isError, data } = useListGamesQuery(searchTerm, token);
 
     const games = computed(() => {
       return data.value?.items.map((game: any) => ({
@@ -80,8 +76,6 @@ export default defineComponent({
 
     function prev() {
       const t = prevToken.pop();
-      console.log(t);
-
       token.value = t;
     }
 

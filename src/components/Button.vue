@@ -15,7 +15,7 @@
     :class="classes"
   >
     <slot />
-    <Loading v-if="isLoading" class="ml-2" :color="$props.hoverColor" />
+    <Loading v-if="isLoading" class="ml-2" :color="hoverColor" />
   </button>
 </template>
 
