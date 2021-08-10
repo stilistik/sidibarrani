@@ -11,6 +11,7 @@
       flex
       items-center
       justify-center
+      gap-2
     "
     :class="classes"
   >

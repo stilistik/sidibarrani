@@ -14,6 +14,7 @@ const listGames = /* GraphQL */ `
     listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        index
         private
         status
         name

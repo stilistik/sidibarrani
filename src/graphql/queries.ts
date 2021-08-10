@@ -51,6 +51,33 @@ export const getUserHand = /* GraphQL */ `
     }
   }
 `;
+export const getSequenceNumber = /* GraphQL */ `
+  query GetSequenceNumber($id: ID!) {
+    getSequenceNumber(id: $id) {
+      id
+      indexNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSequenceNumbers = /* GraphQL */ `
+  query ListSequenceNumbers(
+    $filter: ModelSequenceNumberFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSequenceNumbers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        indexNumber
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getTeam = /* GraphQL */ `
   query GetTeam($id: ID!) {
     getTeam(id: $id) {
@@ -458,6 +485,7 @@ export const getGame = /* GraphQL */ `
   query GetGame($id: ID!) {
     getGame(id: $id) {
       id
+      index
       private
       activeRoundID
       status
@@ -529,6 +557,7 @@ export const listGames = /* GraphQL */ `
     listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        index
         private
         activeRoundID
         status

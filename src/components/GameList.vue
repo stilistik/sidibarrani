@@ -9,9 +9,9 @@
       :name="game.name"
       :index="index"
       :id="game.id"
-      :team1name="game?.Teams?.items[0].name"
-      :team2name="game?.Teams?.items[1].name"
-      :style="getStyle(index)"
+      :team1name="game?.team1name"
+      :team2name="game?.team2name"
+      :style="getStyle(game.index)"
     />
   </div>
   <div class="flex">
@@ -49,7 +49,9 @@ export default defineComponent({
     const prevToken = reactive([]);
     const token = ref(null);
 
-    function getStyle(index: number) {
+    function getStyle(index: number = 0) {
+      console.log(index);
+
       const img = images[index % images.length];
       return {
         backgroundImage: `url(${img})`,
@@ -65,6 +67,7 @@ export default defineComponent({
         id: game.id,
         team1name: game.Teams.items[0].name,
         team2name: game.Teams.items[1].name,
+        index: game.index,
       }));
     });
 
@@ -80,8 +83,6 @@ export default defineComponent({
     }
 
     const hasNext = computed(() => {
-      console.log(data.value?.nextToken);
-
       return Boolean(data.value?.nextToken);
     });
     const hasPrev = computed(() => prevToken.length > 0);

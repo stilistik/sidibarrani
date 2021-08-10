@@ -1,3 +1,4 @@
+from models.seqnum import SequenceNumberModel
 import os
 from uuid import uuid4 as uuid
 import boto3
@@ -21,6 +22,7 @@ class GameModel:
     def create(name=None, private=False):
         date_now = get_iso_date_string()
         name = get_random_name() if name is None else name
+        index = SequenceNumberModel.get_index('Game')
         game = {
             'id': str(uuid()),
             'name': name,
@@ -29,6 +31,7 @@ class GameModel:
             'private': private,
             'createdAt': date_now,
             'updatedAt': date_now,
+            'index': index,
             '__typename': 'Game'
         }
 

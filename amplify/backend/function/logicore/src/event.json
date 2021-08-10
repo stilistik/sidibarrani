@@ -1,9 +1,8 @@
 {
   "typeName": "Mutation",
-  "fieldName": "playCard",
+  "fieldName": "createNewGame",
   "arguments": {
-    "roundID": "18edceb8-e6aa-49a8-968f-1ad16e9245b9",
-    "value": "QH"
+    "input": {}
   },
   "identity": {
     "claims": {

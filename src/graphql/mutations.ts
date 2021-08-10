@@ -6,6 +6,7 @@ export const createNewGame = /* GraphQL */ `
   mutation CreateNewGame($input: CreateNewGameInput) {
     createNewGame(input: $input) {
       id
+      index
       private
       activeRoundID
       status
@@ -72,6 +73,7 @@ export const joinTeam = /* GraphQL */ `
   mutation JoinTeam($input: JoinTeamInput!) {
     joinTeam(input: $input) {
       id
+      index
       private
       activeRoundID
       status
@@ -138,6 +140,7 @@ export const leaveGame = /* GraphQL */ `
   mutation LeaveGame($input: LeaveGameInput!) {
     leaveGame(input: $input) {
       id
+      index
       private
       activeRoundID
       status
@@ -204,6 +207,7 @@ export const startGame = /* GraphQL */ `
   mutation StartGame($gameID: String!) {
     startGame(gameID: $gameID) {
       id
+      index
       private
       activeRoundID
       status
@@ -270,6 +274,7 @@ export const playCard = /* GraphQL */ `
   mutation PlayCard($roundID: String!, $value: String!) {
     playCard(roundID: $roundID, value: $value) {
       id
+      index
       private
       activeRoundID
       status
@@ -336,6 +341,7 @@ export const clearStack = /* GraphQL */ `
   mutation ClearStack($roundID: String!) {
     clearStack(roundID: $roundID) {
       id
+      index
       private
       activeRoundID
       status
@@ -402,6 +408,7 @@ export const newRound = /* GraphQL */ `
   mutation NewRound($gameID: String!) {
     newRound(gameID: $gameID) {
       id
+      index
       private
       activeRoundID
       status
@@ -468,6 +475,7 @@ export const placeBet = /* GraphQL */ `
   mutation PlaceBet($roundID: String!, $value: String!) {
     placeBet(roundID: $roundID, value: $value) {
       id
+      index
       private
       activeRoundID
       status
@@ -534,6 +542,7 @@ export const skipBet = /* GraphQL */ `
   mutation SkipBet($roundID: String!) {
     skipBet(roundID: $roundID) {
       id
+      index
       private
       activeRoundID
       status
@@ -593,6 +602,45 @@ export const skipBet = /* GraphQL */ `
         }
         nextToken
       }
+    }
+  }
+`;
+export const createSequenceNumber = /* GraphQL */ `
+  mutation CreateSequenceNumber(
+    $input: CreateSequenceNumberInput!
+    $condition: ModelSequenceNumberConditionInput
+  ) {
+    createSequenceNumber(input: $input, condition: $condition) {
+      id
+      indexNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSequenceNumber = /* GraphQL */ `
+  mutation UpdateSequenceNumber(
+    $input: UpdateSequenceNumberInput!
+    $condition: ModelSequenceNumberConditionInput
+  ) {
+    updateSequenceNumber(input: $input, condition: $condition) {
+      id
+      indexNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSequenceNumber = /* GraphQL */ `
+  mutation DeleteSequenceNumber(
+    $input: DeleteSequenceNumberInput!
+    $condition: ModelSequenceNumberConditionInput
+  ) {
+    deleteSequenceNumber(input: $input, condition: $condition) {
+      id
+      indexNumber
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -1356,6 +1404,7 @@ export const createGame = /* GraphQL */ `
   ) {
     createGame(input: $input, condition: $condition) {
       id
+      index
       private
       activeRoundID
       status
@@ -1425,6 +1474,7 @@ export const updateGame = /* GraphQL */ `
   ) {
     updateGame(input: $input, condition: $condition) {
       id
+      index
       private
       activeRoundID
       status
@@ -1494,6 +1544,7 @@ export const deleteGame = /* GraphQL */ `
   ) {
     deleteGame(input: $input, condition: $condition) {
       id
+      index
       private
       activeRoundID
       status

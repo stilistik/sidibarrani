@@ -6,6 +6,7 @@ export const onUpdateGameState = /* GraphQL */ `
   subscription OnUpdateGameState($id: ID!) {
     onUpdateGameState(id: $id) {
       id
+      index
       private
       activeRoundID
       status
@@ -65,6 +66,36 @@ export const onUpdateGameState = /* GraphQL */ `
         }
         nextToken
       }
+    }
+  }
+`;
+export const onCreateSequenceNumber = /* GraphQL */ `
+  subscription OnCreateSequenceNumber {
+    onCreateSequenceNumber {
+      id
+      indexNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSequenceNumber = /* GraphQL */ `
+  subscription OnUpdateSequenceNumber {
+    onUpdateSequenceNumber {
+      id
+      indexNumber
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSequenceNumber = /* GraphQL */ `
+  subscription OnDeleteSequenceNumber {
+    onDeleteSequenceNumber {
+      id
+      indexNumber
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -780,6 +811,7 @@ export const onCreateGame = /* GraphQL */ `
   subscription OnCreateGame {
     onCreateGame {
       id
+      index
       private
       activeRoundID
       status
@@ -846,6 +878,7 @@ export const onUpdateGame = /* GraphQL */ `
   subscription OnUpdateGame {
     onUpdateGame {
       id
+      index
       private
       activeRoundID
       status
@@ -912,6 +945,7 @@ export const onDeleteGame = /* GraphQL */ `
   subscription OnDeleteGame {
     onDeleteGame {
       id
+      index
       private
       activeRoundID
       status

@@ -35,6 +35,11 @@ enum RoundMode {
 # MODELS
 ##########################
 
+type SequenceNumber @model @auth(rules: [{ allow: private }]) {
+  id: ID!
+  indexNumber: Int!
+}
+
 type Team
   @model
   @auth(rules: [{ allow: private }])
@@ -106,6 +111,7 @@ type Round
 
 type Game @model @auth(rules: [{ allow: private }]) {
   id: ID!
+  index: Int
   private: Boolean
   activeRoundID: ID
   ActiveRound: Round @connection(fields: ["activeRoundID"])
