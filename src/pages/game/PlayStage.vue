@@ -17,8 +17,8 @@
         <span>Play Mode:</span>
         <ModeIcon :mode="activeRound.mode" :size="28" />
       </div>
-      <Button @click="newRound">New Round</Button>
       <Button v-if="isClearable" @click="clear">Clear</Button>
+      <Button v-if="isEndable" @click="end">End Round</Button>
     </div>
     <YourTurn />
     <StackWinner />
@@ -33,7 +33,7 @@ import {
   useActiveRound,
   useActiveStack,
   useClearStackMutation,
-  useNewRoundMutation,
+  useEndRoundMutation,
 } from "../../api";
 import AppHeader from "../../components/AppHeader.vue";
 import Hand from "../../components/Hand.vue";
@@ -42,7 +42,6 @@ import Stack from "../../components/Stack.vue";
 import YourTurn from "../../components/YourTurn.vue";
 import StackWinner from "../../components/StackWinner.vue";
 import ModeIcon from "./ModeIcon.vue";
-import router from "../../router";
 
 export default defineComponent({
   name: "GamePage",
@@ -56,11 +55,13 @@ export default defineComponent({
     ModeIcon,
   },
   setup() {
-    const gameId = computed(
-      () => router.currentRoute.value.query.gameId as string
-    );
     const activeRound = useActiveRound();
     const activeStack = useActiveStack();
+
+    const isEndable = computed(
+      () =>
+        activeRound.value.stacks.items.length == 10 && activeStack.value.winner
+    );
 
     const isClearable = computed(
       () =>
@@ -68,16 +69,16 @@ export default defineComponent({
     );
 
     const clearStackMutation = useClearStackMutation();
-    const newRoundMutation = useNewRoundMutation();
-
-    function newRound() {
-      newRoundMutation.mutate({
-        gameID: gameId.value,
-      });
-    }
+    const endRoundMutation = useEndRoundMutation();
 
     function clear() {
       clearStackMutation.mutate({
+        roundID: activeRound.value.id,
+      });
+    }
+
+    function end() {
+      endRoundMutation.mutate({
         roundID: activeRound.value.id,
       });
     }
@@ -86,8 +87,9 @@ export default defineComponent({
       activeRound,
       activeStack,
       isClearable,
+      isEndable,
+      end,
       clear,
-      newRound,
     });
   },
 });

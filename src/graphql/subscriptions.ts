@@ -29,6 +29,7 @@ export const onUpdateGameState = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -56,6 +57,7 @@ export const onUpdateGameState = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -178,6 +180,7 @@ export const onCreateHand = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -227,6 +230,7 @@ export const onUpdateHand = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -276,6 +280,7 @@ export const onDeleteHand = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -409,6 +414,7 @@ export const onCreateStack = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -482,6 +488,7 @@ export const onUpdateStack = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -555,6 +562,7 @@ export const onDeleteStack = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -609,6 +617,7 @@ export const onCreateRound = /* GraphQL */ `
       id
       gameID
       status
+      stackCount
       activeStackID
       turnSequence
       turn
@@ -652,6 +661,7 @@ export const onCreateRound = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -677,6 +687,7 @@ export const onUpdateRound = /* GraphQL */ `
       id
       gameID
       status
+      stackCount
       activeStackID
       turnSequence
       turn
@@ -720,6 +731,7 @@ export const onUpdateRound = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -745,6 +757,7 @@ export const onDeleteRound = /* GraphQL */ `
       id
       gameID
       status
+      stackCount
       activeStackID
       turnSequence
       turn
@@ -788,6 +801,7 @@ export const onDeleteRound = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -834,6 +848,7 @@ export const onCreateGame = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -861,6 +876,7 @@ export const onCreateGame = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -901,6 +917,7 @@ export const onUpdateGame = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -928,6 +945,7 @@ export const onUpdateGame = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -968,6 +986,7 @@ export const onDeleteGame = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -995,6 +1014,7 @@ export const onDeleteGame = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn

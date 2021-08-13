@@ -3,9 +3,9 @@
 ##########################
 
 enum RoundStatus {
-  DEAL
   BET
   PLAY
+  ENDED
 }
 
 enum GameStatus {
@@ -100,6 +100,7 @@ type Round
   gameID: ID
   status: RoundStatus
   hands: [Hand] @connection(keyName: "byRound", fields: ["id"])
+  stackCount: Int!
   stacks: [Stack] @connection(keyName: "byRound", fields: ["id"])
   activeStackID: ID
   activeStack: Stack @connection(fields: ["activeStackID"])
@@ -201,6 +202,10 @@ type Mutation {
     @auth(rules: [{ allow: private }])
 
   newRound(gameID: String!): Game!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
+
+  endRound(roundID: String!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 

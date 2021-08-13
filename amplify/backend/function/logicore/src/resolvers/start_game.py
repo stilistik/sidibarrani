@@ -36,7 +36,6 @@ def validate_game_status(game_id):
 def new_round(event):
     game_id = event['arguments'].get('gameID')
 
-    # validate_game_status(game_id)
     team_users = validate_team_config(game_id)
     stack_size = len(team_users)
 
@@ -67,6 +66,8 @@ def new_round(event):
 
 def start_game(event):
     game_id = event['arguments'].get('gameID')
+
+    validate_game_status(game_id)
 
     new_round(event)
 

@@ -15,6 +15,7 @@ export const getUserHand = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -135,6 +136,7 @@ export const getHand = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -189,6 +191,7 @@ export const listHands = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -287,6 +290,7 @@ export const getStack = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -356,6 +360,7 @@ export const listStacks = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -382,6 +387,7 @@ export const getRound = /* GraphQL */ `
       id
       gameID
       status
+      stackCount
       activeStackID
       turnSequence
       turn
@@ -425,6 +431,7 @@ export const getRound = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -455,6 +462,7 @@ export const listRounds = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -508,6 +516,7 @@ export const getGame = /* GraphQL */ `
         id
         gameID
         status
+        stackCount
         activeStackID
         turnSequence
         turn
@@ -535,6 +544,7 @@ export const getGame = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn
@@ -572,6 +582,7 @@ export const listGames = /* GraphQL */ `
           id
           gameID
           status
+          stackCount
           activeStackID
           turnSequence
           turn

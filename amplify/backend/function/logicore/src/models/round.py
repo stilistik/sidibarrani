@@ -13,7 +13,8 @@ round_table = ddb.Table(round_table_name)
 
 class RoundStatus(Enum):
     BET = 'BET',
-    PLAY = 'PLAY'
+    PLAY = 'PLAY',
+    ENDED = 'ENDED'
 
 
 class RoundMode(Enum):
@@ -50,12 +51,13 @@ class RoundMode(Enum):
 
 class RoundModel:
     @staticmethod
-    def create(game_id):
+    def create(game_id, stack_count=9):
         date_now = get_iso_date_string()
         round = {
             'id': str(uuid()),
             'gameID': game_id,
             'status': RoundStatus.BET.name,
+            'stackCount': stack_count,
             'createdAt': date_now,
             'updatedAt': date_now
         }

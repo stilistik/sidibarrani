@@ -2,6 +2,7 @@
   <AppHeader />
   <BetStage v-if="activeRound?.status === 'BET'" />
   <PlayStage v-if="activeRound?.status === 'PLAY'" />
+  <ResultStage v-if="activeRound.status === 'ENDED'" />
 </template>
 
 <script lang="ts">
@@ -10,6 +11,7 @@ import { useActiveRound, useGameSubscription } from "../../api";
 import AppHeader from "../../components/AppHeader.vue";
 import PlayStage from "./PlayStage.vue";
 import BetStage from "./BetStage.vue";
+import ResultStage from "./ResultStage.vue";
 import router from "../../router";
 
 export default defineComponent({
@@ -18,6 +20,7 @@ export default defineComponent({
     AppHeader,
     PlayStage,
     BetStage,
+    ResultStage,
   },
   setup() {
     const activeRound = useActiveRound();

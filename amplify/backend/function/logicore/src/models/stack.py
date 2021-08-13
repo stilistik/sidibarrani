@@ -45,6 +45,14 @@ class StackModel:
         return response['Item']
 
     @staticmethod
+    def find_by_round(round_id):
+        response = stack_table.query(
+            IndexName="byRound",
+            KeyConditionExpression=Key("roundID").eq(round_id)
+        )
+        return response['Items']
+
+    @staticmethod
     def is_complete(stack_id):
         response = stack_table.get_item(
             Key={
