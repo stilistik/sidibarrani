@@ -2,7 +2,7 @@
   <AppHeader />
   <BetStage v-if="activeRound?.status === 'BET'" />
   <PlayStage v-if="activeRound?.status === 'PLAY'" />
-  <ResultStage v-if="activeRound.status === 'ENDED'" />
+  <ResultStage v-if="activeRound?.status === 'ENDED'" />
 </template>
 
 <script lang="ts">

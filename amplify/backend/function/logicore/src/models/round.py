@@ -198,3 +198,22 @@ class RoundModel:
             ReturnValues="ALL_NEW"
         )
         return response['Attributes']
+
+    @staticmethod
+    def set_result(round_id, result):
+        date_now = get_iso_date_string()
+        response = round_table.update_item(
+            Key={
+                'id': round_id,
+            },
+            AttributeUpdates={
+                'result': {
+                    'Value': result
+                },
+                'updatedAt': {
+                    'Value': date_now
+                }
+            },
+            ReturnValues="ALL_NEW"
+        )
+        return response['Attributes']

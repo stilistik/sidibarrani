@@ -32,9 +32,18 @@ def place_bet(event):
         amount = 157
         StackModel.add_action(ActionType.BET.name, user_id,
                               stack['id'], '{mode}:{amount}'.format(mode=mode, amount=amount))
+
+        # set the winner of the bet stack
+        team_user = TeamModel.find_team_user_in_game(round['gameID'], user_id)
+        StackModel.set_winner(stack['id'], team_user['id'])
+
+        # create a new stack and set as active
         new_stack = StackModel.create(round_id, stack['size'])
         RoundModel.set_active_stack(round_id, new_stack['id'])
+
+        # put round into play status
         RoundModel.set_round_status(round_id, RoundStatus.PLAY)
+        RoundModel.set_turn(round_id, user_id)
         RoundModel.set_mode(round_id, mode)
     else:
         amount = round_to_base(amount, 10)
@@ -53,7 +62,6 @@ def get_max_action(action):
 
 
 def skip_bet(event):
-
     round_id = event['arguments'].get('roundID')
     user_id = event['identity']['claims'].get('sub')
 
@@ -75,9 +83,20 @@ def skip_bet(event):
     mode = max_amount_action['value'].split(":")[0]
 
     if all(action['type'] == ActionType.SKIP.name for action in last_actions):
+        # set the winner of the bet stack to the user with the max amount bet
+        team_user = TeamModel.find_team_user_in_game(
+            game_id, max_amount_action['userID'])
+        StackModel.set_winner(stack['id'], team_user['id'])
+
+        # set the round to play status
         RoundModel.set_round_status(round_id, RoundStatus.PLAY)
+        RoundModel.set_turn(round_id, max_amount_action['userID'])
+
+        # create a new stack and set as active
         new_stack = StackModel.create(round_id, stack['size'])
         RoundModel.set_active_stack(round_id, new_stack['id'])
+
+        # set the play mode of the round
         RoundModel.set_mode(round_id, RoundMode.from_str(mode))
 
     return GameModel.find_by_id(game_id)

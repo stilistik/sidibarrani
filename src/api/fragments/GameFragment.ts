@@ -12,6 +12,7 @@ export const gameFragment = /* GraphQL */ `
       turn
       status
       mode
+      result
       stacks {
         items {
           id

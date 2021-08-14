@@ -1,8 +1,8 @@
 {
   "typeName": "Mutation",
-  "fieldName": "createNewGame",
+  "fieldName": "endRound",
   "arguments": {
-    "input": {}
+    "roundID": "1eeec2bf-353e-41f2-a23e-daa42d4d8938"
   },
   "identity": {
     "claims": {

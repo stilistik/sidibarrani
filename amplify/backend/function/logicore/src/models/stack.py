@@ -95,7 +95,7 @@ class StackModel:
         return action
 
     @staticmethod
-    def set_winner(stack_id, user_id):
+    def set_winner(stack_id, team_user_id):
         date_now = get_iso_date_string()
         response = stack_table.update_item(
             Key={
@@ -103,7 +103,7 @@ class StackModel:
             },
             AttributeUpdates={
                 'winnerID': {
-                    'Value': user_id,
+                    'Value': team_user_id,
                 },
                 'updatedAt': {
                     'Value': date_now

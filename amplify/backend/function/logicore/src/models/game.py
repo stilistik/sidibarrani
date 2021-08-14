@@ -31,7 +31,7 @@ class GameModel:
             'private': private,
             'createdAt': date_now,
             'updatedAt': date_now,
-            'index': index,
+            'index': int(index),
             '__typename': 'Game'
         }
 
@@ -39,7 +39,7 @@ class GameModel:
             Item=game
         )
 
-        return game
+        return GameModel.item_to_json(game)
 
     @staticmethod
     def start(game_id):
@@ -58,7 +58,7 @@ class GameModel:
             },
             ReturnValues="ALL_NEW"
         )
-        return response['Attributes']
+        return GameModel.item_to_json(response['Attributes'])
 
     @staticmethod
     def set_active_round(game_id, round_id):
@@ -77,7 +77,7 @@ class GameModel:
             },
             ReturnValues="ALL_NEW"
         )
-        return response['Attributes']
+        return GameModel.item_to_json(response['Attributes'])
 
     @staticmethod
     def find_by_id(game_id):
@@ -86,4 +86,8 @@ class GameModel:
                 'id': game_id
             }
         )
-        return response['Item']
+        return GameModel.item_to_json(response['Item'])
+
+    def item_to_json(item):
+        item['index'] = int(item['index'])
+        return item

@@ -35,6 +35,7 @@ export const createNewGame = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -63,6 +64,7 @@ export const createNewGame = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -104,6 +106,7 @@ export const joinTeam = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -132,6 +135,7 @@ export const joinTeam = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -173,6 +177,7 @@ export const leaveGame = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -201,6 +206,7 @@ export const leaveGame = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -242,6 +248,7 @@ export const startGame = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -270,6 +277,7 @@ export const startGame = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -311,6 +319,7 @@ export const playCard = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -339,6 +348,7 @@ export const playCard = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -380,6 +390,7 @@ export const clearStack = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -408,6 +419,7 @@ export const clearStack = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -449,6 +461,7 @@ export const newRound = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -477,6 +490,7 @@ export const newRound = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -518,6 +532,7 @@ export const endRound = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -546,6 +561,7 @@ export const endRound = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -587,6 +603,7 @@ export const placeBet = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -615,6 +632,7 @@ export const placeBet = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -656,6 +674,7 @@ export const skipBet = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -684,6 +703,7 @@ export const skipBet = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -828,6 +848,7 @@ export const createHand = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -881,6 +902,7 @@ export const updateHand = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -934,6 +956,7 @@ export const deleteHand = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -1080,6 +1103,7 @@ export const createStack = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -1157,6 +1181,7 @@ export const updateStack = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -1234,6 +1259,7 @@ export const deleteStack = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -1292,6 +1318,7 @@ export const createRound = /* GraphQL */ `
       turn
       mode
       betPoints
+      result
       createdAt
       updatedAt
       hands {
@@ -1336,6 +1363,7 @@ export const createRound = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -1365,6 +1393,7 @@ export const updateRound = /* GraphQL */ `
       turn
       mode
       betPoints
+      result
       createdAt
       updatedAt
       hands {
@@ -1409,6 +1438,7 @@ export const updateRound = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -1438,6 +1468,7 @@ export const deleteRound = /* GraphQL */ `
       turn
       mode
       betPoints
+      result
       createdAt
       updatedAt
       hands {
@@ -1482,6 +1513,7 @@ export const deleteRound = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -1532,6 +1564,7 @@ export const createGame = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -1560,6 +1593,7 @@ export const createGame = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -1604,6 +1638,7 @@ export const updateGame = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -1632,6 +1667,7 @@ export const updateGame = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -1676,6 +1712,7 @@ export const deleteGame = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -1704,6 +1741,7 @@ export const deleteGame = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }

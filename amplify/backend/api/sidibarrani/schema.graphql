@@ -108,6 +108,7 @@ type Round
   turn: ID
   mode: RoundMode
   betPoints: Int
+  result: AWSJSON
 }
 
 type Game @model @auth(rules: [{ allow: private }]) {

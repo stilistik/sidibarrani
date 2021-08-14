@@ -96,6 +96,10 @@ class TeamModel:
             game_team_users += team_users
         return game_team_users
 
+    def find_team_user_in_game(game_id, user_id):
+        team_users = TeamModel.find_team_users_by_game(game_id)
+        return next(team_user for team_user in team_users if team_user['userID'] == user_id)
+
     @staticmethod
     def get_opponent_team(team_id):
         response = team_table.get_item(

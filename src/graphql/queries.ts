@@ -21,6 +21,7 @@ export const getUserHand = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -142,6 +143,7 @@ export const getHand = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -197,6 +199,7 @@ export const listHands = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -296,6 +299,7 @@ export const getStack = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -366,6 +370,7 @@ export const listStacks = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -393,6 +398,7 @@ export const getRound = /* GraphQL */ `
       turn
       mode
       betPoints
+      result
       createdAt
       updatedAt
       hands {
@@ -437,6 +443,7 @@ export const getRound = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -468,6 +475,7 @@ export const listRounds = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -522,6 +530,7 @@ export const getGame = /* GraphQL */ `
         turn
         mode
         betPoints
+        result
         createdAt
         updatedAt
         hands {
@@ -550,6 +559,7 @@ export const getGame = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }
@@ -588,6 +598,7 @@ export const listGames = /* GraphQL */ `
           turn
           mode
           betPoints
+          result
           createdAt
           updatedAt
         }

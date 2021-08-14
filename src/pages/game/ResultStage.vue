@@ -2,6 +2,7 @@
   <div class="relative w-screen h-screen overflow-visible text-white">
     <div class="absolute top-20">
       <h3>Results</h3>
+      <div>{{ activeRound.result }}</div>
       <Button @click="newRound">New Round</Button>
     </div>
   </div>
@@ -9,7 +10,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive } from "vue";
-import { useNewRoundMutation } from "../../api";
+import { useActiveRound, useNewRoundMutation } from "../../api";
 import Button from "../../components/Button.vue";
 import router from "../../router";
 
@@ -22,6 +23,8 @@ export default defineComponent({
     const gameId = computed(
       () => router.currentRoute.value.query.gameId as string
     );
+
+    const activeRound = useActiveRound();
     const newRoundMutation = useNewRoundMutation();
 
     function newRound() {
@@ -32,6 +35,7 @@ export default defineComponent({
 
     return reactive({
       newRound,
+      activeRound,
     });
   },
 });
