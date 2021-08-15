@@ -90,8 +90,9 @@ def get_card_value(action_value, mode):
         return card_values[action_value]
     else:
         rank = get_rank(action_value)
-        if rank + '*' in card_values:
-            return card_values[rank + '*']
+        rank_generic = rank + '*'
+        if rank_generic in card_values:
+            return card_values[rank_generic]
 
     return 0
 
@@ -113,7 +114,9 @@ def compute_result(round):
             stack_winner_result += card_value
 
         team_user = TeamModel.find_team_user_by_id(stack['winnerID'])
-        result[team_user['teamID']] = int(stack_winner_result)
+
+        prev_result = result.get(team_user['teamID'], 0)
+        result[team_user['teamID']] = prev_result + stack_winner_result
 
     return result
 
