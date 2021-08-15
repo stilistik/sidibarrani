@@ -1,3 +1,4 @@
+from models.team import TeamModel
 from models.game import GameModel
 from models.round import RoundModel, RoundStatus, RoundMode
 from models.stack import StackModel, ActionType
@@ -101,6 +102,7 @@ def compute_result(round):
     for stack in stacks:
         if not 'winnerID' in stack:
             continue
+
         actions = StackModel.get_actions(stack['id'])
         stack_winner_result = result.get(stack['winnerID'], 0)
         for action in actions:
@@ -110,7 +112,8 @@ def compute_result(round):
             card_value = get_card_value(action['value'], round['mode'])
             stack_winner_result += card_value
 
-        result[stack['winnerID']] = int(stack_winner_result)
+        team_user = TeamModel.find_team_user_by_id(stack['winnerID'])
+        result[team_user['teamID']] = int(stack_winner_result)
 
     return result
 

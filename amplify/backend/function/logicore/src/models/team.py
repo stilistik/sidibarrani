@@ -88,6 +88,15 @@ class TeamModel:
         return response['Items']
 
     @staticmethod
+    def find_team_user_by_id(team_user_id):
+        response = teamuser_table.get_item(
+            Key={
+                'id': team_user_id,
+            },
+        )
+        return response['Item']
+
+    @staticmethod
     def find_team_users_by_game(game_id):
         game_team_users = []
         teams = TeamModel.get_teams(game_id)

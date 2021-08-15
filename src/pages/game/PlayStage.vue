@@ -12,6 +12,7 @@
           rounded-full
           text-primary
           px-5
+          py-2
         "
       >
         <span>Play Mode:</span>

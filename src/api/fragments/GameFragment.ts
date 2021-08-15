@@ -25,6 +25,10 @@ export const gameFragment = /* GraphQL */ `
               updatedAt
             }
           }
+          winner {
+            id
+            teamID}
+          }
         }
       }
       activeStack {
