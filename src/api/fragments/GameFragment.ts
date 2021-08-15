@@ -27,7 +27,7 @@ export const gameFragment = /* GraphQL */ `
           }
           winner {
             id
-            teamID}
+            teamID
           }
         }
       }

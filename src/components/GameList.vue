@@ -2,7 +2,7 @@
   <Input placeholder="Search Game" type="text" v-model="searchTerm" />
   <Loading v-if="isLoading">Loading</Loading>
   <div v-else-if="isError">Error</div>
-  <div v-else class="w-full flex flex-col gap-10 pb-20">
+  <div v-else-if="games.length > 0" class="w-full flex flex-col gap-10 pb-20">
     <Game
       v-for="(game, index) in games"
       :key="game.id"
@@ -13,6 +13,9 @@
       :team2name="game?.team2name"
       :style="getStyle(game.index)"
     />
+  </div>
+  <div v-else class="p-5 text-white font-thin text-2xl flex justify-center">
+    No games found
   </div>
   <div class="flex">
     <Button v-if="hasPrev" @click="prev()">Prev</Button>
