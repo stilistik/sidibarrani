@@ -160,6 +160,12 @@ def play_card(event):
     user_id = event['identity']['claims'].get('sub')
 
     round = RoundModel.find_by_id(round_id)
+
+    if round['locked'] is True:
+        raise Exception("Concurrent update exception")
+
+    round = RoundModel.lock(round_id)
+
     stack = StackModel.find_by_id(round['activeStackID'])
     hands = HandModel.find_by_round(round_id)
     hand = next(hand for hand in hands if hand['userID'] == user_id)
@@ -185,4 +191,6 @@ def play_card(event):
     if stack_complete:
         set_winner(round, stack)
 
+
+    RoundModel.unlock(round_id)
     return GameModel.find_by_id(round['gameID'])

@@ -217,3 +217,32 @@ class RoundModel:
             ReturnValues="ALL_NEW"
         )
         return response['Attributes']
+
+    @staticmethod
+    def set_locked(round_id, locked):
+        date_now = get_iso_date_string()
+        response = round_table.update_item(
+            Key={
+                'id': round_id,
+            },
+            AttributeUpdates={
+                'locked': {
+                    'Value': locked
+                },
+                'updatedAt': {
+                    'Value': date_now
+                }
+            },
+            ReturnValues="ALL_NEW"
+        )
+        return response['Attributes']
+
+    @staticmethod
+    def lock(round_id):
+        return RoundModel.set_locked(round_id, True)
+    
+    @staticmethod
+    def unlock(round_id):
+        return RoundModel.set_locked(round_id, False)
+
+
