@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-screen h-screen overflow-visible text-white">
+  <div class="fixed top-0 left-0 w-screen h-screen overflow-visible text-white">
     <ModeSelector :selectedMode="mode" @modeChange="onModeChange" />
     <div class="absolute left-10 top-20 py-20">
       <h3 class="font-black text-3xl mb-5">History</h3>

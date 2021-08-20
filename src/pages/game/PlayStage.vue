@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-screen h-screen overflow-visible text-white">
+  <div class="fixed top-0 left-0 w-screen h-screen overflow-visible text-white">
     <div class="absolute top-20 flex gap-3 p-3">
       <div
         class="
