@@ -32,7 +32,6 @@ export async function checkExistingSession() {
       router.replace({ path: "/login" });
     }
   } catch (err) {
-    Message.error("Error during check for existing session");
     setIsAuthenticated(false);
     router.replace({ path: "/login" });
   }

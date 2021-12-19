@@ -21,13 +21,13 @@
       class="w-full justify-center flex items-center text-2xl font-thin gap-5"
     >
       <div class="flex-1 text-left">
-        <span :style="{ textShadow: '1px 1px 5px black' }">{{
+        <span class="font-bold" :style="{ textShadow: '1px 1px 5px black' }">{{
           team1name
         }}</span>
       </div>
       <span class="flex-none text-6xl font-black mix-blend-difference">VS</span>
       <div class="flex-1 text-right">
-        <span :style="{ textShadow: '1px 1px 5px black' }">{{
+        <span class="font-bold" :style="{ textShadow: '1px 1px 5px black' }">{{
           team2name
         }}</span>
       </div>

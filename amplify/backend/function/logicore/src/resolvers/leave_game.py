@@ -15,11 +15,11 @@ def leave_game(event):
     found_in_team_1 = next(
         (True for team_user in team1users if team_user['userID'] == user_id), False)
     if found_in_team_1:
-        return TeamModel.remove_user(teams[0]['id'], user_id)
+        TeamModel.remove_user(teams[0]['id'], user_id)
 
     found_in_team_2 = next(
         (True for team_user in team2users if team_user['userID'] == user_id), False)
     if found_in_team_2:
-        return TeamModel.remove_user(teams[1]['id'], user_id)
+        TeamModel.remove_user(teams[1]['id'], user_id)
 
     return GameModel.find_by_id(game_id)

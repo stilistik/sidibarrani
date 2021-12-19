@@ -1,8 +1,10 @@
 {
   "typeName": "Mutation",
-  "fieldName": "endRound",
+  "fieldName": "leaveGame",
   "arguments": {
-    "roundID": "431d90ce-c80b-474c-b077-f3ff3d09f3df"
+    "input": {
+      "gameID": "2b7078ad-f40a-4838-976a-8d82534ef728"
+    }
   },
   "identity": {
     "claims": {

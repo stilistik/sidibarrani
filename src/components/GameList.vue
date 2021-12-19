@@ -53,8 +53,6 @@ export default defineComponent({
     const token = ref(null);
 
     function getStyle(index: number = 0) {
-      console.log(index);
-
       const img = images[index % images.length];
       return {
         backgroundImage: `url(${img})`,
