@@ -161,36 +161,38 @@ def play_card(event):
 
     round = RoundModel.find_by_id(round_id)
 
-    if round['locked'] is True:
+    if round.get('locked', False) is True:
         raise Exception("Concurrent update exception")
 
-    round = RoundModel.lock(round_id)
 
-    stack = StackModel.find_by_id(round['activeStackID'])
-    hands = HandModel.find_by_round(round_id)
-    hand = next(hand for hand in hands if hand['userID'] == user_id)
+    try:
+        round = RoundModel.lock(round_id)
 
-    if round['status'] != RoundStatus.PLAY.name:
-        raise Exception("You cannot play cards during the bidding stage")
+        stack = StackModel.find_by_id(round['activeStackID'])
+        hands = HandModel.find_by_round(round_id)
+        hand = next(hand for hand in hands if hand['userID'] == user_id)
 
-    if round['turn'] != user_id:
-        raise Exception("It's not your turn to play")
+        if round['status'] != RoundStatus.PLAY.name:
+            raise Exception("You cannot play cards during the bidding stage")
 
-    if (StackModel.is_complete(stack['id'])):
-        new_stack = StackModel.create(round_id, stack['size'])
-        RoundModel.set_active_stack(round_id, new_stack['id'])
-        stack = new_stack
+        if round['turn'] != user_id:
+            raise Exception("It's not your turn to play")
 
-    validate_card_played(stack['id'], round, hand, value)
+        if (StackModel.is_complete(stack['id'])):
+            new_stack = StackModel.create(round_id, stack['size'])
+            RoundModel.set_active_stack(round_id, new_stack['id'])
+            stack = new_stack
 
-    HandModel.remove_card(hand['id'], value)
-    RoundModel.next_turn(round_id)
-    StackModel.add_action(ActionType.PLAY.name, user_id, stack['id'], value)
+        validate_card_played(stack['id'], round, hand, value)
 
-    stack_complete = StackModel.is_complete(stack['id'])
-    if stack_complete:
-        set_winner(round, stack)
+        HandModel.remove_card(hand['id'], value)
+        RoundModel.next_turn(round_id)
+        StackModel.add_action(ActionType.PLAY.name, user_id, stack['id'], value)
 
+        stack_complete = StackModel.is_complete(stack['id'])
+        if stack_complete:
+            set_winner(round, stack)
 
-    RoundModel.unlock(round_id)
-    return GameModel.find_by_id(round['gameID'])
+    finally:
+        RoundModel.unlock(round_id)
+        return GameModel.find_by_id(round['gameID'])
