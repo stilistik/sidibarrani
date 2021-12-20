@@ -9,13 +9,33 @@
     <div class="w-full flex justify-center mt-10">
       <CopyJoinLink />
     </div>
-    <div class="text-white">
-      <div class="flex items-start mt-20">
-        <Team :team="team1" class="flex-1" />
-        <div class="">
-          <p class="font-extrabold text-6xl p-10 mt-4">VS</p>
-        </div>
-        <Team :team="team2" class="flex-1" />
+    <div class="text-white w-full relative overflow-hidden rounded-2xl mt-10">
+      <div class="z-0 absolute w-full h-full">
+        <div
+          :class="[`bg-${team1?.color}-400`, 'absolute']"
+          :style="{
+            transform: 'rotate(120deg)',
+            width: '800px',
+            height: '800px',
+            left: '-240px',
+            top: '-400px',
+          }"
+        />
+        <div
+          :class="[`bg-${team2?.color}-400`, 'absolute']"
+          :style="{
+            transform: 'rotate(120deg)',
+            width: '800px',
+            height: '800px',
+            left: '580px',
+            top: '-200px',
+          }"
+        />
+      </div>
+      <div class="w-full flex items-start justify-between z-10">
+        <Team :team="team1" />
+        <p class="font-extrabold text-6xl p-20 z-10">VS</p>
+        <Team :team="team2" />
       </div>
     </div>
 

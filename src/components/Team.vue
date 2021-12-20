@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-xl p-10 text-3xl font-black" :class="getClass()">
+  <div class="rounded-xl p-10 text-3xl font-black z-10">
     <div v-if="Boolean(team)" class="flex flex-col gap-5">
       <p>{{ team?.name }}</p>
       <User
