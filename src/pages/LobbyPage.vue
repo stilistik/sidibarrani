@@ -17,11 +17,13 @@
         </div>
         <Team :team="team2" class="flex-1" />
       </div>
-      <Button @click="leaveGame">Leave Game</Button>
     </div>
 
     <div class="flex justify-center mt-20">
       <StartGame :id="gameId" />
+    </div>
+    <div class="flex justify-center mt-20">
+      <Button @click="leaveGame">Leave Game</Button>
     </div>
   </PageContainer>
 </template>
@@ -83,6 +85,7 @@ export default defineComponent({
           input: { gameID: gameId.value },
         });
         qclient.invalidateQueries("getGame");
+        router.push({ path: "/" });
       } catch (err) {
         Message.error("Could not leave the game");
       }

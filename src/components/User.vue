@@ -9,14 +9,14 @@
         items-center
         justify-center
         rounded-full
-        font-thin
+        font-black
         text-2xl text-white
       "
       :class="color"
     >
       {{ firstLetter }}
     </div>
-    <span class="text-xl font-thin text-white">{{ username }}</span>
+    <span class="text-xl font-black text-white">{{ username }}</span>
   </div>
 </template>
 

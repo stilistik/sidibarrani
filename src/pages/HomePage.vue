@@ -1,8 +1,6 @@
 <template>
   <AppHeader />
   <PageContainer>
-    <PageTitle class="mt-10">Welcome</PageTitle>
-
     <div class="flex gap-10 mt-20">
       <div class="flex-1 flex items-start justify-end">
         <div class="w-full flex flex-col gap-5">
