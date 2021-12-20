@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-xl p-10 text-3xl font-extrabold" :class="getClass()">
+  <div class="rounded-xl p-10 text-3xl font-black" :class="getClass()">
     <div v-if="Boolean(team)" class="flex flex-col gap-5">
       <p>{{ team?.name }}</p>
       <User
@@ -34,11 +34,7 @@ export default defineComponent({
 
     function getClass() {
       const color = props?.team?.color as Color;
-      return [
-        colorClasses[color]?.shadow,
-        colorClasses[color]?.border,
-        "border-2",
-      ];
+      return [colorClasses[color]?.bg];
     }
 
     return reactive({

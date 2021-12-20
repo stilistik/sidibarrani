@@ -7,7 +7,7 @@
       hover:bg-gray-700
       text-white
       shadow-2xl
-      font-bold
+      font-black
       flex
       items-center
       justify-center

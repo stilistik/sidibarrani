@@ -1,43 +1,55 @@
 <template>
-  <div
+  <button
+    @click="join"
     class="
+      relative
       w-full
-      p-8
-      space-y-4
-      rounded-xl
       text-white
-      flex flex-col
+      flex
       items-center
       shadow-2xl
+      rounded-xl
+      overflow-hidden
     "
   >
-    <h3
-      class="text-4xl font-black"
-      :style="{ textShadow: '2px 2px 10px black' }"
-    >
-      {{ name }}
-    </h3>
-    <div
-      class="w-full justify-center flex items-center text-2xl font-thin gap-5"
-    >
-      <div class="flex-1 text-left">
-        <span class="font-bold" :style="{ textShadow: '1px 1px 5px black' }">{{
-          team1name
-        }}</span>
-      </div>
-      <span class="flex-none text-6xl font-black mix-blend-difference">VS</span>
-      <div class="flex-1 text-right">
-        <span class="font-bold" :style="{ textShadow: '1px 1px 5px black' }">{{
-          team2name
-        }}</span>
+    <div class="z-0 absolute w-full h-full">
+      <div
+        :class="[`bg-${color1}-400`, 'absolute']"
+        :style="{
+          transform: 'rotate(120deg)',
+          width: '400px',
+          height: '400px',
+          left: '-130px',
+          top: '-200px',
+        }"
+      />
+      <div
+        :class="[`bg-${color2}-400`, 'absolute']"
+        :style="{
+          transform: 'rotate(120deg)',
+          width: '400px',
+          height: '400px',
+          left: '280px',
+          top: '-100px',
+        }"
+      />
+    </div>
+    <div class="z-10 w-full flex p-8">
+      <div class="w-full justify-between flex items-center text-2xl font-thin">
+        <div class="">
+          <span class="font-black">{{ team1name }}</span>
+        </div>
+        <span class="font-black text-5xl ring-black">VS</span>
+        <div class="">
+          <span class="font-black">{{ team2name }}</span>
+        </div>
       </div>
     </div>
-    <Button @click="join" class="w-full">Join</Button>
-  </div>
+  </button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive } from "vue";
 import router from "../router";
 import Button from "./Button.vue";
 import { colors } from "../utils/ColorUtils";
@@ -47,15 +59,30 @@ export default defineComponent({
   components: {
     Button,
   },
-  props: ["name", "id", "index", "team1name", "team2name"],
+  props: [
+    "name",
+    "id",
+    "index",
+    "team1name",
+    "team2name",
+    "team1color",
+    "team2color",
+  ],
   setup(props) {
+    console.log(props);
+
     const indexInBounds = props.index % colors.length;
 
     function join() {
       router.push({ path: "/lobby", query: { gameId: props.id } });
     }
 
-    return { color: colors[indexInBounds], join };
+    return reactive({
+      color: colors[indexInBounds],
+      join,
+      color1: props.team1color,
+      color2: props.team2color,
+    });
   },
 });
 </script>

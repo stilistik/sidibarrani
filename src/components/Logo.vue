@@ -13,7 +13,11 @@
       tracking-tighter
       shadow-primary
     "
-    style="width: 220px; height: 220px"
+    :style="{
+      textShadow: '2px 2px 10px black',
+      width: '220px',
+      height: '220px',
+    }"
   >
     SB
   </div>

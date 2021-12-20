@@ -11,7 +11,8 @@
       :id="game.id"
       :team1name="game?.team1name"
       :team2name="game?.team2name"
-      :style="getStyle(game.index)"
+      :team1color="game?.team1color"
+      :team2color="game?.team2color"
     />
   </div>
   <div v-else class="p-5 text-white font-thin text-2xl flex justify-center">
@@ -32,13 +33,6 @@ import { useListGamesQuery } from "../api";
 import { useDebouncedRef } from "../utils/UseDebouncedRef";
 import Loading from "./Loading.vue";
 
-const images = [
-  "assets/bg-1.jpeg",
-  "assets/bg-2.jpeg",
-  "assets/bg-3.jpeg",
-  "assets/bg-4.jpeg",
-];
-
 export default defineComponent({
   components: {
     Game,
@@ -52,24 +46,20 @@ export default defineComponent({
     const prevToken = reactive([]);
     const token = ref(null);
 
-    function getStyle(index: number = 0) {
-      const img = images[index % images.length];
-      return {
-        backgroundImage: `url(${img})`,
-        backgroundSize: "cover",
-      };
-    }
-
     const { isLoading, isError, data } = useListGamesQuery(searchTerm, token);
 
     const games = computed(() => {
-      return data.value?.items.map((game: any) => ({
-        name: game.name,
-        id: game.id,
-        team1name: game.Teams.items[0].name,
-        team2name: game.Teams.items[1].name,
-        index: game.index,
-      }));
+      return data.value?.items.map((game: any) => {
+        return {
+          name: game.name,
+          id: game.id,
+          team1name: game.Teams.items[0].name,
+          team2name: game.Teams.items[1].name,
+          team1color: game.Teams.items[0].color,
+          team2color: game.Teams.items[1].color,
+          index: game.index,
+        };
+      });
     });
 
     function next() {
@@ -92,7 +82,6 @@ export default defineComponent({
       isLoading,
       isError,
       games,
-      getStyle,
       searchTerm,
       next,
       prev,

@@ -25,6 +25,7 @@ const listGames = /* GraphQL */ `
           items {
             id
             name
+            color
           }
         }
         Rounds {
