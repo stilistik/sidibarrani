@@ -10,31 +10,9 @@
       <CopyJoinLink />
     </div>
     <div class="text-white w-full relative overflow-hidden rounded-2xl mt-10">
-      <div class="z-0 absolute w-full h-full">
-        <div
-          :class="[`bg-${team1?.color}-400`, 'absolute']"
-          :style="{
-            transform: 'rotate(120deg)',
-            width: '800px',
-            height: '800px',
-            left: '-240px',
-            top: '-400px',
-          }"
-        />
-        <div
-          :class="[`bg-${team2?.color}-400`, 'absolute']"
-          :style="{
-            transform: 'rotate(120deg)',
-            width: '800px',
-            height: '800px',
-            left: '580px',
-            top: '-200px',
-          }"
-        />
-      </div>
-      <div class="w-full flex items-start justify-between z-10">
+      <SplitBackground :color1="team1?.color" :color2="team2?.color" />
+      <div class="w-full flex relative items-start justify-between z-10">
         <Team :team="team1" />
-        <p class="font-extrabold text-6xl p-20 z-10">VS</p>
         <Team :team="team2" />
       </div>
     </div>
@@ -64,6 +42,7 @@ import Button from "../components/Button.vue";
 import Team from "../components/Team.vue";
 import StartGame from "../components/StartGame.vue";
 import CopyJoinLink from "../components/CopyJoinLink.vue";
+import SplitBackground from "../components/SplitBackground.vue";
 import {
   useLeaveTeamMutation,
   useGameQuery,
@@ -84,6 +63,7 @@ export default defineComponent({
     StartGame,
     CopyJoinLink,
     Button,
+    SplitBackground,
   },
   setup() {
     const leaveGameMutation = useLeaveTeamMutation();

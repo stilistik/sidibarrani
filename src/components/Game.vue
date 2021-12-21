@@ -12,34 +12,12 @@
       overflow-hidden
     "
   >
-    <div class="z-0 absolute w-full h-full">
-      <div
-        :class="[`bg-${color1}-400`, 'absolute']"
-        :style="{
-          transform: 'rotate(120deg)',
-          width: '400px',
-          height: '400px',
-          left: '-130px',
-          top: '-200px',
-        }"
-      />
-      <div
-        :class="[`bg-${color2}-400`, 'absolute']"
-        :style="{
-          transform: 'rotate(120deg)',
-          width: '400px',
-          height: '400px',
-          left: '280px',
-          top: '-100px',
-        }"
-      />
-    </div>
+    <SplitBackground :color1="color1" :color2="color2" :size="50" />
     <div class="z-10 w-full flex p-8">
       <div class="w-full justify-between flex items-center text-2xl font-thin">
         <div class="">
           <span class="font-black">{{ team1name }}</span>
         </div>
-        <span class="font-black text-5xl ring-black">VS</span>
         <div class="">
           <span class="font-black">{{ team2name }}</span>
         </div>
@@ -52,12 +30,14 @@
 import { defineComponent, reactive } from "vue";
 import router from "../router";
 import Button from "./Button.vue";
+import SplitBackground from "./SplitBackground.vue";
 import { colors } from "../utils/ColorUtils";
 
 export default defineComponent({
   name: "Game",
   components: {
     Button,
+    SplitBackground,
   },
   props: [
     "name",
@@ -69,8 +49,6 @@ export default defineComponent({
     "team2color",
   ],
   setup(props) {
-    console.log(props);
-
     const indexInBounds = props.index % colors.length;
 
     function join() {
