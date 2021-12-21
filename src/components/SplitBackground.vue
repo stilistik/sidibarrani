@@ -1,14 +1,22 @@
 <template>
   <div class="z-0 absolute w-full h-full flex">
     <div
-      class="w-full h-full absolute top-0 left-0 transition-all"
+      class="w-full h-full absolute top-0 left-0"
       :class="[bg1class]"
-      :style="{ clipPath: 'polygon(0 0, 54% 0, 44% 100%, 0% 100%)' }"
+      :style="{
+        clipPath: 'polygon(0 0, 54% 0, 44% 100%, 0% 100%)',
+        transform: transformLeft,
+        transition: 'transform 0.4s ease-out',
+      }"
     />
     <div
-      class="w-full h-full absolute top-0 left-0 transition-all"
+      class="w-full h-full absolute top-0 left-0"
       :class="[bg2class]"
-      :style="{ clipPath: 'polygon(56% 0, 100% 0, 100% 100%, 46% 100%)' }"
+      :style="{
+        clipPath: 'polygon(56% 0, 100% 0, 100% 100%, 46% 100%)',
+        transform: transformRight,
+        transition: 'transform 0.4s ease-out',
+      }"
     />
     <div
       class="
@@ -36,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, onMounted, reactive, ref } from "vue";
 import { Color, colorClasses } from "../utils/ColorUtils";
 
 export default defineComponent({
@@ -55,10 +63,22 @@ export default defineComponent({
         : colorClasses[props.color2 as Color]?.bg;
     });
 
+    const transformLeft = ref("translate(-50%, 0px)");
+    const transformRight = ref("translate(50%, 0px)");
+
+    onMounted(() => {
+      setTimeout(() => {
+        transformLeft.value = "translate(0,0)";
+        transformRight.value = "translate(0,0)";
+      }, 100);
+    });
+
     return reactive({
       size: props.size,
       bg1class,
       bg2class,
+      transformLeft,
+      transformRight,
     });
   },
 });
