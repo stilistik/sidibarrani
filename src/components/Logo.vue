@@ -3,7 +3,7 @@
     class="
       text-primary
       font-black
-      text-9xl
+      text-7xl
       border-8
       rounded-full
       border-primary
