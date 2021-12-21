@@ -10,7 +10,12 @@
       <CopyJoinLink />
     </div>
     <div class="text-white w-full relative overflow-hidden rounded-2xl mt-10">
-      <SplitBackground :color1="team1?.color" :color2="team2?.color" />
+      <SplitBackground
+        :color1="team1?.color"
+        :color2="team2?.color"
+        :size="100"
+        :class="'text-5xl'"
+      />
       <div class="w-full flex relative items-start justify-between z-10">
         <Team :team="team1" />
         <Team :team="team2" />
