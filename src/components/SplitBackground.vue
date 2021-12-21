@@ -2,12 +2,12 @@
   <div class="z-0 absolute w-full h-full flex">
     <div
       class="w-full h-full absolute top-0 left-0"
-      :class="[`bg-${color1}-400`]"
+      :class="[bg1class]"
       :style="{ clipPath: 'polygon(0 0, 54% 0, 44% 100%, 0% 100%)' }"
     />
     <div
       class="w-full h-full absolute top-0 left-0"
-      :class="[`bg-${color2}-400`]"
+      :class="[bg2class]"
       :style="{ clipPath: 'polygon(56% 0, 100% 0, 100% 100%, 46% 100%)' }"
     />
     <div
@@ -36,13 +36,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { computed, defineComponent, reactive } from "vue";
+import { Color, colorClasses } from "../utils/ColorUtils";
 
 export default defineComponent({
   name: "SplitBackground",
-  props: ["color1", "color2", "size"],
+  props: ["color1", "color2", "size", "hovered"],
   setup(props) {
-    return reactive({ size: props.size });
+    const bg1class = computed(() => {
+      return props.hovered
+        ? colorClasses[props.color1 as Color].bgHover
+        : colorClasses[props.color1 as Color].bg;
+    });
+
+    const bg2class = computed(() => {
+      return props.hovered
+        ? colorClasses[props.color2 as Color].bgHover
+        : colorClasses[props.color2 as Color].bg;
+    });
+
+    return reactive({
+      size: props.size,
+      bg1class,
+      bg2class,
+    });
   },
 });
 </script>

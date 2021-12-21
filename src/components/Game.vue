@@ -1,6 +1,8 @@
 <template>
   <button
     @click="join"
+    @mouseenter="hovered = true"
+    @mouseleave="hovered = false"
     class="
       relative
       w-full
@@ -12,7 +14,12 @@
       overflow-hidden
     "
   >
-    <SplitBackground :color1="color1" :color2="color2" :size="50" />
+    <SplitBackground
+      :color1="color1"
+      :color2="color2"
+      :size="50"
+      :hovered="hovered"
+    />
     <div class="z-10 w-full flex p-8">
       <div class="w-full justify-between flex items-center text-2xl font-thin">
         <div class="">
@@ -27,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref } from "vue";
 import router from "../router";
 import Button from "./Button.vue";
 import SplitBackground from "./SplitBackground.vue";
@@ -55,9 +62,12 @@ export default defineComponent({
       router.push({ path: "/lobby", query: { gameId: props.id } });
     }
 
+    const hovered = ref(false);
+
     return reactive({
       color: colors[indexInBounds],
       join,
+      hovered,
       color1: props.team1color,
       color2: props.team2color,
     });
