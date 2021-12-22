@@ -71,6 +71,7 @@ export default defineComponent({
           {
             onError: ({ errors }: any) => {
               Message.error(errors[0].message);
+              played.value = false;
             },
           }
         );
