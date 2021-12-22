@@ -164,7 +164,6 @@ def play_card(event):
     if round.get('locked', False) is True:
         raise Exception("Concurrent update exception")
 
-
     try:
         round = RoundModel.lock(round_id)
 
@@ -187,12 +186,14 @@ def play_card(event):
 
         HandModel.remove_card(hand['id'], value)
         RoundModel.next_turn(round_id)
-        StackModel.add_action(ActionType.PLAY.name, user_id, stack['id'], value)
+        StackModel.add_action(ActionType.PLAY.name,
+                              user_id, stack['id'], value)
 
         stack_complete = StackModel.is_complete(stack['id'])
         if stack_complete:
             set_winner(round, stack)
 
+        return GameModel.find_by_id(round['gameID'])
+
     finally:
         RoundModel.unlock(round_id)
-        return GameModel.find_by_id(round['gameID'])
