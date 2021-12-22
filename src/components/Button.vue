@@ -57,7 +57,9 @@ export default defineComponent({
       }
 
       if (props.hoverColor) {
-        classes.push(colorClasses[props.hoverColor as Color].textHover);
+        classes.push(
+          "hover:" + colorClasses[props.hoverColor as Color].textHover
+        );
       } else {
         classes.push("hover:text-primary");
       }
