@@ -68,7 +68,10 @@ export default defineComponent({
           onSuccess: (game) => {
             this.qclient.invalidateQueries("listGames");
             Message.success("Game created!");
-            this.$router.push({ path: "/lobby", query: { gameId: game.id } });
+            this.$router.push({
+              path: "/game/lobby",
+              query: { gameId: game.id },
+            });
           },
           onError: () => {
             Message.error("Error creating game");
