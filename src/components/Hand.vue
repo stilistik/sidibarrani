@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, ref, watchEffect } from "vue";
 import { usePlayCardMutation, useHandQuery } from "../api";
 import { useCurrentUser } from "../utils/Auth";
 import { Message } from "../utils/Message";
@@ -52,8 +52,17 @@ export default defineComponent({
       yTranslation.value = 0;
     }
 
+    const played = ref(false);
+
+    watchEffect(() => {
+      if (props?.round?.turn === user?.value?.id) {
+        played.value = false;
+      }
+    });
+
     function onClick(card: string) {
-      if (props.round.turn === user.value.id) {
+      if (!played.value) {
+        played.value = true;
         playCardMutation.mutate(
           {
             value: card,
