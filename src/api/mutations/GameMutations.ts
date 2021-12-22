@@ -48,7 +48,7 @@ const leaveGame = /* GraphQL */ `
   ${gameFragment}
 `;
 
-export const useLeaveTeamMutation = () => {
+export const useLeaveGameMutation = () => {
   const res = useMutation(async (variables: any) => {
     const cognitoUser = await Auth.currentAuthenticatedUser();
     const input = {

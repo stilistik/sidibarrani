@@ -51,7 +51,7 @@ import StartGame from "../components/StartGame.vue";
 import CopyJoinLink from "../components/CopyJoinLink.vue";
 import SplitBackground from "../components/SplitBackground.vue";
 import {
-  useLeaveTeamMutation,
+  useLeaveGameMutation,
   useGameQuery,
   useGameSubscription,
 } from "../api";
@@ -73,7 +73,7 @@ export default defineComponent({
     SplitBackground,
   },
   setup() {
-    const leaveGameMutation = useLeaveTeamMutation();
+    const leaveGameMutation = useLeaveGameMutation();
     const qclient = useQueryClient();
     const gameId = computed(
       () => router.currentRoute.value.query.gameId as string
