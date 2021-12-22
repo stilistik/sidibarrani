@@ -1,38 +1,4 @@
 {
-  "prod": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-sidibarrani-prod-211754-authRole",
-      "UnauthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-prod-211754-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-prod-211754-authRole",
-      "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-sidibarrani-prod-211754-deployment",
-      "UnauthRoleName": "amplify-sidibarrani-prod-211754-unauthRole",
-      "StackName": "amplify-sidibarrani-prod-211754",
-      "StackId": "arn:aws:cloudformation:eu-central-1:875427163685:stack/amplify-sidibarrani-prod-211754/a0f74460-636c-11ec-be4c-0a250e86a2c6",
-      "AmplifyAppId": "da3xodyxlcfep"
-    },
-    "categories": {
-      "auth": {
-        "sidibarrani76d4ecdc": {}
-      },
-      "function": {
-        "sidibarrani76d4ecdcPostConfirmation": {
-          "deploymentBucketName": "amplify-sidibarrani-prod-211754-deployment",
-          "s3Key": "amplify-builds/sidibarrani76d4ecdcPostConfirmation-5a44654f384633594861-build.zip"
-        },
-        "logicore": {
-          "deploymentBucketName": "amplify-sidibarrani-prod-211754-deployment",
-          "s3Key": "amplify-builds/logicore-436a6f672f50656f524e-build.zip"
-        }
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "da3xodyxlcfep",
-          "type": "manual"
-        }
-      }
-    }
-  },
   "dev": {
     "awscloudformation": {
       "AuthRoleName": "amplify-sidibarrani-dev-94323-authRole",
