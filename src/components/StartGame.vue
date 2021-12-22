@@ -30,7 +30,7 @@ export default defineComponent({
           onSuccess: () => {
             Message.success("Game started");
             this.$router.push({
-              path: "/game",
+              path: "/game/play",
               query: { gameId: this.$props.id },
             });
           },

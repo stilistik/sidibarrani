@@ -3,6 +3,7 @@ import SignupPage from "/src/pages/SignupPage.vue";
 import HomePage from "/src/pages/HomePage.vue";
 import LobbyPage from "/src/pages/LobbyPage.vue";
 import GamePage from "/src/pages/game/GamePage.vue";
+import GameProvider from "/src/components/GameProvider.vue";
 
 const routes = [
   {
@@ -30,20 +31,30 @@ const routes = [
     },
   },
   {
-    path: "/lobby",
-    name: "LobbyPage",
-    component: LobbyPage,
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: "/game",
-    name: "GamePage",
-    component: GamePage,
+    name: "Game",
+    component: GameProvider,
     meta: {
       requiresAuth: true,
     },
+    children: [
+      {
+        path: "lobby",
+        name: "LobbyPage",
+        component: LobbyPage,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "play",
+        name: "GamePage",
+        component: GamePage,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+    ],
   },
 ];
 

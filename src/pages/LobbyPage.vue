@@ -50,11 +50,7 @@ import Team from "../components/Team.vue";
 import StartGame from "../components/StartGame.vue";
 import CopyJoinLink from "../components/CopyJoinLink.vue";
 import SplitBackground from "../components/SplitBackground.vue";
-import {
-  useLeaveGameMutation,
-  useGameQuery,
-  useGameSubscription,
-} from "../api";
+import { useLeaveGameMutation, useGameQuery } from "../api";
 import router from "../router";
 import { useQueryClient } from "vue-query";
 import { Message } from "../utils/Message";
@@ -91,17 +87,11 @@ export default defineComponent({
       }
     }
 
-    const subscription = useGameSubscription(gameId.value);
-
-    onBeforeUnmount(() => {
-      subscription.unsubscribe();
-    });
-
     const { data, isLoading } = useGameQuery(gameId);
 
     watchEffect(() => {
       if (data?.value?.status === "STARTED") {
-        router.replace({ path: "game", query: { gameId: gameId.value } });
+        router.replace({ path: "/game/play", query: { gameId: gameId.value } });
       }
     });
 

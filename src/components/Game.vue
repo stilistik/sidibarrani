@@ -58,7 +58,7 @@ export default defineComponent({
   ],
   setup(props) {
     function join() {
-      router.push({ path: "/lobby", query: { gameId: props.id } });
+      router.push({ path: "/game/lobby", query: { gameId: props.id } });
     }
 
     console.log(props.index);
