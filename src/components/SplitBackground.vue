@@ -6,7 +6,7 @@
       :style="{
         clipPath: 'polygon(0 0, 54% 0, 44% 100%, 0% 100%)',
         transform: transformLeft,
-        transition: 'transform 0.4s ease-out',
+        transition: 'transform 0.6s cubic-bezier(0, 0, 0.3, 1)',
       }"
     />
     <div
@@ -15,7 +15,7 @@
       :style="{
         clipPath: 'polygon(56% 0, 100% 0, 100% 100%, 46% 100%)',
         transform: transformRight,
-        transition: 'transform 0.4s ease-out',
+        transition: 'transform 0.6s cubic-bezier(0, 0, 0.3, 1)',
       }"
     />
     <div
@@ -49,7 +49,7 @@ import { Color, colorClasses } from "../utils/ColorUtils";
 
 export default defineComponent({
   name: "SplitBackground",
-  props: ["color1", "color2", "size", "hovered"],
+  props: ["color1", "color2", "size", "hovered", "animationDelay"],
   setup(props) {
     const bg1class = computed(() => {
       return props.hovered
@@ -63,14 +63,16 @@ export default defineComponent({
         : colorClasses[props.color2 as Color]?.bg;
     });
 
-    const transformLeft = ref("translate(-50%, 0px)");
-    const transformRight = ref("translate(50%, 0px)");
+    const transformLeft = ref("translate(-55%, 0px)");
+    const transformRight = ref("translate(55%, 0px)");
+
+    console.log(props.animationDelay);
 
     onMounted(() => {
       setTimeout(() => {
         transformLeft.value = "translate(0,0)";
         transformRight.value = "translate(0,0)";
-      }, 100);
+      }, 100 + props.animationDelay);
     });
 
     return reactive({

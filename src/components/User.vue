@@ -10,6 +10,7 @@
         justify-center
         rounded-full
         font-black
+        border-2 border-white
         text-2xl text-white
       "
       :class="color"

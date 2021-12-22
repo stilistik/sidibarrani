@@ -19,6 +19,7 @@
       :color2="color2"
       :size="50"
       :hovered="hovered"
+      :animationDelay="index * 100"
     />
     <div class="z-10 w-full flex p-8">
       <div class="w-full justify-between flex items-center text-2xl font-thin">
@@ -38,7 +39,6 @@ import { defineComponent, reactive, ref } from "vue";
 import router from "../router";
 import Button from "./Button.vue";
 import SplitBackground from "./SplitBackground.vue";
-import { colors } from "../utils/ColorUtils";
 
 export default defineComponent({
   name: "Game",
@@ -54,20 +54,21 @@ export default defineComponent({
     "team2name",
     "team1color",
     "team2color",
+    "animationDelay",
   ],
   setup(props) {
-    const indexInBounds = props.index % colors.length;
-
     function join() {
       router.push({ path: "/lobby", query: { gameId: props.id } });
     }
 
+    console.log(props.index);
+
     const hovered = ref(false);
 
     return reactive({
-      color: colors[indexInBounds],
       join,
       hovered,
+      index: props.index,
       color1: props.team1color,
       color2: props.team2color,
     });
