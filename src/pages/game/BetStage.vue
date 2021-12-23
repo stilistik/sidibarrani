@@ -15,7 +15,11 @@
     </div>
     <YourTurn />
     <div class="absolute top-0 left-0">
-      <Hand v-if="Boolean(activeRound)" :round="activeRound" />
+      <Hand
+        v-if="Boolean(activeRound)"
+        :round="activeRound"
+        :handType="'NORMAL'"
+      />
     </div>
   </div>
 </template>

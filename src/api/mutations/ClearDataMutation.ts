@@ -17,7 +17,7 @@ export const useClearDataMutation = () => {
     },
     {
       onSuccess: () => {
-        qc.clear();
+        qc.refetchQueries();
       },
     }
   );

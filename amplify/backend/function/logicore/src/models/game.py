@@ -32,7 +32,7 @@ class GameModel:
         game = {
             'id': str(uuid()),
             'name': name,
-            'mode': mode.name,
+            'mode': mode,
             'nameLowerCase': name.lower(),
             'status': 'CREATED',
             'private': private,

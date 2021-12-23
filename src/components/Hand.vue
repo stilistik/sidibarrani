@@ -30,17 +30,18 @@ export default defineComponent({
   },
   props: {
     round: Object,
+    handType: String,
   },
-  setup(props) {
+  setup({ round, handType }) {
     const user = useCurrentUser();
 
     const cardWidth = 210;
     const cardHeight = 300;
 
-    const roundId = computed(() => props.round.id);
+    const roundId = computed(() => round.id);
     const playCardMutation = usePlayCardMutation();
 
-    const { data, isLoading, isError } = useHandQuery(roundId);
+    const { data, isLoading, isError } = useHandQuery(roundId, handType);
     const cards = computed(() => data?.value?.cards);
 
     const yTranslation = ref(0);
@@ -55,7 +56,7 @@ export default defineComponent({
     const played = ref(false);
 
     watchEffect(() => {
-      if (props?.round?.turn === user?.value?.id) {
+      if (round?.turn === user?.value?.id) {
         played.value = false;
       }
     });
@@ -66,7 +67,7 @@ export default defineComponent({
         playCardMutation.mutate(
           {
             value: card,
-            roundID: props.round.id,
+            roundID: round.id,
           },
           {
             onError: ({ errors }: any) => {
@@ -85,7 +86,7 @@ export default defineComponent({
       const offset = 100;
       const startX =
         window.innerWidth / 2 -
-        Math.floor(cardCount / 2) * offset -
+        (Math.floor(cardCount / 2) - (cardCount % 2 === 0 ? 0.5 : 0)) * offset -
         cardWidth / 2;
 
       return startX + idx * offset;

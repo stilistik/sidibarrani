@@ -1,5 +1,9 @@
 <template>
-  <img class="p-2 bg-white" :style="style" src="assets/card_back_2.png" />
+  <img
+    class="p-2 bg-white rounded-xl"
+    :style="style"
+    src="/assets/card_back_2.png"
+  />
 </template>
 
 <script lang="ts">

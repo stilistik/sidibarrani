@@ -34,7 +34,7 @@ import Card_AC from "./AC.vue";
 import Card_AH from "./AH.vue";
 import Card_AD from "./AD.vue";
 import Card_AS from "./AS.vue";
-import { DefineComponent } from "vue";
+import CardBack from "./CardBack.vue";
 
 export const CardComponents = {
   Card_6C,
@@ -111,4 +111,5 @@ export const cardsByCode: Record<string, any> = {
   AH: Card_AH,
   AD: Card_AD,
   AS: Card_AS,
+  X: CardBack,
 };
