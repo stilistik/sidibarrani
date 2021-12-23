@@ -1,35 +1,33 @@
 <template>
   <AppHeader />
   <PageContainer>
-    <template v-if="!isLoading">
-      <div class="text-center">
-        <h1 class="mt-10 text-white text-9xl font-extrabold">
-          {{ gameName }}
-        </h1>
+    <div class="text-center">
+      <h1 class="mt-10 text-white text-9xl font-extrabold">
+        {{ gameName }}
+      </h1>
+    </div>
+    <div class="w-full flex justify-center mt-10">
+      <CopyJoinLink />
+    </div>
+    <div class="text-white w-full relative overflow-hidden rounded-2xl mt-10">
+      <SplitBackground
+        :color1="team1?.color"
+        :color2="team2?.color"
+        :size="100"
+        :class="'text-5xl'"
+      />
+      <div class="w-full flex relative items-start justify-between z-10">
+        <Team :team="team1" />
+        <Team :team="team2" />
       </div>
-      <div class="w-full flex justify-center mt-10">
-        <CopyJoinLink />
-      </div>
-      <div class="text-white w-full relative overflow-hidden rounded-2xl mt-10">
-        <SplitBackground
-          :color1="team1?.color"
-          :color2="team2?.color"
-          :size="100"
-          :class="'text-5xl'"
-        />
-        <div class="w-full flex relative items-start justify-between z-10">
-          <Team :team="team1" />
-          <Team :team="team2" />
-        </div>
-      </div>
+    </div>
 
-      <div class="flex justify-center mt-20">
-        <StartGame :id="gameId" />
-      </div>
-      <div class="flex justify-center mt-20">
-        <Button @click="leaveGame">Leave Game</Button>
-      </div>
-    </template>
+    <div class="flex justify-center mt-20">
+      <StartGame :id="gameId" />
+    </div>
+    <div class="flex justify-center mt-20">
+      <Button @click="leaveGame">Leave Game</Button>
+    </div>
   </PageContainer>
 </template>
 
