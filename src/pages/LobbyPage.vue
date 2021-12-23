@@ -32,13 +32,7 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  onBeforeUnmount,
-  reactive,
-  watchEffect,
-} from "vue";
+import { computed, defineComponent, reactive, watchEffect } from "vue";
 import PageContainer from "../components/PageContainer.vue";
 import AppHeader from "../components/AppHeader.vue";
 import PageTitle from "../components/PageTitle.vue";
