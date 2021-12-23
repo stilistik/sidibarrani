@@ -1,10 +1,11 @@
+from typing import Dict
 from models.seqnum import SequenceNumberModel
 import os
 from uuid import uuid4 as uuid
 import boto3
 from enum import Enum
 from boto3.dynamodb.conditions import Key
-from utils.utils import get_iso_date_string, get_random_name
+from utils.utils import get_iso_date_string, get_random_name, clear_table
 
 ddb = boto3.resource('dynamodb')
 game_table_name = os.environ.get("GAMETABLE")
@@ -17,15 +18,21 @@ class GameStatus(Enum):
     ENDED = 'ENDED'
 
 
+class GameMode(Enum):
+    DUO = 'DUO',
+    QUATTRO = 'QUATTRO'
+
+
 class GameModel:
     @staticmethod
-    def create(name=None, private=False):
+    def create(name=None, private=False, mode=GameMode.DUO):
         date_now = get_iso_date_string()
         name = get_random_name() if name is None else name
         index = SequenceNumberModel.get_index('Game')
         game = {
             'id': str(uuid()),
             'name': name,
+            'mode': mode.name,
             'nameLowerCase': name.lower(),
             'status': 'CREATED',
             'private': private,
@@ -88,6 +95,11 @@ class GameModel:
         )
         return GameModel.item_to_json(response['Item'])
 
+    @staticmethod
     def item_to_json(item):
         item['index'] = int(item['index'])
         return item
+
+    @staticmethod
+    def clear_data():
+        clear_table(game_table)

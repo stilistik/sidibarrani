@@ -2,6 +2,16 @@
 # ENUMS
 ##########################
 
+enum GameMode {
+  DUO
+}
+
+enum HandType {
+  NORMAL # a hand open only to the owner
+  OPEN # a hand open to everyone
+  HIDDEN # a hand hidden for everyone
+}
+
 enum RoundStatus {
   BET
   PLAY
@@ -59,6 +69,7 @@ type Hand
   id: ID!
   roundID: ID
   userID: ID
+  type: HandType
   user: User @connection(fields: ["userID"])
   round: Round @connection(fields: ["roundID"])
   cards: [String]
@@ -114,6 +125,7 @@ type Round
 type Game @model @auth(rules: [{ allow: private }]) {
   id: ID!
   index: Int
+  mode: GameMode
   private: Boolean
   activeRoundID: ID
   ActiveRound: Round @connection(fields: ["activeRoundID"])
@@ -149,7 +161,7 @@ type TeamUser
 ##########################
 
 type Query {
-  getUserHand(roundID: String!): Hand!
+  getUserHand(roundID: String!, handType: HandType!): Hand!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 }
@@ -160,6 +172,7 @@ type Query {
 
 input CreateNewGameInput {
   name: String
+  mode: GameMode
   team1name: String
   team2name: String
   team1color: String
@@ -215,6 +228,10 @@ type Mutation {
     @auth(rules: [{ allow: private }])
 
   skipBet(roundID: String!): Game!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
+
+  clearData: Boolean!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 }

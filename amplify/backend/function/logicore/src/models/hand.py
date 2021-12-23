@@ -1,17 +1,24 @@
+from enum import Enum
 import os
 from uuid import uuid4 as uuid
 import boto3
 from boto3.dynamodb.conditions import Key
-from utils.utils import get_iso_date_string, get_random_name
+from utils.utils import get_iso_date_string, clear_table
 
 ddb = boto3.resource('dynamodb')
 hand_table_name = os.environ.get("HANDTABLE")
 hand_table = ddb.Table(hand_table_name)
 
 
+class HandType(Enum):
+    NORMAL = 'NORMAL',
+    HIDDEN = 'HIDDEN',
+    OPEN = 'OPEN'
+
+
 class HandModel:
     @staticmethod
-    def create(round_id, user_id, cards):
+    def create(round_id, user_id, type: HandType, cards):
         date_now = get_iso_date_string()
 
         hand = {
@@ -20,7 +27,8 @@ class HandModel:
             'userID': user_id,
             'createdAt': date_now,
             'updateAt': date_now,
-            'cards': cards
+            'cards': cards,
+            'type': type.name,
         }
 
         hand_table.put_item(
@@ -45,7 +53,7 @@ class HandModel:
                 'id': hand_id,
             }
         )
-        
+
         try:
             cards = response['Item']['cards']
             index = cards.index(card)
@@ -61,3 +69,7 @@ class HandModel:
             ReturnValues="ALL_NEW"
         )
         return response['Attributes']
+
+    @staticmethod
+    def clear_data():
+        clear_table(hand_table)

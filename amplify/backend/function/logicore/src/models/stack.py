@@ -4,7 +4,7 @@ from uuid import uuid4 as uuid
 import boto3
 from enum import Enum
 from boto3.dynamodb.conditions import Key
-from utils.utils import get_iso_date_string
+from utils.utils import get_iso_date_string, clear_table
 
 ddb = boto3.resource('dynamodb')
 stack_table_name = os.environ.get("STACKTABLE")
@@ -112,3 +112,7 @@ class StackModel:
             ReturnValues="ALL_NEW"
         )
         return response['Attributes']
+
+    @staticmethod
+    def clear_data():
+        clear_table(stack_table)

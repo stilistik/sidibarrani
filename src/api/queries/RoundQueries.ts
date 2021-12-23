@@ -3,8 +3,8 @@ import { reactive, Ref } from "vue";
 import { useQuery } from "vue-query";
 
 const getUserHand = /* GraphQL */ `
-  query getUserHand($roundID: String!) {
-    getUserHand(roundID: $roundID) {
+  query getUserHand($roundID: String!, $handType: HandType!) {
+    getUserHand(roundID: $roundID, handType: $handType) {
       id
       cards
     }
@@ -20,6 +20,7 @@ export const useHandQuery = (roundID: Ref<string>) => {
       const { data } = (await API.graphql(
         graphqlOperation(getUserHand, {
           roundID: roundID.value,
+          handType: "NORMAL",
         })
       )) as any;
       return data.getUserHand;

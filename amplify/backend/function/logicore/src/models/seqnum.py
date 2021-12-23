@@ -1,7 +1,6 @@
 import os
-from uuid import uuid4 as uuid
 import boto3
-from boto3.dynamodb.conditions import Key
+from utils.utils import clear_table
 
 ddb = boto3.resource('dynamodb')
 seqnum_table_name = os.environ.get("SEQUENCENUMBERTABLE")
@@ -20,3 +19,7 @@ class SequenceNumberModel:
             ReturnValues='ALL_NEW'
         )
         return int(response['Attributes']['indexNumber'])
+
+    @staticmethod
+    def clear_data():
+        clear_table(seqnum_table)

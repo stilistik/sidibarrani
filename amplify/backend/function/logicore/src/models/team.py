@@ -2,7 +2,7 @@ import os
 from uuid import uuid4 as uuid
 import boto3
 from boto3.dynamodb.conditions import Key
-from utils.utils import get_iso_date_string, get_random_name
+from utils.utils import get_iso_date_string, get_random_name, clear_table
 
 ddb = boto3.resource('dynamodb')
 teamuser_table_name = os.environ.get("TEAMUSERTABLE")
@@ -124,3 +124,8 @@ class TeamModel:
         game_teams = response['Items']
 
         return next((team for team in game_teams if team['id'] != team_id), None)
+
+    @staticmethod
+    def clear_data():
+        clear_table(teamuser_table)
+        clear_table(team_table)

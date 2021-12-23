@@ -15,6 +15,7 @@ import {
   faLongArrowAltDown,
   faLongArrowAltUp,
   faArrowsAltV,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -26,6 +27,7 @@ library.add(faCopy);
 library.add(faLongArrowAltDown);
 library.add(faLongArrowAltUp);
 library.add(faArrowsAltV);
+library.add(faTrash);
 
 const app = createApp(App);
 

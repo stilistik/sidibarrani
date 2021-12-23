@@ -7,6 +7,7 @@ from resolvers.leave_game import leave_game
 from resolvers.get_user_hand import get_user_hand
 from resolvers.clear_stack import clear_stack
 from resolvers.end_round import end_round
+from resolvers.clear_data import clear_data
 
 resolvers = {
     'Mutation': {
@@ -19,7 +20,8 @@ resolvers = {
         'newRound': new_round,
         'placeBet': place_bet,
         'skipBet': skip_bet,
-        'endRound': end_round
+        'endRound': end_round,
+        'clearData': clear_data,
     },
     'Query': {
         'getUserHand': get_user_hand,

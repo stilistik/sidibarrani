@@ -7,6 +7,7 @@ export const onUpdateGameState = /* GraphQL */ `
     onUpdateGameState(id: $id) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -175,6 +176,7 @@ export const onCreateHand = /* GraphQL */ `
       id
       roundID
       userID
+      type
       cards
       createdAt
       updatedAt
@@ -226,6 +228,7 @@ export const onUpdateHand = /* GraphQL */ `
       id
       roundID
       userID
+      type
       cards
       createdAt
       updatedAt
@@ -277,6 +280,7 @@ export const onDeleteHand = /* GraphQL */ `
       id
       roundID
       userID
+      type
       cards
       createdAt
       updatedAt
@@ -639,6 +643,7 @@ export const onCreateRound = /* GraphQL */ `
           id
           roundID
           userID
+          type
           cards
           createdAt
           updatedAt
@@ -711,6 +716,7 @@ export const onUpdateRound = /* GraphQL */ `
           id
           roundID
           userID
+          type
           cards
           createdAt
           updatedAt
@@ -783,6 +789,7 @@ export const onDeleteRound = /* GraphQL */ `
           id
           roundID
           userID
+          type
           cards
           createdAt
           updatedAt
@@ -840,6 +847,7 @@ export const onCreateGame = /* GraphQL */ `
     onCreateGame {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -911,6 +919,7 @@ export const onUpdateGame = /* GraphQL */ `
     onUpdateGame {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -982,6 +991,7 @@ export const onDeleteGame = /* GraphQL */ `
     onDeleteGame {
       id
       index
+      mode
       private
       activeRoundID
       status

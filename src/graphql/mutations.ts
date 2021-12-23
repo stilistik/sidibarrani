@@ -7,6 +7,7 @@ export const createNewGame = /* GraphQL */ `
     createNewGame(input: $input) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -78,6 +79,7 @@ export const joinTeam = /* GraphQL */ `
     joinTeam(input: $input) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -149,6 +151,7 @@ export const leaveGame = /* GraphQL */ `
     leaveGame(input: $input) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -220,6 +223,7 @@ export const startGame = /* GraphQL */ `
     startGame(gameID: $gameID) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -291,6 +295,7 @@ export const playCard = /* GraphQL */ `
     playCard(roundID: $roundID, value: $value) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -362,6 +367,7 @@ export const clearStack = /* GraphQL */ `
     clearStack(roundID: $roundID) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -433,6 +439,7 @@ export const newRound = /* GraphQL */ `
     newRound(gameID: $gameID) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -504,6 +511,7 @@ export const endRound = /* GraphQL */ `
     endRound(roundID: $roundID) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -575,6 +583,7 @@ export const placeBet = /* GraphQL */ `
     placeBet(roundID: $roundID, value: $value) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -646,6 +655,7 @@ export const skipBet = /* GraphQL */ `
     skipBet(roundID: $roundID) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -710,6 +720,11 @@ export const skipBet = /* GraphQL */ `
         nextToken
       }
     }
+  }
+`;
+export const clearData = /* GraphQL */ `
+  mutation ClearData {
+    clearData
   }
 `;
 export const createSequenceNumber = /* GraphQL */ `
@@ -835,6 +850,7 @@ export const createHand = /* GraphQL */ `
       id
       roundID
       userID
+      type
       cards
       createdAt
       updatedAt
@@ -889,6 +905,7 @@ export const updateHand = /* GraphQL */ `
       id
       roundID
       userID
+      type
       cards
       createdAt
       updatedAt
@@ -943,6 +960,7 @@ export const deleteHand = /* GraphQL */ `
       id
       roundID
       userID
+      type
       cards
       createdAt
       updatedAt
@@ -1326,6 +1344,7 @@ export const createRound = /* GraphQL */ `
           id
           roundID
           userID
+          type
           cards
           createdAt
           updatedAt
@@ -1401,6 +1420,7 @@ export const updateRound = /* GraphQL */ `
           id
           roundID
           userID
+          type
           cards
           createdAt
           updatedAt
@@ -1476,6 +1496,7 @@ export const deleteRound = /* GraphQL */ `
           id
           roundID
           userID
+          type
           cards
           createdAt
           updatedAt
@@ -1536,6 +1557,7 @@ export const createGame = /* GraphQL */ `
     createGame(input: $input, condition: $condition) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -1610,6 +1632,7 @@ export const updateGame = /* GraphQL */ `
     updateGame(input: $input, condition: $condition) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -1684,6 +1707,7 @@ export const deleteGame = /* GraphQL */ `
     deleteGame(input: $input, condition: $condition) {
       id
       index
+      mode
       private
       activeRoundID
       status

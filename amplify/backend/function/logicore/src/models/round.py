@@ -1,10 +1,10 @@
 import os
-from re import M
+import json
 from uuid import uuid4 as uuid
 import boto3
 from enum import Enum
 from boto3.dynamodb.conditions import Key
-from utils.utils import get_iso_date_string
+from utils.utils import get_iso_date_string, clear_table
 
 ddb = boto3.resource('dynamodb')
 round_table_name = os.environ.get("ROUNDTABLE")
@@ -238,11 +238,32 @@ class RoundModel:
         return response['Attributes']
 
     @staticmethod
+    def save_hidden_hands(round_id, hidden_hands):
+        date_now = get_iso_date_string()
+        response = round_table.update_item(
+            Key={
+                'id': round_id,
+            },
+            AttributeUpdates={
+                'hidden_hands': {
+                    'Value': json.dumps(hidden_hands)
+                },
+                'updatedAt': {
+                    'Value': date_now
+                }
+            },
+            ReturnValues="ALL_NEW"
+        )
+        return response['Attributes']
+
+    @staticmethod
     def lock(round_id):
         return RoundModel.set_locked(round_id, True)
-    
+
     @staticmethod
     def unlock(round_id):
         return RoundModel.set_locked(round_id, False)
 
-
+    @staticmethod
+    def clear_data():
+        clear_table(round_table)

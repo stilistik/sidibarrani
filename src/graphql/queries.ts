@@ -3,11 +3,12 @@
 // this is an auto generated file. This will be overwritten
 
 export const getUserHand = /* GraphQL */ `
-  query GetUserHand($roundID: String!) {
-    getUserHand(roundID: $roundID) {
+  query GetUserHand($roundID: String!, $handType: HandType!) {
+    getUserHand(roundID: $roundID, handType: $handType) {
       id
       roundID
       userID
+      type
       cards
       createdAt
       updatedAt
@@ -130,6 +131,7 @@ export const getHand = /* GraphQL */ `
       id
       roundID
       userID
+      type
       cards
       createdAt
       updatedAt
@@ -186,6 +188,7 @@ export const listHands = /* GraphQL */ `
         id
         roundID
         userID
+        type
         cards
         createdAt
         updatedAt
@@ -406,6 +409,7 @@ export const getRound = /* GraphQL */ `
           id
           roundID
           userID
+          type
           cards
           createdAt
           updatedAt
@@ -502,6 +506,7 @@ export const getGame = /* GraphQL */ `
     getGame(id: $id) {
       id
       index
+      mode
       private
       activeRoundID
       status
@@ -578,6 +583,7 @@ export const listGames = /* GraphQL */ `
       items {
         id
         index
+        mode
         private
         activeRoundID
         status
