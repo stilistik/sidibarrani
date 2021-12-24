@@ -1,5 +1,5 @@
 <template>
-  <IconButton @click="handleClearData">
+  <IconButton v-if="shouldRender" @click="handleClearData">
     <Icon icon="trash" />
   </IconButton>
 </template>
@@ -23,15 +23,16 @@ export default defineComponent({
         const success = await clearDataMutation.mutateAsync();
         if (success) {
           Message.success("Data has been cleared");
-        } else {
-          Message.error("Something wrong");
         }
-      } catch {
-        Message.error("Error clearing data");
+      } catch (data: any) {
+        const msg = data.errors[0].message;
+        Message.error(`Error clearing data: ${msg}`);
       }
     }
 
-    return { handleClearData };
+    const shouldRender = import.meta.env.DEV;
+
+    return { handleClearData, shouldRender };
   },
 });
 </script>

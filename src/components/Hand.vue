@@ -10,6 +10,7 @@
     :y="getYPosition() + yTranslation"
     :initX="getXPosition(idx)"
     :initY="1000"
+    :interactive="interactive"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
     @onClick="onClick"
@@ -17,7 +18,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref, watchEffect } from "vue";
+import {
+  computed,
+  defineComponent,
+  PropType,
+  reactive,
+  ref,
+  watchEffect,
+} from "vue";
 import { usePlayCardMutation, useHandQuery } from "../api";
 import { useCurrentUser } from "../utils/Auth";
 import { Message } from "../utils/Message";
@@ -31,12 +39,24 @@ export default defineComponent({
   props: {
     round: Object,
     handType: String,
+    interCardDistance: Number,
+    cardWidth: Number,
+    position: {
+      type: Array as PropType<Array<number>>,
+    },
+    shiftOnHover: Boolean,
+    interactive: Boolean,
   },
-  setup({ round, handType }) {
+  setup({
+    round,
+    handType,
+    interCardDistance,
+    cardWidth,
+    position,
+    shiftOnHover,
+    interactive,
+  }) {
     const user = useCurrentUser();
-
-    const cardWidth = 210;
-    const cardHeight = 300;
 
     const roundId = computed(() => round.id);
     const playCardMutation = usePlayCardMutation();
@@ -44,12 +64,16 @@ export default defineComponent({
     const { data, isLoading, isError } = useHandQuery(roundId, handType);
     const cards = computed(() => data?.value?.cards);
 
+    const cardHeight = cardWidth * 1.4;
+
     const yTranslation = ref(0);
     function onMouseEnter() {
+      if (!shiftOnHover || !interactive) return;
       yTranslation.value = -cardHeight / 2;
     }
 
     function onMouseLeave() {
+      if (!shiftOnHover || !interactive) return;
       yTranslation.value = 0;
     }
 
@@ -62,6 +86,7 @@ export default defineComponent({
     });
 
     function onClick(card: string) {
+      if (!interactive) return;
       if (!played.value) {
         played.value = true;
         playCardMutation.mutate(
@@ -83,17 +108,17 @@ export default defineComponent({
 
     function getXPosition(idx: number) {
       const cardCount = cards.value.length;
-      const offset = 100;
       const startX =
-        window.innerWidth / 2 -
-        (Math.floor(cardCount / 2) - (cardCount % 2 === 0 ? 0.5 : 0)) * offset -
+        position[0] -
+        (Math.floor(cardCount / 2) - (cardCount % 2 === 0 ? 0.5 : 0)) *
+          interCardDistance -
         cardWidth / 2;
 
-      return startX + idx * offset;
+      return startX + idx * interCardDistance;
     }
 
     function getYPosition() {
-      return window.innerHeight - cardHeight / 2;
+      return position[1] - cardHeight / 2;
     }
 
     return reactive({
@@ -109,6 +134,7 @@ export default defineComponent({
       yTranslation,
       getXPosition,
       getYPosition,
+      interactive,
     });
   },
 });

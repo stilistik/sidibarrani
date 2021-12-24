@@ -9,7 +9,6 @@
   >
     <div
       class="absolute w-full h-full shadow-2xl rounded-xl"
-      @contextmenu.prevent="onContextMenu"
       :style="outerStyle"
     >
       <component
@@ -47,6 +46,7 @@ export default defineComponent({
     y: Number,
     initX: Number,
     initY: Number,
+    interactive: Boolean,
   },
   setup(props, context) {
     const cardRef = ref(null);
@@ -68,19 +68,20 @@ export default defineComponent({
       pos.y = newValue;
     });
 
-    const flipped = ref(false);
-
     function onMouseMove(event: any) {
+      if (!props.interactive) return;
       p.x = event.pageX - pos.x - props.width / 2;
       p.y = event.pageY - pos.y - props.height / 2;
     }
 
     function onMouseEnter(event: Event) {
+      if (!props.interactive) return;
       scale.value = 1.1;
       context.emit("mouseenter", event);
     }
 
     function onMouseLeave(event: Event) {
+      if (!props.interactive) return;
       scale.value = 1.0;
       p.x = 0;
       p.y = 0;
@@ -88,17 +89,8 @@ export default defineComponent({
     }
 
     function onClick(event: Event) {
+      if (!props.interactive) return;
       context.emit("onClick", props.card, event);
-    }
-
-    function onContextMenu() {
-      if (flipped.value) {
-        rotation.value = 0;
-        flipped.value = false;
-      } else {
-        rotation.value = 180;
-        flipped.value = true;
-      }
     }
 
     const style = computed(() => {
@@ -123,7 +115,6 @@ export default defineComponent({
       onMouseEnter,
       onMouseLeave,
       onClick,
-      onContextMenu,
       outerStyle,
     });
   },
