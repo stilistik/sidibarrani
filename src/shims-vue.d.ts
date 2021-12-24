@@ -3,3 +3,11 @@ declare module "*.vue" {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
+
+interface ImportMeta {
+  env: {
+    DEV: boolean;
+    PROD: boolean;
+    MODE: string;
+  };
+}
