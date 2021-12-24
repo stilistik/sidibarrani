@@ -30,40 +30,32 @@ class StackModel:
             'updatedAt': date_now,
             'size': size,
         }
-        stack_table.put_item(
-            Item=stack,
-        )
+        stack_table.put_item(Item=stack, )
         return stack
 
     @staticmethod
     def find_by_id(stack_id):
-        response = stack_table.get_item(
-            Key={
-                'id': stack_id,
-            }
-        )
+        response = stack_table.get_item(Key={
+            'id': stack_id,
+        })
         return response['Item']
 
     @staticmethod
     def find_by_round(round_id):
         response = stack_table.query(
             IndexName="byRound",
-            KeyConditionExpression=Key("roundID").eq(round_id)
-        )
+            KeyConditionExpression=Key("roundID").eq(round_id))
         return response['Items']
 
     @staticmethod
     def is_complete(stack_id):
-        response = stack_table.get_item(
-            Key={
-                'id': stack_id,
-            }
-        )
+        response = stack_table.get_item(Key={
+            'id': stack_id,
+        })
         size = response['Item']['size']
         response = action_table.query(
             IndexName="byStack",
-            KeyConditionExpression=Key("stackID").eq(stack_id)
-        )
+            KeyConditionExpression=Key("stackID").eq(stack_id))
         actions = response['Items']
         return len(actions) >= size
 
@@ -71,8 +63,7 @@ class StackModel:
     def get_actions(stack_id):
         response = action_table.query(
             IndexName="byStack",
-            KeyConditionExpression=Key("stackID").eq(stack_id)
-        )
+            KeyConditionExpression=Key("stackID").eq(stack_id))
         return response['Items']
 
     @staticmethod
@@ -88,31 +79,26 @@ class StackModel:
             'updatedAt': date_now,
         }
 
-        action_table.put_item(
-            Item=action
-        )
+        action_table.put_item(Item=action)
 
         return action
 
     @staticmethod
     def set_winner(stack_id, team_user_id):
         date_now = get_iso_date_string()
-        response = stack_table.update_item(
-            Key={
-                'id': stack_id
-            },
-            AttributeUpdates={
-                'winnerID': {
-                    'Value': team_user_id,
-                },
-                'updatedAt': {
-                    'Value': date_now
-                }
-            },
-            ReturnValues="ALL_NEW"
-        )
+        response = stack_table.update_item(Key={'id': stack_id},
+                                           AttributeUpdates={
+                                               'winnerID': {
+                                                   'Value': team_user_id,
+                                               },
+                                               'updatedAt': {
+                                                   'Value': date_now
+                                               }
+                                           },
+                                           ReturnValues="ALL_NEW")
         return response['Attributes']
 
     @staticmethod
     def clear_data():
         clear_table(stack_table)
+        clear_table(action_table)
