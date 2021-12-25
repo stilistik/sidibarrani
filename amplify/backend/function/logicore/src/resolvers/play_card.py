@@ -195,7 +195,7 @@ def play_card(event):
         if stack_complete:
             set_winner(round, stack)
 
-        return GameModel.find_by_id(round.gameID)
+        return vars(GameModel.find_by_id(round.gameID))
 
     finally:
         RoundModel.unlock(round_id)

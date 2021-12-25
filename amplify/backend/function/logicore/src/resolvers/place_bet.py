@@ -2,6 +2,7 @@ from models.round import RoundModel, RoundStatus, RoundMode
 from models.stack import StackModel
 from models.game import GameModel
 from models.team import TeamModel
+from models.team_user import TeamUserModel
 from models.action import ActionModel, ActionType, Action
 
 
@@ -35,8 +36,8 @@ def place_bet(event):
                            '{mode}:{amount}'.format(mode=mode, amount=amount))
 
         # set the winner of the bet stack
-        team_user = TeamModel.find_team_user_in_game(round.gameID, user_id)
-        StackModel.set_winner(stack.id, team_user['id'])
+        team_user = TeamUserModel.find_by_game_user(round.gameID, user_id)
+        StackModel.set_winner(stack.id, team_user.id)
 
         # create a new stack and set as active
         new_stack = StackModel.create(round_id, stack.size)
@@ -52,7 +53,7 @@ def place_bet(event):
                            '{mode}:{amount}'.format(mode=mode, amount=amount))
         RoundModel.next_turn(round_id)
 
-    return GameModel.find_by_id(round.gameID)
+    return vars(GameModel.find_by_id(round.gameID))
 
 
 def get_max_action(action: Action):
@@ -85,9 +86,9 @@ def skip_bet(event):
 
     if all(action.type == ActionType.SKIP for action in last_actions):
         # set the winner of the bet stack to the user with the max amount bet
-        team_user = TeamModel.find_team_user_in_game(game_id,
-                                                     max_amount_action.userID)
-        StackModel.set_winner(stack.id, team_user['id'])
+        team_user = TeamUserModel.find_by_game_user(game_id,
+                                                    max_amount_action.userID)
+        StackModel.set_winner(stack.id, team_user.id)
 
         # set the round to play status
         RoundModel.set_round_status(round_id, RoundStatus.PLAY)
@@ -100,4 +101,4 @@ def skip_bet(event):
         # set the play mode of the round
         RoundModel.set_mode(round_id, mode)
 
-    return GameModel.find_by_id(game_id)
+    return vars(GameModel.find_by_id(game_id))

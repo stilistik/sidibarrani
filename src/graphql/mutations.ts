@@ -75,8 +75,8 @@ export const createNewGame = /* GraphQL */ `
   }
 `;
 export const joinTeam = /* GraphQL */ `
-  mutation JoinTeam($input: JoinTeamInput!) {
-    joinTeam(input: $input) {
+  mutation JoinTeam($teamID: String!) {
+    joinTeam(teamID: $teamID) {
       id
       index
       mode
@@ -147,8 +147,8 @@ export const joinTeam = /* GraphQL */ `
   }
 `;
 export const leaveGame = /* GraphQL */ `
-  mutation LeaveGame($input: LeaveGameInput!) {
-    leaveGame(input: $input) {
+  mutation LeaveGame($gameID: String!) {
+    leaveGame(gameID: $gameID) {
       id
       index
       mode

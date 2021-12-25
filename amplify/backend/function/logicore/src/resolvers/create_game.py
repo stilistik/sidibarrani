@@ -13,4 +13,4 @@ def create_game(event):
     TeamModel.create(game.id, input.get('team2name'),
                      input.get('team2color', 'blue'))
 
-    return game
+    return vars(game)

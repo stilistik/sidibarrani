@@ -27,9 +27,6 @@ class Hand:
         self.cards: List[str] = kwargs['cards']
         self.type: HandType = HandType(kwargs['type'])
 
-    def to_json(self) -> dict:
-        return vars(self)
-
 
 class HandModel:
     @staticmethod
@@ -54,7 +51,7 @@ class HandModel:
             KeyConditionExpression=Key("roundID").eq(round_id),
         )
 
-        return [Hand(item) for item in response['Items']]
+        return [Hand(**item) for item in response['Items']]
 
     @staticmethod
     def remove_card(hand_id, card) -> Hand:
@@ -75,7 +72,7 @@ class HandModel:
             },
             UpdateExpression='remove cards[{}]'.format(index),
             ReturnValues="ALL_NEW")
-        return Hand(response['Attributes'])
+        return Hand(**response['Attributes'])
 
     @staticmethod
     def clear_data():

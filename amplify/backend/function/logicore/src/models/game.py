@@ -35,9 +35,6 @@ class Game():
         self.updatedAt: str = kwargs['updatedAt']
         self.index: int = int(kwargs['index'])
 
-    def to_json(self) -> dict:
-        return vars(self)
-
 
 class GameModel:
     @staticmethod
@@ -70,7 +67,7 @@ class GameModel:
                                               },
                                           },
                                           ReturnValues="ALL_NEW")
-        return Game(response['Attributes'])
+        return Game(**response['Attributes'])
 
     @staticmethod
     def set_active_round(game_id, round_id) -> Game:
@@ -85,12 +82,12 @@ class GameModel:
                                               },
                                           },
                                           ReturnValues="ALL_NEW")
-        return Game(response['Attributes'])
+        return Game(**response['Attributes'])
 
     @staticmethod
     def find_by_id(game_id) -> Game:
         response = game_table.get_item(Key={'id': game_id})
-        return Game(response['Item'])
+        return Game(**response['Item'])
 
     @staticmethod
     def clear_data():

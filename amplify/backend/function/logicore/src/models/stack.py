@@ -20,9 +20,6 @@ class Stack():
         self.size: int = kwargs['size']
         self.winnerID: str = kwargs.get('winnerID', None)
 
-    def to_json(self) -> dict:
-        return vars(self)
-
 
 class StackModel:
     @staticmethod
@@ -41,14 +38,14 @@ class StackModel:
     @staticmethod
     def find_by_id(stack_id):
         response = stack_table.get_item(Key={'id': stack_id})
-        return Stack(response['Item'])
+        return Stack(**response['Item'])
 
     @staticmethod
     def find_by_round(round_id) -> List[Stack]:
         response = stack_table.query(
             IndexName="byRound",
             KeyConditionExpression=Key("roundID").eq(round_id))
-        return [Stack(item) for item in response['Items']]
+        return [Stack(**item) for item in response['Items']]
 
     @staticmethod
     def is_complete(stack_id) -> bool:
@@ -69,7 +66,7 @@ class StackModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
-        return Stack(response['Attributes'])
+        return Stack(**response['Attributes'])
 
     @staticmethod
     def clear_data():

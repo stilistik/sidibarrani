@@ -42,9 +42,6 @@ class Round():
             kwargs['mode']) if 'mode' in kwargs else None
         self.locked: bool = kwargs.get('locked', False)
 
-    def to_json(self) -> dict:
-        return vars(self)
-
 
 class RoundModel:
     @staticmethod
@@ -58,7 +55,6 @@ class RoundModel:
                       updatedAt=date_now)
 
         round_table.put_item(Item=vars(round))
-
         return round
 
     @staticmethod
@@ -66,7 +62,7 @@ class RoundModel:
         response = round_table.get_item(Key={
             'id': round_id,
         })
-        return Round(response['Item'])
+        return Round(**response['Item'])
 
     @staticmethod
     def set_round_status(round_id, status: RoundStatus) -> Round:
@@ -81,7 +77,7 @@ class RoundModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
-        return Round(response['Attributes'])
+        return Round(**response['Attributes'])
 
     @staticmethod
     def set_active_stack(round_id, stack_id) -> Round:
@@ -96,7 +92,7 @@ class RoundModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
-        return Round(response['Attributes'])
+        return Round(**response['Attributes'])
 
     @staticmethod
     def set_turn(round_id, user_id) -> Round:
@@ -111,7 +107,7 @@ class RoundModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
-        return Round(response['Attributes'])
+        return Round(**response['Attributes'])
 
     @staticmethod
     def next_turn(round_id) -> Round:
@@ -132,7 +128,7 @@ class RoundModel:
                                                },
                                            },
                                            ReturnValues="ALL_NEW")
-        return Round(response['Attributes'])
+        return Round(**response['Attributes'])
 
     @staticmethod
     def set_turn_sequence(round_id, user_ids) -> Round:
@@ -147,7 +143,7 @@ class RoundModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
-        return Round(response['Attributes'])
+        return Round(**response['Attributes'])
 
     @staticmethod
     def set_mode(round_id, mode: RoundMode) -> Round:
@@ -162,7 +158,7 @@ class RoundModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
-        return Round(response['Attributes'])
+        return Round(**response['Attributes'])
 
     @staticmethod
     def set_result(round_id, result) -> Round:
@@ -177,7 +173,7 @@ class RoundModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
-        return Round(response['Attributes'])
+        return Round(**response['Attributes'])
 
     @staticmethod
     def set_locked(round_id, locked) -> Round:
@@ -192,7 +188,7 @@ class RoundModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
-        return Round(response['Attributes'])
+        return Round(**response['Attributes'])
 
     @staticmethod
     def save_hidden_hands(round_id, hidden_hands) -> Round:
@@ -208,7 +204,7 @@ class RoundModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
-        return Round(response['Attributes'])
+        return Round(**response['Attributes'])
 
     @staticmethod
     def lock(round_id):

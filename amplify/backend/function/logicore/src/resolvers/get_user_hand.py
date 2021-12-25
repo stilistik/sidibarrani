@@ -7,5 +7,6 @@ def get_user_hand(event):
     user_id = event['identity']['claims'].get('sub')
 
     all_hands = HandModel.find_by_round(round_id)
-    return next(hand for hand in all_hands
+    hand = next(hand for hand in all_hands
                 if hand.userID == user_id and hand.type == HandType(hand_type))
+    return vars(hand)

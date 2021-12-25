@@ -8,9 +8,6 @@ from resolvers.get_user_hand import get_user_hand
 from resolvers.clear_stack import clear_stack
 from resolvers.end_round import end_round
 from resolvers.clear_data import clear_data
-from utils.serialize import patch_default_json_encoder
-
-patch_default_json_encoder()
 
 resolvers = {
     'Mutation': {

@@ -40,8 +40,8 @@ export const useStartGameMutation = () => {
 };
 
 const leaveGame = /* GraphQL */ `
-  mutation LeaveGame($input: LeaveGameInput!) {
-    leaveGame(input: $input) {
+  mutation LeaveGame($gameID: String!) {
+    leaveGame(gameID: $gameID) {
       ...GameFragment
     }
   }
@@ -51,12 +51,8 @@ const leaveGame = /* GraphQL */ `
 export const useLeaveGameMutation = () => {
   const res = useMutation(async (variables: any) => {
     const cognitoUser = await Auth.currentAuthenticatedUser();
-    const input = {
-      ...(variables.input || {}),
-      userID: cognitoUser.attributes.sub,
-    };
     const { data } = (await API.graphql(
-      graphqlOperation(leaveGame, { input })
+      graphqlOperation(leaveGame, variables)
     )) as any;
     return data.leaveGame;
   });

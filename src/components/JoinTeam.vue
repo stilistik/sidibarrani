@@ -24,11 +24,11 @@ export default defineComponent({
 
     function join() {
       isLoading.value = true;
+      console.log(props);
+
       joinTeamMutation.mutate(
         {
-          input: {
-            teamID: props.teamID,
-          },
+          teamID: props.teamID,
         },
         {
           onSuccess: () => {

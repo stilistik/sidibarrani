@@ -16,4 +16,4 @@ def clear_stack(event):
     new_stack = StackModel.create(round_id, stack['size'])
     RoundModel.set_active_stack(round_id, new_stack['id'])
 
-    return GameModel.find_by_id(round.gameID)
+    return vars(GameModel.find_by_id(round.gameID))

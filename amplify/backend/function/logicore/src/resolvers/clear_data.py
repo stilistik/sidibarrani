@@ -1,4 +1,6 @@
 import os
+from models.action import ActionModel
+from models.team_user import TeamUserModel
 from models.game import GameModel
 from models.hand import HandModel
 from models.round import RoundModel
@@ -19,4 +21,6 @@ def clear_data(event):
     SequenceNumberModel.clear_data()
     StackModel.clear_data()
     TeamModel.clear_data()
+    TeamUserModel.clear_data()
+    ActionModel.clear_data()
     return True

@@ -1,16 +1,16 @@
 from models.game import GameModel
 from models.team import TeamModel
+from models.team_user import TeamUserModel
 
 
 def join_team(event):
-    input = event['arguments'].get('input', {})
-    team_id = input.get('teamID')
-    user_id = input.get('userID')
+    team_id = event['arguments']['teamID']
+    user_id = event['identity']['claims'].get('sub')
 
     other_team = TeamModel.get_opponent_team(team_id)
 
-    TeamModel.remove_user(team_id, user_id)
-    TeamModel.remove_user(other_team['id'], user_id)
+    TeamUserModel.delete(team_id, user_id)
+    TeamUserModel.delete(other_team.id, user_id)
 
-    TeamModel.add_user(team_id, user_id)
-    return GameModel.find_by_id(other_team['gameID'])
+    TeamUserModel.create(team_id, user_id)
+    return vars(GameModel.find_by_id(other_team.gameID))

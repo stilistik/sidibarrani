@@ -27,9 +27,6 @@ class Action():
         self.createdAt: str = kwargs['createdAt']
         self.updatedAt: str = kwargs['updatedAt']
 
-    def to_json(self) -> dict:
-        return vars(self)
-
 
 class ActionModel:
     @staticmethod
@@ -53,7 +50,7 @@ class ActionModel:
         response = action_table.query(
             IndexName="byStack",
             KeyConditionExpression=Key("stackID").eq(stack_id))
-        return [Action(item) for item in response['Items']]
+        return [Action(**item) for item in response['Items']]
 
     @staticmethod
     def clear_data():

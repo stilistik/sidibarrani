@@ -3,8 +3,8 @@ import { useMutation } from "vue-query";
 import { gameFragment } from "../fragments/GameFragment";
 
 const joinTeam = /* GraphQL */ `
-  mutation JoinTeam($input: JoinTeamInput!) {
-    joinTeam(input: $input) {
+  mutation JoinTeam($teamID: String!) {
+    joinTeam(teamID: $teamID) {
       ...GameFragment
     }
   }
@@ -13,13 +13,8 @@ const joinTeam = /* GraphQL */ `
 
 export const useJoinTeamMutation = () => {
   const res = useMutation(async (variables: any) => {
-    const cognitoUser = await Auth.currentAuthenticatedUser();
-    const input = {
-      ...(variables.input || {}),
-      userID: cognitoUser.attributes.sub,
-    };
     const { data } = (await API.graphql(
-      graphqlOperation(joinTeam, { input })
+      graphqlOperation(joinTeam, variables)
     )) as any;
     return data.joinTeam;
   });

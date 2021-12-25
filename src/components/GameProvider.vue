@@ -20,7 +20,7 @@ export default defineComponent({
     async function leaveGame() {
       try {
         await leaveGameMutation.mutateAsync({
-          input: { gameID: gameId },
+          gameID: gameId,
         });
         qclient.refetchQueries("getGame");
         router.push({ path: "/" });

@@ -1,0 +1,12 @@
+{
+  "typeName": "Mutation",
+  "fieldName": "joinTeam",
+  "arguments": {
+    "teamID": "c8d77080-031f-4915-a2d9-c4732b6607c5"
+  },
+  "identity": {
+    "claims": {
+      "sub": "ba605d00-045a-453d-a274-2e768916fd58"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 from models.game import GameModel, GameStatus, Game, GameMode
 from models.team import TeamModel
+from models.team_user import TeamUserModel
 from models.round import RoundModel
 from models.deck import Deck
 from models.hand import HandModel, HandType
@@ -7,13 +8,13 @@ from models.stack import StackModel
 
 
 def validate_team_config(game_id: str, mode: GameMode):
-    teams = TeamModel.get_teams(game_id)
+    teams = TeamModel.find_by_game(game_id)
 
     if len(teams) != 2:
         raise Exception("Game did not have 2 teams")
 
-    team1users = TeamModel.get_team_users(teams[0]['id'])
-    team2users = TeamModel.get_team_users(teams[1]['id'])
+    team1users = TeamUserModel.find_by_team(teams[0].id)
+    team2users = TeamUserModel.find_by_team(teams[1].id)
 
     count_team_1 = len(team1users)
     count_team_2 = len(team2users)
@@ -112,4 +113,4 @@ def start_game(event):
     game_id = event['arguments'].get('gameID')
     validate_game_status(game_id)
     new_round(event)
-    return GameModel.start(game_id)
+    return vars(GameModel.start(game_id))
