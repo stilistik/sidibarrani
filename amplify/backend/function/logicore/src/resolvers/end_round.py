@@ -126,4 +126,4 @@ def end_round(event):
     round = RoundModel.set_round_status(round_id, RoundStatus.ENDED)
     result = compute_result(round)
     RoundModel.set_result(round_id, result)
-    return GameModel.find_by_id(round['gameID'])
+    return GameModel.find_by_id(round.gameID)

@@ -41,7 +41,7 @@ class Game():
 
 class GameModel:
     @staticmethod
-    def create(**kwargs):
+    def create(**kwargs) -> Game:
         date_now = get_iso_date_string()
 
         game = Game(id=str(uuid()),
@@ -58,7 +58,7 @@ class GameModel:
         return game
 
     @staticmethod
-    def start(game_id):
+    def start(game_id) -> Game:
         date_now = get_iso_date_string()
         response = game_table.update_item(Key={'id': game_id},
                                           AttributeUpdates={
@@ -73,7 +73,7 @@ class GameModel:
         return Game(response['Attributes'])
 
     @staticmethod
-    def set_active_round(game_id, round_id):
+    def set_active_round(game_id, round_id) -> Game:
         date_now = get_iso_date_string()
         response = game_table.update_item(Key={'id': game_id},
                                           AttributeUpdates={
@@ -88,7 +88,7 @@ class GameModel:
         return Game(response['Attributes'])
 
     @staticmethod
-    def find_by_id(game_id):
+    def find_by_id(game_id) -> Game:
         response = game_table.get_item(Key={'id': game_id})
         return Game(response['Item'])
 

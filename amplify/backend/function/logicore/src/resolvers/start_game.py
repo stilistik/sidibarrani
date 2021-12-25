@@ -1,4 +1,4 @@
-from models.game import GameModel, GameStatus
+from models.game import GameModel, GameStatus, Game, GameMode
 from models.team import TeamModel
 from models.round import RoundModel
 from models.deck import Deck
@@ -36,19 +36,19 @@ def validate_team_config(game_id, mode):
 def validate_game_status(game_id):
     game = GameModel.find_by_id(game_id)
 
-    if game['status'] != GameStatus.CREATED.name:
+    if game.status != GameStatus.CREATED:
         raise Exception("Game already started")
 
 
-def new_round_duo(game):
-    players = validate_team_config(game['id'], "DUO")
+def new_round_duo(game: Game):
+    players = validate_team_config(game.id, "DUO")
     stack_size = 2
 
     deck = Deck()
-    round = RoundModel.create(game['id'])
-    stack = StackModel.create(round['id'], stack_size)
+    round = RoundModel.create(game.id)
+    stack = StackModel.create(round.id, stack_size)
 
-    RoundModel.set_active_stack(round['id'], stack['id'])
+    RoundModel.set_active_stack(round.id, stack['id'])
 
     hidden_hands = {}
     for player in players:
@@ -56,29 +56,28 @@ def new_round_duo(game):
         open_hand = deck.deal_hand(6)
         hidden_hands[player['userID']] = deck.deal_hand(6)
 
-        HandModel.create(round['id'], player['userID'],
-                         HandType.NORMAL, normal_hand)
-        HandModel.create(round['id'], player['userID'],
-                         HandType.OPEN, open_hand)
-        HandModel.create(round['id'], player['userID'],
-                         HandType.HIDDEN, ['X']*6)
+        HandModel.create(round.id, player['userID'], HandType.NORMAL,
+                         normal_hand)
+        HandModel.create(round.id, player['userID'], HandType.OPEN, open_hand)
+        HandModel.create(round.id, player['userID'], HandType.HIDDEN,
+                         ['X'] * 6)
 
-    RoundModel.save_hidden_hands(round['id'], hidden_hands)
+    RoundModel.save_hidden_hands(round.id, hidden_hands)
     turn_sequence = list(map(lambda x: x['userID'], players))
-    RoundModel.set_turn_sequence(round['id'], turn_sequence)
-    RoundModel.set_turn(round['id'], players[0]['userID'])
-    return GameModel.set_active_round(game['id'], round['id'])
+    RoundModel.set_turn_sequence(round.id, turn_sequence)
+    RoundModel.set_turn(round.id, players[0]['userID'])
+    return GameModel.set_active_round(game.id, round.id)
 
 
-def new_round_quattro(game):
-    players = validate_team_config(game['id'], "QUATTRO")
+def new_round_quattro(game: Game):
+    players = validate_team_config(game.id, "QUATTRO")
     stack_size = 4
 
     deck = Deck()
-    round = RoundModel.create(game['id'])
-    stack = StackModel.create(round['id'], stack_size)
+    round = RoundModel.create(game.id)
+    stack = StackModel.create(round.id, stack_size)
 
-    RoundModel.set_active_stack(round['id'], stack['id'])
+    RoundModel.set_active_stack(round.id, stack['id'])
 
     starting_player_id = None
     for player in players:
@@ -87,26 +86,25 @@ def new_round_quattro(game):
         if '7D' in cards:
             starting_player_id = player['userID']
 
-        HandModel.create(round['id'], player['userID'],
-                         HandType.NORMAL, cards)
+        HandModel.create(round.id, player['userID'], HandType.NORMAL, cards)
 
     turn_sequence = list(map(lambda x: x['userID'], players))
 
     if not starting_player_id:
         starting_player_id = turn_sequence[0]
 
-    RoundModel.set_turn_sequence(round['id'], turn_sequence)
-    RoundModel.set_turn(round['id'], starting_player_id)
-    return GameModel.set_active_round(game['id'], round['id'])
+    RoundModel.set_turn_sequence(round.id, turn_sequence)
+    RoundModel.set_turn(round.id, starting_player_id)
+    return GameModel.set_active_round(game.id, round.id)
 
 
 def new_round(event):
     game_id = event['arguments'].get('gameID')
     game = GameModel.find_by_id(game_id)
 
-    if game['mode'] == 'DUO':
+    if game.mode == GameMode.DUO:
         return new_round_duo(game)
-    elif game['mode'] == 'QUATTRO':
+    elif game.mode == GameMode.QUATTRO:
         return new_round_quattro(game)
 
 

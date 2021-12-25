@@ -1,6 +1,6 @@
 from models.team import TeamModel
 from models.stack import StackModel, ActionType
-from models.round import RoundModel, RoundMode, RoundStatus
+from models.round import RoundModel, RoundMode, RoundStatus, Round
 from models.hand import HandModel
 from models.game import GameModel
 
@@ -84,9 +84,9 @@ def get_winner_trump(actions, trump_suit):
     return winner
 
 
-def set_winner(round, stack):
+def set_winner(round: Round, stack):
     actions = StackModel.get_actions(stack['id'])
-    mode = round.get('mode', RoundMode.TOP_DOWN.name)
+    mode = round.mode
 
     winner = None
     if mode == RoundMode.TOP_DOWN.name:
@@ -103,19 +103,19 @@ def set_winner(round, stack):
         winner = get_winner_trump(actions, 'S')
     elif mode == RoundMode.SLALOM_TOP.name:
         winner = get_winner_top_down(actions)
-        RoundModel.set_mode(round['id'], RoundMode.SLALOM_BOTTOM)
+        RoundModel.set_mode(round.id, RoundMode.SLALOM_BOTTOM)
     elif mode == RoundMode.SLALOM_BOTTOM.name:
         winner = get_winner_bottom_up(actions)
-        RoundModel.set_mode(round['id'], RoundMode.SLALOM_TOP)
+        RoundModel.set_mode(round.id, RoundMode.SLALOM_TOP)
     else:
         raise Exception('Unsupported round mode {}'.format(mode))
 
     team_users = TeamModel.find_team_users_by_game(round['gameID'])
-    winner_team_user = next(
-        (team_user for team_user in team_users if team_user['userID'] == winner['userID']), None)
+    winner_team_user = next((team_user for team_user in team_users
+                             if team_user['userID'] == winner['userID']), None)
 
     StackModel.set_winner(stack['id'], winner_team_user['id'])
-    RoundModel.set_turn(round['id'], winner['userID'])
+    RoundModel.set_turn(round.id, winner['userID'])
 
 
 def has_suit(hand, suit):
@@ -126,8 +126,8 @@ def has_suit(hand, suit):
         return False
 
 
-def is_trump(round, value):
-    mode = round.get('mode', RoundMode.TOP_DOWN.name)
+def is_trump(round: Round, value):
+    mode = round.mode
     suit = get_suit(value)
     if mode == RoundMode.TRUMP_C.name and suit == 'C':
         return True
@@ -161,20 +161,20 @@ def play_card(event):
 
     round = RoundModel.find_by_id(round_id)
 
-    if round.get('locked', False) is True:
+    if round.locked is True:
         raise Exception("Concurrent update exception")
 
     try:
         round = RoundModel.lock(round_id)
 
-        stack = StackModel.find_by_id(round['activeStackID'])
+        stack = StackModel.find_by_id(round.activeStackID)
         hands = HandModel.find_by_round(round_id)
         hand = next(hand for hand in hands if hand['userID'] == user_id)
 
-        if round['status'] != RoundStatus.PLAY.name:
+        if round.status != RoundStatus.PLAY:
             raise Exception("You cannot play cards during the bidding stage")
 
-        if round['turn'] != user_id:
+        if round.turn != user_id:
             raise Exception("It's not your turn to play")
 
         if (StackModel.is_complete(stack['id'])):
@@ -186,14 +186,14 @@ def play_card(event):
 
         HandModel.remove_card(hand['id'], value)
         RoundModel.next_turn(round_id)
-        StackModel.add_action(ActionType.PLAY.name,
-                              user_id, stack['id'], value)
+        StackModel.add_action(ActionType.PLAY.name, user_id, stack['id'],
+                              value)
 
         stack_complete = StackModel.is_complete(stack['id'])
         if stack_complete:
             set_winner(round, stack)
 
-        return GameModel.find_by_id(round['gameID'])
+        return GameModel.find_by_id(round.gameID)
 
     finally:
         RoundModel.unlock(round_id)

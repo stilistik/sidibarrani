@@ -5,7 +5,7 @@ from models.team import TeamModel
 
 
 def round_to_base(x, base=10):
-    return base * round(x/base)
+    return base * round(x / base)
 
 
 def place_bet(event):
@@ -14,9 +14,9 @@ def place_bet(event):
     user_id = event['identity']['claims'].get('sub')
 
     round = RoundModel.find_by_id(round_id)
-    stack = StackModel.find_by_id(round['activeStackID'])
+    stack = StackModel.find_by_id(round.activeStackID)
 
-    if round['turn'] != user_id:
+    if round.turn != user_id:
         raise Exception("It's not your turn to place a bet")
 
     [mode, amount_str] = value.split(":")
@@ -30,11 +30,12 @@ def place_bet(event):
 
     if amount >= 157:
         amount = 157
-        StackModel.add_action(ActionType.BET.name, user_id,
-                              stack['id'], '{mode}:{amount}'.format(mode=mode, amount=amount))
+        StackModel.add_action(
+            ActionType.BET.name, user_id, stack['id'],
+            '{mode}:{amount}'.format(mode=mode, amount=amount))
 
         # set the winner of the bet stack
-        team_user = TeamModel.find_team_user_in_game(round['gameID'], user_id)
+        team_user = TeamModel.find_team_user_in_game(round.gameID, user_id)
         StackModel.set_winner(stack['id'], team_user['id'])
 
         # create a new stack and set as active
@@ -47,11 +48,12 @@ def place_bet(event):
         RoundModel.set_mode(round_id, mode)
     else:
         amount = round_to_base(amount, 10)
-        StackModel.add_action(ActionType.BET.name, user_id,
-                              stack['id'], '{mode}:{amount}'.format(mode=mode, amount=amount))
+        StackModel.add_action(
+            ActionType.BET.name, user_id, stack['id'],
+            '{mode}:{amount}'.format(mode=mode, amount=amount))
         RoundModel.next_turn(round_id)
 
-    return GameModel.find_by_id(round['gameID'])
+    return GameModel.find_by_id(round.gameID)
 
 
 def get_max_action(action):
@@ -66,10 +68,10 @@ def skip_bet(event):
     user_id = event['identity']['claims'].get('sub')
 
     round = RoundModel.find_by_id(round_id)
-    stack = StackModel.find_by_id(round['activeStackID'])
-    game_id = round['gameID']
+    stack = StackModel.find_by_id(round.activeStackID)
+    game_id = round.gameID
 
-    if round['turn'] != user_id:
+    if round.turn != user_id:
         raise Exception("It's not your turn to place a bet")
 
     StackModel.add_action(ActionType.SKIP.name, user_id, stack['id'], None)
