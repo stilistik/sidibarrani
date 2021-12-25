@@ -12,93 +12,85 @@ game_table_name = os.environ.get("GAMETABLE")
 game_table = ddb.Table(game_table_name)
 
 
-class GameStatus(Enum):
+class GameStatus(str, Enum):
     CREATED = 'CREATED',
     STARTED = 'STARTED',
     ENDED = 'ENDED'
 
 
-class GameMode(Enum):
+class GameMode(str, Enum):
     DUO = 'DUO',
     QUATTRO = 'QUATTRO'
 
 
+class Game():
+    def __init__(self, **kwargs) -> None:
+        self.id: str = kwargs['id']
+        self.name: str = kwargs['name']
+        self.nameLowerCase: str = self.name.lower()
+        self.status: GameStatus = GameStatus(kwargs['status'])
+        self.mode: GameMode = GameMode(kwargs['mode'])
+        self.private: bool = kwargs['private']
+        self.createdAt: str = kwargs['createdAt']
+        self.updatedAt: str = kwargs['updatedAt']
+        self.index: int = int(kwargs['index'])
+
+    def to_json(self) -> dict:
+        return vars(self)
+
+
 class GameModel:
     @staticmethod
-    def create(name=None, private=False, mode=GameMode.DUO):
+    def create(**kwargs):
         date_now = get_iso_date_string()
-        name = get_random_name() if name is None else name
-        index = SequenceNumberModel.get_index('Game')
-        game = {
-            'id': str(uuid()),
-            'name': name,
-            'mode': mode,
-            'nameLowerCase': name.lower(),
-            'status': 'CREATED',
-            'private': private,
-            'createdAt': date_now,
-            'updatedAt': date_now,
-            'index': int(index),
-            '__typename': 'Game'
-        }
 
-        game_table.put_item(
-            Item=game
-        )
+        game = Game(id=str(uuid()),
+                    name=kwargs.get('name', get_random_name()),
+                    mode=kwargs.get('mode', GameMode.DUO),
+                    status=GameStatus.CREATED,
+                    private=kwargs.get('private', False),
+                    createdAt=date_now,
+                    updatedAt=date_now,
+                    index=SequenceNumberModel.get_index('Game'))
 
-        return GameModel.item_to_json(game)
+        game_table.put_item(Item=vars(game))
+
+        return game
 
     @staticmethod
     def start(game_id):
         date_now = get_iso_date_string()
-        response = game_table.update_item(
-            Key={
-                'id': game_id
-            },
-            AttributeUpdates={
-                'status': {
-                    'Value': "STARTED"
-                },
-                'updatedAt': {
-                    'Value': date_now
-                },
-            },
-            ReturnValues="ALL_NEW"
-        )
-        return GameModel.item_to_json(response['Attributes'])
+        response = game_table.update_item(Key={'id': game_id},
+                                          AttributeUpdates={
+                                              'status': {
+                                                  'Value': "STARTED"
+                                              },
+                                              'updatedAt': {
+                                                  'Value': date_now
+                                              },
+                                          },
+                                          ReturnValues="ALL_NEW")
+        return Game(response['Attributes'])
 
     @staticmethod
     def set_active_round(game_id, round_id):
         date_now = get_iso_date_string()
-        response = game_table.update_item(
-            Key={
-                'id': game_id
-            },
-            AttributeUpdates={
-                'activeRoundID': {
-                    'Value': round_id
-                },
-                'updatedAt': {
-                    'Value': date_now
-                },
-            },
-            ReturnValues="ALL_NEW"
-        )
-        return GameModel.item_to_json(response['Attributes'])
+        response = game_table.update_item(Key={'id': game_id},
+                                          AttributeUpdates={
+                                              'activeRoundID': {
+                                                  'Value': round_id
+                                              },
+                                              'updatedAt': {
+                                                  'Value': date_now
+                                              },
+                                          },
+                                          ReturnValues="ALL_NEW")
+        return Game(response['Attributes'])
 
     @staticmethod
     def find_by_id(game_id):
-        response = game_table.get_item(
-            Key={
-                'id': game_id
-            }
-        )
-        return GameModel.item_to_json(response['Item'])
-
-    @staticmethod
-    def item_to_json(item):
-        item['index'] = int(item['index'])
-        return item
+        response = game_table.get_item(Key={'id': game_id})
+        return Game(response['Item'])
 
     @staticmethod
     def clear_data():
