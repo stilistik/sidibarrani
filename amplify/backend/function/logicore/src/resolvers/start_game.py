@@ -6,7 +6,7 @@ from models.hand import HandModel, HandType
 from models.stack import StackModel
 
 
-def validate_team_config(game_id, mode):
+def validate_team_config(game_id: str, mode: GameMode):
     teams = TeamModel.get_teams(game_id)
 
     if len(teams) != 2:
@@ -41,7 +41,7 @@ def validate_game_status(game_id):
 
 
 def new_round_duo(game: Game):
-    players = validate_team_config(game.id, "DUO")
+    players = validate_team_config(game.id, GameMode.DUO)
     stack_size = 2
 
     deck = Deck()
@@ -70,7 +70,7 @@ def new_round_duo(game: Game):
 
 
 def new_round_quattro(game: Game):
-    players = validate_team_config(game.id, "QUATTRO")
+    players = validate_team_config(game.id, GameMode.QUATTRO)
     stack_size = 4
 
     deck = Deck()
@@ -110,9 +110,6 @@ def new_round(event):
 
 def start_game(event):
     game_id = event['arguments'].get('gameID')
-
     validate_game_status(game_id)
-
     new_round(event)
-
     return GameModel.start(game_id)
