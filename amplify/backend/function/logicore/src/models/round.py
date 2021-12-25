@@ -39,7 +39,7 @@ class Round():
         self.activeStackID: str = kwargs.get('activeStackID', None)
         self.turn: str = kwargs.get('turn', None)
         self.mode: RoundMode = RoundMode(
-            kwargs['mode']) if 'mode' in kwargs else None
+            kwargs['mode']) if kwargs.get('mode') is not None else None
         self.locked: bool = kwargs.get('locked', False)
 
 
@@ -47,12 +47,14 @@ class RoundModel:
     @staticmethod
     def create(game_id, stack_count=9) -> Round:
         date_now = get_iso_date_string()
-        round = Round(id=str(uuid()),
-                      gameID=game_id,
-                      status=RoundStatus.BET,
-                      stackCount=stack_count,
-                      createdAt=date_now,
-                      updatedAt=date_now)
+        round = Round(
+            id=str(uuid()),
+            gameID=game_id,
+            status=RoundStatus.BET,
+            stackCount=stack_count,
+            createdAt=date_now,
+            updatedAt=date_now,
+        )
 
         round_table.put_item(Item=vars(round))
         return round

@@ -1,13 +1,14 @@
 from models.game import GameModel, GameStatus, Game, GameMode
 from models.team import TeamModel
-from models.team_user import TeamUserModel
+from models.team_user import TeamUserModel, TeamUser
 from models.round import RoundModel
 from models.deck import Deck
 from models.hand import HandModel, HandType
 from models.stack import StackModel
+from typing import List
 
 
-def validate_team_config(game_id: str, mode: GameMode):
+def validate_team_config(game_id: str, mode: GameMode) -> List[TeamUser]:
     teams = TeamModel.find_by_game(game_id)
 
     if len(teams) != 2:
@@ -26,7 +27,7 @@ def validate_team_config(game_id: str, mode: GameMode):
     elif mode == "DUO" and (count_team_1 != 1 or count_team_2 != 1):
         raise Exception("Mode: Duo requires one player on each team.")
 
-    shuffled_teams = []
+    shuffled_teams: List[TeamUser] = []
     for pair in zip(team1users, team2users):
         shuffled_teams.append(pair[0])
         shuffled_teams.append(pair[1])
@@ -49,24 +50,22 @@ def new_round_duo(game: Game):
     round = RoundModel.create(game.id)
     stack = StackModel.create(round.id, stack_size)
 
-    RoundModel.set_active_stack(round.id, stack['id'])
+    RoundModel.set_active_stack(round.id, stack.id)
 
     hidden_hands = {}
     for player in players:
         normal_hand = deck.deal_hand(6)
         open_hand = deck.deal_hand(6)
-        hidden_hands[player['userID']] = deck.deal_hand(6)
+        hidden_hands[player.userID] = deck.deal_hand(6)
 
-        HandModel.create(round.id, player['userID'], HandType.NORMAL,
-                         normal_hand)
-        HandModel.create(round.id, player['userID'], HandType.OPEN, open_hand)
-        HandModel.create(round.id, player['userID'], HandType.HIDDEN,
-                         ['X'] * 6)
+        HandModel.create(round.id, player.userID, HandType.NORMAL, normal_hand)
+        HandModel.create(round.id, player.userID, HandType.OPEN, open_hand)
+        HandModel.create(round.id, player.userID, HandType.HIDDEN, ['X'] * 6)
 
     RoundModel.save_hidden_hands(round.id, hidden_hands)
-    turn_sequence = list(map(lambda x: x['userID'], players))
+    turn_sequence = list(map(lambda p: p.userID, players))
     RoundModel.set_turn_sequence(round.id, turn_sequence)
-    RoundModel.set_turn(round.id, players[0]['userID'])
+    RoundModel.set_turn(round.id, players[0].userID)
     return GameModel.set_active_round(game.id, round.id)
 
 
@@ -78,18 +77,18 @@ def new_round_quattro(game: Game):
     round = RoundModel.create(game.id)
     stack = StackModel.create(round.id, stack_size)
 
-    RoundModel.set_active_stack(round.id, stack['id'])
+    RoundModel.set_active_stack(round.id, stack.id)
 
     starting_player_id = None
     for player in players:
         cards = deck.deal_hand()
 
         if '7D' in cards:
-            starting_player_id = player['userID']
+            starting_player_id = player.userID
 
-        HandModel.create(round.id, player['userID'], HandType.NORMAL, cards)
+        HandModel.create(round.id, player.userID, HandType.NORMAL, cards)
 
-    turn_sequence = list(map(lambda x: x['userID'], players))
+    turn_sequence = list(map(lambda p: p.userID, players))
 
     if not starting_player_id:
         starting_player_id = turn_sequence[0]

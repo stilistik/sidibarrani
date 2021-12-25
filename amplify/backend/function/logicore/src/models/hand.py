@@ -37,7 +37,7 @@ class HandModel:
             roundID=round_id,
             userID=user_id,
             createdAt=date_now,
-            updateAt=date_now,
+            updatedAt=date_now,
             cards=cards,
             type=type,
         )
