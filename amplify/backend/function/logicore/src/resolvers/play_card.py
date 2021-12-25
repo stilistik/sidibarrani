@@ -2,11 +2,12 @@ from models.team import TeamModel
 from models.stack import StackModel, Stack
 from models.action import ActionModel, ActionType, Action
 from models.round import RoundModel, RoundMode, RoundStatus, Round
-from models.hand import HandModel
+from models.hand import HandModel, Hand
 from models.game import GameModel
+from typing import List
 
 
-def get_rank(value, is_trump=False):
+def get_rank(value: str, is_trump=False):
     rank_str = value[0:-1]
     if rank_str == '9':
         if is_trump:
@@ -28,61 +29,61 @@ def get_rank(value, is_trump=False):
         return int(rank_str)
 
 
-def get_suit(value):
+def get_suit(value: str):
     return value[-1]
 
 
-def get_winner_top_down(actions):
-    suit_played = get_suit(actions[0]['value'])
+def get_winner_top_down(actions: List[Action]):
+    suit_played = get_suit(actions[0].value)
+    win_action = actions[0]
+
+    for action in actions:
+        suit = get_suit(action.value)
+        rank = get_rank(action.value)
+
+        if suit == suit_played:
+            if rank > get_rank(win_action.value):
+                win_action = action
+
+    return win_action
+
+
+def get_winner_bottom_up(actions: List[Action]):
+    suit_played = get_suit(actions[0].value)
     winner = actions[0]
 
     for action in actions:
-        suit = get_suit(action['value'])
-        rank = get_rank(action['value'])
+        suit = get_suit(action.value)
+        rank = get_rank(action.value)
 
         if suit == suit_played:
-            if rank > get_rank(winner['value']):
+            if rank < get_rank(winner.value):
                 winner = action
 
     return winner
 
 
-def get_winner_bottom_up(actions):
-    suit_played = get_suit(actions[0]['value'])
-    winner = actions[0]
+def get_winner_trump(actions: List[Action], trump_suit: str):
+    suit_played = get_suit(actions[0].value)
+    win_action = actions[0]
 
     for action in actions:
-        suit = get_suit(action['value'])
-        rank = get_rank(action['value'])
-
-        if suit == suit_played:
-            if rank < get_rank(winner['value']):
-                winner = action
-
-    return winner
-
-
-def get_winner_trump(actions, trump_suit):
-    suit_played = get_suit(actions[0]['value'])
-    winner = actions[0]
-
-    for action in actions:
-        suit = get_suit(action['value'])
+        suit = get_suit(action.value)
 
         if suit == trump_suit:
-            rank = get_rank(action['value'], is_trump=True)
-            if get_suit(winner['value']) == trump_suit:
-                if rank > get_rank(winner['value'], is_trump=True):
-                    winner = action
+            rank = get_rank(action.value, is_trump=True)
+            if get_suit(win_action.value) == trump_suit:
+                if rank > get_rank(win_action.value, is_trump=True):
+                    win_action = action
             else:
-                winner = action
+                win_action = action
 
-        elif suit == suit_played and get_suit(winner['value']) != trump_suit:
-            rank = get_rank(action['value'])
-            if rank > get_rank(winner['value']):
-                winner = action
+        elif suit == suit_played and get_suit(win_action.value) != trump_suit:
+            rank = get_rank(action.value)
+            if rank > get_rank(win_action.value):
+                win_action = action
 
-    return winner
+    return win_action
 
 
 def set_winner(round: Round, stack: Stack):
@@ -116,19 +117,19 @@ def set_winner(round: Round, stack: Stack):
                              if team_user['userID'] == win_action.userID),
                             None)
 
-    StackModel.set_winner(stack.id, winner_team_user['id'])
+    StackModel.set_winner(stack.id, winner_team_user.id)
     RoundModel.set_turn(round.id, win_action.userID)
 
 
-def has_suit(hand, suit):
-    hand_suits = list(map(lambda x: get_suit(x), hand['cards']))
+def has_suit(hand: Hand, suit: str):
+    hand_suits = list(map(lambda x: get_suit(x), hand.cards))
     if suit in hand_suits:
         return True
     else:
         return False
 
 
-def is_trump(round: Round, value):
+def is_trump(round: Round, value: str):
     mode = round.mode
     suit = get_suit(value)
     if mode == RoundMode.TRUMP_C.name and suit == 'C':
@@ -143,13 +144,13 @@ def is_trump(round: Round, value):
         return False
 
 
-def validate_card_played(stack_id, round, hand, value):
-    actions = StackModel.get_actions(stack_id)
+def validate_card_played(stack_id: str, round: Round, hand: Hand, value: str):
+    actions = ActionModel.find_by_stack(stack_id)
 
     if is_trump(round, value):
         return True
 
-    first_played = actions[0]['value'] if len(actions) > 0 else None
+    first_played = actions[0].value if len(actions) > 0 else None
     if first_played:
         if get_suit(first_played) != get_suit(value):
             if has_suit(hand, get_suit(first_played)):
@@ -171,7 +172,7 @@ def play_card(event):
 
         stack = StackModel.find_by_id(round.activeStackID)
         hands = HandModel.find_by_round(round_id)
-        hand = next(hand for hand in hands if hand['userID'] == user_id)
+        hand = next(hand for hand in hands if hand.userID == user_id)
 
         if round.status != RoundStatus.PLAY:
             raise Exception("You cannot play cards during the bidding stage")
@@ -179,19 +180,18 @@ def play_card(event):
         if round.turn != user_id:
             raise Exception("It's not your turn to play")
 
-        if (StackModel.is_complete(stack['id'])):
-            new_stack = StackModel.create(round_id, stack['size'])
-            RoundModel.set_active_stack(round_id, new_stack['id'])
+        if (StackModel.is_complete(stack.id)):
+            new_stack = StackModel.create(round_id, stack.size)
+            RoundModel.set_active_stack(round_id, new_stack.id)
             stack = new_stack
 
-        validate_card_played(stack['id'], round, hand, value)
+        validate_card_played(stack.id, round, hand, value)
 
-        HandModel.remove_card(hand['id'], value)
+        HandModel.remove_card(hand.id, value)
         RoundModel.next_turn(round_id)
-        StackModel.add_action(ActionType.PLAY.name, user_id, stack['id'],
-                              value)
+        StackModel.add_action(ActionType.PLAY.name, user_id, stack.id, value)
 
-        stack_complete = StackModel.is_complete(stack['id'])
+        stack_complete = StackModel.is_complete(stack.id)
         if stack_complete:
             set_winner(round, stack)
 
