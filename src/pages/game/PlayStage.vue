@@ -23,7 +23,13 @@
     </div>
     <YourTurn />
     <StackWinner />
-    <Stack v-if="Boolean(activeStack)" :stack="activeStack" />
+    <Stack
+      v-if="Boolean(activeStack)"
+      :stack="activeStack"
+      :position="[window.innerWidth / 2, window.innerHeight / 2 - 15]"
+      :cardWidth="140"
+      :interCardDistance="30"
+    />
     <Hand
       v-if="Boolean(activeRound && opponentId)"
       :round="activeRound"

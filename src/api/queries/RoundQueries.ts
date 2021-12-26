@@ -15,10 +15,9 @@ const getHandCards = /* GraphQL */ `
 export const useHandQuery = (
   roundID: Ref<string>,
   userID: Ref<string>,
-  type: string = "NORMAL"
+  type: Ref<string>
 ) => {
-  const typeRef = ref(type);
-  const key = reactive(["hand", { roundID, userID, typeRef }]);
+  const key = reactive(["hand", { roundID, userID, type }]);
   const options = reactive({ enabled: roundID.value && userID.value && true });
 
   const res = useQuery(
@@ -28,7 +27,7 @@ export const useHandQuery = (
         graphqlOperation(getHandCards, {
           roundID: roundID.value,
           userID: userID.value,
-          handType: typeRef.value,
+          handType: type.value,
         })
       )) as any;
       return data.getHandCards;

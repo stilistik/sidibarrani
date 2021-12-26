@@ -53,12 +53,9 @@ export default defineComponent({
     const user = useCurrentUser();
     const userId = computed(() => props.userId);
     const roundId = computed(() => props.round.id);
+    const type = computed(() => props.handType);
 
-    const { data, isLoading, isError } = useHandQuery(
-      roundId,
-      userId,
-      props.handType
-    );
+    const { data, isLoading, isError } = useHandQuery(roundId, userId, type);
 
     const playCardMutation = usePlayCardMutation();
 
