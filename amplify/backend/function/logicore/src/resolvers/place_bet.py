@@ -6,10 +6,6 @@ from models.team_user import TeamUserModel
 from models.action import ActionModel, ActionType, Action
 
 
-def round_to_base(x, base=10):
-    return base * round(x / base)
-
-
 def place_bet(event):
     round_id = event['arguments'].get('roundID')
     value: str = event['arguments'].get('value')
@@ -31,9 +27,9 @@ def place_bet(event):
     amount = int(amount_str)
 
     actions = ActionModel.find_by_stack(round.activeStackID)
-    max_value_action = max(actions, key=get_max_action)
+    max_value_action = max(actions, key=get_max_action, default=None)
 
-    if amount < max_value_action.get_value():
+    if max_value_action and amount < max_value_action.get_value():
         raise Exception("Bet amount must be higher than current highest bet.")
 
     if amount >= 157:
@@ -54,7 +50,6 @@ def place_bet(event):
         RoundModel.set_turn(round_id, user_id)
         RoundModel.set_mode(round_id, mode)
     else:
-        amount = round_to_base(amount, 10)
         ActionModel.create(ActionType.BET, user_id, stack.id,
                            '{mode}:{amount}'.format(mode=mode, amount=amount))
         RoundModel.next_turn(round_id)
