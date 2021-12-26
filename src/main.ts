@@ -3,7 +3,6 @@ import router from "./router";
 import App from "./App.vue";
 import { storeKey, store, actionsKey, actions } from "./store/Store";
 import "./tailwind.css";
-import * as amplify from "aws-amplify";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -18,6 +17,8 @@ import {
   faTrash,
   faCoins,
   faForward,
+  faCaretUp,
+  faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -32,6 +33,8 @@ library.add(faArrowsAltV);
 library.add(faTrash);
 library.add(faCoins);
 library.add(faForward);
+library.add(faCaretDown);
+library.add(faCaretUp);
 
 const app = createApp(App);
 
