@@ -1,0 +1,13 @@
+{
+  "typeName": "Mutation",
+  "fieldName": "playCard",
+  "arguments": {
+    "value": "AH",
+    "roundID": "24fd5417-dee2-4490-babd-910d0f59a49d"
+  },
+  "identity": {
+    "claims": {
+      "sub": "ba605d00-045a-453d-a274-2e768916fd58"
+    }
+  }
+}

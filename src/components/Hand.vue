@@ -18,13 +18,13 @@
 </template>
 
 <script lang="ts">
+import { useQueryClient } from "vue-query";
 import {
   computed,
   defineComponent,
   PropType,
   reactive,
   ref,
-  toRef,
   watchEffect,
 } from "vue";
 import { usePlayCardMutation, useHandQuery } from "../api";
@@ -53,13 +53,14 @@ export default defineComponent({
     const user = useCurrentUser();
     const userId = computed(() => props.userId);
     const roundId = computed(() => props.round.id);
-    const playCardMutation = usePlayCardMutation();
 
     const { data, isLoading, isError } = useHandQuery(
       roundId,
       userId,
       props.handType
     );
+
+    const playCardMutation = usePlayCardMutation();
 
     const cards = computed(() => data.value);
 

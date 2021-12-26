@@ -24,7 +24,57 @@
     <YourTurn />
     <StackWinner />
     <Stack v-if="Boolean(activeStack)" :stack="activeStack" />
-    <Hand v-if="Boolean(activeRound)" :round="activeRound" />
+    <Hand
+      v-if="Boolean(activeRound && opponentId)"
+      :round="activeRound"
+      :handType="'HIDDEN'"
+      :userId="opponentId"
+      :interCardDistance="165"
+      :cardWidth="140"
+      :position="[window.innerWidth / 2, 250]"
+      :interactive="false"
+    />
+    <Hand
+      v-if="Boolean(activeRound && opponentId)"
+      :round="activeRound"
+      :handType="'OPEN'"
+      :userId="opponentId"
+      :interCardDistance="165"
+      :cardWidth="140"
+      :position="[window.innerWidth / 2, 220]"
+      :interactive="false"
+    />
+    <Hand
+      v-if="Boolean(activeRound && userId)"
+      :round="activeRound"
+      :handType="'HIDDEN'"
+      :userId="userId"
+      :interCardDistance="165"
+      :cardWidth="140"
+      :position="[window.innerWidth / 2, window.innerHeight - 280]"
+      :interactive="false"
+    />
+    <Hand
+      v-if="Boolean(activeRound && userId)"
+      :round="activeRound"
+      :handType="'OPEN'"
+      :userId="userId"
+      :interCardDistance="165"
+      :cardWidth="140"
+      :position="[window.innerWidth / 2, window.innerHeight - 250]"
+      :interactive="true"
+    />
+    <Hand
+      v-if="Boolean(activeRound && userId)"
+      :round="activeRound"
+      :handType="'NORMAL'"
+      :userId="userId"
+      :interCardDistance="100"
+      :cardWidth="160"
+      :position="[window.innerWidth / 2, window.innerHeight]"
+      :shiftOnHover="true"
+      :interactive="true"
+    />
   </div>
 </template>
 
@@ -34,6 +84,7 @@ import {
   useActiveRound,
   useActiveStack,
   useClearStackMutation,
+  useCurrentGame,
   useEndRoundMutation,
 } from "../../api";
 import AppHeader from "../../components/AppHeader.vue";
@@ -43,6 +94,7 @@ import Stack from "../../components/Stack.vue";
 import YourTurn from "../../components/YourTurn.vue";
 import StackWinner from "../../components/StackWinner.vue";
 import ModeIcon from "./ModeIcon.vue";
+import { useCurrentUser } from "../../utils/Auth";
 
 export default defineComponent({
   name: "GamePage",
@@ -84,13 +136,28 @@ export default defineComponent({
       });
     }
 
+    const user = useCurrentUser();
+    const game = useCurrentGame();
+    const userId = computed(() => user?.value?.id);
+    const opponentId = computed(() => {
+      const teams = game.value?.Teams?.items;
+      const allUsers = teams.reduce((acc: any, curr: any) => {
+        const users = curr.TeamUsers.items.map((el: any) => el.user);
+        return acc.concat(users);
+      }, []);
+      return allUsers.find((el: any) => el.id !== userId.value)?.id;
+    });
+
     return reactive({
       activeRound,
       activeStack,
       isClearable,
       isEndable,
+      userId,
+      opponentId,
       end,
       clear,
+      window,
     });
   },
 });

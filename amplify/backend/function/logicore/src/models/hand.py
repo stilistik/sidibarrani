@@ -63,8 +63,7 @@ class HandModel:
             cards = response['Item']['cards']
             index = cards.index(card)
         except ValueError:
-            raise Exception(
-                'Card cannot be played because it is not in your hand')
+            raise Exception('Card not found in hand')
 
         response = hand_table.update_item(
             Key={

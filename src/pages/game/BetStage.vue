@@ -30,6 +30,7 @@
         :interCardDistance="165"
         :cardWidth="140"
         :position="[window.innerWidth / 2, 250]"
+        :interactive="false"
       />
       <Hand
         v-if="Boolean(activeRound && opponentId)"
@@ -49,6 +50,7 @@
         :interCardDistance="165"
         :cardWidth="140"
         :position="[window.innerWidth / 2, window.innerHeight - 280]"
+        :interactive="false"
       />
       <Hand
         v-if="Boolean(activeRound && userId)"

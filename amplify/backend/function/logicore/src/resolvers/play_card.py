@@ -1,4 +1,4 @@
-from models.team import TeamModel
+from models.team_user import TeamUserModel
 from models.stack import StackModel, Stack
 from models.action import ActionModel, ActionType, Action
 from models.round import RoundModel, RoundMode, RoundStatus, Round
@@ -112,10 +112,11 @@ def set_winner(round: Round, stack: Stack):
     else:
         raise Exception('Unsupported round mode {}'.format(mode))
 
-    team_users = TeamModel.find_team_users_by_game(round.gameID)
-    winner_team_user = next((team_user for team_user in team_users
-                             if team_user['userID'] == win_action.userID),
-                            None)
+    team_users = TeamUserModel.find_by_game(round.gameID)
+    winner_team_user = next(
+        (team_user
+         for team_user in team_users if team_user.userID == win_action.userID),
+        None)
 
     StackModel.set_winner(stack.id, winner_team_user.id)
     RoundModel.set_turn(round.id, win_action.userID)
@@ -172,7 +173,12 @@ def play_card(event):
 
         stack = StackModel.find_by_id(round.activeStackID)
         hands = HandModel.find_by_round(round_id)
-        hand = next(hand for hand in hands if hand.userID == user_id)
+        user_hands = [hand for hand in hands if hand.userID == user_id]
+
+        hand = next((hand for hand in user_hands if value in hand.cards), None)
+
+        if not hand:
+            raise Exception('Played card was not found in users hands.')
 
         if round.status != RoundStatus.PLAY:
             raise Exception("You cannot play cards during the bidding stage")
@@ -189,7 +195,7 @@ def play_card(event):
 
         HandModel.remove_card(hand.id, value)
         RoundModel.next_turn(round_id)
-        StackModel.add_action(ActionType.PLAY.name, user_id, stack.id, value)
+        ActionModel.create(ActionType.PLAY.name, user_id, stack.id, value)
 
         stack_complete = StackModel.is_complete(stack.id)
         if stack_complete:

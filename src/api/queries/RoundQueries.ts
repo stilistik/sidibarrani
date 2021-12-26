@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { reactive, Ref } from "vue";
+import { reactive, ref, Ref } from "vue";
 import { useQuery } from "vue-query";
 
 const getHandCards = /* GraphQL */ `
@@ -17,7 +17,8 @@ export const useHandQuery = (
   userID: Ref<string>,
   type: string = "NORMAL"
 ) => {
-  const key = reactive(["hand", { roundID, userID, type }]);
+  const typeRef = ref(type);
+  const key = reactive(["hand", { roundID, userID, typeRef }]);
   const options = reactive({ enabled: roundID.value && userID.value && true });
 
   const res = useQuery(
@@ -27,7 +28,7 @@ export const useHandQuery = (
         graphqlOperation(getHandCards, {
           roundID: roundID.value,
           userID: userID.value,
-          handType: type,
+          handType: typeRef.value,
         })
       )) as any;
       return data.getHandCards;

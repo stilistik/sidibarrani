@@ -28,7 +28,7 @@ class Action():
         self.updatedAt: str = kwargs['updatedAt']
 
     def get_value(self) -> int:
-        return int(self.value.split(':')[-1])
+        return int(self.value.split(':')[-1]) if self.value else 0
 
 
 class ActionModel:
