@@ -27,6 +27,9 @@ class Action():
         self.createdAt: str = kwargs['createdAt']
         self.updatedAt: str = kwargs['updatedAt']
 
+    def get_value(self) -> int:
+        return int(self.value.split(':')[-1])
+
 
 class ActionModel:
     @staticmethod
