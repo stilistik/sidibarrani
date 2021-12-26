@@ -34,6 +34,7 @@ class Game():
         self.createdAt: str = kwargs['createdAt']
         self.updatedAt: str = kwargs['updatedAt']
         self.index: int = int(kwargs['index'])
+        self.activeRoundID: str = kwargs.get('activeRoundID', None)
 
 
 class GameModel:

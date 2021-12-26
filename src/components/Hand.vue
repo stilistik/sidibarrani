@@ -24,6 +24,7 @@ import {
   PropType,
   reactive,
   ref,
+  toRef,
   watchEffect,
 } from "vue";
 import { usePlayCardMutation, useHandQuery } from "../api";
@@ -44,55 +45,53 @@ export default defineComponent({
     position: {
       type: Array as PropType<Array<number>>,
     },
+    userId: String,
     shiftOnHover: Boolean,
     interactive: Boolean,
   },
-  setup({
-    round,
-    handType,
-    interCardDistance,
-    cardWidth,
-    position,
-    shiftOnHover,
-    interactive,
-  }) {
+  setup(props) {
     const user = useCurrentUser();
-
-    const roundId = computed(() => round.id);
+    const userId = computed(() => props.userId);
+    const roundId = computed(() => props.round.id);
     const playCardMutation = usePlayCardMutation();
 
-    const { data, isLoading, isError } = useHandQuery(roundId, handType);
-    const cards = computed(() => data?.value?.cards);
+    const { data, isLoading, isError } = useHandQuery(
+      roundId,
+      userId,
+      props.handType
+    );
 
-    const cardHeight = cardWidth * 1.4;
+    const cards = computed(() => data.value);
+
+    const cardHeight = props.cardWidth * 1.4;
 
     const yTranslation = ref(0);
     function onMouseEnter() {
-      if (!shiftOnHover || !interactive) return;
+      if (!props.shiftOnHover || !props.interactive) return;
       yTranslation.value = -cardHeight / 2;
     }
 
     function onMouseLeave() {
-      if (!shiftOnHover || !interactive) return;
+      if (!props.shiftOnHover || !props.interactive) return;
       yTranslation.value = 0;
     }
 
     const played = ref(false);
 
     watchEffect(() => {
-      if (round?.turn === user?.value?.id) {
+      if (props.round?.turn === user?.value?.id) {
         played.value = false;
       }
     });
 
     function onClick(card: string) {
-      if (!interactive) return;
+      if (!props.interactive) return;
       if (!played.value) {
         played.value = true;
         playCardMutation.mutate(
           {
             value: card,
-            roundID: round.id,
+            roundID: props.round.id,
           },
           {
             onError: ({ errors }: any) => {
@@ -109,20 +108,20 @@ export default defineComponent({
     function getXPosition(idx: number) {
       const cardCount = cards.value.length;
       const startX =
-        position[0] -
+        props.position[0] -
         (Math.floor(cardCount / 2) - (cardCount % 2 === 0 ? 0.5 : 0)) *
-          interCardDistance -
-        cardWidth / 2;
+          props.interCardDistance -
+        props.cardWidth / 2;
 
-      return startX + idx * interCardDistance;
+      return startX + idx * props.interCardDistance;
     }
 
     function getYPosition() {
-      return position[1] - cardHeight / 2;
+      return props.position[1] - cardHeight / 2;
     }
 
     return reactive({
-      cardWidth,
+      cardWidth: props.cardWidth,
       cardHeight,
       isLoading,
       isError,
@@ -134,7 +133,7 @@ export default defineComponent({
       yTranslation,
       getXPosition,
       getYPosition,
-      interactive,
+      interactive: props.interactive,
     });
   },
 });

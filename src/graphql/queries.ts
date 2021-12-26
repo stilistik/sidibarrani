@@ -9,7 +9,6 @@ export const getUserHand = /* GraphQL */ `
       roundID
       userID
       type
-      cards
       createdAt
       updatedAt
       round {
@@ -52,6 +51,15 @@ export const getUserHand = /* GraphQL */ `
         }
       }
     }
+  }
+`;
+export const getHandCards = /* GraphQL */ `
+  query GetHandCards(
+    $roundID: String!
+    $userID: String!
+    $handType: HandType!
+  ) {
+    getHandCards(roundID: $roundID, userID: $userID, handType: $handType)
   }
 `;
 export const getSequenceNumber = /* GraphQL */ `
@@ -132,7 +140,6 @@ export const getHand = /* GraphQL */ `
       roundID
       userID
       type
-      cards
       createdAt
       updatedAt
       round {
@@ -189,7 +196,6 @@ export const listHands = /* GraphQL */ `
         roundID
         userID
         type
-        cards
         createdAt
         updatedAt
         round {
@@ -410,7 +416,6 @@ export const getRound = /* GraphQL */ `
           roundID
           userID
           type
-          cards
           createdAt
           updatedAt
         }

@@ -72,7 +72,6 @@ type Hand
   type: HandType
   user: User @connection(fields: ["userID"])
   round: Round @connection(fields: ["roundID"])
-  cards: [String]
 }
 
 type Action
@@ -162,6 +161,14 @@ type TeamUser
 
 type Query {
   getUserHand(roundID: String!, handType: HandType!): Hand!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
+
+  getHandCards(
+    roundID: String!
+    userID: String!
+    handType: HandType!
+  ): [String!]!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 }

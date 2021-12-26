@@ -23,44 +23,48 @@
     <YourTurn />
     <div class="absolute top-0 left-0">
       <Hand
-        v-if="Boolean(activeRound)"
+        v-if="Boolean(activeRound && opponentId)"
         :round="activeRound"
         :handType="'HIDDEN'"
+        :userId="opponentId"
         :interCardDistance="165"
         :cardWidth="140"
         :position="[window.innerWidth / 2, 250]"
       />
       <Hand
-        v-if="Boolean(activeRound)"
+        v-if="Boolean(activeRound && opponentId)"
         :round="activeRound"
         :handType="'OPEN'"
+        :userId="opponentId"
         :interCardDistance="165"
         :cardWidth="140"
         :position="[window.innerWidth / 2, 220]"
         :interactive="true"
       />
-
       <Hand
-        v-if="Boolean(activeRound)"
+        v-if="Boolean(activeRound && userId)"
         :round="activeRound"
         :handType="'HIDDEN'"
+        :userId="userId"
         :interCardDistance="165"
         :cardWidth="140"
         :position="[window.innerWidth / 2, window.innerHeight - 280]"
       />
       <Hand
-        v-if="Boolean(activeRound)"
+        v-if="Boolean(activeRound && userId)"
         :round="activeRound"
         :handType="'OPEN'"
+        :userId="userId"
         :interCardDistance="165"
         :cardWidth="140"
         :position="[window.innerWidth / 2, window.innerHeight - 250]"
         :interactive="true"
       />
       <Hand
-        v-if="Boolean(activeRound)"
+        v-if="Boolean(activeRound && userId)"
         :round="activeRound"
         :handType="'NORMAL'"
+        :userId="userId"
         :interCardDistance="100"
         :cardWidth="160"
         :position="[window.innerWidth / 2, window.innerHeight]"
@@ -83,10 +87,12 @@ import ModeSelector from "./ModeSelector.vue";
 import {
   useActiveRound,
   useActiveStack,
+  useCurrentGame,
   usePlaceBetMutation,
   useSkipBetMutation,
 } from "../../api";
 import { Message } from "../../utils/Message";
+import { useCurrentUser } from "../../utils/Auth";
 
 export default defineComponent({
   components: {
@@ -101,6 +107,8 @@ export default defineComponent({
   setup() {
     const activeRound = useActiveRound();
     const activeStack = useActiveStack();
+    const user = useCurrentUser();
+    const game = useCurrentGame();
 
     const lastAction = computed(() => {
       const actions = activeStack.value.actions.items;
@@ -128,8 +136,6 @@ export default defineComponent({
         Message.error("You have to select a mode.");
         return;
       }
-      console.log(bet.value);
-
       placeBetMutation.mutate(
         {
           roundID: activeRound.value.id,
@@ -149,6 +155,16 @@ export default defineComponent({
       });
     }
 
+    const userId = computed(() => user?.value?.id);
+    const opponentId = computed(() => {
+      const teams = game.value?.Teams?.items;
+      const allUsers = teams.reduce((acc: any, curr: any) => {
+        const users = curr.TeamUsers.items.map((el: any) => el.user);
+        return acc.concat(users);
+      }, []);
+      return allUsers.find((el: any) => el.id !== userId.value)?.id;
+    });
+
     return reactive({
       mode,
       onModeChange,
@@ -159,6 +175,8 @@ export default defineComponent({
       lastBet,
       window,
       bet,
+      userId,
+      opponentId,
     });
   },
 });

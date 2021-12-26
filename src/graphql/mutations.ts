@@ -851,7 +851,6 @@ export const createHand = /* GraphQL */ `
       roundID
       userID
       type
-      cards
       createdAt
       updatedAt
       round {
@@ -906,7 +905,6 @@ export const updateHand = /* GraphQL */ `
       roundID
       userID
       type
-      cards
       createdAt
       updatedAt
       round {
@@ -961,7 +959,6 @@ export const deleteHand = /* GraphQL */ `
       roundID
       userID
       type
-      cards
       createdAt
       updatedAt
       round {
@@ -1345,7 +1342,6 @@ export const createRound = /* GraphQL */ `
           roundID
           userID
           type
-          cards
           createdAt
           updatedAt
         }
@@ -1421,7 +1417,6 @@ export const updateRound = /* GraphQL */ `
           roundID
           userID
           type
-          cards
           createdAt
           updatedAt
         }
@@ -1497,7 +1492,6 @@ export const deleteRound = /* GraphQL */ `
           roundID
           userID
           type
-          cards
           createdAt
           updatedAt
         }

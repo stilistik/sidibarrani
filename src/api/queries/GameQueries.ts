@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { computed, Ref } from "vue";
+import { computed, ref, Ref } from "vue";
 import { ComputedRef, reactive } from "vue-demi";
 import { useQuery } from "vue-query";
 import router from "../../router";
@@ -89,6 +89,18 @@ export const useGameQuery = (gameId: ComputedRef<string>) => {
     options
   );
   return res;
+};
+
+const gameRef = ref(null);
+export const useCurrentGame = () => {
+  const gameId = computed(
+    () => router.currentRoute.value.query.gameId as string
+  );
+  const { data } = useGameQuery(gameId);
+  if (data.value) {
+    gameRef.value = data.value;
+  }
+  return gameRef;
 };
 
 export const useActiveRound = () => {

@@ -12,7 +12,7 @@ def round_to_base(x, base=10):
 
 def place_bet(event):
     round_id = event['arguments'].get('roundID')
-    value = event['arguments'].get('value')
+    value: str = event['arguments'].get('value')
     user_id = event['identity']['claims'].get('sub')
 
     round = RoundModel.find_by_id(round_id)
@@ -53,14 +53,16 @@ def place_bet(event):
                            '{mode}:{amount}'.format(mode=mode, amount=amount))
         RoundModel.next_turn(round_id)
 
-    return vars(GameModel.find_by_id(round.gameID))
+    game = GameModel.find_by_id(round.gameID)
+    print(vars(game))
+    return vars(game)
 
 
 def get_max_action(action: Action):
     if action.type == ActionType.SKIP:
         return -1
     else:
-        return int(action['value'].split(":")[1])
+        return int(action.value.split(":")[1])
 
 
 def skip_bet(event):

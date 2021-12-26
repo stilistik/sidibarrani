@@ -1,10 +1,12 @@
+from resolvers.get_user_hand import get_user_hand
+from resolvers.get_hand_cards import get_hand_cards
+
 from resolvers.place_bet import place_bet, skip_bet
 from resolvers.play_card import play_card
 from resolvers.start_game import start_game, new_round
 from resolvers.create_game import create_game
 from resolvers.join_team import join_team
 from resolvers.leave_game import leave_game
-from resolvers.get_user_hand import get_user_hand
 from resolvers.clear_stack import clear_stack
 from resolvers.end_round import end_round
 from resolvers.clear_data import clear_data
@@ -25,6 +27,7 @@ resolvers = {
     },
     'Query': {
         'getUserHand': get_user_hand,
+        'getHandCards': get_hand_cards,
     }
 }
 

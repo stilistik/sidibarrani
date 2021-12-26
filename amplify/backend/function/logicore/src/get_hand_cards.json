@@ -1,0 +1,14 @@
+{
+  "typeName": "Query",
+  "fieldName": "getHandCards",
+  "arguments": {
+    "roundID": "0aeb0f20-751e-4de2-b511-f4add7759f57",
+    "userID": "8ff7c546-0b9f-4e61-93a5-716ed3358ad6",
+    "handType": "NORMAL"
+  },
+  "identity": {
+    "claims": {
+      "sub": "ba605d00-045a-453d-a274-2e768916fd58"
+    }
+  }
+}

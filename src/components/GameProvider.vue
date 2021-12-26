@@ -31,11 +31,11 @@ export default defineComponent({
     }
 
     onBeforeUnmount(() => {
-      leaveGame();
+      // leaveGame();
     });
 
     window.onbeforeunload = () => {
-      leaveGame();
+      // leaveGame();
     };
   },
 });

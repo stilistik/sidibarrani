@@ -5,6 +5,7 @@ import boto3
 from enum import Enum
 from boto3.dynamodb.conditions import Key
 from utils.utils import get_iso_date_string, clear_table
+from typing import List
 
 ddb = boto3.resource('dynamodb')
 round_table_name = os.environ.get("ROUNDTABLE")
@@ -41,6 +42,9 @@ class Round():
         self.mode: RoundMode = RoundMode(
             kwargs['mode']) if kwargs.get('mode') is not None else None
         self.locked: bool = kwargs.get('locked', False)
+        self.betPoints: int = kwargs.get('betPoints', None)
+        self.result: dict = kwargs.get('result', None)
+        self.turnSequence: List[str] = kwargs.get('turnSequence', [])
 
 
 class RoundModel:
