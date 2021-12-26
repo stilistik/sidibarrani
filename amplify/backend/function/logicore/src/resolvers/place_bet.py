@@ -30,6 +30,12 @@ def place_bet(event):
 
     amount = int(amount_str)
 
+    actions = ActionModel.find_by_stack(round.activeStackID)
+    max_value_action = max(actions, key=get_max_action)
+
+    if amount < max_value_action.get_value():
+        raise Exception("Bet amount must be higher than current highest bet.")
+
     if amount >= 157:
         amount = 157
         ActionModel.create(ActionType.BET, user_id, stack.id,
@@ -62,7 +68,7 @@ def get_max_action(action: Action):
     if action.type == ActionType.SKIP:
         return -1
     else:
-        return int(action.value.split(":")[1])
+        return action.get_value()
 
 
 def skip_bet(event):
@@ -80,7 +86,7 @@ def skip_bet(event):
     RoundModel.next_turn(round_id)
 
     actions = ActionModel.find_by_stack(stack.id)
-    game_user_count = len(TeamModel.find_team_users_by_game(game_id))
+    game_user_count = len(TeamUserModel.find_by_game(game_id))
 
     last_actions = actions[-game_user_count:]
     max_amount_action = max(actions, key=get_max_action)
