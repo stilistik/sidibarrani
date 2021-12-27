@@ -6,10 +6,9 @@ import { gameFragment } from "../fragments/GameFragment";
 const onUpdateGameState = /* GraphQL */ `
   subscription OnUpdateGameState($id: ID!) {
     onUpdateGameState(id: $id) {
-      ...GameFragment
+      id
     }
   }
-  ${gameFragment}
 `;
 
 export const useGameSubscription = (gameId: string) => {
@@ -17,12 +16,11 @@ export const useGameSubscription = (gameId: string) => {
   const subscription = (
     API.graphql(graphqlOperation(onUpdateGameState, { id: gameId })) as any
   ).subscribe({
-    next: ({ value }: any) => {
-      const key = reactive(["getGame", { gameId }]);
-
-      if (value?.data?.onUpdateGameState) {
-        qc.setQueryData(key, value.data.onUpdateGameState);
-      }
+    next: () => {
+      // we have to refetch and cannot use the subscription data directly, because the data
+      // created by the mutator may not be valid for the subscriber (i.e. cards from mutator are
+      // different than cards from subscriber)
+      qc.refetchQueries("getGame");
     },
     error: (error: any) => console.warn(error),
   });
