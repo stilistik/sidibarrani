@@ -22,6 +22,7 @@ import { useQueryClient } from "vue-query";
 import {
   computed,
   defineComponent,
+  onUpdated,
   PropType,
   reactive,
   ref,
@@ -55,7 +56,15 @@ export default defineComponent({
     const roundId = computed(() => props.round.id);
     const type = computed(() => props.handType);
 
-    const { data, isLoading, isError } = useHandQuery(roundId, userId, type);
+    const { data, isLoading, isError, refetch } = useHandQuery(
+      roundId,
+      userId,
+      type
+    );
+
+    onUpdated(() => {
+      refetch.value();
+    });
 
     const playCardMutation = usePlayCardMutation();
 

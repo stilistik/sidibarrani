@@ -22,7 +22,6 @@ export const useGameSubscription = (gameId: string) => {
 
       if (value?.data?.onUpdateGameState) {
         qc.setQueryData(key, value.data.onUpdateGameState);
-        qc.refetchQueries("hand");
       }
     },
     error: (error: any) => console.warn(error),
