@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="Boolean(card)"
     class="absolute"
     :style="style"
     @mousemove="onMouseMove"

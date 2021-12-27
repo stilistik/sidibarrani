@@ -6,8 +6,8 @@
     :card="card"
     :width="cardWidth"
     :height="cardHeight"
-    :x="getXPosition(idx)"
-    :y="getYPosition() + yTranslation"
+    :x="getXPosition(idx, card)"
+    :y="getYPosition(card)"
     :initX="getXPosition(idx)"
     :initY="1000"
     :interactive="interactive"
@@ -81,18 +81,18 @@ export default defineComponent({
       yTranslation.value = 0;
     }
 
-    const played = ref(false);
+    const playedCard = ref(null);
 
     watchEffect(() => {
       if (props.round?.turn === user?.value?.id) {
-        played.value = false;
+        playedCard.value = null;
       }
     });
 
     function onClick(card: string) {
       if (!props.interactive) return;
-      if (!played.value) {
-        played.value = true;
+      if (!playedCard.value) {
+        playedCard.value = card;
         playCardMutation.mutate(
           {
             value: card,
@@ -101,7 +101,7 @@ export default defineComponent({
           {
             onError: ({ errors }: any) => {
               Message.error(errors[0].message);
-              played.value = false;
+              playedCard.value = null;
             },
           }
         );
@@ -110,19 +110,27 @@ export default defineComponent({
       }
     }
 
-    function getXPosition(idx: number) {
-      const cardCount = cards.value.length;
-      const startX =
-        props.position[0] -
-        (Math.floor(cardCount / 2) - (cardCount % 2 === 0 ? 0.5 : 0)) *
-          props.interCardDistance -
-        props.cardWidth / 2;
+    function getXPosition(idx: number, card: string) {
+      if (card === playedCard.value) {
+        return window.innerWidth / 2 - props.cardWidth / 2;
+      } else {
+        const cardCount = cards.value.length;
+        const startX =
+          props.position[0] -
+          (Math.floor(cardCount / 2) - (cardCount % 2 === 0 ? 0.5 : 0)) *
+            props.interCardDistance -
+          props.cardWidth / 2;
 
-      return startX + idx * props.interCardDistance;
+        return startX + idx * props.interCardDistance;
+      }
     }
 
-    function getYPosition() {
-      return props.position[1] - cardHeight / 2;
+    function getYPosition(card: string) {
+      if (card === playedCard.value) {
+        return window.innerHeight / 2 - cardHeight / 2;
+      } else {
+        return props.position[1] - cardHeight / 2 + yTranslation.value;
+      }
     }
 
     return reactive({
@@ -133,7 +141,6 @@ export default defineComponent({
       onClick,
       onMouseEnter,
       onMouseLeave,
-      yTranslation,
       getXPosition,
       getYPosition,
       interactive: props.interactive,
