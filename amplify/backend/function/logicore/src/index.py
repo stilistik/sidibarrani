@@ -27,7 +27,9 @@ resolvers = {
     },
     'Query': {
         'getUserHand': get_user_hand,
-        'getHandCards': get_hand_cards,
+    },
+    'Hand': {
+        'cards': get_hand_cards,
     }
 }
 

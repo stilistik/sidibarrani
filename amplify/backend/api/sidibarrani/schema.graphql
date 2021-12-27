@@ -72,7 +72,7 @@ type Hand
   type: HandType
   user: User @connection(fields: ["userID"])
   round: Round @connection(fields: ["roundID"])
-  cards: [String]
+  cards: [String] @function(name: "logicore-${env}")
 }
 
 type Action

@@ -45,6 +45,11 @@ class HandModel:
         return hand
 
     @staticmethod
+    def find_by_id(hand_id) -> Hand:
+        response = hand_table.get_item(Key={'id': hand_id})
+        return Hand(**response['Item'])
+
+    @staticmethod
     def find_by_round(round_id) -> List[Hand]:
         response = hand_table.query(
             IndexName="byRound",
