@@ -2,8 +2,8 @@ from models.team_user import TeamUserModel
 from models.stack import StackModel, Stack
 from models.action import ActionModel, ActionType, Action
 from models.round import RoundModel, RoundMode, RoundStatus, Round
-from models.hand import HandModel, Hand
-from models.game import GameModel
+from models.hand import HandModel, Hand, HandType
+from models.game import GameModel, GameMode
 from typing import List
 
 
@@ -166,6 +166,7 @@ def play_card(event):
     user_id = event['identity']['claims'].get('sub')
 
     round = RoundModel.find_by_id(round_id)
+    game = GameModel.find_by_id(round.gameID)
 
     if round.locked is True:
         raise Exception("Concurrent update exception")
@@ -194,6 +195,12 @@ def play_card(event):
             stack = new_stack
 
         validate_card_played(stack.id, round, user_hands, value)
+
+        if game.mode == GameMode.DUO:
+            hidden_hand = next(
+                (hand for hand in user_hands if hand.type == HandType.HIDDEN))
+            index = HandModel.get_card_index(hand.id, value)
+            HandModel.unhide_card(hidden_hand.id, index)
 
         HandModel.set_card_played(hand.id, value)
         RoundModel.next_turn(round_id)

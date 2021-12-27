@@ -26,21 +26,21 @@ class Hand:
         self.updatedAt: str = kwargs['updatedAt']
         self.cards: List[str] = kwargs['cards']
         self.type: HandType = HandType(kwargs['type'])
+        self.hiddenCards: List[str] = kwargs['hiddenCards']
 
 
 class HandModel:
     @staticmethod
-    def create(round_id, user_id, type: HandType, cards):
+    def create(round_id, user_id, type: HandType, cards, **kwargs):
         date_now = get_iso_date_string()
-        hand = Hand(
-            id=str(uuid()),
-            roundID=round_id,
-            userID=user_id,
-            createdAt=date_now,
-            updatedAt=date_now,
-            cards=cards,
-            type=type,
-        )
+        hand = Hand(id=str(uuid()),
+                    roundID=round_id,
+                    userID=user_id,
+                    createdAt=date_now,
+                    updatedAt=date_now,
+                    cards=cards,
+                    type=type,
+                    hiddenCards=kwargs.get('hidden_cards', []))
         hand_table.put_item(Item=vars(hand))
         return hand
 
@@ -88,6 +88,20 @@ class HandModel:
             return index
         except ValueError:
             raise Exception('Card not found in hand')
+
+    def unhide_card(hand_id: str, index: int) -> Hand:
+        hand = HandModel.find_by_id(hand_id)
+        if hand.type != HandType.HIDDEN:
+            raise Exception("Can't unhide card in non-hidden hand")
+
+        response = hand_table.update_item(
+            Key={
+                'id': hand_id,
+            },
+            UpdateExpression=f'set cards[{index}] = :val',
+            ExpressionAttributeValues={':val': hand.hiddenCards[index]},
+            ReturnValues="ALL_NEW")
+        return Hand(**response['Attributes'])
 
     @staticmethod
     def clear_data():

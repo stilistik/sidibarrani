@@ -52,17 +52,19 @@ def new_round_duo(game: Game):
 
     RoundModel.set_active_stack(round.id, stack.id)
 
-    hidden_hands = {}
     for player in players:
-        normal_hand = deck.deal_hand(6)
-        open_hand = deck.deal_hand(6)
-        hidden_hands[player.userID] = deck.deal_hand(6)
+        normal_cards = deck.deal_hand(6)
+        open_cards = deck.deal_hand(6)
+        hidden_cards = deck.deal_hand(6)
 
-        HandModel.create(round.id, player.userID, HandType.NORMAL, normal_hand)
-        HandModel.create(round.id, player.userID, HandType.OPEN, open_hand)
-        HandModel.create(round.id, player.userID, HandType.HIDDEN, ['X'] * 6)
+        HandModel.create(round.id, player.userID, HandType.NORMAL,
+                         normal_cards)
+        HandModel.create(round.id, player.userID, HandType.OPEN, open_cards)
+        HandModel.create(round.id,
+                         player.userID,
+                         HandType.HIDDEN, ['X'] * 6,
+                         hidden_cards=hidden_cards)
 
-    RoundModel.save_hidden_hands(round.id, hidden_hands)
     turn_sequence = list(map(lambda p: p.userID, players))
     RoundModel.set_turn_sequence(round.id, turn_sequence)
     RoundModel.set_turn(round.id, players[0].userID)

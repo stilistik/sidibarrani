@@ -197,22 +197,6 @@ class RoundModel:
         return Round(**response['Attributes'])
 
     @staticmethod
-    def save_hidden_hands(round_id, hidden_hands) -> Round:
-        date_now = get_iso_date_string()
-        response = round_table.update_item(Key={'id': round_id},
-                                           AttributeUpdates={
-                                               'hidden_hands': {
-                                                   'Value':
-                                                   json.dumps(hidden_hands)
-                                               },
-                                               'updatedAt': {
-                                                   'Value': date_now
-                                               }
-                                           },
-                                           ReturnValues="ALL_NEW")
-        return Round(**response['Attributes'])
-
-    @staticmethod
     def lock(round_id):
         return RoundModel.set_locked(round_id, True)
 
