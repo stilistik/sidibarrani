@@ -63,6 +63,8 @@ export default defineComponent({
     );
 
     onUpdated(() => {
+      // this refetch is required to make the hand update when the game state changes
+      // invalidating queries in the game subscription did lead to a consistent update
       refetch.value();
     });
 
