@@ -56,23 +56,24 @@ export default defineComponent({
     const rotation = spring(0, { damping: 12 });
     const scale = spring(1, { damping: 12, precision: 8, from: 0 });
     const p = spring({ x: 0, y: 0 }, { damping: 20 });
-    const pos = spring(
-      { x: props.x, y: props.y },
-      { from: { x: props.initX || props.x, y: props.initY || props.y } }
-    );
+
+    const options = reactive({ from: { x: props.x, y: props.y } });
+
+    const xpos = spring(props.x, { from: props.x });
+    const ypos = spring(props.y, { from: props.y });
 
     const { x, y } = toRefs(props);
     watch(x, (newValue) => {
-      pos.x = newValue;
+      xpos.value = newValue;
     });
     watch(y, (newValue) => {
-      pos.y = newValue;
+      ypos.value = newValue;
     });
 
     function onMouseMove(event: any) {
       if (!props.interactive) return;
-      p.x = event.pageX - pos.x - props.width / 2;
-      p.y = event.pageY - pos.y - props.height / 2;
+      p.x = event.pageX - xpos.value - props.width / 2;
+      p.y = event.pageY - ypos.value - props.height / 2;
     }
 
     function onMouseEnter(event: Event) {
@@ -97,11 +98,11 @@ export default defineComponent({
     const style = computed(() => {
       return `width:${props.width}px; height:${
         props.height
-      }px;  transform:  translateX(${pos.x}px) translateY(${pos.y}px) scale(${
-        scale.value
-      }) perspective(800px) rotateX(${calcX(p.y)}deg) rotateY(${calcY(
-        p.x
-      )}deg)`;
+      }px;  transform:  translateX(${xpos.value}px) translateY(${
+        ypos.value
+      }px) scale(${scale.value}) perspective(800px) rotateX(${calcX(
+        p.y
+      )}deg) rotateY(${calcY(p.x)}deg)`;
     });
 
     const outerStyle = computed(() => {

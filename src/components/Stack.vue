@@ -8,7 +8,6 @@
     :height="cardHeight"
     :x="getXPosition(idx)"
     :y="getYPosition()"
-    :initY="-100"
   />
 </template>
 

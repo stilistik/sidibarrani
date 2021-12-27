@@ -8,9 +8,7 @@
     :height="cardHeight"
     :x="getXPosition(idx, card)"
     :y="getYPosition(card)"
-    :initX="getXPosition(idx)"
-    :initY="1000"
-    :interactive="interactive"
+    :interactive="getInteractive(card)"
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
     @onClick="onClick"
@@ -133,6 +131,11 @@ export default defineComponent({
       }
     }
 
+    function getInteractive(card: string) {
+      if (props.interactive && card != "X") return true;
+      else return false;
+    }
+
     return reactive({
       cardWidth: props.cardWidth,
       cardHeight,
@@ -143,7 +146,7 @@ export default defineComponent({
       onMouseLeave,
       getXPosition,
       getYPosition,
-      interactive: props.interactive,
+      getInteractive,
     });
   },
 });
