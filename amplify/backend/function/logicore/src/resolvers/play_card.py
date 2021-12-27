@@ -195,7 +195,7 @@ def play_card(event):
 
         validate_card_played(stack.id, round, user_hands, value)
 
-        HandModel.remove_card(hand.id, value)
+        HandModel.set_card_played(hand.id, value)
         RoundModel.next_turn(round_id)
         ActionModel.create(ActionType.PLAY.name, user_id, stack.id, value)
 

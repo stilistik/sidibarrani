@@ -80,6 +80,7 @@
       :position="[window.innerWidth / 2, window.innerHeight]"
       :shiftOnHover="true"
       :interactive="true"
+      :filterPlayed="true"
     />
   </div>
 </template>
