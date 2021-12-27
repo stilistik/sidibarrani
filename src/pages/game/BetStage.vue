@@ -40,7 +40,7 @@
         :interCardDistance="165"
         :cardWidth="140"
         :position="[window.innerWidth / 2, 220]"
-        :interactive="true"
+        :interactive="false"
       />
       <Hand
         v-if="Boolean(activeRound && userId)"

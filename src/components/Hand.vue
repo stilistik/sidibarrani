@@ -1,19 +1,4 @@
-<template>
-  <Card
-    v-for="(card, idx) in cards"
-    class="absolute"
-    :key="card"
-    :card="card"
-    :width="cardWidth"
-    :height="cardHeight"
-    :x="getXPosition(idx, card)"
-    :y="getYPosition(card)"
-    :interactive="getInteractive(card)"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
-    @onClick="onClick"
-  />
-</template>
+<template></template>
 
 <script lang="ts">
 import {
@@ -25,6 +10,7 @@ import {
   watchEffect,
 } from "vue";
 import { usePlayCardMutation, useActiveRound } from "../api";
+import { useCardManager } from "../pages/game/CardManager.vue";
 import { useCurrentUser } from "../utils/Auth";
 import { Message } from "../utils/Message";
 import Card from "./Card.vue";
@@ -51,6 +37,8 @@ export default defineComponent({
     const user = useCurrentUser();
     const activeRound = useActiveRound();
     const playCardMutation = usePlayCardMutation();
+
+    const { setCardState, resetCardState } = useCardManager();
 
     const cards = computed(() => {
       const hand = activeRound.value.hands.items.find((hand: any) => {
@@ -136,17 +124,27 @@ export default defineComponent({
       else return false;
     }
 
-    return reactive({
-      cardWidth: props.cardWidth,
-      cardHeight,
-      cards,
-      user,
-      onClick,
-      onMouseEnter,
-      onMouseLeave,
-      getXPosition,
-      getYPosition,
-      getInteractive,
+    let prevCards: any[] = [];
+    watchEffect(() => {
+      prevCards.forEach((card) => {
+        resetCardState(card);
+      });
+
+      cards.value.forEach((card: string, index: number) => {
+        setCardState(card, "visible", true);
+        setCardState(card, "position", {
+          x: getXPosition(index, card),
+          y: getYPosition(card),
+        });
+        setCardState(card, "interactive", getInteractive(card));
+        setCardState(card, "onClick", () => onClick(card));
+        setCardState(card, "onMouseEnter", onMouseEnter);
+        setCardState(card, "onMouseLeave", onMouseLeave);
+        setCardState(card, "width", props.cardWidth);
+        setCardState(card, "zIndex", index + 1);
+      });
+
+      prevCards = cards.value;
     });
   },
 });

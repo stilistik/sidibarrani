@@ -1,9 +1,11 @@
 <template>
   <AppHeader />
   <PageContainer>
-    <BetStage v-if="activeRound?.status === 'BET'" />
-    <PlayStage v-if="activeRound?.status === 'PLAY'" />
-    <ResultStage v-if="activeRound?.status === 'ENDED'" />
+    <CardManager>
+      <BetStage v-if="activeRound?.status === 'BET'" />
+      <PlayStage v-if="activeRound?.status === 'PLAY'" />
+      <ResultStage v-if="activeRound?.status === 'ENDED'" />
+    </CardManager>
   </PageContainer>
 </template>
 
@@ -15,6 +17,7 @@ import PlayStage from "./PlayStage.vue";
 import BetStage from "./BetStage.vue";
 import ResultStage from "./ResultStage.vue";
 import PageContainer from "../../components/PageContainer.vue";
+import CardManager from "./CardManager.vue";
 
 export default defineComponent({
   name: "GamePage",
@@ -24,6 +27,7 @@ export default defineComponent({
     BetStage,
     ResultStage,
     PageContainer,
+    CardManager,
   },
   setup() {
     const activeRound = useActiveRound();

@@ -3,6 +3,10 @@
 @import "tailwindcss/utilities";
 
 @layer utilities {
+  .z-hud {
+    z-index: 1000;
+  }
+
   /* 
    * PRIMARY COLORS
    * ---------------

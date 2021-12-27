@@ -1,18 +1,8 @@
-<template>
-  <Card
-    v-for="(action, idx) in stack?.actions?.items"
-    class="absolute"
-    :key="action.value"
-    :card="action.value"
-    :width="cardWidth"
-    :height="cardHeight"
-    :x="getXPosition(idx)"
-    :y="getYPosition()"
-  />
-</template>
+<template></template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive } from "vue";
+import { computed, defineComponent, PropType, watchEffect } from "vue";
+import { useCardManager } from "../pages/game/CardManager.vue";
 import Card from "./Card.vue";
 
 export default defineComponent({
@@ -28,6 +18,12 @@ export default defineComponent({
     interCardDistance: Number,
   },
   setup(props) {
+    const { setCardState, resetCardState } = useCardManager();
+
+    const cards = computed(() =>
+      props.stack.actions.items.map((action: any) => action.value)
+    );
+
     function getXPosition(idx: number) {
       const cardCount = props.stack.actions.items.length;
       const startX =
@@ -45,11 +41,24 @@ export default defineComponent({
 
     const cardHeight = props.cardWidth * 1.4;
 
-    return reactive({
-      getXPosition,
-      getYPosition,
-      cardWidth: props.cardWidth,
-      cardHeight,
+    let prevCards: any[] = [];
+    watchEffect(() => {
+      prevCards.forEach((card) => {
+        setCardState(card, "position", {
+          x: window.innerWidth + 100,
+          y: getYPosition(),
+        });
+      });
+      cards.value.forEach((card: string, index: number) => {
+        setCardState(card, "position", {
+          x: getXPosition(index),
+          y: getYPosition(),
+        });
+        setCardState(card, "visible", true);
+        setCardState(card, "width", props.cardWidth);
+      });
+
+      prevCards = cards.value;
     });
   },
 });
