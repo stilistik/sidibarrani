@@ -196,7 +196,7 @@ def play_card(event):
 
         validate_card_played(stack.id, round, user_hands, value)
 
-        if game.mode == GameMode.DUO:
+        if game.mode == GameMode.DUO and hand.type == HandType.OPEN:
             hidden_hand = next(
                 (hand for hand in user_hands if hand.type == HandType.HIDDEN))
             index = HandModel.get_card_index(hand.id, value)
