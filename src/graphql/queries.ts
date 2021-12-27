@@ -9,6 +9,7 @@ export const getUserHand = /* GraphQL */ `
       roundID
       userID
       type
+      cards
       createdAt
       updatedAt
       round {
@@ -140,6 +141,7 @@ export const getHand = /* GraphQL */ `
       roundID
       userID
       type
+      cards
       createdAt
       updatedAt
       round {
@@ -196,6 +198,7 @@ export const listHands = /* GraphQL */ `
         roundID
         userID
         type
+        cards
         createdAt
         updatedAt
         round {
@@ -416,6 +419,7 @@ export const getRound = /* GraphQL */ `
           roundID
           userID
           type
+          cards
           createdAt
           updatedAt
         }

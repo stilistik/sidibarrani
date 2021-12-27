@@ -171,12 +171,13 @@ export const onDeleteTeam = /* GraphQL */ `
   }
 `;
 export const onCreateHand = /* GraphQL */ `
-  subscription OnCreateHand($userID: String) {
-    onCreateHand(userID: $userID) {
+  subscription OnCreateHand {
+    onCreateHand {
       id
       roundID
       userID
       type
+      cards
       createdAt
       updatedAt
       round {
@@ -222,12 +223,13 @@ export const onCreateHand = /* GraphQL */ `
   }
 `;
 export const onUpdateHand = /* GraphQL */ `
-  subscription OnUpdateHand($userID: String) {
-    onUpdateHand(userID: $userID) {
+  subscription OnUpdateHand {
+    onUpdateHand {
       id
       roundID
       userID
       type
+      cards
       createdAt
       updatedAt
       round {
@@ -273,12 +275,13 @@ export const onUpdateHand = /* GraphQL */ `
   }
 `;
 export const onDeleteHand = /* GraphQL */ `
-  subscription OnDeleteHand($userID: String) {
-    onDeleteHand(userID: $userID) {
+  subscription OnDeleteHand {
+    onDeleteHand {
       id
       roundID
       userID
       type
+      cards
       createdAt
       updatedAt
       round {
@@ -641,6 +644,7 @@ export const onCreateRound = /* GraphQL */ `
           roundID
           userID
           type
+          cards
           createdAt
           updatedAt
         }
@@ -713,6 +717,7 @@ export const onUpdateRound = /* GraphQL */ `
           roundID
           userID
           type
+          cards
           createdAt
           updatedAt
         }
@@ -785,6 +790,7 @@ export const onDeleteRound = /* GraphQL */ `
           roundID
           userID
           type
+          cards
           createdAt
           updatedAt
         }

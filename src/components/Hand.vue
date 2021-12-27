@@ -18,17 +18,15 @@
 </template>
 
 <script lang="ts">
-import { useQueryClient } from "vue-query";
 import {
   computed,
   defineComponent,
-  onUpdated,
   PropType,
   reactive,
   ref,
   watchEffect,
 } from "vue";
-import { usePlayCardMutation, useHandQuery } from "../api";
+import { usePlayCardMutation, useActiveRound } from "../api";
 import { useCurrentUser } from "../utils/Auth";
 import { Message } from "../utils/Message";
 import Card from "./Card.vue";
@@ -52,25 +50,15 @@ export default defineComponent({
   },
   setup(props) {
     const user = useCurrentUser();
-    const userId = computed(() => props.userId);
-    const roundId = computed(() => props.round.id);
-    const type = computed(() => props.handType);
-
-    const { data, isLoading, isError, refetch } = useHandQuery(
-      roundId,
-      userId,
-      type
-    );
-
-    onUpdated(() => {
-      // this refetch is required to make the hand update when the game state changes
-      // invalidating queries in the game subscription did lead to a consistent update
-      refetch.value();
-    });
-
+    const activeRound = useActiveRound();
     const playCardMutation = usePlayCardMutation();
 
-    const cards = computed(() => data.value);
+    const cards = computed(() => {
+      const hand = activeRound.value.hands.items.find((hand: any) => {
+        return hand.type === props.handType && hand.userID == props.userId;
+      });
+      return hand?.cards || [];
+    });
 
     const cardHeight = props.cardWidth * 1.4;
 
@@ -132,8 +120,6 @@ export default defineComponent({
     return reactive({
       cardWidth: props.cardWidth,
       cardHeight,
-      isLoading,
-      isError,
       cards,
       user,
       onClick,

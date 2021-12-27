@@ -13,6 +13,14 @@ export const gameFragment = /* GraphQL */ `
       status
       mode
       result
+      hands {
+        items {
+          id
+          userID
+          type
+          cards
+        }
+      }
       stacks {
         items {
           id

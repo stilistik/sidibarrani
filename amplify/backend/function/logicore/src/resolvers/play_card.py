@@ -145,7 +145,8 @@ def is_trump(round: Round, value: str):
         return False
 
 
-def validate_card_played(stack_id: str, round: Round, hand: Hand, value: str):
+def validate_card_played(stack_id: str, round: Round, hands: List[Hand],
+                         value: str):
     actions = ActionModel.find_by_stack(stack_id)
 
     if is_trump(round, value):
@@ -154,8 +155,9 @@ def validate_card_played(stack_id: str, round: Round, hand: Hand, value: str):
     first_played = actions[0].value if len(actions) > 0 else None
     if first_played:
         if get_suit(first_played) != get_suit(value):
-            if has_suit(hand, get_suit(first_played)):
-                raise Exception("You must play the correct suit")
+            for hand in hands:
+                if has_suit(hand, get_suit(first_played)):
+                    raise Exception("You must play the correct suit")
 
 
 def play_card(event):
@@ -191,7 +193,7 @@ def play_card(event):
             RoundModel.set_active_stack(round_id, new_stack.id)
             stack = new_stack
 
-        validate_card_played(stack.id, round, hand, value)
+        validate_card_played(stack.id, round, user_hands, value)
 
         HandModel.remove_card(hand.id, value)
         RoundModel.next_turn(round_id)
