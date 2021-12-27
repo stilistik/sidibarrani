@@ -59,24 +59,35 @@ class HandModel:
         return [Hand(**item) for item in response['Items']]
 
     @staticmethod
-    def remove_card(hand_id, card) -> Hand:
-        response = hand_table.get_item(Key={
-            'id': hand_id,
-        })
-
-        try:
-            cards = response['Item']['cards']
-            index = cards.index(card)
-        except ValueError:
-            raise Exception('Card not found in hand')
-
+    def set_card_played(hand_id, card) -> Hand:
+        index = HandModel.get_card_index(hand_id, card)
         response = hand_table.update_item(
             Key={
                 'id': hand_id,
             },
-            UpdateExpression='remove cards[{}]'.format(index),
+            UpdateExpression=f'set cards[{index}] = :val',
+            ExpressionAttributeValues={':val': '__played__'},
             ReturnValues="ALL_NEW")
         return Hand(**response['Attributes'])
+
+    @staticmethod
+    def remove_card(hand_id, card) -> Hand:
+        index = HandModel.get_card_index(hand_id, card)
+        response = hand_table.update_item(
+            Key={
+                'id': hand_id,
+            },
+            UpdateExpression=f'remove cards[{index}]',
+            ReturnValues="ALL_NEW")
+        return Hand(**response['Attributes'])
+
+    def get_card_index(hand_id: str, card: str) -> int:
+        hand = HandModel.find_by_id(hand_id)
+        try:
+            index = hand.cards.index(card)
+            return index
+        except ValueError:
+            raise Exception('Card not found in hand')
 
     @staticmethod
     def clear_data():

@@ -47,6 +47,7 @@ export default defineComponent({
     userId: String,
     shiftOnHover: Boolean,
     interactive: Boolean,
+    filterPlayed: Boolean,
   },
   setup(props) {
     const user = useCurrentUser();
@@ -57,7 +58,14 @@ export default defineComponent({
       const hand = activeRound.value.hands.items.find((hand: any) => {
         return hand.type === props.handType && hand.userID == props.userId;
       });
-      return hand?.cards || [];
+
+      const cards = hand?.cards || [];
+
+      if (props.filterPlayed) {
+        return cards.filter((el: string) => el !== "__played__");
+      } else {
+        return cards;
+      }
     });
 
     const cardHeight = props.cardWidth * 1.4;

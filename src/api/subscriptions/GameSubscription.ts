@@ -21,6 +21,7 @@ export const useGameSubscription = (gameId: string) => {
       const key = reactive(["getGame", { gameId }]);
 
       if (value?.data?.onUpdateGameState) {
+        console.log(value?.data?.onUpdateGameState);
         qc.setQueryData(key, value.data.onUpdateGameState);
       }
     },
