@@ -116,8 +116,8 @@ def compute_result(round: Round):
 
         team_user = TeamUserModel.find_by_id(stack.winnerID)
 
-        prev_result = result.get(team_user['teamID'], 0)
-        result[team_user['teamID']] = prev_result + stack_winner_result
+        prev_result = result.get(team_user.teamID, 0)
+        result[team_user.teamID] = prev_result + stack_winner_result
 
     return result
 

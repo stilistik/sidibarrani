@@ -68,7 +68,7 @@ def new_round_duo(game: Game):
     turn_sequence = list(map(lambda p: p.userID, players))
     RoundModel.set_turn_sequence(round.id, turn_sequence)
     RoundModel.set_turn(round.id, players[0].userID)
-    return GameModel.set_active_round(game.id, round.id)
+    return vars(GameModel.set_active_round(game.id, round.id))
 
 
 def new_round_quattro(game: Game):
@@ -97,7 +97,7 @@ def new_round_quattro(game: Game):
 
     RoundModel.set_turn_sequence(round.id, turn_sequence)
     RoundModel.set_turn(round.id, starting_player_id)
-    return GameModel.set_active_round(game.id, round.id)
+    return vars(GameModel.set_active_round(game.id, round.id))
 
 
 def new_round(event):
