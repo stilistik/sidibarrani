@@ -41,6 +41,7 @@
       :cardWidth="140"
       :position="[window.innerWidth / 2, 250]"
       :interactive="false"
+      :zIndex="0"
     />
     <Hand
       v-if="Boolean(activeRound && opponentId)"
@@ -51,6 +52,7 @@
       :cardWidth="140"
       :position="[window.innerWidth / 2, 220]"
       :interactive="false"
+      :zIndex="10"
     />
     <Hand
       v-if="Boolean(activeRound && userId)"
@@ -61,6 +63,7 @@
       :cardWidth="140"
       :position="[window.innerWidth / 2, window.innerHeight - 280]"
       :interactive="true"
+      :zIndex="0"
     />
     <Hand
       v-if="Boolean(activeRound && userId)"
@@ -71,6 +74,7 @@
       :cardWidth="140"
       :position="[window.innerWidth / 2, window.innerHeight - 250]"
       :interactive="true"
+      :zIndex="10"
     />
     <Hand
       v-if="Boolean(activeRound && userId)"
@@ -83,6 +87,7 @@
       :shiftOnHover="true"
       :interactive="true"
       :filterPlayed="true"
+      :zIndex="20"
     />
   </div>
 </template>

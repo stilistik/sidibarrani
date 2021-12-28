@@ -7,6 +7,7 @@ import {
   PropType,
   reactive,
   ref,
+  watch,
   watchEffect,
 } from "vue";
 import { usePlayCardMutation, useActiveRound } from "../api";
@@ -32,20 +33,25 @@ export default defineComponent({
     shiftOnHover: Boolean,
     interactive: Boolean,
     filterPlayed: Boolean,
+    zIndex: Number,
   },
   setup(props) {
     const user = useCurrentUser();
     const activeRound = useActiveRound();
     const playCardMutation = usePlayCardMutation();
 
-    const { setCardState, resetCardState } = useCardManager();
+    const { setCardState, resetCardState, addHiddenCard, removeHiddenCard } =
+      useCardManager();
 
     const cards = computed(() => {
       const hand = activeRound.value.hands.items.find((hand: any) => {
         return hand.type === props.handType && hand.userID == props.userId;
       });
 
-      const cards = hand?.cards || [];
+      const cards = (hand?.cards || []).map((card: string, idx: number) => {
+        if (card === "X") return `X:${props.userId}:${props.handType}:${idx}`;
+        else return card;
+      });
 
       if (props.filterPlayed) {
         return cards.filter((el: string) => el !== "__played__");
@@ -125,26 +131,38 @@ export default defineComponent({
     }
 
     let prevCards: any[] = [];
+
+    watch(cards, () => {
+      prevCards.forEach((id) => {
+        if (id.includes("X:")) {
+          removeHiddenCard(id);
+        } else {
+          resetCardState(id);
+        }
+      });
+
+      prevCards = [];
+    });
+
     watchEffect(() => {
-      prevCards.forEach((card) => {
-        resetCardState(card);
-      });
-
-      cards.value.forEach((card: string, index: number) => {
-        setCardState(card, "visible", true);
-        setCardState(card, "position", {
-          x: getXPosition(index, card),
-          y: getYPosition(card),
+      cards.value.forEach((id: string, index: number) => {
+        if (id.includes("X:")) {
+          addHiddenCard(id);
+        }
+        setCardState(id, "visible", true);
+        setCardState(id, "position", {
+          x: getXPosition(index, id),
+          y: getYPosition(id),
         });
-        setCardState(card, "interactive", getInteractive(card));
-        setCardState(card, "onClick", () => onClick(card));
-        setCardState(card, "onMouseEnter", onMouseEnter);
-        setCardState(card, "onMouseLeave", onMouseLeave);
-        setCardState(card, "width", props.cardWidth);
-        setCardState(card, "zIndex", index + 1);
-      });
+        setCardState(id, "interactive", getInteractive(id));
+        setCardState(id, "onClick", () => onClick(id));
+        setCardState(id, "onMouseEnter", onMouseEnter);
+        setCardState(id, "onMouseLeave", onMouseLeave);
+        setCardState(id, "width", props.cardWidth);
+        setCardState(id, "zIndex", props.zIndex + index + 1);
 
-      prevCards = cards.value;
+        prevCards.push(id);
+      });
     });
   },
 });

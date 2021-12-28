@@ -23,19 +23,20 @@
       @click="onClick"
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
-      :style="{ zIndex: Z_OFFSET + zIndex }"
+      :style="{ zIndex }"
     />
     <slot />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, provide, reactive } from "vue";
+import { defineComponent, inject, provide, reactive, Ref, ref } from "vue";
 import { cardsByCode } from "../../cards";
 import Card from "../../components/Card.vue";
 import Button from "../../components/Button.vue";
 
 interface CardState {
+  id: string;
   card: string;
   width: number;
   position: { x: number; y: number };
@@ -50,15 +51,15 @@ interface CardState {
 export const useCardManager = () => {
   return inject("CardManagerAPI") as {
     setCardState: <K extends keyof CardState>(
-      card: string,
+      id: string,
       key: K,
       value: CardState[K]
     ) => void;
-    resetCardState: (card: string) => void;
+    resetCardState: (id: string) => void;
+    addHiddenCard: (id: string) => void;
+    removeHiddenCard: (id: string) => void;
   };
 };
-
-const Z_OFFSET = 0;
 
 export default defineComponent({
   name: "CardManager",
@@ -67,11 +68,12 @@ export default defineComponent({
     Button,
   },
   setup() {
-    const state: CardState[] = Object.keys(cardsByCode).map((card) => {
+    const normalCards = Object.keys(cardsByCode).map((card) => {
       return reactive({
+        id: card,
         card,
         width: 140,
-        position: { x: 0, y: 0 },
+        position: { x: -100, y: window.innerHeight / 2 },
         visible: false,
         zIndex: 0,
         interactive: false,
@@ -81,17 +83,36 @@ export default defineComponent({
       });
     });
 
+    const hiddenCards = Array(36)
+      .fill(undefined)
+      .map((_, idx) => {
+        return reactive({
+          id: null,
+          card: "X",
+          width: 140,
+          position: { x: -100, y: window.innerHeight / 2 - 100 },
+          visible: false,
+          zIndex: 0,
+          interactive: false,
+          onClick: undefined,
+          onMouseEnter: undefined,
+          onMouseLeave: undefined,
+        });
+      });
+
+    const state: CardState[] = [...normalCards, ...hiddenCards];
+
     function setCardState<K extends keyof CardState>(
-      card: string,
+      id: string,
       key: K,
       value: CardState[K]
     ) {
-      const cardState = state.find((el) => el.card === card);
+      const cardState = state.find((el) => el.id === id);
       if (cardState) cardState[key] = value;
     }
 
-    function resetCardState(card: string) {
-      const cardState = state.find((el) => el.card === card);
+    function resetCardState(id: string) {
+      const cardState = state.find((el) => el.id === id);
       if (cardState) {
         cardState.width = 140;
         cardState.position = { x: 0, y: 0 };
@@ -104,12 +125,31 @@ export default defineComponent({
       }
     }
 
+    function addHiddenCard(id: string) {
+      const hiddenCard = hiddenCards.find((el) => !el.id);
+      if (hiddenCard) {
+        hiddenCard.id = id;
+      } else {
+        throw new Error("Out of hidden cards");
+      }
+    }
+
+    function removeHiddenCard(id: string) {
+      const hiddenCard = hiddenCards.find((el) => el.id === id);
+      if (hiddenCard) {
+        hiddenCard.id = null;
+        resetCardState(hiddenCard.id);
+      }
+    }
+
     provide("CardManagerAPI", {
       setCardState,
       resetCardState,
+      addHiddenCard,
+      removeHiddenCard,
     });
 
-    return reactive({ state, Z_OFFSET });
+    return reactive({ state });
   },
 });
 </script>
