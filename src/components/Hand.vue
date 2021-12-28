@@ -40,7 +40,7 @@ export default defineComponent({
     const activeRound = useActiveRound();
     const playCardMutation = usePlayCardMutation();
 
-    const { setCardState, resetCardState, addHiddenCard, removeHiddenCard } =
+    const { setCardState, resetCardState, addHiddenCard, replaceHiddenCard } =
       useCardManager();
 
     const cards = computed(() => {
@@ -130,18 +130,14 @@ export default defineComponent({
       else return false;
     }
 
-    let prevCards: any[] = [];
-
-    watch(cards, () => {
-      prevCards.forEach((id) => {
+    watch(cards, (newcards, oldcards) => {
+      oldcards.forEach((id: string, index: number) => {
         if (id.includes("X:")) {
-          removeHiddenCard(id);
+          replaceHiddenCard(newcards[index], id);
         } else {
           resetCardState(id);
         }
       });
-
-      prevCards = [];
     });
 
     watchEffect(() => {
@@ -160,8 +156,6 @@ export default defineComponent({
         setCardState(id, "onMouseLeave", onMouseLeave);
         setCardState(id, "width", props.cardWidth);
         setCardState(id, "zIndex", props.zIndex + index + 1);
-
-        prevCards.push(id);
       });
     });
   },

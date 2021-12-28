@@ -57,17 +57,24 @@ export default defineComponent({
     const scale = spring(1, { damping: 12, precision: 8, from: 0 });
     const p = spring({ x: 0, y: 0 }, { damping: 20 });
 
-    const options = reactive({ from: { x: props.x, y: props.y } });
+    let xpos = spring(props.x, { from: props.x });
+    let ypos = spring(props.y, { from: props.y });
 
-    const xpos = spring(props.x, { from: props.x });
-    const ypos = spring(props.y, { from: props.y });
-
-    const { x, y } = toRefs(props);
+    const { x, y, initX, initY } = toRefs(props);
     watch(x, (newValue) => {
       xpos.value = newValue;
     });
     watch(y, (newValue) => {
       ypos.value = newValue;
+    });
+
+    watch(initX, (newValue) => {
+      console.log("CALLED");
+
+      xpos = spring(newValue, { from: newValue });
+    });
+    watch(initY, (newValue) => {
+      ypos = spring(newValue, { from: newValue });
     });
 
     function onMouseMove(event: any) {

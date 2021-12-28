@@ -4,6 +4,7 @@
       v-for="{
         card,
         position,
+        immediatePosition,
         width,
         visible,
         interactive,
@@ -17,6 +18,8 @@
       :card="card"
       :x="position.x"
       :y="position.y"
+      :initX="immediatePosition?.x"
+      :initY="immediatePosition?.y"
       :width="width"
       :height="width * 1.4"
       :interactive="interactive"
@@ -40,6 +43,7 @@ interface CardState {
   card: string;
   width: number;
   position: { x: number; y: number };
+  immediatePosition: { x: number; y: number } | null;
   visible: boolean;
   interactive: boolean;
   zIndex: number;
@@ -58,6 +62,7 @@ export const useCardManager = () => {
     resetCardState: (id: string) => void;
     addHiddenCard: (id: string) => void;
     removeHiddenCard: (id: string) => void;
+    replaceHiddenCard: (id: string, hiddenId: string) => void;
   };
 };
 
@@ -74,6 +79,7 @@ export default defineComponent({
         card,
         width: 140,
         position: { x: -100, y: window.innerHeight / 2 },
+        immediatePosition: null,
         visible: false,
         zIndex: 0,
         interactive: false,
@@ -91,6 +97,7 @@ export default defineComponent({
           card: "X",
           width: 140,
           position: { x: -100, y: window.innerHeight / 2 - 100 },
+          immediatePosition: null,
           visible: false,
           zIndex: 0,
           interactive: false,
@@ -126,6 +133,7 @@ export default defineComponent({
     }
 
     function addHiddenCard(id: string) {
+      if (hiddenCards.some((el) => el.id === id)) return;
       const hiddenCard = hiddenCards.find((el) => !el.id);
       if (hiddenCard) {
         hiddenCard.id = id;
@@ -142,11 +150,23 @@ export default defineComponent({
       }
     }
 
+    function replaceHiddenCard(id: string, hiddenId: string) {
+      const card = normalCards.find((el) => el.id === id);
+      const hiddenCard = hiddenCards.find((el) => el.id === hiddenId);
+
+      if (card && hiddenCard) {
+        card.immediatePosition = hiddenCard.position;
+        hiddenCard.visible = false;
+        hiddenCard.id = null;
+      }
+    }
+
     provide("CardManagerAPI", {
       setCardState,
       resetCardState,
       addHiddenCard,
       removeHiddenCard,
+      replaceHiddenCard,
     });
 
     return reactive({ state });
