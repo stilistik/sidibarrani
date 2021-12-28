@@ -1,85 +1,85 @@
 <template>
-  <div class="fixed top-0 left-0 w-screen h-screen overflow-visible text-white">
-    <ModeSelector
-      :selectedMode="mode"
-      @modeChange="onModeChange"
-      class="absolute right-20"
-    />
-    <div class="absolute left-10 top-20 py-20">
-      <h3 class="font-black text-3xl mb-5">History</h3>
-      <PreviousBets />
-    </div>
-    <div class="w-full flex justify-center absolute" style="top: 430px">
-      <CurrentBet v-if="Boolean(lastBet)" :action="lastBet" />
-    </div>
-    <div class="flex w-full justify-center gap-3 py-20">
-      <BetInput
-        v-model="bet"
-        class="absolute bottom-10 right-20"
-        @onPlaceBet="placeBet"
-        @onSkip="skip"
-      />
-    </div>
-    <YourTurn />
-    <div class="absolute top-0 left-0">
-      <Hand
-        v-if="Boolean(activeRound && opponentId)"
-        :round="activeRound"
-        :handType="'HIDDEN'"
-        :userId="opponentId"
-        :interCardDistance="165"
-        :cardWidth="140"
-        :position="[window.innerWidth / 2, 250]"
-        :interactive="false"
-        :zIndex="0"
-      />
-      <Hand
-        v-if="Boolean(activeRound && opponentId)"
-        :round="activeRound"
-        :handType="'OPEN'"
-        :userId="opponentId"
-        :interCardDistance="165"
-        :cardWidth="140"
-        :position="[window.innerWidth / 2, 220]"
-        :interactive="false"
-        :zIndex="10"
-      />
-      <Hand
-        v-if="Boolean(activeRound && userId)"
-        :round="activeRound"
-        :handType="'HIDDEN'"
-        :userId="userId"
-        :interCardDistance="165"
-        :cardWidth="140"
-        :position="[window.innerWidth / 2, window.innerHeight - 280]"
-        :interactive="false"
-        :zIndex="0"
-      />
-      <Hand
-        v-if="Boolean(activeRound && userId)"
-        :round="activeRound"
-        :handType="'OPEN'"
-        :userId="userId"
-        :interCardDistance="165"
-        :cardWidth="140"
-        :position="[window.innerWidth / 2, window.innerHeight - 250]"
-        :interactive="true"
-        :zIndex="10"
-      />
-      <Hand
-        v-if="Boolean(activeRound && userId)"
-        :round="activeRound"
-        :handType="'NORMAL'"
-        :userId="userId"
-        :interCardDistance="100"
-        :cardWidth="160"
-        :position="[window.innerWidth / 2, window.innerHeight]"
-        :shiftOnHover="true"
-        :interactive="true"
-        :zIndex="20"
-      />
-    </div>
-  </div>
+  <ModeSelector
+    :selectedMode="mode"
+    @modeChange="onModeChange"
+    class="absolute right-20"
+  />
+  <History class="absolute left-10 top-20 py-20 z-hud" />
+  <CurrentBet
+    v-if="Boolean(lastBet)"
+    :action="lastBet"
+    class="
+      flex
+      justify-center
+      absolute
+      left-1/2
+      top-1/2
+      -translate-x-1/2 -translate-y-1/2
+    "
+  />
+  <BetInput
+    v-model="bet"
+    class="absolute bottom-10 right-20"
+    @onPlaceBet="placeBet"
+    @onSkip="skip"
+  />
+  <YourTurn />
+  <Hand
+    v-if="Boolean(activeRound && opponentId)"
+    :round="activeRound"
+    :handType="'HIDDEN'"
+    :userId="opponentId"
+    :interCardDistance="165"
+    :cardWidth="140"
+    :position="[window.innerWidth / 2, 250]"
+    :interactive="false"
+    :zIndex="0"
+  />
+  <Hand
+    v-if="Boolean(activeRound && opponentId)"
+    :round="activeRound"
+    :handType="'OPEN'"
+    :userId="opponentId"
+    :interCardDistance="165"
+    :cardWidth="140"
+    :position="[window.innerWidth / 2, 220]"
+    :interactive="false"
+    :zIndex="10"
+  />
+  <Hand
+    v-if="Boolean(activeRound && userId)"
+    :round="activeRound"
+    :handType="'HIDDEN'"
+    :userId="userId"
+    :interCardDistance="165"
+    :cardWidth="140"
+    :position="[window.innerWidth / 2, window.innerHeight - 280]"
+    :interactive="false"
+    :zIndex="0"
+  />
+  <Hand
+    v-if="Boolean(activeRound && userId)"
+    :round="activeRound"
+    :handType="'OPEN'"
+    :userId="userId"
+    :interCardDistance="165"
+    :cardWidth="140"
+    :position="[window.innerWidth / 2, window.innerHeight - 250]"
+    :interactive="true"
+    :zIndex="10"
+  />
+  <Hand
+    v-if="Boolean(activeRound && userId)"
+    :round="activeRound"
+    :handType="'NORMAL'"
+    :userId="userId"
+    :interCardDistance="100"
+    :cardWidth="160"
+    :position="[window.innerWidth / 2, window.innerHeight]"
+    :shiftOnHover="true"
+    :interactive="true"
+    :zIndex="20"
+  />
 </template>
 
 <script lang="ts">
@@ -89,7 +89,7 @@ import Button from "../../components/Button.vue";
 import Hand from "../../components/Hand.vue";
 import YourTurn from "../../components/YourTurn.vue";
 import CurrentBet from "./CurrentBet.vue";
-import PreviousBets from "./PreviousBets.vue";
+import History from "./History.vue";
 import ModeSelector from "./ModeSelector.vue";
 import {
   useActiveRound,
@@ -108,7 +108,7 @@ export default defineComponent({
     Hand,
     YourTurn,
     CurrentBet,
-    PreviousBets,
+    History,
     ModeSelector,
   },
   setup() {

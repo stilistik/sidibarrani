@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute left-0 top-0">
+  <div class="fixed w-screen h-screen top-0 left-0">
     <Card
       v-for="{
         card,
@@ -81,10 +81,10 @@ export default defineComponent({
         id: card,
         card,
         width: 140,
-        position: { x: -100, y: window.innerHeight / 2 },
+        position: { x: window.innerWidth / 2, y: -100 },
         immediatePosition: null,
         visible: false,
-        zIndex: 0,
+        zIndex: 100,
         interactive: false,
         flipAppear: false,
         onClick: undefined,
@@ -100,7 +100,7 @@ export default defineComponent({
           id: null,
           card: "X",
           width: 140,
-          position: { x: -100, y: window.innerHeight / 2 - 100 },
+          position: { x: window.innerWidth / 2, y: -100 },
           immediatePosition: null,
           visible: false,
           zIndex: 0,

@@ -1,7 +1,7 @@
 <template>
   <div
     :style="`transform-origin:center; transform: scale(${scale});`"
-    class="absolute top-28 w-full flex justify-center z-10 pointer-events-none"
+    class="absolute top-28 w-full flex justify-center z-hud pointer-events-none"
   >
     <h3
       class="

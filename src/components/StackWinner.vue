@@ -1,6 +1,14 @@
 <template>
   <div
-    class="absolute top-1/3 w-full flex justify-center z-10 pointer-events-none"
+    class="
+      absolute
+      top-1/3
+      w-full
+      flex
+      justify-center
+      z-hud
+      pointer-events-none
+    "
   >
     <div
       :style="`transform-origin:center; transform: scale(${scale});`"

@@ -1,23 +1,25 @@
 <template>
-  <div
-    :style="`transform-origin:center; transform: scale(${scale});`"
-    class="
-      font-black
-      text-primary
-      bg-gray-800
-      py-3
-      px-8
-      rounded-full
-      shadow-2xl
-      flex
-      items-center
-      gap-3
-    "
-  >
-    <ModeIcon :mode="mode" />
-    <div>
-      <span class="text-3xl">{{ value }}</span>
-      <div class="flex justify-center">by {{ action?.user?.username }}</div>
+  <div>
+    <div
+      :style="`transform-origin:center; transform: scale(${scale});`"
+      class="
+        font-black
+        text-primary
+        bg-gray-800
+        py-3
+        px-8
+        rounded-full
+        shadow-2xl
+        flex
+        items-center
+        gap-3
+      "
+    >
+      <ModeIcon :mode="mode" />
+      <div>
+        <span class="text-3xl">{{ value }}</span>
+        <div class="flex justify-center">by {{ action?.user?.username }}</div>
+      </div>
     </div>
   </div>
 </template>

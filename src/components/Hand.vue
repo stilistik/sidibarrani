@@ -126,7 +126,7 @@ export default defineComponent({
     }
 
     function getInteractive(card: string) {
-      if (props.interactive && card != "X") return true;
+      if (props.interactive && !card.includes("X:")) return true;
       else return false;
     }
 

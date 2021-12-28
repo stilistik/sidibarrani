@@ -1,23 +1,26 @@
 <template>
-  <div class="flex flex-col gap-3">
-    <div
-      v-for="action in actions"
-      :key="action.id"
-      class="
-        flex
-        items-center
-        bg-gray-800
-        rounded-full
-        px-3
-        py-1
-        font-black
-        gap-2
-      "
-    >
-      <span>{{ action.username }}</span>
-      <span v-if="action.skip">Skip</span>
-      <ModeIcon v-if="action.mode !== null" :mode="action.mode" :size="20" />
-      <span v-if="action.amount !== null">{{ action.amount }}</span>
+  <div class="text-white">
+    <h3 class="font-black text-3xl mb-5">History</h3>
+    <div class="flex flex-col gap-3">
+      <div
+        v-for="action in actions"
+        :key="action.id"
+        class="
+          flex
+          items-center
+          bg-gray-800
+          rounded-full
+          px-3
+          py-1
+          font-black
+          gap-2
+        "
+      >
+        <span>{{ action.username }}</span>
+        <span v-if="action.skip">Skip</span>
+        <ModeIcon v-if="action.mode !== null" :mode="action.mode" :size="20" />
+        <span v-if="action.amount !== null">{{ action.amount }}</span>
+      </div>
     </div>
   </div>
 </template>
