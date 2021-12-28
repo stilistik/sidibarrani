@@ -43,23 +43,29 @@ export const useListGamesQuery = (
   limit: number = 20
 ) => {
   const key = reactive(["listGames", { searchTerm, nextToken, limit }]);
-  const res = useQuery(key, async () => {
-    const filter: any = {
-      private: { eq: false },
-      status: { eq: "CREATED" },
-    };
-    if (searchTerm.value) {
-      filter.nameLowerCase = { contains: searchTerm.value };
+  const res = useQuery(
+    key,
+    async () => {
+      const filter: any = {
+        private: { eq: false },
+        status: { eq: "CREATED" },
+      };
+      if (searchTerm.value) {
+        filter.nameLowerCase = { contains: searchTerm.value };
+      }
+      const { data } = (await API.graphql(
+        graphqlOperation(listGames, {
+          filter,
+          limit,
+          nextToken: nextToken.value,
+        })
+      )) as any;
+      return data.listGames;
+    },
+    {
+      refetchInterval: 2000,
     }
-    const { data } = (await API.graphql(
-      graphqlOperation(listGames, {
-        filter,
-        limit,
-        nextToken: nextToken.value,
-      })
-    )) as any;
-    return data.listGames;
-  });
+  );
   return res;
 };
 

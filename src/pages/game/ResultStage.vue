@@ -1,44 +1,42 @@
 <template>
-  <div class="text-white">
-    <div class="w-full flex justify-center">
-      <div class="flex flex-col gap-3 pt-20">
-        <Button @click="newRound" class="mb-10">New Round</Button>
-        <div class="flex gap-3">
+  <div class="w-full h-full flex justify-center text-white overflow-auto">
+    <div class="flex flex-col gap-3 pt-40">
+      <Button @click="newRound" class="mb-10">New Round</Button>
+      <div class="flex gap-3 pb-20">
+        <div
+          v-for="result in results"
+          :key="result.team.id"
+          class="flex flex-col gap-3"
+        >
           <div
-            v-for="result in results"
-            :key="result.team.id"
-            class="flex flex-col gap-3"
+            class="
+              flex
+              items-center
+              font-black
+              text-2xl
+              gap-2
+              bg-gray-800
+              rounded-full
+              px-5
+              py-2
+              mb-5
+            "
           >
-            <div
-              class="
-                flex
-                items-center
-                font-black
-                text-2xl
-                gap-2
-                bg-gray-800
-                rounded-full
-                px-5
-                py-2
-                mb-5
-              "
-            >
-              <span>{{ result?.team?.name }}:</span>
-              <span class="text-primary">{{ result?.score }} Points</span>
-            </div>
+            <span>{{ result?.team?.name }}:</span>
+            <span class="text-primary">{{ result?.score }} Points</span>
+          </div>
 
-            <div
-              v-for="(stack, index) in result.stacks"
-              :key="index"
-              class="text-white flex gap-2 pl-3"
-            >
-              <StaticCard
-                v-for="card in stack?.cards"
-                :key="card"
-                :card="card"
-                :style="{ width: 65, height: 100 }"
-              />
-            </div>
+          <div
+            v-for="(stack, index) in result.stacks"
+            :key="index"
+            class="text-white flex gap-2 pl-3"
+          >
+            <StaticCard
+              v-for="card in stack?.cards"
+              :key="card"
+              :card="card"
+              :style="{ width: 65, height: 100 }"
+            />
           </div>
         </div>
       </div>

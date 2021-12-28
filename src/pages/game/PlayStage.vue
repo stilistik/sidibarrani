@@ -121,8 +121,6 @@ export default defineComponent({
     const activeRound = useActiveRound();
     const activeStack = useActiveStack();
 
-    console.log(activeRound);
-
     const isEndable = computed(
       () =>
         activeRound.value.stacks.items.length ==

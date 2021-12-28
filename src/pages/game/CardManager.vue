@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, provide, reactive, Ref, ref } from "vue";
+import { defineComponent, inject, provide, reactive } from "vue";
 import { cardsByCode } from "../../cards";
 import Card from "../../components/Card.vue";
 import Button from "../../components/Button.vue";
@@ -87,9 +87,9 @@ export default defineComponent({
         zIndex: 100,
         interactive: false,
         flipAppear: false,
-        onClick: undefined,
-        onMouseEnter: undefined,
-        onMouseLeave: undefined,
+        onClick: () => {},
+        onMouseEnter: () => {},
+        onMouseLeave: () => {},
       });
     });
 
@@ -106,9 +106,9 @@ export default defineComponent({
           zIndex: 0,
           interactive: false,
           flipAppear: false,
-          onClick: undefined,
-          onMouseEnter: undefined,
-          onMouseLeave: undefined,
+          onClick: () => {},
+          onMouseEnter: () => {},
+          onMouseLeave: () => {},
         });
       });
 
@@ -131,9 +131,9 @@ export default defineComponent({
         cardState.visible = false;
         cardState.zIndex = 0;
         cardState.interactive = false;
-        cardState.onClick = undefined;
-        cardState.onMouseEnter = undefined;
-        cardState.onMouseLeave = undefined;
+        cardState.onClick = () => {};
+        cardState.onMouseEnter = () => {};
+        cardState.onMouseLeave = () => {};
       }
     }
 
