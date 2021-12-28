@@ -48,19 +48,36 @@ export default defineComponent({
     initX: Number,
     initY: Number,
     interactive: Boolean,
+    flipAppear: Boolean,
   },
   setup(props, context) {
     const cardRef = ref(null);
     const card = computed(() => cardsByCode[props.card as string]);
 
-    const rotation = spring(0, { damping: 12 });
+    const rotationOptions = reactive({
+      damping: 12,
+      from: 0,
+      to: 0,
+      immediateValue: 0,
+    });
+    const rotation = spring(0, rotationOptions);
     const scale = spring(1, { damping: 12, precision: 8, from: 0 });
     const p = spring({ x: 0, y: 0 }, { damping: 20 });
 
-    let xpos = spring(props.x, { from: props.x });
-    let ypos = spring(props.y, { from: props.y });
+    const xOptions = reactive({
+      from: props.x,
+      to: props.x,
+      immediateValue: props.x,
+    });
+    const xpos = spring(props.x, xOptions);
+    const yOptions = reactive({
+      from: props.y,
+      to: props.y,
+      immediateValue: props.x,
+    });
+    const ypos = spring(props.y, yOptions);
 
-    const { x, y, initX, initY } = toRefs(props);
+    const { x, y, initX, initY, flipAppear } = toRefs(props);
     watch(x, (newValue) => {
       xpos.value = newValue;
     });
@@ -69,12 +86,19 @@ export default defineComponent({
     });
 
     watch(initX, (newValue) => {
-      console.log("CALLED");
-
-      xpos = spring(newValue, { from: newValue });
+      xOptions.immediateValue = newValue;
     });
     watch(initY, (newValue) => {
-      ypos = spring(newValue, { from: newValue });
+      yOptions.immediateValue = newValue;
+    });
+
+    watch(flipAppear, (newValue) => {
+      if (newValue) {
+        rotationOptions.immediateValue = 180;
+        setTimeout(() => (rotation.value = 0), 200);
+      } else {
+        rotationOptions.immediateValue = 0;
+      }
     });
 
     function onMouseMove(event: any) {

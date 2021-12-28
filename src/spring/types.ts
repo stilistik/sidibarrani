@@ -10,4 +10,5 @@ export interface SpringProps {
   precision?: number;
   framesPerSecond?: number;
   isPendulum?: boolean;
+  immediateValue?: SpringValue;
 }

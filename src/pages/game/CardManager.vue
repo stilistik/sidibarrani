@@ -12,6 +12,7 @@
         onMouseEnter,
         onMouseLeave,
         zIndex,
+        flipAppear,
       } in state"
       v-show="visible"
       :key="card"
@@ -23,6 +24,7 @@
       :width="width"
       :height="width * 1.4"
       :interactive="interactive"
+      :flipAppear="flipAppear"
       @click="onClick"
       @mouseenter="onMouseEnter"
       @mouseleave="onMouseLeave"
@@ -44,6 +46,7 @@ interface CardState {
   width: number;
   position: { x: number; y: number };
   immediatePosition: { x: number; y: number } | null;
+  flipAppear: boolean;
   visible: boolean;
   interactive: boolean;
   zIndex: number;
@@ -83,6 +86,7 @@ export default defineComponent({
         visible: false,
         zIndex: 0,
         interactive: false,
+        flipAppear: false,
         onClick: undefined,
         onMouseEnter: undefined,
         onMouseLeave: undefined,
@@ -101,6 +105,7 @@ export default defineComponent({
           visible: false,
           zIndex: 0,
           interactive: false,
+          flipAppear: false,
           onClick: undefined,
           onMouseEnter: undefined,
           onMouseLeave: undefined,
@@ -156,6 +161,7 @@ export default defineComponent({
 
       if (card && hiddenCard) {
         card.immediatePosition = hiddenCard.position;
+        card.flipAppear = true;
         hiddenCard.visible = false;
         hiddenCard.id = null;
       }

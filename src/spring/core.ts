@@ -1,16 +1,23 @@
-import { reactive, computed, toRefs } from "vue";
+import { reactive, computed, toRefs, toRef, watch } from "vue";
 
 import { getFarestValue, requestAnimation, cancelAnimation } from "./utils";
 
 import { springDefaults } from "./defaults";
 
 export default function springCore(settings: any) {
+  const immediateValue = toRef(settings, "immediateValue");
   const props = reactive({ ...springDefaults, ...toRefs(settings) });
 
   const state: any = reactive({
     currentValue: props.from,
     desiredValue: props.to,
     velocity: props.velocity,
+  });
+
+  watch(immediateValue, (newValue: any) => {
+    state.currentValue = newValue;
+    state.desiredValue = newValue;
+    cancelAnimation(animationId);
   });
 
   // Non reactive values
