@@ -133,13 +133,13 @@ def has_suit(hand: Hand, suit: str):
 def is_trump(round: Round, value: str):
     mode = round.mode
     suit = get_suit(value)
-    if mode == RoundMode.TRUMP_C.name and suit == 'C':
+    if mode == RoundMode.TRUMP_C and suit == 'C':
         return True
-    elif mode == RoundMode.TRUMP_D.name and suit == 'D':
+    elif mode == RoundMode.TRUMP_D and suit == 'D':
         return True
-    elif mode == RoundMode.TRUMP_H.name and suit == 'H':
+    elif mode == RoundMode.TRUMP_H and suit == 'H':
         return True
-    elif mode == RoundMode.TRUMP_S.name and suit == 'S':
+    elif mode == RoundMode.TRUMP_S and suit == 'S':
         return True
     else:
         return False

@@ -157,7 +157,7 @@ class RoundModel:
         response = round_table.update_item(Key={'id': round_id},
                                            AttributeUpdates={
                                                'mode': {
-                                                   'Value': mode.name
+                                                   'Value': mode
                                                },
                                                'updatedAt': {
                                                    'Value': date_now
