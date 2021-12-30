@@ -11,9 +11,12 @@ def clear_stack(event):
     try:
         key = RoundModel.lock(round_id)
         stack = StackModel.find_by_id(round.activeStackID)
+
         if round.activeStackID != stack.id:
-            # Stack has already been cleared
-            return vars(GameModel.find_by_id(round.gameID))
+            raise Exception("Attempted to clear non-active stack.")
+        if not StackModel.is_complete(stack.id):
+            raise Exception("Attempted to clear incomplete stack.")
+
         new_stack = StackModel.create(round_id, stack.size)
         RoundModel.set_active_stack(round_id, new_stack.id)
 

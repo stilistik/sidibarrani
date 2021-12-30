@@ -183,16 +183,13 @@ class RoundModel:
     @staticmethod
     def lock(round_id):
         key = str(uuid())
-        response = round_table.update_item(
+        round_table.update_item(
             Key={'id': round_id},
             UpdateExpression="set locked = :val",
             ConditionExpression="attribute_not_exists(locked)",
             ExpressionAttributeValues={':val': key},
             ReturnValues="ALL_NEW")
-        if response:
-            return key
-        else:
-            return False
+        return key
 
     @staticmethod
     def unlock(round_id: str, key: str):
