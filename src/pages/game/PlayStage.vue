@@ -89,7 +89,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import {
+  computed,
+  defineComponent,
+  onBeforeUnmount,
+  reactive,
+  watch,
+} from "vue";
 import {
   useActiveRound,
   useActiveStack,
@@ -105,6 +111,7 @@ import YourTurn from "../../components/YourTurn.vue";
 import StackWinner from "../../components/StackWinner.vue";
 import ModeIcon from "./ModeIcon.vue";
 import { useCurrentUser } from "../../utils/Auth";
+import { useCardManager } from "./CardManager.vue";
 
 export default defineComponent({
   name: "GamePage",
@@ -120,17 +127,32 @@ export default defineComponent({
   setup() {
     const activeRound = useActiveRound();
     const activeStack = useActiveStack();
+    const { removeAllCardsFromField } = useCardManager();
+
+    onBeforeUnmount(removeAllCardsFromField);
 
     const isEndable = computed(
       () =>
-        activeRound.value.stacks.items.length ==
-          36 / activeStack.value.size + 1 && activeStack.value.winner
+        activeRound.value?.stacks?.items?.length ==
+          36 / activeStack.value?.size + 1 && activeStack.value?.winner
     );
 
     const isClearable = computed(
       () =>
         activeStack?.value?.actions?.items?.length >= activeStack?.value?.size
     );
+
+    watch(isClearable, (value) => {
+      if (value && !isEndable.value) {
+        setTimeout(clear, 1000);
+      }
+    });
+
+    watch(isEndable, (value) => {
+      if (value) {
+        setTimeout(end, 1000);
+      }
+    });
 
     const clearStackMutation = useClearStackMutation();
     const endRoundMutation = useEndRoundMutation();

@@ -1,11 +1,11 @@
 import os
-import json
 from uuid import uuid4 as uuid
 import boto3
 from enum import Enum
-from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.conditions import Key, Attr
 from utils.utils import get_iso_date_string, clear_table
 from typing import List
+from botocore.exceptions import ClientError
 
 ddb = boto3.resource('dynamodb')
 round_table_name = os.environ.get("ROUNDTABLE")
@@ -41,7 +41,6 @@ class Round():
         self.turn: str = kwargs.get('turn', None)
         self.mode: RoundMode = RoundMode(
             kwargs['mode']) if kwargs.get('mode') is not None else None
-        self.locked: bool = kwargs.get('locked', False)
         self.betPoints: int = kwargs.get('betPoints', None)
         self.result: dict = kwargs.get('result', None)
         self.turnSequence: List[str] = kwargs.get('turnSequence', [])
@@ -182,27 +181,28 @@ class RoundModel:
         return Round(**response['Attributes'])
 
     @staticmethod
-    def set_locked(round_id, locked) -> Round:
-        date_now = get_iso_date_string()
-        response = round_table.update_item(Key={'id': round_id},
-                                           AttributeUpdates={
-                                               'locked': {
-                                                   'Value': locked
-                                               },
-                                               'updatedAt': {
-                                                   'Value': date_now
-                                               }
-                                           },
-                                           ReturnValues="ALL_NEW")
-        return Round(**response['Attributes'])
-
-    @staticmethod
     def lock(round_id):
-        return RoundModel.set_locked(round_id, True)
+        key = str(uuid())
+        response = round_table.update_item(
+            Key={'id': round_id},
+            UpdateExpression="set locked = :val",
+            ConditionExpression="attribute_not_exists(locked)",
+            ExpressionAttributeValues={':val': key},
+            ReturnValues="ALL_NEW")
+        if response:
+            return key
+        else:
+            return False
 
     @staticmethod
-    def unlock(round_id):
-        return RoundModel.set_locked(round_id, False)
+    def unlock(round_id: str, key: str):
+        response = round_table.update_item(
+            Key={'id': round_id},
+            UpdateExpression="remove locked",
+            ConditionExpression="locked = :val",
+            ExpressionAttributeValues={':val': key},
+            ReturnValues="ALL_NEW")
+        return Round(**response['Attributes'])
 
     @staticmethod
     def clear_data():

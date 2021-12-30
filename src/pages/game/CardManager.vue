@@ -66,6 +66,7 @@ export const useCardManager = () => {
     addHiddenCard: (id: string) => void;
     removeHiddenCard: (id: string) => void;
     replaceHiddenCard: (id: string, hiddenId: string) => void;
+    removeAllCardsFromField: () => void;
   };
 };
 
@@ -167,12 +168,30 @@ export default defineComponent({
       }
     }
 
+    function removeAllCardsFromField() {
+      console.log("TEST");
+
+      state.forEach((cardState) => {
+        cardState.position = {
+          x: window.innerWidth + 100,
+          y: window.innerHeight / 2,
+        };
+      });
+
+      setTimeout(() => {
+        state.forEach(({ id }) => {
+          resetCardState(id);
+        });
+      }, 2000);
+    }
+
     provide("CardManagerAPI", {
       setCardState,
       resetCardState,
       addHiddenCard,
       removeHiddenCard,
       replaceHiddenCard,
+      removeAllCardsFromField,
     });
 
     return reactive({ state });
