@@ -14,5 +14,7 @@ def get_hand_cards(event):
     else:
         if hand.type == HandType.OPEN or hand.type == HandType.HIDDEN:
             return hand.cards
-        else:
-            return []
+        elif hand.type == HandType.NORMAL:
+            return [
+                card if card == '__played__' else 'X' for card in hand.cards
+            ]

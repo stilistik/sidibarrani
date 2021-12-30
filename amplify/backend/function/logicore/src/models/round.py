@@ -182,14 +182,21 @@ class RoundModel:
 
     @staticmethod
     def lock(round_id):
-        key = str(uuid())
-        round_table.update_item(
-            Key={'id': round_id},
-            UpdateExpression="set locked = :val",
-            ConditionExpression="attribute_not_exists(locked)",
-            ExpressionAttributeValues={':val': key},
-            ReturnValues="ALL_NEW")
-        return key
+        try:
+            key = str(uuid())
+            round_table.update_item(
+                Key={'id': round_id},
+                UpdateExpression="set locked = :val",
+                ConditionExpression="attribute_not_exists(locked)",
+                ExpressionAttributeValues={':val': key},
+                ReturnValues="ALL_NEW")
+            return key
+        except ClientError as e:
+            if e.response['Error'][
+                    'Code'] == "ConditionalCheckFailedException":
+                raise Exception("Game is busy.")
+            else:
+                raise
 
     @staticmethod
     def unlock(round_id: str, key: str):

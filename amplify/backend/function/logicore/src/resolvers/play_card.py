@@ -209,4 +209,5 @@ def play_card(event):
         return vars(GameModel.find_by_id(round.gameID))
 
     finally:
-        RoundModel.unlock(round_id, key)
+        # needs to run in finally block so it always runs, even if other exceptions are raised
+        if key: RoundModel.unlock(round_id, key)
