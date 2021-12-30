@@ -25,7 +25,7 @@
   <Stack
     v-if="Boolean(activeStack)"
     :stack="activeStack"
-    :position="[window.innerWidth / 2, window.innerHeight / 2 - 15]"
+    :position="[window.innerWidth / 2, window.innerHeight / 2]"
     :cardWidth="140"
     :interCardDistance="30"
   />
@@ -70,7 +70,7 @@
     :userId="userId"
     :interCardDistance="165"
     :cardWidth="140"
-    :position="[window.innerWidth / 2, window.innerHeight - 280]"
+    :position="[window.innerWidth / 2, window.innerHeight - 250]"
     :interactive="true"
     :zIndex="0"
   />
@@ -81,7 +81,7 @@
     :userId="userId"
     :interCardDistance="165"
     :cardWidth="140"
-    :position="[window.innerWidth / 2, window.innerHeight - 250]"
+    :position="[window.innerWidth / 2, window.innerHeight - 220]"
     :interactive="true"
     :zIndex="10"
   />
@@ -92,11 +92,17 @@
     :userId="userId"
     :interCardDistance="100"
     :cardWidth="160"
-    :position="[window.innerWidth / 2, window.innerHeight]"
+    :position="[window.innerWidth / 2, window.innerHeight + 30]"
     :shiftOnHover="true"
     :interactive="true"
     :filterPlayed="true"
     :zIndex="20"
+  />
+  <PlayerDeck v-if="userTeam" :color="userTeam?.color" :location="'bottom'" />
+  <PlayerDeck
+    v-if="opponentTeam"
+    :color="opponentTeam?.color"
+    :location="'top'"
   />
 </template>
 
@@ -122,6 +128,7 @@ import Stack from "../../components/Stack.vue";
 import YourTurn from "../../components/YourTurn.vue";
 import StackWinner from "../../components/StackWinner.vue";
 import ModeIcon from "./ModeIcon.vue";
+import PlayerDeck from "./PlayerDeck.vue";
 import { useCurrentUser } from "../../utils/Auth";
 import { useCardManager } from "./CardManager.vue";
 
@@ -135,6 +142,7 @@ export default defineComponent({
     YourTurn,
     StackWinner,
     ModeIcon,
+    PlayerDeck,
   },
   setup() {
     const activeRound = useActiveRound();
@@ -184,14 +192,27 @@ export default defineComponent({
     const user = useCurrentUser();
     const game = useCurrentGame();
     const userId = computed(() => user?.value?.id);
-    const opponentId = computed(() => {
-      const teams = game.value?.Teams?.items;
-      const allUsers = teams.reduce((acc: any, curr: any) => {
-        const users = curr.TeamUsers.items.map((el: any) => el.user);
-        return acc.concat(users);
-      }, []);
-      return allUsers.find((el: any) => el.id !== userId.value)?.id;
-    });
+
+    const userTeam = computed(() =>
+      game.value?.Teams.items.find((team: any) =>
+        team.TeamUsers.items.some(
+          (teamUser: any) => teamUser.user.id === userId.value
+        )
+      )
+    );
+
+    const opponentTeam = computed(() =>
+      game.value?.Teams.items.find(
+        (team: any) =>
+          !team.TeamUsers.items.some(
+            (teamUser: any) => teamUser.user.id === userId.value
+          )
+      )
+    );
+
+    const opponentId = computed(
+      () => opponentTeam.value.TeamUsers.items[0].user.id
+    );
 
     return reactive({
       activeRound,
@@ -203,6 +224,8 @@ export default defineComponent({
       end,
       clear,
       window,
+      opponentTeam,
+      userTeam,
     });
   },
 });
