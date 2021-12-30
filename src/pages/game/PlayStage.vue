@@ -32,6 +32,18 @@
   <Hand
     v-if="Boolean(activeRound && opponentId)"
     :round="activeRound"
+    :handType="'NORMAL'"
+    :userId="opponentId"
+    :interCardDistance="100"
+    :cardWidth="140"
+    :position="[window.innerWidth / 2, 100]"
+    :interactive="false"
+    :filterPlayed="true"
+    :zIndex="20"
+  />
+  <Hand
+    v-if="Boolean(activeRound && opponentId)"
+    :round="activeRound"
     :handType="'HIDDEN'"
     :userId="opponentId"
     :interCardDistance="165"

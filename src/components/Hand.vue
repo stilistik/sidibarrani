@@ -132,7 +132,7 @@ export default defineComponent({
 
     watch(cards, (newcards, oldcards) => {
       oldcards.forEach((id: string, index: number) => {
-        if (id.includes("X:")) {
+        if (props.handType == "HIDDEN" && id.includes("X:")) {
           replaceHiddenCard(newcards[index], id);
         } else {
           resetCardState(id);
