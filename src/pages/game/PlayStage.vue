@@ -17,8 +17,6 @@
       <span>Play Mode:</span>
       <ModeIcon :mode="activeRound.mode" :size="28" />
     </div>
-    <Button v-if="isClearable" @click="clear">Clear</Button>
-    <Button v-if="isEndable" @click="end">End Round</Button>
   </div>
   <YourTurn />
   <StackWinner />
@@ -223,12 +221,8 @@ export default defineComponent({
     return reactive({
       activeRound,
       activeStack,
-      isClearable,
-      isEndable,
       userId,
       opponentId,
-      end,
-      clear,
       window,
       opponentTeam,
       userTeam,
