@@ -17,7 +17,6 @@ const listGames = /* GraphQL */ `
         index
         private
         status
-        name
         createdAt
         updatedAt
         Teams {
@@ -38,11 +37,10 @@ const listGames = /* GraphQL */ `
 `;
 
 export const useListGamesQuery = (
-  searchTerm: Ref<string>,
   nextToken: Ref<string>,
   limit: number = 20
 ) => {
-  const key = reactive(["listGames", { searchTerm, nextToken, limit }]);
+  const key = reactive(["listGames", { nextToken, limit }]);
   const res = useQuery(
     key,
     async () => {
@@ -50,9 +48,6 @@ export const useListGamesQuery = (
         private: { eq: false },
         status: { eq: "CREATED" },
       };
-      if (searchTerm.value) {
-        filter.nameLowerCase = { contains: searchTerm.value };
-      }
       const { data } = (await API.graphql(
         graphqlOperation(listGames, {
           filter,

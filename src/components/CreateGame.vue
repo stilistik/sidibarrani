@@ -1,7 +1,6 @@
 <template>
   <div class="flex flex-col items-start gap-5">
     <div class="flex flex-col items-start gap-5">
-      <Input v-model="name" type="text" placeholder="Game Name" />
       <div class="flex items-center gap-3">
         <Input v-model="team1name" type="text" placeholder="Team 1 Name" />
         <ColorPicker v-model="team1color" />
@@ -13,7 +12,7 @@
       <Checkbox v-model="isPrivate" name="private" label="Private" />
     </div>
     <div class="flex">
-      <Button @click="create" size="large">Create</Button>
+      <Button @click="createGame" size="large">Create</Button>
     </div>
   </div>
 </template>
@@ -28,6 +27,7 @@ import IconButton from "./IconButton.vue";
 import { Message } from "../utils/Message";
 import { useCreateNewGameMutation } from "../api";
 import { useQueryClient } from "vue-query";
+import router from "../router";
 
 export default defineComponent({
   name: "CreateGame",
@@ -41,34 +41,23 @@ export default defineComponent({
   setup() {
     const createGameMutation = useCreateNewGameMutation();
     const qclient = useQueryClient();
-    return reactive({
-      createGameMutation,
-      qclient,
-      isPrivate: false,
-      name: "",
+
+    const state = reactive({
       team1name: "",
       team2name: "",
       team1color: "red",
       team2color: "blue",
+      private: false,
     });
-  },
-  methods: {
-    create: function () {
-      const input = {
-        name: this.name || undefined,
-        team1name: this.team1name || undefined,
-        team2name: this.team2name || undefined,
-        team1color: this.team1color || undefined,
-        team2color: this.team2color || undefined,
-        private: this.isPrivate || false,
-      };
-      this.createGameMutation.mutate(
-        { input },
+
+    function createGame() {
+      createGameMutation.mutate(
+        { input: state },
         {
           onSuccess: (game) => {
-            this.qclient.invalidateQueries("listGames");
+            qclient.invalidateQueries("listGames");
             Message.success("Game created!");
-            this.$router.push({
+            router.push({
               path: "/game/lobby",
               query: { gameId: game.id },
             });
@@ -78,7 +67,12 @@ export default defineComponent({
           },
         }
       );
-    },
+    }
+
+    return reactive({
+      createGame,
+      ...state,
+    });
   },
 });
 </script>

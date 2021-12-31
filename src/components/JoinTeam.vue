@@ -24,7 +24,6 @@ export default defineComponent({
 
     function join() {
       isLoading.value = true;
-      console.log(props);
 
       joinTeamMutation.mutate(
         {

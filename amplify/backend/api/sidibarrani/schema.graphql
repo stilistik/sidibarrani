@@ -132,8 +132,6 @@ type Game @model @auth(rules: [{ allow: private }]) {
   Rounds: [Round] @connection(keyName: "byGame", fields: ["id"])
   status: GameStatus
   Teams: [Team] @connection(keyName: "byGame", fields: ["id"])
-  name: String
-  nameLowerCase: String
 }
 
 type User @model @auth(rules: [{ allow: private }]) {
@@ -157,29 +155,10 @@ type TeamUser
 }
 
 ##########################
-# QUERIES
-##########################
-
-type Query {
-  getUserHand(roundID: String!, handType: HandType!): Hand!
-    @function(name: "logicore-${env}")
-    @auth(rules: [{ allow: private }])
-
-  getHandCards(
-    roundID: String!
-    userID: String!
-    handType: HandType!
-  ): [String!]!
-    @function(name: "logicore-${env}")
-    @auth(rules: [{ allow: private }])
-}
-
-##########################
 # MUTATIONS
 ##########################
 
 input CreateNewGameInput {
-  name: String
   mode: GameMode
   team1name: String
   team2name: String

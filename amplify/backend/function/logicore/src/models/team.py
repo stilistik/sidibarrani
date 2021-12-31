@@ -24,7 +24,7 @@ class TeamModel:
     @staticmethod
     def create(game_id, name=None, color="red") -> Team:
         date_now = get_iso_date_string()
-        name = get_random_name() if name is None else name
+        name = get_random_name() if not name else name
         team = Team(
             id=str(uuid()),
             name=name,

@@ -1,11 +1,6 @@
 <template>
   <AppHeader />
   <PageContainer>
-    <div class="text-center">
-      <h1 class="mt-10 text-white text-9xl font-extrabold">
-        {{ gameName }}
-      </h1>
-    </div>
     <div class="w-full flex justify-center mt-10">
       <CopyJoinLink />
     </div>

@@ -2,67 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getUserHand = /* GraphQL */ `
-  query GetUserHand($roundID: String!, $handType: HandType!) {
-    getUserHand(roundID: $roundID, handType: $handType) {
-      id
-      roundID
-      userID
-      type
-      cards
-      createdAt
-      updatedAt
-      round {
-        id
-        gameID
-        status
-        stackCount
-        activeStackID
-        turnSequence
-        turn
-        mode
-        betPoints
-        result
-        createdAt
-        updatedAt
-        hands {
-          nextToken
-        }
-        stacks {
-          nextToken
-        }
-        activeStack {
-          id
-          roundID
-          size
-          winnerID
-          createdAt
-          updatedAt
-        }
-      }
-      user {
-        id
-        email
-        username
-        lastOnline
-        createdAt
-        updatedAt
-        teams {
-          nextToken
-        }
-      }
-    }
-  }
-`;
-export const getHandCards = /* GraphQL */ `
-  query GetHandCards(
-    $roundID: String!
-    $userID: String!
-    $handType: HandType!
-  ) {
-    getHandCards(roundID: $roundID, userID: $userID, handType: $handType)
-  }
-`;
 export const getSequenceNumber = /* GraphQL */ `
   query GetSequenceNumber($id: ID!) {
     getSequenceNumber(id: $id) {
@@ -519,8 +458,6 @@ export const getGame = /* GraphQL */ `
       private
       activeRoundID
       status
-      name
-      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -596,8 +533,6 @@ export const listGames = /* GraphQL */ `
         private
         activeRoundID
         status
-        name
-        nameLowerCase
         createdAt
         updatedAt
         Teams {

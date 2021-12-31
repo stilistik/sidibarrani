@@ -66,8 +66,6 @@ export default defineComponent({
     const transformLeft = ref("translate(-55%, 0px)");
     const transformRight = ref("translate(55%, 0px)");
 
-    console.log(props.animationDelay);
-
     onMounted(() => {
       setTimeout(() => {
         transformLeft.value = "translate(0,0)";

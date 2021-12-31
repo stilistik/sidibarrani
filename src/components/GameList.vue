@@ -1,5 +1,4 @@
 <template>
-  <Input placeholder="Search Game" type="text" v-model="searchTerm" />
   <Loading v-if="isLoading">Loading</Loading>
   <div v-else-if="isError">Error</div>
   <div v-else-if="games.length > 0" class="w-full flex flex-col gap-10 pb-20">
@@ -42,16 +41,14 @@ export default defineComponent({
   },
   setup() {
     const searchTerm = useDebouncedRef("", 500);
-    const nextToken = reactive([]);
     const prevToken = reactive([]);
     const token = ref(null);
 
-    const { isLoading, isError, data } = useListGamesQuery(searchTerm, token);
+    const { isLoading, isError, data } = useListGamesQuery(token);
 
     const games = computed(() => {
       return data.value?.items.map((game: any) => {
         return {
-          name: game.name,
           id: game.id,
           team1name: game.Teams.items[0].name,
           team2name: game.Teams.items[1].name,

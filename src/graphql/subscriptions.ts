@@ -11,8 +11,6 @@ export const onUpdateGameState = /* GraphQL */ `
       private
       activeRoundID
       status
-      name
-      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -851,8 +849,6 @@ export const onCreateGame = /* GraphQL */ `
       private
       activeRoundID
       status
-      name
-      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -923,8 +919,6 @@ export const onUpdateGame = /* GraphQL */ `
       private
       activeRoundID
       status
-      name
-      nameLowerCase
       createdAt
       updatedAt
       Teams {
@@ -995,8 +989,6 @@ export const onDeleteGame = /* GraphQL */ `
       private
       activeRoundID
       status
-      name
-      nameLowerCase
       createdAt
       updatedAt
       Teams {
