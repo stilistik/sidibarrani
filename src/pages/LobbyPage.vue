@@ -65,7 +65,7 @@ export default defineComponent({
     async function leaveGame() {
       try {
         await leaveGameMutation.mutateAsync({
-          input: { gameID: gameId.value },
+          gameID: gameId.value,
         });
         qclient.invalidateQueries("getGame");
         router.push({ path: "/" });

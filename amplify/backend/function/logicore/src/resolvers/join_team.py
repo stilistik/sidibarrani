@@ -1,4 +1,4 @@
-from models.game import GameModel
+from models.game import GameModel, GameStatus
 from models.team import TeamModel
 from models.team_user import TeamUserModel
 
@@ -13,4 +13,5 @@ def join_team(event):
     TeamUserModel.delete(other_team.id, user_id)
 
     TeamUserModel.create(team_id, user_id)
-    return vars(GameModel.find_by_id(other_team.gameID))
+
+    return vars(GameModel.set_status(other_team.gameID, GameStatus.WAITING))

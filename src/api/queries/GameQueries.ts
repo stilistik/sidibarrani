@@ -46,7 +46,7 @@ export const useListGamesQuery = (
     async () => {
       const filter: any = {
         private: { eq: false },
-        status: { eq: "CREATED" },
+        status: { eq: "WAITING" },
       };
       const { data } = (await API.graphql(
         graphqlOperation(listGames, {

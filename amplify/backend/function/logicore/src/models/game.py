@@ -14,6 +14,7 @@ game_table = ddb.Table(game_table_name)
 
 class GameStatus(str, Enum):
     CREATED = 'CREATED',
+    WAITING = 'WAITING',
     STARTED = 'STARTED',
     ENDED = 'ENDED'
 
@@ -56,12 +57,12 @@ class GameModel:
         return game
 
     @staticmethod
-    def start(game_id) -> Game:
+    def set_status(game_id: str, status: GameStatus) -> Game:
         date_now = get_iso_date_string()
         response = game_table.update_item(Key={'id': game_id},
                                           AttributeUpdates={
                                               'status': {
-                                                  'Value': "STARTED"
+                                                  'Value': status
                                               },
                                               'updatedAt': {
                                                   'Value': date_now

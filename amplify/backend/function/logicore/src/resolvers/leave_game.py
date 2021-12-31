@@ -1,6 +1,6 @@
 from models.team import TeamModel
 from models.team_user import TeamUserModel
-from models.game import GameModel
+from models.game import GameModel, GameStatus
 
 
 def leave_game(event):
@@ -23,5 +23,9 @@ def leave_game(event):
         False)
     if found_in_team_2:
         TeamUserModel.delete(teams[1].id, user_id)
+
+    all_users_in_game = TeamUserModel.find_by_game(game_id)
+    if len(all_users_in_game) == 0:
+        GameModel.set_status(game_id, GameStatus.CREATED)
 
     return vars(GameModel.find_by_id(game_id))

@@ -20,6 +20,7 @@ enum RoundStatus {
 
 enum GameStatus {
   CREATED
+  WAITING
   STARTED
   ENDED
 }

@@ -35,13 +35,6 @@ def validate_team_config(game_id: str, mode: GameMode) -> List[TeamUser]:
     return shuffled_teams
 
 
-def validate_game_status(game_id):
-    game = GameModel.find_by_id(game_id)
-
-    if game.status != GameStatus.CREATED:
-        raise Exception("Game already started")
-
-
 def new_round_duo(game: Game):
     players = validate_team_config(game.id, GameMode.DUO)
     stack_size = 2
@@ -100,10 +93,7 @@ def new_round_quattro(game: Game):
     return vars(GameModel.set_active_round(game.id, round.id))
 
 
-def new_round(event):
-    game_id = event['arguments'].get('gameID')
-    game = GameModel.find_by_id(game_id)
-
+def new_round(game: Game):
     if game.mode == GameMode.DUO:
         return new_round_duo(game)
     elif game.mode == GameMode.QUATTRO:
@@ -112,6 +102,12 @@ def new_round(event):
 
 def start_game(event):
     game_id = event['arguments'].get('gameID')
-    validate_game_status(game_id)
-    new_round(event)
-    return vars(GameModel.start(game_id))
+    game = GameModel.find_by_id(game_id)
+
+    if game.status == GameStatus.STARTED:
+        raise Exception("Game already started")
+    elif game.status == GameStatus.ENDED:
+        raise Exception("Game has ended.")
+
+    new_round(game)
+    return vars(GameModel.set_status(game_id, GameStatus.STARTED))
