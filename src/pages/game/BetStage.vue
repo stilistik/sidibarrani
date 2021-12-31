@@ -82,21 +82,23 @@
     :zIndex="20"
   />
   <PlayerDeck
-    v-if="userTeam"
-    :color="userTeam?.color"
+    v-if="Boolean(userTeam)"
+    :color="userTeam.color"
+    :name="userTeam.name"
     :location="'bottom'"
     :endStraightRight="true"
   />
   <PlayerDeck
-    v-if="opponentTeam"
-    :color="opponentTeam?.color"
+    v-if="Boolean(opponentTeam)"
+    :color="opponentTeam.color"
+    :name="opponentTeam.name"
     :location="'top'"
     :endStraightRight="true"
   />
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, ref } from "vue";
+import { computed, defineComponent, reactive, ref, watch } from "vue";
 import BetInput from "./BetInput.vue";
 import Button from "../../components/Button.vue";
 import Hand from "../../components/Hand.vue";
@@ -199,8 +201,6 @@ export default defineComponent({
     const opponentId = computed(
       () => opponentTeam.value.TeamUsers.items[0].user.id
     );
-
-    console.log(opponentTeam, userTeam);
 
     return reactive({
       mode,
