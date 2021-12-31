@@ -123,6 +123,7 @@ export default defineComponent({
 
     function onClick(event: Event) {
       if (!props.interactive) return;
+      scale.value = 1.0;
       context.emit("onClick", props.card, event);
     }
 
