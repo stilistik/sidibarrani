@@ -98,10 +98,16 @@
     :filterPlayed="true"
     :zIndex="20"
   />
-  <PlayerDeck v-if="userTeam" :color="userTeam?.color" :location="'bottom'" />
   <PlayerDeck
-    v-if="opponentTeam"
-    :color="opponentTeam?.color"
+    v-if="Boolean(userTeam)"
+    :color="userTeam.color"
+    :name="userTeam.name"
+    :location="'bottom'"
+  />
+  <PlayerDeck
+    v-if="Boolean(opponentTeam)"
+    :color="opponentTeam.color"
+    :name="opponentTeam.name"
     :location="'top'"
   />
 </template>

@@ -51,6 +51,7 @@ export default defineComponent({
       if (props.location === "top") {
         style.bottom = "4px";
         if (props.endStraightRight) {
+          style.width = "1200px";
           style.clipPath = "polygon(0% 80%, 10% 100%, 100% 100%, 100% 80%)";
         } else {
           style.clipPath = "polygon(0% 80%, 10% 100%, 90% 100%, 100% 80%)";
@@ -58,6 +59,7 @@ export default defineComponent({
       } else if (props.location === "bottom") {
         style.top = "4px";
         if (props.endStraightRight) {
+          style.width = "1200px";
           style.clipPath = "polygon(0% 20%, 10% 0, 100% 0, 100% 20%)";
         } else {
           style.clipPath = "polygon(0% 20%, 10% 0, 90% 0, 100% 20%)";
