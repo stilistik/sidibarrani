@@ -26,7 +26,7 @@
         flex
         items-center
         justify-center
-        bg-gray-900
+        bg-gray-800
         rounded-full
       "
       :style="{

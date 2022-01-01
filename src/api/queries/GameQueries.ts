@@ -1,7 +1,8 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { computed, ref, Ref } from "vue";
+import { watch, computed, ref, Ref } from "vue";
 import { ComputedRef, reactive } from "vue-demi";
 import { useQuery } from "vue-query";
+import { Game } from "../../graphql/types";
 import router from "../../router";
 import { gameFragment } from "../fragments/GameFragment";
 
@@ -92,15 +93,19 @@ export const useGameQuery = (gameId: ComputedRef<string>) => {
   return res;
 };
 
-const gameRef = ref(null);
+const gameRef: Ref<Game> = ref(null);
 export const useCurrentGame = () => {
   const gameId = computed(
     () => router.currentRoute.value.query.gameId as string
   );
   const { data } = useGameQuery(gameId);
-  if (data.value) {
-    gameRef.value = data.value;
-  }
+  console.log(data);
+
+  watch(data, (newValue: Game) => {
+    if (newValue) {
+      gameRef.value = newValue;
+    }
+  });
   return gameRef;
 };
 

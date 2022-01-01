@@ -1,5 +1,6 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
-import { useMutation } from "vue-query";
+import { useMutation, useQueryClient } from "vue-query";
+import { updateGame } from "../../graphql/mutations";
 import { gameFragment } from "../fragments/GameFragment";
 
 const createNewGame = /* GraphQL */ `
@@ -56,5 +57,23 @@ export const useLeaveGameMutation = () => {
     )) as any;
     return data.leaveGame;
   });
+  return res;
+};
+
+export const useUpdateGameMutation = () => {
+  const qc = useQueryClient();
+  const res = useMutation(
+    async (variables: any) => {
+      const { data } = (await API.graphql(
+        graphqlOperation(updateGame, variables)
+      )) as any;
+      return data.updateGame;
+    },
+    {
+      onSuccess: () => {
+        qc.invalidateQueries("getGame");
+      },
+    }
+  );
   return res;
 };

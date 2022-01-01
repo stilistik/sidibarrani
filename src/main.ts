@@ -19,6 +19,9 @@ import {
   faForward,
   faCaretUp,
   faCaretDown,
+  faPlus,
+  faTrophy,
+  faDice,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -35,6 +38,9 @@ library.add(faCoins);
 library.add(faForward);
 library.add(faCaretDown);
 library.add(faCaretUp);
+library.add(faPlus);
+library.add(faTrophy);
+library.add(faDice);
 
 const app = createApp(App);
 

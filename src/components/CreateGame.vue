@@ -1,20 +1,8 @@
 <template>
-  <div class="flex flex-col items-start gap-5">
-    <div class="flex flex-col items-start gap-5">
-      <div class="flex items-center gap-3">
-        <Input v-model="team1name" type="text" placeholder="Team 1 Name" />
-        <ColorPicker v-model="team1color" />
-      </div>
-      <div class="flex items-center gap-3">
-        <Input v-model="team2name" type="text" placeholder="Team 2 Name" />
-        <ColorPicker v-model="team2color" />
-      </div>
-      <Checkbox v-model="isPrivate" name="private" label="Private" />
-    </div>
-    <div class="flex">
-      <Button @click="createGame" size="large">Create</Button>
-    </div>
-  </div>
+  <Button @click="createGame" size="medium">
+    <Icon icon="plus" />
+    Create Game
+  </Button>
 </template>
 
 <script lang="ts">
