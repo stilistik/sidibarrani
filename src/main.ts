@@ -22,6 +22,7 @@ import {
   faPlus,
   faTrophy,
   faDice,
+  faMinus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -39,6 +40,7 @@ library.add(faForward);
 library.add(faCaretDown);
 library.add(faCaretUp);
 library.add(faPlus);
+library.add(faMinus);
 library.add(faTrophy);
 library.add(faDice);
 

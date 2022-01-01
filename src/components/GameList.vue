@@ -5,13 +5,8 @@
     <Game
       v-for="(game, index) in games"
       :key="game.id"
-      :name="game.name"
+      :game="game"
       :index="index"
-      :id="game.id"
-      :team1name="game?.team1name"
-      :team2name="game?.team2name"
-      :team1color="game?.team1color"
-      :team2color="game?.team2color"
     />
   </div>
   <div v-else class="p-5 text-white font-thin text-2xl flex justify-center">
@@ -46,18 +41,7 @@ export default defineComponent({
 
     const { isLoading, isError, data } = useListGamesQuery(token);
 
-    const games = computed(() => {
-      return data.value?.items.map((game: any) => {
-        return {
-          id: game.id,
-          team1name: game.Teams.items[0].name,
-          team2name: game.Teams.items[1].name,
-          team1color: game.Teams.items[0].color,
-          team2color: game.Teams.items[1].color,
-          index: game.index,
-        };
-      });
-    });
+    const games = computed(() => data.value?.items);
 
     function next() {
       const t = data?.value?.nextToken;

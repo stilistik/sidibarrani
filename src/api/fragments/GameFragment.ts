@@ -4,6 +4,7 @@ export const gameFragment = /* GraphQL */ `
     index
     private
     status
+    mode
     createdAt
     updatedAt
     ActiveRound {

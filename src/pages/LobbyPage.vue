@@ -4,8 +4,8 @@
     <div class="w-full flex justify-center mt-10">
       <CopyJoinLink />
     </div>
-    <div class="w-full overflow-hidden rounded-2xl mt-10 bg-gray-800">
-      <div class="relative text-white w-full">
+    <div class="w-full rounded-2xl mt-10 bg-gray-800">
+      <div class="relative text-white w-full overflow-hidden rounded-t-2xl">
         <SplitBackground
           :color1="team1?.color"
           :color2="team2?.color"

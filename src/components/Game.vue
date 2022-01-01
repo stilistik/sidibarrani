@@ -8,10 +8,10 @@
       w-full
       text-white
       shadow-2xl
+      overflow-hidden
       flex
       items-center
       rounded-xl
-      overflow-hidden
       bg-gray-800
     "
     :style="{ height: '150px', maxWidth: '1000px' }"
@@ -72,16 +72,20 @@
         :hovered="hovered"
         :animationDelay="index * 100"
       />
-      <div class="relative z-10 w-full flex p-8">
+      <div class="relative z-10 w-full h-full flex p-8">
         <div
-          class="w-full justify-between flex items-center text-2xl font-thin"
+          class="
+            w-full
+            h-full
+            justify-between
+            flex
+            items-center
+            text-2xl
+            font-thin
+          "
         >
-          <div class="">
-            <span class="font-black">{{ team1name }}</span>
-          </div>
-          <div class="">
-            <span class="font-black">{{ team2name }}</span>
-          </div>
+          <span class="font-black">{{ team1name }}</span>
+          <span class="font-black">{{ team2name }}</span>
         </div>
       </div>
     </div>
@@ -89,7 +93,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
+import { defineComponent, PropType, reactive, ref } from "vue";
+import { Game } from "../graphql/types";
 import router from "../router";
 import Button from "./Button.vue";
 import SplitBackground from "./SplitBackground.vue";
@@ -100,29 +105,31 @@ export default defineComponent({
     Button,
     SplitBackground,
   },
-  props: [
-    "name",
-    "id",
-    "index",
-    "team1name",
-    "team2name",
-    "team1color",
-    "team2color",
-    "animationDelay",
-  ],
+  props: {
+    game: Object as PropType<Game>,
+    index: Number,
+    animationDelay: Number,
+  },
   setup(props) {
     function join() {
-      router.push({ path: "/game/lobby", query: { gameId: props.id } });
+      router.push({ path: "/game/lobby", query: { gameId: props.game.id } });
     }
 
     const hovered = ref(false);
+
+    const color1 = props.game.Teams.items[0].color;
+    const color2 = props.game.Teams.items[1].color;
+    const team1name = props.game.Teams.items[0].name;
+    const team2name = props.game.Teams.items[1].name;
 
     return reactive({
       join,
       hovered,
       index: props.index,
-      color1: props.team1color,
-      color2: props.team2color,
+      color1,
+      color2,
+      team1name,
+      team2name,
     });
   },
 });
