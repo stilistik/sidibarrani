@@ -23,6 +23,7 @@ import {
   faTrophy,
   faDice,
   faMinus,
+  faPalette,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -43,6 +44,7 @@ library.add(faPlus);
 library.add(faMinus);
 library.add(faTrophy);
 library.add(faDice);
+library.add(faPalette);
 
 const app = createApp(App);
 

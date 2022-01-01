@@ -1,10 +1,12 @@
 <template>
   <div class="relative">
     <button
-      class="rounded-full p-6"
-      :class="[`bg-${modelValue}-400`, `hover:bg-${modelValue}-300`]"
+      class="rounded-full p-2 border-4 border-white bg-gray-700"
       @click.stop="openPicker"
-    />
+      style="width: 60px; height: 60px"
+    >
+      <Icon icon="palette" />
+    </button>
     <div
       class="
         absolute
