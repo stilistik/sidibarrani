@@ -42,7 +42,7 @@
         :style="{ width: '50px', height: '50px' }"
       >
         <Icon icon="dice" />
-        2er
+        {{ game?.mode }}
       </span>
       <span
         class="
@@ -58,7 +58,7 @@
         :style="{ width: '50px', height: '50px' }"
       >
         <Icon icon="trophy" />
-        1000</span
+        {{ game?.winCondition }}</span
       >
     </div>
     <div

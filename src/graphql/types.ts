@@ -2,6 +2,7 @@ export interface Game {
   id: string;
   index: number;
   mode: GameMode;
+  winCondition: number;
   private: boolean;
   activeRoundID: string;
   activeRound: Round;

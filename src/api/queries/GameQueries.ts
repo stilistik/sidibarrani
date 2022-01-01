@@ -18,6 +18,8 @@ const listGames = /* GraphQL */ `
         index
         private
         status
+        mode
+        winCondition
         createdAt
         updatedAt
         Teams {
@@ -99,8 +101,6 @@ export const useCurrentGame = () => {
     () => router.currentRoute.value.query.gameId as string
   );
   const { data } = useGameQuery(gameId);
-  console.log(data);
-
   watch(data, (newValue: Game) => {
     if (newValue) {
       gameRef.value = newValue;

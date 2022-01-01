@@ -5,6 +5,7 @@ export const gameFragment = /* GraphQL */ `
     private
     status
     mode
+    winCondition
     createdAt
     updatedAt
     ActiveRound {

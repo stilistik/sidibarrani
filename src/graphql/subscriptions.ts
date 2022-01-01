@@ -9,6 +9,7 @@ export const onUpdateGameState = /* GraphQL */ `
       index
       mode
       private
+      winCondition
       activeRoundID
       status
       createdAt
@@ -847,6 +848,7 @@ export const onCreateGame = /* GraphQL */ `
       index
       mode
       private
+      winCondition
       activeRoundID
       status
       createdAt
@@ -917,6 +919,7 @@ export const onUpdateGame = /* GraphQL */ `
       index
       mode
       private
+      winCondition
       activeRoundID
       status
       createdAt
@@ -987,6 +990,7 @@ export const onDeleteGame = /* GraphQL */ `
       index
       mode
       private
+      winCondition
       activeRoundID
       status
       createdAt

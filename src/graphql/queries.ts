@@ -456,6 +456,7 @@ export const getGame = /* GraphQL */ `
       index
       mode
       private
+      winCondition
       activeRoundID
       status
       createdAt
@@ -531,6 +532,7 @@ export const listGames = /* GraphQL */ `
         index
         mode
         private
+        winCondition
         activeRoundID
         status
         createdAt

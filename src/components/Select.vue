@@ -18,7 +18,8 @@
         py-1
         px-3
       "
-      style="min-width: 150px"
+      style="min-width: 150px; height: 40px"
+      :disabled="$props.disabled"
     >
       <slot />
       {{ $props.value ? $props.value : $props.placeholder || "Select" }}
@@ -35,7 +36,7 @@
         rounded-xl
         z-10
         bg-gray-700
-        mt-10
+        mt-12
         flex flex-col
         overflow-hidden
       "
@@ -60,6 +61,7 @@ export default defineComponent({
     placeholder: String,
     value: String,
     options: Array as PropType<string[]>,
+    disabled: Boolean,
   },
   emits: ["onSelect"],
   setup(props, context) {

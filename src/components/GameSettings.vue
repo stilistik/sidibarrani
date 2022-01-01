@@ -11,9 +11,18 @@
       :value="game?.mode"
       @onSelect="handleSelectMode"
       :placeholder="'Select Mode'"
+      :disabled="true"
     >
       <Icon icon="dice" />
     </Select>
+    <NumberInput
+      :value="game?.winCondition"
+      @onChange="handleWinConditionChange"
+      :step="100"
+      :min="0"
+    >
+      <Icon icon="trophy" class="mx-2" />
+    </NumberInput>
   </div>
 </template>
 
@@ -23,12 +32,14 @@ import { useCurrentGame, useUpdateGameMutation } from "../api";
 import Checkbox from "./Checkbox.vue";
 import Select from "./Select.vue";
 import ColorPicker from "./ColorPicker.vue";
+import NumberInput from "./NumberInput.vue";
 
 export default defineComponent({
   components: {
     Checkbox,
     Select,
     ColorPicker,
+    NumberInput,
   },
   setup(props) {
     const updateGameMutation = useUpdateGameMutation();
@@ -54,10 +65,20 @@ export default defineComponent({
       });
     }
 
+    function handleWinConditionChange(value: number) {
+      updateGameMutation.mutate({
+        input: {
+          id: gameRef.value?.id,
+          winCondition: value,
+        },
+      });
+    }
+
     return reactive({
       game: gameRef,
       handleChangePrivate,
       handleSelectMode,
+      handleWinConditionChange,
     });
   },
 });

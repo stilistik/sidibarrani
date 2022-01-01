@@ -35,6 +35,7 @@ class Game():
         self.createdAt: str = kwargs['createdAt']
         self.updatedAt: str = kwargs['updatedAt']
         self.index: int = int(kwargs['index'])
+        self.winCondition: int = int(kwargs['winCondition'])
         self.activeRoundID: str = kwargs.get('activeRoundID', None)
 
 
@@ -50,6 +51,7 @@ class GameModel:
                     private=kwargs.get('private', False),
                     createdAt=date_now,
                     updatedAt=date_now,
+                    winCondition=1000,
                     index=SequenceNumberModel.get_index('Game'))
 
         game_table.put_item(Item=vars(game))
