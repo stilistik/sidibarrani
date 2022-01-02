@@ -1,5 +1,5 @@
 import { API, graphqlOperation } from "aws-amplify";
-import { watch, computed, ref, Ref } from "vue";
+import { watch, computed, ref, Ref, watchEffect } from "vue";
 import { ComputedRef, reactive } from "vue-demi";
 import { useQuery } from "vue-query";
 import { Game } from "../../graphql/types";
@@ -101,10 +101,8 @@ export const useCurrentGame = () => {
     () => router.currentRoute.value.query.gameId as string
   );
   const { data } = useGameQuery(gameId);
-  watch(data, (newValue: Game) => {
-    if (newValue) {
-      gameRef.value = newValue;
-    }
+  watchEffect(() => {
+    gameRef.value = data.value;
   });
   return gameRef;
 };

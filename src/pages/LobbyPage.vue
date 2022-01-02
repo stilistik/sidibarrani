@@ -1,6 +1,6 @@
 <template>
   <AppHeader />
-  <PageContainer>
+  <PageContainer v-if="Boolean(game)">
     <div class="w-full flex justify-center mt-10">
       <CopyJoinLink />
     </div>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="flex justify-center mt-20">
-      <StartGame :id="gameId" />
+      <StartGame :id="game?.id" />
     </div>
     <div class="flex justify-center mt-20">
       <Button @click="leaveGame">Leave Game</Button>
@@ -41,7 +41,7 @@ import StartGame from "../components/StartGame.vue";
 import CopyJoinLink from "../components/CopyJoinLink.vue";
 import SplitBackground from "../components/SplitBackground.vue";
 import GameSettings from "../components/GameSettings.vue";
-import { useLeaveGameMutation, useGameQuery } from "../api";
+import { useLeaveGameMutation, useGameQuery, useCurrentGame } from "../api";
 import router from "../router";
 import { useQueryClient } from "vue-query";
 import { Message } from "../utils/Message";
@@ -63,14 +63,12 @@ export default defineComponent({
   setup() {
     const leaveGameMutation = useLeaveGameMutation();
     const qclient = useQueryClient();
-    const gameId = computed(
-      () => router.currentRoute.value.query.gameId as string
-    );
+    const game = useCurrentGame();
 
     async function leaveGame() {
       try {
         await leaveGameMutation.mutateAsync({
-          gameID: gameId.value,
+          gameID: game.value.id,
         });
         qclient.invalidateQueries("getGame");
         router.push({ path: "/" });
@@ -79,33 +77,28 @@ export default defineComponent({
       }
     }
 
-    const { data, isLoading } = useGameQuery(gameId);
-
     watchEffect(() => {
-      if (data?.value?.status === "STARTED") {
-        router.replace({ path: "/game/play", query: { gameId: gameId.value } });
+      if (game.value?.status === "STARTED") {
+        router.replace({
+          path: "/game/play",
+          query: { gameId: game.value.id },
+        });
       }
     });
 
     const team1 = computed(() => {
-      return data?.value?.Teams?.items[0];
+      return game.value?.Teams?.items[0];
     });
 
     const team2 = computed(() => {
-      return data?.value?.Teams?.items[1];
-    });
-
-    const gameName = computed(() => {
-      return data?.value?.name;
+      return game.value?.Teams?.items[1];
     });
 
     return reactive({
       team1,
       team2,
-      gameName,
-      gameId,
+      game,
       leaveGame,
-      isLoading,
     });
   },
 });
