@@ -5,8 +5,7 @@
       :class="[bg1class]"
       :style="{
         clipPath: 'polygon(0 0, 54% 0, 44% 100%, 0% 100%)',
-        transform: transformLeft,
-        transition: 'transform 0.6s cubic-bezier(0, 0, 0.3, 1)',
+        transform: getLeftTransform(),
       }"
     />
     <div
@@ -14,8 +13,7 @@
       :class="[bg2class]"
       :style="{
         clipPath: 'polygon(56% 0, 100% 0, 100% 100%, 46% 100%)',
-        transform: transformRight,
-        transition: 'transform 0.6s cubic-bezier(0, 0, 0.3, 1)',
+        transform: getRightTransform(),
       }"
     />
     <div
@@ -44,7 +42,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, reactive, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  reactive,
+  ref,
+  watch,
+} from "vue";
+import { spring } from "../spring";
 import { Color, colorClasses } from "../utils/ColorUtils";
 
 export default defineComponent({
@@ -63,22 +69,30 @@ export default defineComponent({
         : colorClasses[props.color2 as Color]?.bg;
     });
 
-    const transformLeft = ref("translate(-55%, 0px)");
-    const transformRight = ref("translate(55%, 0px)");
+    const xOptions = reactive({ immediateValue: 0 });
+    const x = spring(1400, xOptions);
 
     onMounted(() => {
+      xOptions.immediateValue = 1000;
       setTimeout(() => {
-        transformLeft.value = "translate(0,0)";
-        transformRight.value = "translate(0,0)";
+        x.value = 0;
       }, 100 + props.animationDelay);
     });
+
+    function getLeftTransform() {
+      return `translate(-${x.value}px, 0)`;
+    }
+
+    function getRightTransform() {
+      return `translate(${x.value}px, 0)`;
+    }
 
     return reactive({
       size: props.size,
       bg1class,
       bg2class,
-      transformLeft,
-      transformRight,
+      getLeftTransform,
+      getRightTransform,
     });
   },
 });
