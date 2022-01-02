@@ -9,7 +9,7 @@
   >
     <div
       :class="getOuterClasses()"
-      class="absolute top-0 left-0 bg-red-400"
+      class="absolute top-0 left-0"
       :style="{
         height: '370px',
         width: '1200px',
