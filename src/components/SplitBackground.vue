@@ -59,13 +59,13 @@ export default defineComponent({
   setup(props) {
     const bg1class = computed(() => {
       return props.hovered
-        ? colorClasses[props.color1 as Color]?.bgHover
+        ? colorClasses[props.color1 as Color]?.bgLight
         : colorClasses[props.color1 as Color]?.bg;
     });
 
     const bg2class = computed(() => {
       return props.hovered
-        ? colorClasses[props.color2 as Color]?.bgHover
+        ? colorClasses[props.color2 as Color]?.bgLight
         : colorClasses[props.color2 as Color]?.bg;
     });
 

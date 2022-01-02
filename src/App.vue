@@ -1,6 +1,7 @@
 <template>
   <NotificationHub />
   <router-view />
+  <div id="modal-plane" />
 </template>
 
 <script lang="ts">
