@@ -27,7 +27,6 @@ class GameMode(str, Enum):
 class Game():
     def __init__(self, **kwargs) -> None:
         self.id: str = kwargs['id']
-        self.name: str = kwargs['name']
         self.nameLowerCase: str = self.name.lower()
         self.status: GameStatus = GameStatus(kwargs['status'])
         self.mode: GameMode = GameMode(kwargs['mode'])
@@ -37,6 +36,10 @@ class Game():
         self.index: int = int(kwargs['index'])
         self.winCondition: int = int(kwargs['winCondition'])
         self.activeRoundID: str = kwargs.get('activeRoundID', None)
+        self.teamAID: str = kwargs.get('teamAID')
+        self.teamBID: str = kwargs.get('teamBID')
+        self.teamAColor: str = kwargs.get('teamAColor')
+        self.teamBColor: str = kwargs.get('teamBColor')
         self.result: dict = kwargs.get('result', {})
 
 
@@ -46,13 +49,14 @@ class GameModel:
         date_now = get_iso_date_string()
 
         game = Game(id=str(uuid()),
-                    name=kwargs.get('name', get_random_name()),
                     mode=kwargs.get('mode', GameMode.DUO),
                     status=GameStatus.CREATED,
                     private=kwargs.get('private', False),
                     createdAt=date_now,
                     updatedAt=date_now,
                     winCondition=1000,
+                    teamAColor=kwargs.get('teamAColor', 'red'),
+                    teamBColor=kwargs.get('teamBColor', 'blue'),
                     index=SequenceNumberModel.get_index('Game'))
 
         game_table.put_item(Item=vars(game))
@@ -96,6 +100,21 @@ class GameModel:
                                           AttributeUpdates={
                                               'result': {
                                                   'Value': result
+                                              },
+                                              'updatedAt': {
+                                                  'Value': date_now
+                                              },
+                                          },
+                                          ReturnValues="ALL_NEW")
+        return Game(**response['Attributes'])
+
+    @staticmethod
+    def set_team(game_id: str, team_id: str, key: str) -> Game:
+        date_now = get_iso_date_string()
+        response = game_table.update_item(Key={'id': game_id},
+                                          AttributeUpdates={
+                                              [key]: {
+                                                  'Value': team_id
                                               },
                                               'updatedAt': {
                                                   'Value': date_now

@@ -51,14 +51,8 @@ type SequenceNumber @model @auth(rules: [{ allow: private }]) {
   indexNumber: Int!
 }
 
-type Team
-  @model
-  @auth(rules: [{ allow: private }])
-  @key(name: "byGame", fields: ["gameID"]) {
+type Team @model @auth(rules: [{ allow: private }]) {
   id: ID!
-  gameID: ID
-  name: String
-  color: String
   TeamUsers: [TeamUser] @connection(keyName: "byTeam", fields: ["id"])
 }
 
@@ -133,7 +127,12 @@ type Game @model @auth(rules: [{ allow: private }]) {
   ActiveRound: Round @connection(fields: ["activeRoundID"])
   Rounds: [Round] @connection(keyName: "byGame", fields: ["id"])
   status: GameStatus
-  Teams: [Team] @connection(keyName: "byGame", fields: ["id"])
+  teamAID: ID
+  teamBID: ID
+  TeamA: Team @connection(fields: ["teamAID"])
+  TeamB: Team @connection(fields: ["teamBID"])
+  teamAColor: String
+  teamBColor: String
   result: AWSJSON
 }
 
@@ -163,8 +162,6 @@ type TeamUser
 
 input CreateNewGameInput {
   mode: GameMode
-  team1name: String
-  team2name: String
   team1color: String
   team2color: String
   private: Boolean
@@ -175,7 +172,7 @@ type Mutation {
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
-  joinTeam(teamID: String!): Game!
+  joinTeam(gameID: String!, teamKey: String!): Game!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
