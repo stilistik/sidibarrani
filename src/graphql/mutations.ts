@@ -12,6 +12,7 @@ export const createNewGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -83,6 +84,7 @@ export const joinTeam = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -154,6 +156,7 @@ export const leaveGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -225,6 +228,7 @@ export const startGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -296,6 +300,7 @@ export const playCard = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -367,6 +372,7 @@ export const clearStack = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -438,6 +444,7 @@ export const newRound = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -509,6 +516,7 @@ export const endRound = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -580,6 +588,7 @@ export const placeBet = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -651,6 +660,7 @@ export const skipBet = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -1552,6 +1562,7 @@ export const createGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -1626,6 +1637,7 @@ export const updateGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -1700,6 +1712,7 @@ export const deleteGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {

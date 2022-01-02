@@ -12,6 +12,7 @@ export const onUpdateGameState = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -851,6 +852,7 @@ export const onCreateGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -922,6 +924,7 @@ export const onUpdateGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
@@ -993,6 +996,7 @@ export const onDeleteGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      result
       createdAt
       updatedAt
       Teams {
