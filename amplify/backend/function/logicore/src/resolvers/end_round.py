@@ -101,7 +101,7 @@ def get_card_value(action_value: str, mode: RoundMode):
 def compute_result(round: Round):
     result = {}
     stacks = StackModel.find_by_round(round.id)
-    for stack in stacks:
+    for i, stack in enumerate(stacks):
         if not stack.winnerID:
             continue
 
@@ -113,6 +113,10 @@ def compute_result(round: Round):
 
             card_value = get_card_value(action.value, round.mode)
             stack_winner_result += card_value
+
+        # the last stack is awarded 5 points
+        if i == len(stacks) - 1:
+            stack_winner_result += 5
 
         team_user = TeamUserModel.find_by_id(stack.winnerID)
 
