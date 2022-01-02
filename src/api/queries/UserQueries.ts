@@ -1,30 +1,7 @@
 import { API, Auth, graphqlOperation } from "aws-amplify";
 import { useQuery } from "vue-query";
 import { QueryKey, UseQueryOptions } from "vue-query/types";
-import { getAWSTimeStamp } from "../../utils/Utils";
-
-const getUser = /* GraphQL */ `
-  query GetUser($id: ID!) {
-    getUser(id: $id) {
-      id
-      email
-      username
-      lastOnline
-      createdAt
-      updatedAt
-      teams {
-        items {
-          id
-          teamID
-          userID
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-    }
-  }
-`;
+import { getUser } from "../../graphql/queries";
 
 export const useCurrentUserQuery = () => {
   const res = useQuery("currentUser", async () => {
@@ -82,7 +59,7 @@ export const useListOnlineUsersQuery = (
     async () => {
       const { data } = (await API.graphql(
         graphqlOperation(listUsers, {
-          filter: { lastOnline: { gt: getAWSTimeStamp() - 30 } },
+          filter: { lastOnline: { gt: new Date().toISOString() } },
         })
       )) as any;
       return data.listUsers;

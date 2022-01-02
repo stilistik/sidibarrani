@@ -34,6 +34,7 @@ export const useUpdateTeamMutation = () => {
     {
       onSuccess: () => {
         qc.invalidateQueries("getGame");
+        qc.refetchQueries("listGames");
       },
     }
   );
