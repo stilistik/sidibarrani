@@ -70,7 +70,7 @@ export default defineComponent({
     });
 
     const xOptions = reactive({ immediateValue: 0 });
-    const x = spring(1400, xOptions);
+    const x = spring(1000, xOptions);
 
     onMounted(() => {
       xOptions.immediateValue = 1000;
