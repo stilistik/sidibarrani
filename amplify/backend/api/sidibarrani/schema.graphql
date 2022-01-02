@@ -134,6 +134,7 @@ type Game @model @auth(rules: [{ allow: private }]) {
   Rounds: [Round] @connection(keyName: "byGame", fields: ["id"])
   status: GameStatus
   Teams: [Team] @connection(keyName: "byGame", fields: ["id"])
+  result: AWSJSON
 }
 
 type User @model @auth(rules: [{ allow: private }]) {

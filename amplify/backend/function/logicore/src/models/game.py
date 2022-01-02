@@ -37,6 +37,7 @@ class Game():
         self.index: int = int(kwargs['index'])
         self.winCondition: int = int(kwargs['winCondition'])
         self.activeRoundID: str = kwargs.get('activeRoundID', None)
+        self.result: dict = kwargs.get('result', {})
 
 
 class GameModel:
@@ -80,6 +81,21 @@ class GameModel:
                                           AttributeUpdates={
                                               'activeRoundID': {
                                                   'Value': round_id
+                                              },
+                                              'updatedAt': {
+                                                  'Value': date_now
+                                              },
+                                          },
+                                          ReturnValues="ALL_NEW")
+        return Game(**response['Attributes'])
+
+    @staticmethod
+    def set_result(game_id: str, result: dict) -> Game:
+        date_now = get_iso_date_string()
+        response = game_table.update_item(Key={'id': game_id},
+                                          AttributeUpdates={
+                                              'result': {
+                                                  'Value': result
                                               },
                                               'updatedAt': {
                                                   'Value': date_now

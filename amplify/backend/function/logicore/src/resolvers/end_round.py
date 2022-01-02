@@ -1,5 +1,5 @@
 from models.team_user import TeamUserModel
-from models.game import GameModel
+from models.game import GameModel, GameStatus
 from models.round import RoundModel, RoundStatus, RoundMode, Round
 from models.stack import StackModel
 from models.action import ActionModel, ActionType
@@ -131,4 +131,15 @@ def end_round(event):
     round = RoundModel.set_round_status(round_id, RoundStatus.ENDED)
     result = compute_result(round)
     RoundModel.set_result(round_id, result)
-    return vars(GameModel.find_by_id(round.gameID))
+    game = GameModel.find_by_id(round.gameID)
+    game_result = {
+        k: game.result.get(k, 0) + result.get(k, 0)
+        for k in game.result.keys() | result.keys()
+    }
+    game = GameModel.set_result(game.id, game_result)
+
+    for k in game.result.keys():
+        if game.result[k] > game.winCondition:
+            game = GameModel.set_status(game.id, GameStatus.ENDED)
+
+    return vars(game)
