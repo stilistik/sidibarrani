@@ -83,25 +83,27 @@ def skip_bet(event):
     actions = ActionModel.find_by_stack(stack.id)
     game_user_count = len(TeamUserModel.find_by_game(game_id))
 
-    last_actions = actions[-game_user_count:]
-    max_amount_action = max(actions, key=get_max_action)
-    mode = RoundMode(max_amount_action.value.split(":")[0])
+    if len(actions) > game_user_count and not all(
+            action.type == ActionType.SKIP for action in actions):
+        last_actions = actions[-game_user_count:]
+        max_amount_action = max(actions, key=get_max_action)
+        mode = RoundMode(max_amount_action.value.split(":")[0])
 
-    if all(action.type == ActionType.SKIP for action in last_actions):
-        # set the winner of the bet stack to the user with the max amount bet
-        team_user = TeamUserModel.find_by_game_user(game_id,
-                                                    max_amount_action.userID)
-        StackModel.set_winner(stack.id, team_user.id)
+        if all(action.type == ActionType.SKIP for action in last_actions):
+            # set the winner of the bet stack to the user with the max amount bet
+            team_user = TeamUserModel.find_by_game_user(
+                game_id, max_amount_action.userID)
+            StackModel.set_winner(stack.id, team_user.id)
 
-        # set the round to play status
-        RoundModel.set_round_status(round_id, RoundStatus.PLAY)
-        RoundModel.set_turn(round_id, max_amount_action.userID)
+            # set the round to play status
+            RoundModel.set_round_status(round_id, RoundStatus.PLAY)
+            RoundModel.set_turn(round_id, max_amount_action.userID)
 
-        # create a new stack and set as active
-        new_stack = StackModel.create(round_id, stack.size)
-        RoundModel.set_active_stack(round_id, new_stack.id)
+            # create a new stack and set as active
+            new_stack = StackModel.create(round_id, stack.size)
+            RoundModel.set_active_stack(round_id, new_stack.id)
 
-        # set the play mode of the round
-        RoundModel.set_mode(round_id, mode)
+            # set the play mode of the round
+            RoundModel.set_mode(round_id, mode)
 
     return vars(GameModel.find_by_id(game_id))
