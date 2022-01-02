@@ -41,8 +41,8 @@ def join_team(event):
         for team_user in team_users:
             user_ids.append(team_user.userID)
 
-        team = get_or_create_team(user_ids)
-        GameModel.set_team(game_id, team.id, f'team{team_key}ID')
+    team = get_or_create_team(user_ids)
+    GameModel.set_team(game_id, team.id, f'team{team_key}ID')
 
     if opponent_team_id:
         team_users = TeamUserModel.find_by_team(opponent_team_id)
@@ -53,8 +53,11 @@ def join_team(event):
                 team_user.userID for team_user in team_users
                 if team_user.userID != user_id
             ]
-            opponent_team = get_or_create_team(user_ids)
-            GameModel.set_team(game_id, opponent_team.id,
-                               f'team{opponent_team_key}ID')
+            if len(user_ids):
+                opponent_team = get_or_create_team(user_ids)
+                GameModel.set_team(game_id, opponent_team.id,
+                                   f'team{opponent_team_key}ID')
+            else:
+                GameModel.set_team(game_id, None, f'team{opponent_team_key}ID')
 
     return vars(GameModel.set_status(game_id, GameStatus.WAITING))

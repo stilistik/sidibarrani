@@ -27,7 +27,6 @@ class GameMode(str, Enum):
 class Game():
     def __init__(self, **kwargs) -> None:
         self.id: str = kwargs['id']
-        self.nameLowerCase: str = self.name.lower()
         self.status: GameStatus = GameStatus(kwargs['status'])
         self.mode: GameMode = GameMode(kwargs['mode'])
         self.private: bool = kwargs['private']
@@ -111,9 +110,10 @@ class GameModel:
     @staticmethod
     def set_team(game_id: str, team_id: str, key: str) -> Game:
         date_now = get_iso_date_string()
+        print(team_id, key)
         response = game_table.update_item(Key={'id': game_id},
                                           AttributeUpdates={
-                                              [key]: {
+                                              key: {
                                                   'Value': team_id
                                               },
                                               'updatedAt': {

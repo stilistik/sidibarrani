@@ -13,7 +13,8 @@ export default defineComponent({
     Button,
   },
   props: {
-    teamID: String,
+    gameID: String,
+    teamKey: String,
     color: String,
   },
   setup(props) {
@@ -27,7 +28,8 @@ export default defineComponent({
 
       joinTeamMutation.mutate(
         {
-          teamID: props.teamID,
+          gameID: props.gameID,
+          teamKey: props.teamKey,
         },
         {
           onSuccess: () => {

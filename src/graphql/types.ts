@@ -1,3 +1,5 @@
+import { Color } from "../utils/ColorUtils";
+
 export interface Game {
   id: string;
   index: number;
@@ -8,7 +10,10 @@ export interface Game {
   activeRound: Round;
   status: GameStatus;
   Rounds: { items: Round[] };
-  Teams: { items: Team[] };
+  TeamA: Team;
+  TeamB: Team;
+  teamAColor: Color;
+  teamBColor: Color;
 }
 
 export enum GameMode {
@@ -19,9 +24,6 @@ export interface Round {}
 
 export interface Team {
   id: string;
-  name: string;
-  gameID: string;
-  color: string;
   TeamUsers: {
     items: TeamUser[];
   };

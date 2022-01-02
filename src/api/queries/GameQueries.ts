@@ -22,14 +22,8 @@ const listGames = /* GraphQL */ `
         winCondition
         createdAt
         updatedAt
-        Teams {
-          nextToken
-          items {
-            id
-            name
-            color
-          }
-        }
+        teamAColor
+        teamBColor
         Rounds {
           nextToken
         }

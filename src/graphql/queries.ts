@@ -33,9 +33,6 @@ export const getTeam = /* GraphQL */ `
   query GetTeam($id: ID!) {
     getTeam(id: $id) {
       id
-      gameID
-      name
-      color
       createdAt
       updatedAt
       TeamUsers {
@@ -60,9 +57,6 @@ export const listTeams = /* GraphQL */ `
     listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        gameID
-        name
-        color
         createdAt
         updatedAt
         TeamUsers {
@@ -276,9 +270,6 @@ export const getStack = /* GraphQL */ `
         updatedAt
         team {
           id
-          gameID
-          name
-          color
           createdAt
           updatedAt
         }
@@ -459,19 +450,28 @@ export const getGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      teamAID
+      teamBID
+      teamAColor
+      teamBColor
       result
       createdAt
       updatedAt
-      Teams {
-        items {
-          id
-          gameID
-          name
-          color
-          createdAt
-          updatedAt
+      TeamA {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
         }
-        nextToken
+      }
+      TeamB {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
       }
       ActiveRound {
         id
@@ -536,11 +536,22 @@ export const listGames = /* GraphQL */ `
         winCondition
         activeRoundID
         status
+        teamAID
+        teamBID
+        teamAColor
+        teamBColor
         result
         createdAt
         updatedAt
-        Teams {
-          nextToken
+        TeamA {
+          id
+          createdAt
+          updatedAt
+        }
+        TeamB {
+          id
+          createdAt
+          updatedAt
         }
         ActiveRound {
           id

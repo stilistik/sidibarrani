@@ -1,5 +1,5 @@
 import os
-from uuid import uuid4 as uuid, uuid5
+from uuid import UUID, uuid4, uuid5, NAMESPACE_DNS
 import boto3
 from boto3.dynamodb.conditions import Key
 from utils.utils import get_iso_date_string, get_random_name, clear_table
@@ -10,7 +10,7 @@ ddb = boto3.resource('dynamodb')
 team_table_name = os.environ.get('TEAMTABLE')
 team_table = ddb.Table(team_table_name)
 
-uuid_namespace = 'eeade8cc-2c08-4df8-92f7-664a29f52375'
+uuid_namespace = UUID('eeade8cc-2c08-4df8-92f7-664a29f52375')
 
 
 class Team():
@@ -26,7 +26,7 @@ class TeamModel:
         return str(uuid5(uuid_namespace, ''.join(user_ids)))
 
     @staticmethod
-    def create(id: str = str(uuid())) -> Team:
+    def create(id: str = str(uuid4())) -> Team:
         date_now = get_iso_date_string()
         team = Team(
             id=id,
@@ -41,7 +41,11 @@ class TeamModel:
         response = team_table.get_item(Key={
             'id': team_id,
         })
-        return Team(**response['Item'])
+        item = response.get('Item', None)
+        if item:
+            return Team(**item)
+        else:
+            return None
 
     @staticmethod
     def find_by_game(game_id: str) -> List[Team]:

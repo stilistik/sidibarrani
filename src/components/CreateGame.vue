@@ -31,8 +31,6 @@ export default defineComponent({
     const qclient = useQueryClient();
 
     const state = reactive({
-      team1name: "",
-      team2name: "",
       team1color: "red",
       team2color: "blue",
       private: false,

@@ -51,8 +51,6 @@ export const gameFragment = /* GraphQL */ `
           }
           team {
             id
-            name
-            color
           }
         }
         actions(sortDirection: ASC) {
@@ -69,25 +67,32 @@ export const gameFragment = /* GraphQL */ `
         }
       }
     }
-    Teams {
-      items {
-        id
-        gameID
-        name
-        color
-        createdAt
-        updatedAt
-        TeamUsers {
-          items {
+    teamAColor
+    TeamA {
+      id
+      TeamUsers {
+        items {
+          id
+          userID
+          user {
             id
-            user {
-              id
-              username
-            }
+            username
           }
         }
       }
-      nextToken
+    }
+    teamBColor
+    TeamB {
+      id
+      TeamUsers {
+        items {
+          id
+          user {
+            id
+            username
+          }
+        }
+      }
     }
     Rounds {
       items {

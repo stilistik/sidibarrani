@@ -7,14 +7,14 @@
     <div class="w-full rounded-2xl mt-10 bg-gray-800">
       <div class="relative text-white w-full overflow-hidden rounded-t-2xl">
         <SplitBackground
-          :color1="team1?.color"
-          :color2="team2?.color"
+          :color1="game.teamAColor"
+          :color2="game.teamBColor"
           :size="100"
           :class="'text-5xl'"
         />
         <div class="w-full flex relative items-start justify-between z-10">
-          <Team :team="team1" />
-          <Team :team="team2" />
+          <Team :game="game" :teamKey="'A'" />
+          <Team :game="game" :teamKey="'B'" />
         </div>
       </div>
       <GameSettings class="w-full p-5 text-white" />
@@ -41,7 +41,12 @@ import StartGame from "../components/StartGame.vue";
 import CopyJoinLink from "../components/CopyJoinLink.vue";
 import SplitBackground from "../components/SplitBackground.vue";
 import GameSettings from "../components/GameSettings.vue";
-import { useLeaveGameMutation, useGameQuery, useCurrentGame } from "../api";
+import {
+  useLeaveGameMutation,
+  useGameQuery,
+  useCurrentGame,
+  useUpdateGameMutation,
+} from "../api";
 import router from "../router";
 import { useQueryClient } from "vue-query";
 import { Message } from "../utils/Message";
@@ -62,6 +67,7 @@ export default defineComponent({
   },
   setup() {
     const leaveGameMutation = useLeaveGameMutation();
+    const updateGameMutation = useUpdateGameMutation();
     const qclient = useQueryClient();
     const game = useCurrentGame();
 
@@ -86,17 +92,7 @@ export default defineComponent({
       }
     });
 
-    const team1 = computed(() => {
-      return game.value?.Teams?.items[0];
-    });
-
-    const team2 = computed(() => {
-      return game.value?.Teams?.items[1];
-    });
-
     return reactive({
-      team1,
-      team2,
       game,
       leaveGame,
     });

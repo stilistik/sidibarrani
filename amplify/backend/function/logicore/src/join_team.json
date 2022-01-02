@@ -2,7 +2,8 @@
   "typeName": "Mutation",
   "fieldName": "joinTeam",
   "arguments": {
-    "teamID": "c8d77080-031f-4915-a2d9-c4732b6607c5"
+    "gameID": "f468e185-47b6-44c5-a15a-5e2f8649a9b8",
+    "teamKey": "A"
   },
   "identity": {
     "claims": {

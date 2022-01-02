@@ -12,19 +12,28 @@ export const onUpdateGameState = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      teamAID
+      teamBID
+      teamAColor
+      teamBColor
       result
       createdAt
       updatedAt
-      Teams {
-        items {
-          id
-          gameID
-          name
-          color
-          createdAt
-          updatedAt
+      TeamA {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
         }
-        nextToken
+      }
+      TeamB {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
       }
       ActiveRound {
         id
@@ -108,9 +117,6 @@ export const onCreateTeam = /* GraphQL */ `
   subscription OnCreateTeam {
     onCreateTeam {
       id
-      gameID
-      name
-      color
       createdAt
       updatedAt
       TeamUsers {
@@ -130,9 +136,6 @@ export const onUpdateTeam = /* GraphQL */ `
   subscription OnUpdateTeam {
     onUpdateTeam {
       id
-      gameID
-      name
-      color
       createdAt
       updatedAt
       TeamUsers {
@@ -152,9 +155,6 @@ export const onDeleteTeam = /* GraphQL */ `
   subscription OnDeleteTeam {
     onDeleteTeam {
       id
-      gameID
-      name
-      color
       createdAt
       updatedAt
       TeamUsers {
@@ -455,9 +455,6 @@ export const onCreateStack = /* GraphQL */ `
         updatedAt
         team {
           id
-          gameID
-          name
-          color
           createdAt
           updatedAt
         }
@@ -530,9 +527,6 @@ export const onUpdateStack = /* GraphQL */ `
         updatedAt
         team {
           id
-          gameID
-          name
-          color
           createdAt
           updatedAt
         }
@@ -605,9 +599,6 @@ export const onDeleteStack = /* GraphQL */ `
         updatedAt
         team {
           id
-          gameID
-          name
-          color
           createdAt
           updatedAt
         }
@@ -852,19 +843,28 @@ export const onCreateGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      teamAID
+      teamBID
+      teamAColor
+      teamBColor
       result
       createdAt
       updatedAt
-      Teams {
-        items {
-          id
-          gameID
-          name
-          color
-          createdAt
-          updatedAt
+      TeamA {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
         }
-        nextToken
+      }
+      TeamB {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
       }
       ActiveRound {
         id
@@ -924,19 +924,28 @@ export const onUpdateGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      teamAID
+      teamBID
+      teamAColor
+      teamBColor
       result
       createdAt
       updatedAt
-      Teams {
-        items {
-          id
-          gameID
-          name
-          color
-          createdAt
-          updatedAt
+      TeamA {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
         }
-        nextToken
+      }
+      TeamB {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
       }
       ActiveRound {
         id
@@ -996,19 +1005,28 @@ export const onDeleteGame = /* GraphQL */ `
       winCondition
       activeRoundID
       status
+      teamAID
+      teamBID
+      teamAColor
+      teamBColor
       result
       createdAt
       updatedAt
-      Teams {
-        items {
-          id
-          gameID
-          name
-          color
-          createdAt
-          updatedAt
+      TeamA {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
         }
-        nextToken
+      }
+      TeamB {
+        id
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
       }
       ActiveRound {
         id
@@ -1134,9 +1152,6 @@ export const onCreateTeamUser = /* GraphQL */ `
       updatedAt
       team {
         id
-        gameID
-        name
-        color
         createdAt
         updatedAt
         TeamUsers {
@@ -1167,9 +1182,6 @@ export const onUpdateTeamUser = /* GraphQL */ `
       updatedAt
       team {
         id
-        gameID
-        name
-        color
         createdAt
         updatedAt
         TeamUsers {
@@ -1200,9 +1212,6 @@ export const onDeleteTeamUser = /* GraphQL */ `
       updatedAt
       team {
         id
-        gameID
-        name
-        color
         createdAt
         updatedAt
         TeamUsers {

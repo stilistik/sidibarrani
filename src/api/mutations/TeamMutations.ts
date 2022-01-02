@@ -4,8 +4,8 @@ import { updateTeam } from "../../graphql/mutations";
 import { gameFragment } from "../fragments/GameFragment";
 
 const joinTeam = /* GraphQL */ `
-  mutation JoinTeam($teamID: String!) {
-    joinTeam(teamID: $teamID) {
+  mutation JoinTeam($gameID: String!, $teamKey: String!) {
+    joinTeam(gameID: $gameID, teamKey: $teamKey) {
       ...GameFragment
     }
   }
