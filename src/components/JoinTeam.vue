@@ -7,6 +7,7 @@ import { defineComponent, reactive, ref } from "vue";
 import { useJoinTeamMutation } from "../api";
 import { useQueryClient } from "vue-query";
 import Button from "./Button.vue";
+import { Message } from "../utils/Message";
 
 export default defineComponent({
   components: {
@@ -34,6 +35,9 @@ export default defineComponent({
         {
           onSuccess: () => {
             qclient.invalidateQueries("team");
+          },
+          onError: ({ errors }: any) => {
+            Message.error(errors[0].message);
           },
           onSettled: () => {
             isLoading.value = false;

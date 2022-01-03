@@ -168,6 +168,7 @@ def play_card(event):
     round = RoundModel.find_by_id(round_id)
     game = GameModel.find_by_id(round.gameID)
 
+    key = None
     try:
         key = RoundModel.lock(round_id)
         stack = StackModel.find_by_id(round.activeStackID)

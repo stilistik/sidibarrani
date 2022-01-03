@@ -66,8 +66,8 @@
       :style="{ height: '100%', width: '100%' }"
     >
       <SplitBackground
-        :color1="color1"
-        :color2="color2"
+        :color1="game?.TeamA ? game?.teamAColor : 'gray'"
+        :color2="game?.TeamB ? game?.teamBColor : 'gray'"
         :size="50"
         :hovered="hovered"
         :animationDelay="index * 100"
@@ -84,8 +84,11 @@
             font-thin
           "
         >
-          <span class="font-black">{{ team1name }}</span>
-          <span class="font-black">{{ team2name }}</span>
+          <span v-if="teamA?.name" class="font-black">{{ teamA?.name }}</span>
+          <Icon v-else icon="question" />
+
+          <span v-if="teamB?.name" class="font-black">{{ teamB?.name }}</span>
+          <Icon v-else icon="question" />
         </div>
       </div>
     </div>
@@ -93,7 +96,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive, ref } from "vue";
+import { computed, defineComponent, PropType, reactive, ref } from "vue";
 import { Game } from "../graphql/types";
 import router from "../router";
 import Button from "./Button.vue";
@@ -117,19 +120,15 @@ export default defineComponent({
 
     const hovered = ref(false);
 
-    const color1 = props.game.Teams.items[0].color;
-    const color2 = props.game.Teams.items[1].color;
-    const team1name = props.game.Teams.items[0].name;
-    const team2name = props.game.Teams.items[1].name;
+    const teamA = computed(() => props.game.TeamA);
+    const teamB = computed(() => props.game.TeamB);
 
     return reactive({
       join,
       hovered,
       index: props.index,
-      color1,
-      color2,
-      team1name,
-      team2name,
+      teamA: teamA.value,
+      teamB: teamB.value,
     });
   },
 });

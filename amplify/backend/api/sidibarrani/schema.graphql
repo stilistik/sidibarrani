@@ -53,6 +53,7 @@ type SequenceNumber @model @auth(rules: [{ allow: private }]) {
 
 type Team @model @auth(rules: [{ allow: private }]) {
   id: ID!
+  name: String!
   TeamUsers: [TeamUser] @connection(keyName: "byTeam", fields: ["id"])
 }
 

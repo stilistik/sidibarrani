@@ -33,6 +33,7 @@ export const getTeam = /* GraphQL */ `
   query GetTeam($id: ID!) {
     getTeam(id: $id) {
       id
+      name
       createdAt
       updatedAt
       TeamUsers {
@@ -57,6 +58,7 @@ export const listTeams = /* GraphQL */ `
     listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -270,6 +272,7 @@ export const getStack = /* GraphQL */ `
         updatedAt
         team {
           id
+          name
           createdAt
           updatedAt
         }
@@ -459,6 +462,7 @@ export const getGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -467,6 +471,7 @@ export const getGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -545,11 +550,13 @@ export const listGames = /* GraphQL */ `
         updatedAt
         TeamA {
           id
+          name
           createdAt
           updatedAt
         }
         TeamB {
           id
+          name
           createdAt
           updatedAt
         }

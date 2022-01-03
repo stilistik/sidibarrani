@@ -16,6 +16,7 @@ uuid_namespace = UUID('eeade8cc-2c08-4df8-92f7-664a29f52375')
 class Team():
     def __init__(self, **kwargs) -> None:
         self.id: str = kwargs['id']
+        self.name: str = kwargs['id']
         self.createdAt: str = kwargs['createdAt']
         self.updatedAt: str = kwargs['updatedAt']
 
@@ -26,10 +27,11 @@ class TeamModel:
         return str(uuid5(uuid_namespace, ''.join(user_ids)))
 
     @staticmethod
-    def create(id: str = str(uuid4())) -> Team:
+    def create(id: str = str(uuid4()), name: str = get_random_name()) -> Team:
         date_now = get_iso_date_string()
         team = Team(
             id=id,
+            name=name,
             createdAt=date_now,
             updatedAt=date_now,
         )
@@ -53,6 +55,21 @@ class TeamModel:
         team_a = TeamModel.find_by_id(game.teamAID)
         team_b = TeamModel.find_by_id(game.teamBID)
         return [team_a, team_b]
+
+    @staticmethod
+    def set_name(team_id: str, name: str) -> Team:
+        date_now = get_iso_date_string()
+        response = team_table.update_item(Key={'id': team_id},
+                                          AttributeUpdates={
+                                              'name': {
+                                                  'Value': name
+                                              },
+                                              'updatedAt': {
+                                                  'Value': date_now
+                                              }
+                                          },
+                                          ReturnValues="ALL_NEW")
+        return Team(**response['Attributes'])
 
     @staticmethod
     def clear_data():

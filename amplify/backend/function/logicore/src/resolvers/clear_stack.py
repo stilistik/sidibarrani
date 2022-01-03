@@ -8,6 +8,7 @@ def clear_stack(event):
     round_id = event['arguments'].get('roundID')
     round = RoundModel.find_by_id(round_id)
 
+    key = None
     try:
         key = RoundModel.lock(round_id)
         stack = StackModel.find_by_id(round.activeStackID)

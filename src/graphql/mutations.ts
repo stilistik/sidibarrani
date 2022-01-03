@@ -21,6 +21,7 @@ export const createNewGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -29,6 +30,7 @@ export const createNewGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -102,6 +104,7 @@ export const joinTeam = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -110,6 +113,7 @@ export const joinTeam = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -183,6 +187,7 @@ export const leaveGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -191,6 +196,7 @@ export const leaveGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -264,6 +270,7 @@ export const startGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -272,6 +279,7 @@ export const startGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -345,6 +353,7 @@ export const playCard = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -353,6 +362,7 @@ export const playCard = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -426,6 +436,7 @@ export const clearStack = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -434,6 +445,7 @@ export const clearStack = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -507,6 +519,7 @@ export const newRound = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -515,6 +528,7 @@ export const newRound = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -588,6 +602,7 @@ export const endRound = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -596,6 +611,7 @@ export const endRound = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -669,6 +685,7 @@ export const placeBet = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -677,6 +694,7 @@ export const placeBet = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -750,6 +768,7 @@ export const skipBet = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -758,6 +777,7 @@ export const skipBet = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -863,6 +883,7 @@ export const createTeam = /* GraphQL */ `
   ) {
     createTeam(input: $input, condition: $condition) {
       id
+      name
       createdAt
       updatedAt
       TeamUsers {
@@ -885,6 +906,7 @@ export const updateTeam = /* GraphQL */ `
   ) {
     updateTeam(input: $input, condition: $condition) {
       id
+      name
       createdAt
       updatedAt
       TeamUsers {
@@ -907,6 +929,7 @@ export const deleteTeam = /* GraphQL */ `
   ) {
     deleteTeam(input: $input, condition: $condition) {
       id
+      name
       createdAt
       updatedAt
       TeamUsers {
@@ -1228,6 +1251,7 @@ export const createStack = /* GraphQL */ `
         updatedAt
         team {
           id
+          name
           createdAt
           updatedAt
         }
@@ -1303,6 +1327,7 @@ export const updateStack = /* GraphQL */ `
         updatedAt
         team {
           id
+          name
           createdAt
           updatedAt
         }
@@ -1378,6 +1403,7 @@ export const deleteStack = /* GraphQL */ `
         updatedAt
         team {
           id
+          name
           createdAt
           updatedAt
         }
@@ -1643,6 +1669,7 @@ export const createGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1651,6 +1678,7 @@ export const createGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1727,6 +1755,7 @@ export const updateGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1735,6 +1764,7 @@ export const updateGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1811,6 +1841,7 @@ export const deleteGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1819,6 +1850,7 @@ export const deleteGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1961,6 +1993,7 @@ export const createTeamUser = /* GraphQL */ `
       updatedAt
       team {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1994,6 +2027,7 @@ export const updateTeamUser = /* GraphQL */ `
       updatedAt
       team {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -2027,6 +2061,7 @@ export const deleteTeamUser = /* GraphQL */ `
       updatedAt
       team {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {

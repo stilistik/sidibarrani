@@ -1,4 +1,5 @@
 export type Color =
+  | "gray"
   | "red"
   | "orange"
   | "yellow"
@@ -34,6 +35,15 @@ export const colors: Color[] = [
 ];
 
 export const colorClasses: Record<Color, ColorClasses> = {
+  gray: {
+    shadow: "shadow-gray",
+    border: "border-gray-400",
+    text: "text-gray-400",
+    textHover: "text-gray-400",
+    bg: "bg-gray-700",
+    bgLight: "bg-gray-600",
+    bgHover: "hover:bg-gray-600",
+  },
   red: {
     shadow: "shadow-red",
     border: "border-red-400",

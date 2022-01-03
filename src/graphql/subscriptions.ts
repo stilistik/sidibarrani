@@ -21,6 +21,7 @@ export const onUpdateGameState = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -29,6 +30,7 @@ export const onUpdateGameState = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -117,6 +119,7 @@ export const onCreateTeam = /* GraphQL */ `
   subscription OnCreateTeam {
     onCreateTeam {
       id
+      name
       createdAt
       updatedAt
       TeamUsers {
@@ -136,6 +139,7 @@ export const onUpdateTeam = /* GraphQL */ `
   subscription OnUpdateTeam {
     onUpdateTeam {
       id
+      name
       createdAt
       updatedAt
       TeamUsers {
@@ -155,6 +159,7 @@ export const onDeleteTeam = /* GraphQL */ `
   subscription OnDeleteTeam {
     onDeleteTeam {
       id
+      name
       createdAt
       updatedAt
       TeamUsers {
@@ -455,6 +460,7 @@ export const onCreateStack = /* GraphQL */ `
         updatedAt
         team {
           id
+          name
           createdAt
           updatedAt
         }
@@ -527,6 +533,7 @@ export const onUpdateStack = /* GraphQL */ `
         updatedAt
         team {
           id
+          name
           createdAt
           updatedAt
         }
@@ -599,6 +606,7 @@ export const onDeleteStack = /* GraphQL */ `
         updatedAt
         team {
           id
+          name
           createdAt
           updatedAt
         }
@@ -852,6 +860,7 @@ export const onCreateGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -860,6 +869,7 @@ export const onCreateGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -933,6 +943,7 @@ export const onUpdateGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -941,6 +952,7 @@ export const onUpdateGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1014,6 +1026,7 @@ export const onDeleteGame = /* GraphQL */ `
       updatedAt
       TeamA {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1022,6 +1035,7 @@ export const onDeleteGame = /* GraphQL */ `
       }
       TeamB {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1152,6 +1166,7 @@ export const onCreateTeamUser = /* GraphQL */ `
       updatedAt
       team {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1182,6 +1197,7 @@ export const onUpdateTeamUser = /* GraphQL */ `
       updatedAt
       team {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {
@@ -1212,6 +1228,7 @@ export const onDeleteTeamUser = /* GraphQL */ `
       updatedAt
       team {
         id
+        name
         createdAt
         updatedAt
         TeamUsers {

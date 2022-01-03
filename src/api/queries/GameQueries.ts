@@ -24,6 +24,14 @@ const listGames = /* GraphQL */ `
         updatedAt
         teamAColor
         teamBColor
+        TeamA {
+          id
+          name
+        }
+        TeamB {
+          id
+          name
+        }
         Rounds {
           nextToken
         }

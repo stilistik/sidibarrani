@@ -7,8 +7,8 @@
     <div class="w-full rounded-2xl mt-10 bg-gray-800">
       <div class="relative text-white w-full overflow-hidden rounded-t-2xl">
         <SplitBackground
-          :color1="game.teamAColor"
-          :color2="game.teamBColor"
+          :color1="game.TeamA ? game.teamAColor : 'gray'"
+          :color2="game.TeamB ? game.teamBColor : 'gray'"
           :size="100"
           :class="'text-5xl'"
         />
@@ -91,6 +91,8 @@ export default defineComponent({
         });
       }
     });
+
+    console.log(game);
 
     return reactive({
       game,

@@ -5,10 +5,14 @@
         <ColorPicker
           :modelValue="$props.color"
           @update:modelValue="handleColorChange"
+          :style="{ order: teamKey === 'A' ? 0 : 1 }"
         />
+        <p :style="{ order: teamKey === 'A' ? 1 : 0 }">
+          Team {{ $props.teamKey }}
+        </p>
       </div>
       <User
-        v-for="item in teamUsers"
+        v-for="item in team?.TeamUsers?.items"
         :key="item.id"
         :id="item.user.id"
         :username="item.user.username"
@@ -44,11 +48,9 @@ export default defineComponent({
   setup(props) {
     const updateGameMutation = useUpdateGameMutation();
 
-    const teamUsers = computed(() => {
-      if (props.teamKey === "A")
-        return props.game?.TeamA?.TeamUsers?.items || [];
-      else if (props.teamKey === "B")
-        return props.game?.TeamB?.TeamUsers?.items || [];
+    const team = computed(() => {
+      if (props.teamKey === "A") return props.game?.TeamA;
+      else if (props.teamKey === "B") return props.game?.TeamB;
     });
 
     const color = computed(() => {
@@ -71,7 +73,7 @@ export default defineComponent({
     }
 
     return reactive({
-      teamUsers,
+      team,
       getClass,
       handleColorChange,
     });

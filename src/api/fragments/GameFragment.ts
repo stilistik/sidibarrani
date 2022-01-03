@@ -70,6 +70,7 @@ export const gameFragment = /* GraphQL */ `
     teamAColor
     TeamA {
       id
+      name
       TeamUsers {
         items {
           id
@@ -84,6 +85,7 @@ export const gameFragment = /* GraphQL */ `
     teamBColor
     TeamB {
       id
+      name
       TeamUsers {
         items {
           id

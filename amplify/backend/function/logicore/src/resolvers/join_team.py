@@ -1,6 +1,7 @@
 from models.game import GameModel, GameStatus
 from models.team import TeamModel, Team
 from models.team_user import TeamUserModel
+from models.user import UserModel
 from typing import List
 
 
@@ -11,8 +12,12 @@ def get_or_create_team(user_ids: List[str]) -> Team:
         return team
     else:
         team = TeamModel.create(team_id)
+        user_names = []
         for user_id in user_ids:
+            user = UserModel.find_by_id(user_id)
+            user_names.append(user.username)
             TeamUserModel.create(team.id, user_id)
+        TeamModel.set_name(team_id, ', '.join(user_names))
         return team
 
 
@@ -38,6 +43,11 @@ def join_team(event):
     if team_id:
         # game has a team registered
         team_users = TeamUserModel.find_by_team(team_id)
+        found_in_team = next(team_user for team_user in team_users
+                             if team_user.userID == user_id)
+        if found_in_team:
+            raise Exception("You have already joined this team")
+
         for team_user in team_users:
             user_ids.append(team_user.userID)
 

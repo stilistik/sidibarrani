@@ -28,10 +28,10 @@
     :interCardDistance="30"
   />
   <Hand
-    v-if="Boolean(activeRound && opponentId)"
+    v-if="Boolean(activeRound && teamData)"
     :round="activeRound"
     :handType="'NORMAL'"
-    :userId="opponentId"
+    :userId="teamData.opponentId"
     :interCardDistance="100"
     :cardWidth="140"
     :position="[window.innerWidth / 2, 100]"
@@ -40,10 +40,10 @@
     :zIndex="20"
   />
   <Hand
-    v-if="Boolean(activeRound && opponentId)"
+    v-if="Boolean(activeRound && teamData)"
     :round="activeRound"
     :handType="'HIDDEN'"
-    :userId="opponentId"
+    :userId="teamData.opponentId"
     :interCardDistance="165"
     :cardWidth="140"
     :position="[window.innerWidth / 2, 250]"
@@ -51,10 +51,10 @@
     :zIndex="0"
   />
   <Hand
-    v-if="Boolean(activeRound && opponentId)"
+    v-if="Boolean(activeRound && teamData)"
     :round="activeRound"
     :handType="'OPEN'"
-    :userId="opponentId"
+    :userId="teamData.opponentId"
     :interCardDistance="165"
     :cardWidth="140"
     :position="[window.innerWidth / 2, 220]"
@@ -97,15 +97,15 @@
     :zIndex="20"
   />
   <PlayerDeck
-    v-if="Boolean(userTeam)"
-    :color="userTeam.color"
-    :name="userTeam.name"
+    v-if="Boolean(teamData)"
+    :color="teamData.userTeamColor"
+    :name="teamData.userTeam.name"
     :location="'bottom'"
   />
   <PlayerDeck
-    v-if="Boolean(opponentTeam)"
-    :color="opponentTeam.color"
-    :name="opponentTeam.name"
+    v-if="Boolean(teamData)"
+    :color="teamData.opponentTeamColor"
+    :name="teamData.opponentTeam.name"
     :location="'top'"
   />
 </template>
@@ -135,6 +135,7 @@ import ModeIcon from "./ModeIcon.vue";
 import PlayerDeck from "./PlayerDeck.vue";
 import { useCurrentUser } from "../../utils/Auth";
 import { useCardManager } from "./CardManager.vue";
+import { resolveTeams } from "../../utils/GameUtils";
 
 export default defineComponent({
   name: "GamePage",
@@ -197,35 +198,14 @@ export default defineComponent({
     const game = useCurrentGame();
     const userId = computed(() => user?.value?.id);
 
-    const userTeam = computed(() =>
-      game.value?.Teams.items.find((team: any) =>
-        team.TeamUsers.items.some(
-          (teamUser: any) => teamUser.user.id === userId.value
-        )
-      )
-    );
-
-    const opponentTeam = computed(() =>
-      game.value?.Teams.items.find(
-        (team: any) =>
-          !team.TeamUsers.items.some(
-            (teamUser: any) => teamUser.user.id === userId.value
-          )
-      )
-    );
-
-    const opponentId = computed(
-      () => opponentTeam.value.TeamUsers.items[0].user.id
-    );
+    const teamData = computed(() => resolveTeams(game.value, userId.value));
 
     return reactive({
       activeRound,
       activeStack,
       userId,
-      opponentId,
       window,
-      opponentTeam,
-      userTeam,
+      teamData,
     });
   },
 });
