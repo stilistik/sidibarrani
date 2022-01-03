@@ -92,8 +92,6 @@ export default defineComponent({
       }
     });
 
-    console.log(game);
-
     return reactive({
       game,
       leaveGame,

@@ -2,11 +2,11 @@
   "typeName": "Mutation",
   "fieldName": "leaveGame",
   "arguments": {
-    "gameID": "c7e34f5a-d784-4768-8743-344977c487a8"
+    "gameID": "b30bc90d-f5ca-46f8-a6d6-226a58b9f4ec"
   },
   "identity": {
     "claims": {
-      "sub": "ba605d00-045a-453d-a274-2e768916fd58"
+      "sub": "c9dc5e16-62d0-4385-b7f0-52b6d7103e91"
     }
   }
 }

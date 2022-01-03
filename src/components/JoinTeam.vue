@@ -34,7 +34,8 @@ export default defineComponent({
         },
         {
           onSuccess: () => {
-            qclient.invalidateQueries("team");
+            qclient.invalidateQueries("getGame");
+            qclient.refetchQueries("listGames");
           },
           onError: ({ errors }: any) => {
             Message.error(errors[0].message);
