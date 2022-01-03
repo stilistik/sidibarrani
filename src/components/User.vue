@@ -36,7 +36,7 @@ export default defineComponent({
     const color = computed(() => {
       const idx = props.username.charCodeAt(0) % colors.length;
       const color = colors[idx];
-      return colorClasses[color].bg;
+      return colorClasses[color]?.bg;
     });
     return { firstLetter, color };
   },

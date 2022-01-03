@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="container"
     class="fixed bottom-10 left-10 rounded-2xl bg-gray-800 overflow-auto p-3"
     style="max-height: 300px; max-width: 400px"
   >
@@ -29,7 +30,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
+import {
+  defineComponent,
+  onMounted,
+  onUpdated,
+  PropType,
+  ref,
+  toRef,
+  watch,
+} from "vue";
 import Input from "./Input.vue";
 import Button from "./Button.vue";
 import { Message } from "../graphql/types";
@@ -49,6 +58,14 @@ export default defineComponent({
     const createMessageMutation = useCreateMessageMutatio();
     const text = ref("");
     const focused = ref(false);
+    const container = ref(null);
+
+    function scrollDown() {
+      container.value.scrollTop = container.value.scrollHeight + 50;
+    }
+
+    onMounted(scrollDown);
+    onUpdated(scrollDown);
 
     function handleFocus() {
       focused.value = true;
@@ -92,6 +109,7 @@ export default defineComponent({
 
     return {
       text,
+      container,
       handleKeyDown,
       handleClick,
       handleFocus,
