@@ -523,6 +523,17 @@ export const getGame = /* GraphQL */ `
         }
         nextToken
       }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -576,6 +587,59 @@ export const listGames = /* GraphQL */ `
         }
         Rounds {
           nextToken
+        }
+        messages {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getMessage = /* GraphQL */ `
+  query GetMessage($id: ID!) {
+    getMessage(id: $id) {
+      id
+      gameID
+      text
+      userID
+      createdAt
+      updatedAt
+      User {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listMessages = /* GraphQL */ `
+  query ListMessages(
+    $filter: ModelMessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        gameID
+        text
+        userID
+        createdAt
+        updatedAt
+        User {
+          id
+          email
+          username
+          lastOnline
+          createdAt
+          updatedAt
         }
       }
       nextToken

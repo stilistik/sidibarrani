@@ -82,6 +82,17 @@ export const onUpdateGameState = /* GraphQL */ `
         }
         nextToken
       }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -921,6 +932,17 @@ export const onCreateGame = /* GraphQL */ `
         }
         nextToken
       }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -999,6 +1021,17 @@ export const onUpdateGame = /* GraphQL */ `
           mode
           betPoints
           result
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
           createdAt
           updatedAt
         }
@@ -1086,6 +1119,86 @@ export const onDeleteGame = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateMessage = /* GraphQL */ `
+  subscription OnCreateMessage {
+    onCreateMessage {
+      id
+      gameID
+      text
+      userID
+      createdAt
+      updatedAt
+      User {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateMessage = /* GraphQL */ `
+  subscription OnUpdateMessage {
+    onUpdateMessage {
+      id
+      gameID
+      text
+      userID
+      createdAt
+      updatedAt
+      User {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteMessage = /* GraphQL */ `
+  subscription OnDeleteMessage {
+    onDeleteMessage {
+      id
+      gameID
+      text
+      userID
+      createdAt
+      updatedAt
+      User {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
       }
     }
   }

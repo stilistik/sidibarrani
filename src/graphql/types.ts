@@ -14,10 +14,19 @@ export interface Game {
   TeamB: Team;
   teamAColor: Color;
   teamBColor: Color;
+  messages: { items: Message[] };
 }
 
 export enum GameMode {
   DUO = "DUO",
+}
+
+export interface Message {
+  id: string;
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+  user: User;
 }
 
 export interface Round {}

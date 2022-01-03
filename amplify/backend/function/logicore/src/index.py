@@ -1,6 +1,5 @@
-from resolvers.get_user_hand import get_user_hand
+from resolvers.create_message import create_message
 from resolvers.get_hand_cards import get_hand_cards
-
 from resolvers.place_bet import place_bet, skip_bet
 from resolvers.play_card import play_card
 from resolvers.start_game import start_game, new_round
@@ -24,9 +23,7 @@ resolvers = {
         'skipBet': skip_bet,
         'endRound': end_round,
         'clearData': clear_data,
-    },
-    'Query': {
-        'getUserHand': get_user_hand,
+        'createNewMessage': create_message
     },
     'Hand': {
         'cards': get_hand_cards,

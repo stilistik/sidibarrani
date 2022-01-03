@@ -135,6 +135,19 @@ type Game @model @auth(rules: [{ allow: private }]) {
   teamAColor: String
   teamBColor: String
   result: AWSJSON
+  messages: [Message] @connection(keyName: "byGame", fields: ["id"])
+}
+
+type Message
+  @model
+  @auth(rules: [{ allow: private }])
+  @key(name: "byGame", fields: ["gameID", "createdAt"]) {
+  id: ID!
+  gameID: ID!
+  text: String
+  userID: ID
+  User: User @connection(fields: ["userID"])
+  createdAt: AWSDateTime
 }
 
 type User @model @auth(rules: [{ allow: private }]) {
@@ -209,6 +222,10 @@ type Mutation {
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
 
+  createNewMessage(gameID: String!, text: String!): Game!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
+
   clearData: Boolean!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
@@ -226,6 +243,7 @@ type Subscription {
         "placeBet"
         "skipBet"
         "joinTeam"
+        "createNewMessage"
       ]
     )
 }

@@ -82,6 +82,17 @@ export const createNewGame = /* GraphQL */ `
         }
         nextToken
       }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -160,6 +171,17 @@ export const joinTeam = /* GraphQL */ `
           mode
           betPoints
           result
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
           createdAt
           updatedAt
         }
@@ -248,6 +270,17 @@ export const leaveGame = /* GraphQL */ `
         }
         nextToken
       }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -326,6 +359,17 @@ export const startGame = /* GraphQL */ `
           mode
           betPoints
           result
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
           createdAt
           updatedAt
         }
@@ -414,6 +458,17 @@ export const playCard = /* GraphQL */ `
         }
         nextToken
       }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -492,6 +547,17 @@ export const clearStack = /* GraphQL */ `
           mode
           betPoints
           result
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
           createdAt
           updatedAt
         }
@@ -580,6 +646,17 @@ export const newRound = /* GraphQL */ `
         }
         nextToken
       }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -658,6 +735,17 @@ export const endRound = /* GraphQL */ `
           mode
           betPoints
           result
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
           createdAt
           updatedAt
         }
@@ -746,6 +834,17 @@ export const placeBet = /* GraphQL */ `
         }
         nextToken
       }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -824,6 +923,111 @@ export const skipBet = /* GraphQL */ `
           mode
           betPoints
           result
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createNewMessage = /* GraphQL */ `
+  mutation CreateNewMessage($gameID: String!, $text: String!) {
+    createNewMessage(gameID: $gameID, text: $text) {
+      id
+      index
+      mode
+      private
+      winCondition
+      activeRoundID
+      status
+      teamAID
+      teamBID
+      teamAColor
+      teamBColor
+      result
+      createdAt
+      updatedAt
+      TeamA {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        stackCount
+        activeStackID
+        turnSequence
+        turn
+        mode
+        betPoints
+        result
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+        stacks {
+          nextToken
+        }
+        activeStack {
+          id
+          roundID
+          size
+          winnerID
+          createdAt
+          updatedAt
+        }
+      }
+      Rounds {
+        items {
+          id
+          gameID
+          status
+          stackCount
+          activeStackID
+          turnSequence
+          turn
+          mode
+          betPoints
+          result
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
           createdAt
           updatedAt
         }
@@ -1730,6 +1934,17 @@ export const createGame = /* GraphQL */ `
         }
         nextToken
       }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -1811,6 +2026,17 @@ export const updateGame = /* GraphQL */ `
           mode
           betPoints
           result
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
           createdAt
           updatedAt
         }
@@ -1901,6 +2127,95 @@ export const deleteGame = /* GraphQL */ `
           updatedAt
         }
         nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createMessage = /* GraphQL */ `
+  mutation CreateMessage(
+    $input: CreateMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    createMessage(input: $input, condition: $condition) {
+      id
+      gameID
+      text
+      userID
+      createdAt
+      updatedAt
+      User {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const updateMessage = /* GraphQL */ `
+  mutation UpdateMessage(
+    $input: UpdateMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    updateMessage(input: $input, condition: $condition) {
+      id
+      gameID
+      text
+      userID
+      createdAt
+      updatedAt
+      User {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const deleteMessage = /* GraphQL */ `
+  mutation DeleteMessage(
+    $input: DeleteMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    deleteMessage(input: $input, condition: $condition) {
+      id
+      gameID
+      text
+      userID
+      createdAt
+      updatedAt
+      User {
+        id
+        email
+        username
+        lastOnline
+        createdAt
+        updatedAt
+        teams {
+          nextToken
+        }
       }
     }
   }

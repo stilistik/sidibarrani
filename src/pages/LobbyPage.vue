@@ -26,6 +26,7 @@
     <div class="flex justify-center mt-20">
       <Button @click="leaveGame">Leave Game</Button>
     </div>
+    <Messages :messages="game?.messages?.items" :gameID="game?.id" />
   </PageContainer>
 </template>
 
@@ -50,6 +51,7 @@ import {
 import router from "../router";
 import { useQueryClient } from "vue-query";
 import { Message } from "../utils/Message";
+import Messages from "../components/Messages.vue";
 
 export default defineComponent({
   name: "LobbyPage",
@@ -64,6 +66,7 @@ export default defineComponent({
     Button,
     SplitBackground,
     GameSettings,
+    Messages,
   },
   setup() {
     const leaveGameMutation = useLeaveGameMutation();

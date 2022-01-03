@@ -106,5 +106,15 @@ export const gameFragment = /* GraphQL */ `
       }
       nextToken
     }
+    messages {
+      items {
+        id
+        text
+        User {
+          id
+          username
+        }
+      }
+    }
   }
 `;

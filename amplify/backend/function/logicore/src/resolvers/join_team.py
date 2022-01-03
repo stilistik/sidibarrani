@@ -43,8 +43,9 @@ def join_team(event):
     if team_id:
         # game has a team registered
         team_users = TeamUserModel.find_by_team(team_id)
-        found_in_team = next((True, team_user for team_user in team_users
-                             if team_user.userID == user_id), False)
+        found_in_team = next(
+            (True for team_user in team_users if team_user.userID == user_id),
+            False)
         if found_in_team:
             raise Exception("You have already joined this team")
 

@@ -23,19 +23,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-
-const colors: string[] = [
-  "bg-green-400",
-  "bg-red-400",
-  "bg-purple-400",
-  "bg-pink-400",
-  "bg-blue-400",
-  "bg-yellow-400",
-  "bg-indigo-400",
-  "bg-teal-400",
-  "bg-orange-400",
-  "bg-cyan-400",
-];
+import { colorClasses, colors } from "../utils/ColorUtils";
 
 export default defineComponent({
   name: "User",
@@ -47,7 +35,8 @@ export default defineComponent({
     const firstLetter = computed(() => props.username.charAt(0).toUpperCase());
     const color = computed(() => {
       const idx = props.username.charCodeAt(0) % colors.length;
-      return colors[idx];
+      const color = colors[idx];
+      return colorClasses[color].bg;
     });
     return { firstLetter, color };
   },
