@@ -33,8 +33,6 @@ export default defineComponent({
   },
   setup(props) {
     function getButtonStyle() {
-      console.log(props.size);
-
       if (props.size === "large") {
         return { width: "80px", height: "80px" };
       } else if (props.size === "medium") {

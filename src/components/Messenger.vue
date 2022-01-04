@@ -1,11 +1,24 @@
 <template>
-  <IconButton
-    v-if="minimized"
-    @click="minimized = false"
-    class="fixed bottom-10 left-10"
-  >
-    <Icon icon="comments" />
-  </IconButton>
+  <div v-if="minimized" class="fixed bottom-10 left-10">
+    <IconButton @click="minimized = false" class="">
+      <Icon icon="comments" />
+      <span
+        v-if="unreadMessages > 0"
+        class="
+          absolute
+          top-0
+          right-0
+          rounded-full
+          bg-primary
+          text-sm
+          font-black
+        "
+        style="width: 20px; height: 20px"
+      >
+        {{ unreadMessages }}
+      </span>
+    </IconButton>
+  </div>
   <div
     v-else
     class="fixed bottom-10 left-10 rounded-2xl bg-gray-800 p-3 flex flex-col"
@@ -76,7 +89,18 @@ export default defineComponent({
     const text = ref("");
     const focused = ref(false);
     const container = ref(null);
-    const minimized = ref(false);
+    const minimized = ref(true);
+    const unreadMessages = ref(0);
+    const messages = toRef(props, "messages");
+
+    watch(messages, (_, prevValue) => {
+      if (!prevValue) return;
+      if (minimized.value) unreadMessages.value++;
+    });
+
+    watch(minimized, (newValue) => {
+      if (!newValue) unreadMessages.value = 0;
+    });
 
     function scrollDown() {
       if (container.value)
@@ -130,6 +154,7 @@ export default defineComponent({
       text,
       container,
       minimized,
+      unreadMessages,
       handleKeyDown,
       handleClick,
       handleFocus,
