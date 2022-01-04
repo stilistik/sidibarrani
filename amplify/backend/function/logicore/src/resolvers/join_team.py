@@ -1,4 +1,4 @@
-from models.game import GameModel, GameStatus
+from models.game import GameModel, GameStatus, GameMode
 from models.team import TeamModel, Team
 from models.team_user import TeamUserModel
 from models.user import UserModel
@@ -43,6 +43,10 @@ def join_team(event):
     if team_id:
         # game has a team registered
         team_users = TeamUserModel.find_by_team(team_id)
+
+        if game.mode == GameMode.DUO and len(team_users) == 1:
+            raise Exception("Game mode DUO can only have one user per team")
+
         found_in_team = next(
             (True for team_user in team_users if team_user.userID == user_id),
             False)
