@@ -16,7 +16,7 @@ const listGames = /* GraphQL */ `
       items {
         id
         index
-        private
+        public
         status
         mode
         winCondition
@@ -50,7 +50,7 @@ export const useListGamesQuery = (
     key,
     async () => {
       const filter: any = {
-        private: { eq: false },
+        public: { eq: true },
         status: { eq: "WAITING" },
       };
       const { data } = (await API.graphql(

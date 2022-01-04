@@ -2,7 +2,7 @@ export const gameFragment = /* GraphQL */ `
   fragment GameFragment on Game {
     id
     index
-    private
+    public
     status
     mode
     winCondition

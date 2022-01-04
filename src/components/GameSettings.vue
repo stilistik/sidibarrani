@@ -1,10 +1,10 @@
 <template>
   <div class="flex gap-5">
     <Checkbox
-      :modelValue="game?.private"
-      @change="handleChangePrivate"
-      name="private"
-      label="Private"
+      :modelValue="game?.public"
+      @change="handleChangePublic"
+      name="public"
+      label="Public"
     />
     <Select
       :options="['DUO', 'QUATTRO']"
@@ -45,12 +45,12 @@ export default defineComponent({
     const updateGameMutation = useUpdateGameMutation();
     const gameRef = useCurrentGame();
 
-    function handleChangePrivate(e: any) {
-      const isPrivate = e.target.checked;
+    function handleChangePublic(e: any) {
+      const isPublic = e.target.checked;
       updateGameMutation.mutate({
         input: {
           id: gameRef.value?.id,
-          private: isPrivate,
+          public: isPublic,
         },
       });
     }
@@ -76,7 +76,7 @@ export default defineComponent({
 
     return reactive({
       game: gameRef,
-      handleChangePrivate,
+      handleChangePublic,
       handleSelectMode,
       handleWinConditionChange,
     });

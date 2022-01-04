@@ -33,7 +33,7 @@ export default defineComponent({
     const state = reactive({
       team1color: "red",
       team2color: "blue",
-      private: false,
+      public: false,
     });
 
     function createGame() {

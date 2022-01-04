@@ -29,7 +29,7 @@ class Game():
         self.id: str = kwargs['id']
         self.status: GameStatus = GameStatus(kwargs['status'])
         self.mode: GameMode = GameMode(kwargs['mode'])
-        self.private: bool = kwargs['private']
+        self.public: bool = kwargs['public']
         self.createdAt: str = kwargs['createdAt']
         self.updatedAt: str = kwargs['updatedAt']
         self.index: int = int(kwargs['index'])
@@ -50,7 +50,7 @@ class GameModel:
         game = Game(id=str(uuid()),
                     mode=kwargs.get('mode', GameMode.DUO),
                     status=GameStatus.CREATED,
-                    private=kwargs.get('private', False),
+                    public=kwargs.get('public', False),
                     createdAt=date_now,
                     updatedAt=date_now,
                     winCondition=1000,

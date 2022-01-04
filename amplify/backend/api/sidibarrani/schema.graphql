@@ -122,7 +122,7 @@ type Game @model @auth(rules: [{ allow: private }]) {
   id: ID!
   index: Int
   mode: GameMode
-  private: Boolean
+  public: Boolean
   winCondition: Int
   activeRoundID: ID
   ActiveRound: Round @connection(fields: ["activeRoundID"])
@@ -178,7 +178,7 @@ input CreateNewGameInput {
   mode: GameMode
   team1color: String
   team2color: String
-  private: Boolean
+  public: Boolean
 }
 
 type Mutation {
