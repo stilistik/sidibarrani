@@ -1,7 +1,7 @@
 <template>
   <button
     v-bind="$props"
-    style="width: 60px; height: 60px"
+    :style="getButtonStyle()"
     class="
       transition-all
       flex
@@ -22,8 +22,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
 export default defineComponent({
   name: "Button",
+  props: {
+    size: {
+      type: String as PropType<"large" | "medium" | "small">,
+      default: "medium",
+    },
+  },
+  setup(props) {
+    function getButtonStyle() {
+      console.log(props.size);
+
+      if (props.size === "large") {
+        return { width: "80px", height: "80px" };
+      } else if (props.size === "medium") {
+        return { width: "60px", height: "60px" };
+      } else {
+        return { width: "40px", height: "40px" };
+      }
+    }
+    return {
+      getButtonStyle,
+    };
+  },
 });
 </script>

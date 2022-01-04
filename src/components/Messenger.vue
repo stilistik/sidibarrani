@@ -1,17 +1,32 @@
 <template>
+  <IconButton
+    v-if="minimized"
+    @click="minimized = false"
+    class="fixed bottom-10 left-10"
+  >
+    <Icon icon="comments" />
+  </IconButton>
   <div
-    ref="container"
-    class="fixed bottom-10 left-10 rounded-2xl bg-gray-800 overflow-auto p-3"
+    v-else
+    class="fixed bottom-10 left-10 rounded-2xl bg-gray-800 p-3 flex flex-col"
     style="max-height: 300px; max-width: 400px"
   >
-    <div v-for="message in $props.messages" :key="message.id">
-      <span
-        class="font-black mr-2"
-        :class="getMessageUserClass(message?.User?.username)"
-      >
-        {{ message?.User?.username }}:
-      </span>
-      <span class="text-white break-words">{{ message?.text }}</span>
+    <div class="flex justify-between text-white items-center">
+      <p class="font-black">Chat</p>
+      <IconButton :size="'small'" @click="minimized = true">
+        <Icon icon="minus" />
+      </IconButton>
+    </div>
+    <div ref="container" class="flex-1 overflow-auto">
+      <div v-for="message in $props.messages" :key="message.id">
+        <span
+          class="font-black mr-2"
+          :class="getMessageUserClass(message?.User?.username)"
+        >
+          {{ message?.User?.username }}:
+        </span>
+        <span class="text-white break-words">{{ message?.text }}</span>
+      </div>
     </div>
     <div class="flex text-white mt-3" :class="getInputClasses()">
       <Input
@@ -41,6 +56,7 @@ import {
 } from "vue";
 import Input from "./Input.vue";
 import Button from "./Button.vue";
+import IconButton from "./IconButton.vue";
 import { Message } from "../graphql/types";
 import { useCreateMessageMutatio } from "../api";
 import { colorClasses, colors } from "../utils/ColorUtils";
@@ -49,6 +65,7 @@ export default defineComponent({
   components: {
     Input,
     Button,
+    IconButton,
   },
   props: {
     messages: Array as PropType<Message[]>,
@@ -59,9 +76,11 @@ export default defineComponent({
     const text = ref("");
     const focused = ref(false);
     const container = ref(null);
+    const minimized = ref(false);
 
     function scrollDown() {
-      container.value.scrollTop = container.value.scrollHeight + 50;
+      if (container.value)
+        container.value.scrollTop = container.value.scrollHeight + 50;
     }
 
     onMounted(scrollDown);
@@ -110,6 +129,7 @@ export default defineComponent({
     return {
       text,
       container,
+      minimized,
       handleKeyDown,
       handleClick,
       handleFocus,
