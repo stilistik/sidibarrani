@@ -12,6 +12,8 @@
           type="password"
           name="password"
           placeholder="Password"
+          pattern=".{8,}"
+          title="Must be 8 or more characters"
           required
         />
         <Button type="submit" size="large">Sign Up</Button>

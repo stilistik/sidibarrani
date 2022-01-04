@@ -52,8 +52,8 @@ export async function signUp(
       },
     });
     return result.user;
-  } catch (err) {
-    Message.error("Error during sign up process");
+  } catch (err: any) {
+    Message.error(`Error during sign up process: ${err.message}`);
   }
 }
 
