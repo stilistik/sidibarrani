@@ -8,8 +8,8 @@
       @submit.prevent="handleLogin"
       class="flex flex-col col-span-4 items-center w-full my-20 gap-8"
     >
-      <Input name="email" type="email" placeholder="Email" />
-      <Input name="password" type="password" placeholder="Password" />
+      <Input name="email" type="email" placeholder="Email" required />
+      <Input name="password" type="password" placeholder="Password" required />
       <Button type="submit" size="large" :isLoading="isLoading">Login</Button>
       <Link @click="handleSignup()"> Sign Up </Link>
     </form>
