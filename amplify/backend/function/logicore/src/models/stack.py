@@ -19,6 +19,8 @@ class Stack():
         self.updatedAt: str = kwargs['updatedAt']
         self.size: int = kwargs['size']
         self.winnerID: str = kwargs.get('winnerID', None)
+        self.points: int = kwargs.get('points', None)
+        self.isLastStack: bool = kwargs.get('isLastStack', False)
 
 
 class StackModel:
@@ -66,6 +68,36 @@ class StackModel:
                                                }
                                            },
                                            ReturnValues="ALL_NEW")
+        return Stack(**response['Attributes'])
+
+    @staticmethod
+    def set_points(stack_id: str, points: int) -> Stack:
+        date_now = get_iso_date_string()
+        response = stack_table.update_item(Key={'id': stack_id},
+                                           AttributeUpdates={
+                                               'points': {
+                                                   'Value': points,
+                                               },
+                                               'updatedAt': {
+                                                   'Value': date_now
+                                               }
+                                           },
+                                           ReturnValues="ALL_NEW")
+        return Stack(**response['Attributes'])
+
+    @staticmethod
+    def set_last_stack(stack_id: str) -> Stack:
+        date_now = get_iso_date_string()
+        response = stack_table.update_item(
+            Key={'id': stack_id},
+            UpdateExpression=
+            'SET isLastStack = :ils, updatedAt = :dt ADD points :inc',
+            ExpressionAttributeValues={
+                ':ils': True,
+                ':inc': 5,
+                ':dt': date_now
+            },
+            ReturnValues="ALL_NEW")
         return Stack(**response['Attributes'])
 
     @staticmethod

@@ -78,6 +78,8 @@ export const createNewGame = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -190,6 +192,8 @@ export const joinTeam = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -302,6 +306,8 @@ export const leaveGame = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -414,6 +420,8 @@ export const startGame = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -526,6 +534,8 @@ export const playCard = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -638,6 +648,8 @@ export const clearStack = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -750,6 +762,8 @@ export const newRound = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -862,6 +876,8 @@ export const endRound = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -974,6 +990,8 @@ export const placeBet = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -1086,6 +1104,8 @@ export const skipBet = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -1198,6 +1218,8 @@ export const createNewMessage = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -1315,6 +1337,8 @@ export const finishRound = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -1503,6 +1527,8 @@ export const createHand = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -1565,6 +1591,8 @@ export const updateHand = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -1627,6 +1655,8 @@ export const deleteHand = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -1736,6 +1766,8 @@ export const createStack = /* GraphQL */ `
       roundID
       size
       winnerID
+      points
+      isLastStack
       createdAt
       updatedAt
       actions {
@@ -1781,6 +1813,8 @@ export const createStack = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -1819,6 +1853,8 @@ export const updateStack = /* GraphQL */ `
       roundID
       size
       winnerID
+      points
+      isLastStack
       createdAt
       updatedAt
       actions {
@@ -1864,6 +1900,8 @@ export const updateStack = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -1902,6 +1940,8 @@ export const deleteStack = /* GraphQL */ `
       roundID
       size
       winnerID
+      points
+      isLastStack
       createdAt
       updatedAt
       actions {
@@ -1947,6 +1987,8 @@ export const deleteStack = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -2021,6 +2063,8 @@ export const createRound = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -2031,6 +2075,8 @@ export const createRound = /* GraphQL */ `
         roundID
         size
         winnerID
+        points
+        isLastStack
         createdAt
         updatedAt
         actions {
@@ -2108,6 +2154,8 @@ export const updateRound = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -2118,6 +2166,8 @@ export const updateRound = /* GraphQL */ `
         roundID
         size
         winnerID
+        points
+        isLastStack
         createdAt
         updatedAt
         actions {
@@ -2195,6 +2245,8 @@ export const deleteRound = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -2205,6 +2257,8 @@ export const deleteRound = /* GraphQL */ `
         roundID
         size
         winnerID
+        points
+        isLastStack
         createdAt
         updatedAt
         actions {
@@ -2315,6 +2369,8 @@ export const createGame = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -2430,6 +2486,8 @@ export const updateGame = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -2545,6 +2603,8 @@ export const deleteGame = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }

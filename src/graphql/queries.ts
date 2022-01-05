@@ -110,6 +110,8 @@ export const getHand = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -230,6 +232,8 @@ export const getStack = /* GraphQL */ `
       roundID
       size
       winnerID
+      points
+      isLastStack
       createdAt
       updatedAt
       actions {
@@ -275,6 +279,8 @@ export const getStack = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -315,6 +321,8 @@ export const listStacks = /* GraphQL */ `
         roundID
         size
         winnerID
+        points
+        isLastStack
         createdAt
         updatedAt
         actions {
@@ -390,6 +398,8 @@ export const getRound = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -400,6 +410,8 @@ export const getRound = /* GraphQL */ `
         roundID
         size
         winnerID
+        points
+        isLastStack
         createdAt
         updatedAt
         actions {
@@ -469,6 +481,8 @@ export const listRounds = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }
@@ -553,6 +567,8 @@ export const getGame = /* GraphQL */ `
           roundID
           size
           winnerID
+          points
+          isLastStack
           createdAt
           updatedAt
         }

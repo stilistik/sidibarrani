@@ -1,4 +1,5 @@
-import { Game, GameMode } from "../graphql/types";
+import { Game, GameMode, Team } from "../graphql/types";
+import { Color } from "./ColorUtils";
 
 export function resolveTeams(game: Game, userId: string) {
   if (!game || !userId) return null;
@@ -41,8 +42,14 @@ export function resolveTeams(game: Game, userId: string) {
   };
 }
 
-export function getGameTeamById(game: Game, teamId: string) {
+export function getGameTeamById(game: Game, teamId: string): Team {
   if (game.TeamA.id === teamId) return game.TeamA;
   else if (game.TeamB.id === teamId) return game.TeamB;
+  else throw new Error(`Could not find team with id ${teamId} in game`);
+}
+
+export function getTeamColorById(game: Game, teamId: string): Color {
+  if (game.TeamA.id === teamId) return game.teamAColor;
+  else if (game.TeamB.id === teamId) return game.teamBColor;
   else throw new Error(`Could not find team with id ${teamId} in game`);
 }

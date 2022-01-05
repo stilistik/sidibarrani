@@ -39,9 +39,14 @@ export const gameFragment = /* GraphQL */ `
               updatedAt
             }
           }
+          points
           winner {
             id
             teamID
+            team {
+              id
+              name
+            }
           }
         }
       }

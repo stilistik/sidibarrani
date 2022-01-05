@@ -61,7 +61,35 @@ export enum RoundMode {
   TRUMP_S = "TRUMP_S",
 }
 
-export interface Stack {}
+export interface Stack {
+  id: string;
+  winnerID: string;
+  winner: TeamUser;
+  points: number;
+  roundID: string;
+  size: number;
+  actions: { items: Action[] };
+  isLastStack: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Action {
+  id: string;
+  value: string;
+  type: ActionType;
+  stackID: string;
+  userID: string;
+  user: User;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export enum ActionType {
+  PLAY = "PLAY",
+  BET = "BET",
+  SKIP = "SKIP",
+}
 
 export enum RoundStatus {
   BET = "BET",
@@ -73,6 +101,7 @@ export interface Hand {}
 
 export interface Team {
   id: string;
+  name: string;
   TeamUsers: {
     items: TeamUser[];
   };

@@ -63,23 +63,24 @@
 
       <div>
         <h1 class="text-5xl font-black mb-10">Last Round Turns</h1>
-        <div class="flex gap-3 pb-20">
+        <div class="flex flex-col gap-3 pb-20">
           <div
-            v-for="(stacks, index) in activeRoundStacks"
+            v-for="(turn, index) in activeRoundTurns"
             :key="index"
-            class="flex flex-col gap-3"
+            class="flex gap-3 p-3 rounded-2xl"
+            :class="turn.class"
           >
-            <div
-              v-for="(stack, index) in stacks"
-              :key="index"
-              class="text-white flex gap-2"
-            >
-              <StaticCard
-                v-for="card in stack?.cards"
-                :key="card"
-                :card="card"
-                :style="{ width: 65, height: 100 }"
-              />
+            <StaticCard
+              v-for="card in turn?.cards"
+              :key="card"
+              :card="card"
+              :style="{ width: 65, height: 100 }"
+            />
+            <div class="font-black">
+              <p class="text-4xl">
+                {{ turn.points }} Points {{ turn.isLastStack ? " (+5)" : "" }}
+              </p>
+              <p class="text-2xl">Winner: {{ turn.winner?.team?.name }}</p>
             </div>
           </div>
         </div>
@@ -92,8 +93,9 @@
 import { computed, defineComponent, reactive } from "vue";
 import { useActiveRound, useCurrentGame, useNewRoundMutation } from "../../api";
 import Button from "../../components/Button.vue";
+import { colorClasses } from "../../utils/ColorUtils";
+import { getTeamColorById } from "../../utils/GameUtils";
 import StaticCard from "./StaticCard.vue";
-import { getGameTeamById } from "../../utils/GameUtils";
 
 export default defineComponent({
   name: "ResultStage",
@@ -112,21 +114,21 @@ export default defineComponent({
       });
     }
 
-    const activeRoundStacks = computed(() => {
-      function getStack(teamId: string) {
-        const stacks = activeRound.value?.stacks?.items.filter(
-          (stack: any) => stack?.winner?.teamID === teamId
-        );
-        return stacks
-          .map((stack: any) => ({
-            cards: stack.actions.items
-              .filter((action: any) => action.type === "PLAY")
-              .map((action: any) => action.value),
-          }))
-          .filter((stack: any) => stack.cards.length > 0);
-      }
-
-      return [getStack(game.value.TeamA.id), getStack(game.value.TeamB.id)];
+    const activeRoundTurns = computed(() => {
+      const stacks = activeRound.value?.stacks?.items;
+      return stacks
+        .filter((stack) => stack.winner && stack.points)
+        .map((stack) => ({
+          cards: stack.actions.items
+            .filter((action) => action.type === "PLAY")
+            .map((action) => action.value),
+          points: stack.points,
+          winner: stack.winner,
+          isLastStack: stack.isLastStack,
+          class:
+            colorClasses[getTeamColorById(game.value, stack.winner?.team?.id)]
+              .bg,
+        }));
     });
 
     const gameResults = computed(() => {
@@ -151,7 +153,7 @@ export default defineComponent({
 
     return reactive({
       newRound,
-      activeRoundStacks,
+      activeRoundTurns,
       game,
       gameResults,
     });

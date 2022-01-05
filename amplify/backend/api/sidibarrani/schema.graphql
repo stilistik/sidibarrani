@@ -96,6 +96,8 @@ type Stack
   actions: [Action] @connection(keyName: "byStack", fields: ["id"])
   winnerID: ID
   winner: TeamUser @connection(fields: ["winnerID"])
+  points: Int
+  isLastStack: Boolean
   createdAt: AWSDateTime
 }
 
