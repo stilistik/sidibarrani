@@ -31,6 +31,7 @@ export const gameFragment = /* GraphQL */ `
         items {
           id
           size
+          isLastStack
           actions(sortDirection: ASC) {
             items {
               id

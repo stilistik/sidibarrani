@@ -112,28 +112,29 @@ def compute_stack_points(stack: Stack, round: Round):
         return points
 
 
+def finalize_active_stack(round: Round) -> Stack:
+    stack = StackModel.find_by_id(round.activeStackID)
+    points = compute_stack_points(stack, round)
+    return StackModel.set_points(stack.id, points)
+
+
 def clear_stack(event):
     round_id = event['arguments'].get('roundID')
     round = RoundModel.find_by_id(round_id)
 
     key = None
     try:
-        key = RoundModel.lock(round_id)
-        stack = StackModel.find_by_id(round.activeStackID)
+        key = RoundModel.lock(round.id)
+        stack = finalize_active_stack(round)
 
-        if round.activeStackID != stack.id:
-            raise Exception("Attempted to clear non-active stack.")
-        if not StackModel.is_complete(stack.id):
-            raise Exception("Attempted to clear incomplete stack.")
+        if not StackModel.is_complete(round.activeStackID):
+            # incomplete stacks cannot be finalized
+            raise Exception('Attempted to clear incomplete stack')
 
-        points = compute_stack_points(stack, round)
-        StackModel.set_points(stack.id, points)
-
-        new_stack = StackModel.create(round_id, stack.size)
-        RoundModel.set_active_stack(round_id, new_stack.id)
-
+        new_stack = StackModel.create(round.id, stack.size)
+        RoundModel.set_active_stack(round.id, new_stack.id)
         return vars(GameModel.find_by_id(round.gameID))
 
     finally:
         # needs to run in finally block so it always runs, even if other exceptions are raised
-        if key: RoundModel.unlock(round_id, key)
+        if key: RoundModel.unlock(round.id, key)

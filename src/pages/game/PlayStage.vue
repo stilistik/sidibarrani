@@ -154,6 +154,8 @@ export default defineComponent({
     const activeStack = useActiveStack();
     const { removeAllCardsFromField } = useCardManager();
 
+    console.log(activeRound);
+
     onBeforeUnmount(removeAllCardsFromField);
 
     const isEndable = computed(

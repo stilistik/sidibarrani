@@ -1,12 +1,16 @@
 <template>
-  <Button size="large" @click="start">Start</Button>
+  <Button size="large" @click="start"
+    >Start
+    <Loading v-if="isLoading" />
+  </Button>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useStartGameMutation } from "../api";
 import { Message } from "../utils/Message";
 import Button from "./Button.vue";
+import router from "../router";
 
 export default defineComponent({
   name: "StartGame",
@@ -16,30 +20,35 @@ export default defineComponent({
   components: {
     Button,
   },
-  setup() {
+  setup(props) {
     const startGameMutation = useStartGameMutation();
-    return { startGameMutation };
-  },
-  methods: {
-    start() {
-      this.startGameMutation.mutate(
+    const isLoading = ref(false);
+
+    function start() {
+      isLoading.value = true;
+      startGameMutation.mutate(
         {
-          gameID: this.$props.id,
+          gameID: props.id,
         },
         {
           onSuccess: () => {
             Message.success("Game started");
-            this.$router.push({
+            router.push({
               path: "/game/play",
-              query: { gameId: this.$props.id },
+              query: { gameId: props.id },
             });
           },
           onError: ({ errors }: any) => {
             Message.error("Error starting game: " + errors[0].message);
           },
+          onSettled: () => {
+            isLoading.value = false;
+          },
         }
       );
-    },
+    }
+
+    return { start };
   },
 });
 </script>

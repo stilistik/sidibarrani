@@ -16,17 +16,29 @@
           v-if="game.status !== 'ENDED'"
           @click="newRound"
           class="w-full mb-5"
-          >New Round</Button
         >
+          <Loading v-if="newRoundLoading" />
+          New Round
+        </Button>
         <table class="font-black">
           <thead>
             <tr>
-              <td class="px-8 py-3 border-b-2 border-primary"></td>
-              <td class="px-8 py-3 border-b-2 border-primary">
-                {{ game.TeamA.name }}
+              <td class="px-8 py-3 border-b-2 border-gray-700"></td>
+              <td class="px-8 py-3 border-b-2 border-gray-700" width="160px">
+                <span
+                  class="flex justify-center rounded-xl px-3 py-2"
+                  :class="getColorClass(game.teamAColor)"
+                >
+                  {{ game.TeamA.name }}
+                </span>
               </td>
-              <td class="px-8 py-3 border-b-2 border-primary">
-                {{ game.TeamB.name }}
+              <td class="px-8 py-3 border-b-2 border-gray-700" width="160px">
+                <span
+                  class="flex justify-center rounded-xl px-3 py-2"
+                  :class="getColorClass(game.teamBColor)"
+                >
+                  {{ game.TeamB.name }}
+                </span>
               </td>
             </tr>
           </thead>
@@ -35,15 +47,21 @@
               <td
                 class="px-8 py-3"
                 :class="{
-                  'border-t-2 border-primary': index === gameResults.length - 1,
+                  'border-t-2 border-gray-700':
+                    index === gameResults.length - 1,
                 }"
               >
-                {{ row.name }}
+                <span
+                  class="flex justify-center px-3 py-2 bg-gray-800 rounded-xl"
+                >
+                  {{ row.name }}
+                </span>
               </td>
               <td
                 class="px-8 py-3"
                 :class="{
-                  'border-t-2 border-primary': index === gameResults.length - 1,
+                  'border-t-2 border-gray-700':
+                    index === gameResults.length - 1,
                 }"
               >
                 {{ row.a }}
@@ -51,7 +69,8 @@
               <td
                 class="px-8 py-3"
                 :class="{
-                  'border-t-2 border-primary': index === gameResults.length - 1,
+                  'border-t-2 border-gray-700':
+                    index === gameResults.length - 1,
                 }"
               >
                 {{ row.b }}
@@ -90,10 +109,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive } from "vue";
+import { computed, defineComponent, reactive, ref } from "vue";
 import { useActiveRound, useCurrentGame, useNewRoundMutation } from "../../api";
 import Button from "../../components/Button.vue";
-import { colorClasses } from "../../utils/ColorUtils";
+import { Color, colorClasses } from "../../utils/ColorUtils";
 import { getTeamColorById } from "../../utils/GameUtils";
 import StaticCard from "./StaticCard.vue";
 
@@ -107,17 +126,26 @@ export default defineComponent({
     const game = useCurrentGame();
     const activeRound = useActiveRound();
     const newRoundMutation = useNewRoundMutation();
+    const newRoundLoading = ref(false);
 
     function newRound() {
-      newRoundMutation.mutate({
-        gameID: game.value.id,
-      });
+      newRoundLoading.value = false;
+      newRoundMutation.mutate(
+        {
+          gameID: game.value.id,
+        },
+        {
+          onSettled: () => {
+            newRoundLoading.value = false;
+          },
+        }
+      );
     }
 
     const activeRoundTurns = computed(() => {
       const stacks = activeRound.value?.stacks?.items;
       return stacks
-        .filter((stack) => stack.winner && stack.points)
+        .filter((stack) => stack.winner && stack.points != null)
         .map((stack) => ({
           cards: stack.actions.items
             .filter((action) => action.type === "PLAY")
@@ -151,11 +179,17 @@ export default defineComponent({
       return rows;
     });
 
+    function getColorClass(color: Color) {
+      return colorClasses[color].bg;
+    }
+
     return reactive({
       newRound,
       activeRoundTurns,
       game,
       gameResults,
+      newRoundLoading,
+      getColorClass,
     });
   },
 });

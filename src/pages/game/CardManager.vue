@@ -169,8 +169,6 @@ export default defineComponent({
     }
 
     function removeAllCardsFromField() {
-      console.log("TEST");
-
       state.forEach((cardState) => {
         cardState.position = {
           x: window.innerWidth + 100,

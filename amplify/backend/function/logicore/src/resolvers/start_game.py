@@ -38,9 +38,10 @@ def validate_team_config(game_id: str, mode: GameMode) -> List[TeamUser]:
 def new_round_duo(game: Game):
     players = validate_team_config(game.id, GameMode.DUO)
     stack_size = 2
+    stack_count = Deck.card_count / stack_size + 1  # 1 for the bet stage
 
     deck = Deck()
-    round = RoundModel.create(game.id)
+    round = RoundModel.create(game.id, stack_count)
     stack = StackModel.create(round.id, stack_size)
 
     RoundModel.set_active_stack(round.id, stack.id)
@@ -67,9 +68,10 @@ def new_round_duo(game: Game):
 def new_round_quattro(game: Game):
     players = validate_team_config(game.id, GameMode.QUATTRO)
     stack_size = 4
+    stack_count = Deck.card_count / stack_size + 1  # 1 for the bet stage
 
     deck = Deck()
-    round = RoundModel.create(game.id)
+    round = RoundModel.create(game.id, stack_count)
     stack = StackModel.create(round.id, stack_size)
 
     RoundModel.set_active_stack(round.id, stack.id)

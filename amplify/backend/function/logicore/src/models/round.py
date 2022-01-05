@@ -49,7 +49,7 @@ class Round():
 
 class RoundModel:
     @staticmethod
-    def create(game_id, stack_count=9) -> Round:
+    def create(game_id, stack_count) -> Round:
         date_now = get_iso_date_string()
         round = Round(
             id=str(uuid()),
