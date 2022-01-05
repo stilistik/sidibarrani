@@ -1,4 +1,3 @@
-from collections import defaultdict
 from resolvers.clear_stack import finalize_active_stack
 from models.team_user import TeamUserModel
 from models.game import GameModel, GameStatus
@@ -7,7 +6,7 @@ from models.stack import StackModel
 
 
 def compute_result(round: Round):
-    result = defaultdict(int)
+    result = {}
     stacks = StackModel.find_by_round(round.id)
     for i, stack in enumerate(stacks):
         if not stack.winnerID or not stack.points:
@@ -18,7 +17,13 @@ def compute_result(round: Round):
             stack = StackModel.set_last_stack(stack.id)
 
         team_user = TeamUserModel.find_by_id(stack.winnerID)
-        result[team_user.teamID] += stack.points
+        if not team_user.teamID in result:
+            result[team_user.teamID] = {
+                'value': stack.points,
+                'stake_bonus': None
+            }
+        else:
+            result[team_user.teamID]['value'] += stack.points
 
     return result
 
@@ -32,7 +37,7 @@ def do_end_round(round: Round):
     finalize_active_stack(round)
     round = RoundModel.set_round_status(round.id, RoundStatus.ENDED)
     result = compute_result(round)
-    winner_team_id = max(result.keys(), key=(lambda key: result[key]))
+    winner_team_id = max(result.keys(), key=(lambda key: result[key]['value']))
 
     staking_team_id = None
     non_staking_team_id = None
@@ -44,10 +49,12 @@ def do_end_round(round: Round):
         else:
             non_staking_team_id = key
 
-    if result[staking_team_id] >= stake_value:
-        result[staking_team_id] += stake_value
+    if result[staking_team_id]['value'] >= stake_value:
+        result[staking_team_id]['value'] += stake_value
+        result[staking_team_id]['stake_bonus'] = stake_value
     else:
-        result[non_staking_team_id] += stake_value
+        result[non_staking_team_id]['value'] += stake_value
+        result[non_staking_team_id]['stake_bonus'] = stake_value
 
     RoundModel.set_result(round.id, result)
 
@@ -55,13 +62,16 @@ def do_end_round(round: Round):
 
     game = GameModel.find_by_id(round.gameID)
     game_result = {
-        k: game.result.get(k, 0) + result.get(k, 0)
+        k: {
+            'value':
+            game.result.get(k, {}).get('value', 0) +
+            result.get(k, {}).get('value', 0)
+        }
         for k in game.result.keys() | result.keys()
     }
-    game = GameModel.set_result(game.id, game_result)
 
     for team_id in game.result.keys():
-        if game.result[team_id] > game.winCondition:
+        if game.result[team_id]['value'] > game.winCondition:
             game = GameModel.set_status(game.id, GameStatus.ENDED)
             game = GameModel.set_winner(game.id, team_id)
 

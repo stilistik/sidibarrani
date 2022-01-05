@@ -96,7 +96,7 @@
                     index === gameResults.length - 1,
                 }"
               >
-                {{ row.a }}
+                {{ row.a }} {{ row.a_bonus ? `(+${row.a_bonus})` : "" }}
               </td>
               <td
                 class="px-8 py-3"
@@ -105,7 +105,7 @@
                     index === gameResults.length - 1,
                 }"
               >
-                {{ row.b }}
+                {{ row.b }} {{ row.b_bonus ? `(+${row.b_bonus})` : "" }}
               </td>
             </tr>
           </tbody>
@@ -203,6 +203,8 @@ export default defineComponent({
         name: string;
         a: number;
         b: number;
+        a_bonus?: number;
+        b_bonus?: number;
         mode?: RoundMode;
         stake?: { teamID: string; value: number };
       }[] = [];
@@ -215,15 +217,21 @@ export default defineComponent({
         const stake = JSON.parse(round.stake);
         rows.push({
           name: `Round ${index + 1}`,
-          a: result[idTeamA],
-          b: result[idTeamB],
+          a: result[idTeamA].value,
+          b: result[idTeamB].value,
+          a_bonus: result[idTeamA].stake_bonus,
+          b_bonus: result[idTeamB].stake_bonus,
           stake,
           mode: round.mode,
         });
       });
 
       const result = JSON.parse(game.value.result);
-      rows.push({ name: "Total", a: result[idTeamA], b: result[idTeamB] });
+      rows.push({
+        name: "Total",
+        a: result[idTeamA].value,
+        b: result[idTeamB].value,
+      });
       return rows;
     });
 
