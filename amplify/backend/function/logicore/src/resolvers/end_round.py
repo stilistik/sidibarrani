@@ -56,9 +56,15 @@ def end_round(event):
     round_id = event['arguments'].get('roundID')
     round = RoundModel.find_by_id(round_id)
 
-    if round.status == RoundStatus.ENDED:
-        raise Exception('Round has already ended.')
-    if not is_round_complete(round):
-        raise Exception('Round is not complete yet')
+    key = None
+    try:
+        key = RoundModel.lock(round_id)
 
-    return do_end_round(round)
+        if round.status == RoundStatus.ENDED:
+            raise Exception('Round has already ended.')
+        if not is_round_complete(round):
+            raise Exception('Round is not complete yet')
+
+        return do_end_round(round)
+    finally:
+        RoundModel.unlock(round_id, key)
