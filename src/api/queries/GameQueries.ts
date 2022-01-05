@@ -2,7 +2,7 @@ import { API, graphqlOperation } from "aws-amplify";
 import { watch, computed, ref, Ref, watchEffect } from "vue";
 import { ComputedRef, reactive } from "vue-demi";
 import { useQuery } from "vue-query";
-import { Game } from "../../graphql/types";
+import { Game, Round } from "../../graphql/types";
 import router from "../../router";
 import { gameFragment } from "../fragments/GameFragment";
 
@@ -114,7 +114,7 @@ export const useActiveRound = () => {
     () => router.currentRoute.value.query.gameId as string
   );
   const { data } = useGameQuery(gameId);
-  const activeRound = computed(() => data.value?.ActiveRound);
+  const activeRound = computed<Round>(() => data.value?.ActiveRound);
   return activeRound;
 };
 

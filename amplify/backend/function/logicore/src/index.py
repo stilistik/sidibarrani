@@ -1,3 +1,4 @@
+from resolvers.finish_round import finish_round
 from resolvers.create_message import create_message
 from resolvers.get_hand_cards import get_hand_cards
 from resolvers.place_bet import place_bet, skip_bet
@@ -23,6 +24,7 @@ resolvers = {
         'skipBet': skip_bet,
         'endRound': end_round,
         'clearData': clear_data,
+        'finishRound': finish_round,
         'createNewMessage': create_message
     },
     'Hand': {

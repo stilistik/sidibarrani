@@ -15,6 +15,9 @@ export interface Game {
   teamAColor: Color;
   teamBColor: Color;
   messages: { items: Message[] };
+  winnerID: string;
+  winner: Team;
+  result: string;
 }
 
 export enum GameMode {
@@ -29,7 +32,44 @@ export interface Message {
   user: User;
 }
 
-export interface Round {}
+export interface Round {
+  id: string;
+  gameID: string;
+  status: RoundStatus;
+  hands: { items: Hand[] };
+  stackCount: number;
+  stacks: { items: Stack[] };
+  activeStackID: string;
+  activeStack: Stack;
+  turnSequence: string[];
+  turn: string;
+  mode: RoundMode;
+  betPoints: number;
+  result: string;
+  winnerID: string;
+  winner: Team;
+}
+
+export enum RoundMode {
+  TOP_DOWN = "TOP_DOWN",
+  BOTTOM_UP = "BOTTOM_UP",
+  SLALOM_BOTTOM = "SLALOM_BOTTOM",
+  SLALOM_TOP = "SLALOM_TOP",
+  TRUMP_D = "TRUMP_D",
+  TRUMP_H = "TRUMP_H",
+  TRUMP_C = "TRUMP_C",
+  TRUMP_S = "TRUMP_S",
+}
+
+export interface Stack {}
+
+export enum RoundStatus {
+  BET = "BET",
+  PLAY = "PLAY",
+  ENDED = "ENDED",
+}
+
+export interface Hand {}
 
 export interface Team {
   id: string;

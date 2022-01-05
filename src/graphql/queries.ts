@@ -90,6 +90,13 @@ export const getHand = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -147,6 +154,7 @@ export const listHands = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -247,6 +255,13 @@ export const getStack = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -316,6 +331,7 @@ export const listStacks = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -344,6 +360,16 @@ export const getRound = /* GraphQL */ `
       mode
       betPoints
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       hands {
@@ -390,6 +416,7 @@ export const getRound = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -422,6 +449,13 @@ export const listRounds = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -458,6 +492,16 @@ export const getGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -489,6 +533,13 @@ export const getGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -518,6 +569,7 @@ export const getGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -557,6 +609,13 @@ export const listGames = /* GraphQL */ `
         teamAColor
         teamBColor
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         TeamA {
@@ -582,6 +641,7 @@ export const listGames = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }

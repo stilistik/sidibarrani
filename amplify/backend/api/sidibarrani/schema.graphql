@@ -116,6 +116,8 @@ type Round
   mode: RoundMode
   betPoints: Int
   result: AWSJSON
+  winnerID: ID
+  winner: Team
 }
 
 type Game @model @auth(rules: [{ allow: private }]) {
@@ -135,6 +137,8 @@ type Game @model @auth(rules: [{ allow: private }]) {
   teamAColor: String
   teamBColor: String
   result: AWSJSON
+  winnerID: ID
+  winner: Team
   messages: [Message] @connection(keyName: "byGame", fields: ["id"])
 }
 
@@ -229,6 +233,10 @@ type Mutation {
   clearData: Boolean!
     @function(name: "logicore-${env}")
     @auth(rules: [{ allow: private }])
+
+  finishRound(gameID: String!): Game!
+    @function(name: "logicore-${env}")
+    @auth(rules: [{ allow: private }])
 }
 
 type Subscription {
@@ -244,6 +252,7 @@ type Subscription {
         "skipBet"
         "joinTeam"
         "createNewMessage"
+        "finishRound"
       ]
     )
 }

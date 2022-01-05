@@ -17,6 +17,16 @@ export const createNewGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -48,6 +58,13 @@ export const createNewGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -77,6 +94,7 @@ export const createNewGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -111,6 +129,16 @@ export const joinTeam = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -142,6 +170,13 @@ export const joinTeam = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -171,6 +206,7 @@ export const joinTeam = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -205,6 +241,16 @@ export const leaveGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -236,6 +282,13 @@ export const leaveGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -265,6 +318,7 @@ export const leaveGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -299,6 +353,16 @@ export const startGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -330,6 +394,13 @@ export const startGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -359,6 +430,7 @@ export const startGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -393,6 +465,16 @@ export const playCard = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -424,6 +506,13 @@ export const playCard = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -453,6 +542,7 @@ export const playCard = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -487,6 +577,16 @@ export const clearStack = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -518,6 +618,13 @@ export const clearStack = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -547,6 +654,7 @@ export const clearStack = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -581,6 +689,16 @@ export const newRound = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -612,6 +730,13 @@ export const newRound = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -641,6 +766,7 @@ export const newRound = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -675,6 +801,16 @@ export const endRound = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -706,6 +842,13 @@ export const endRound = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -735,6 +878,7 @@ export const endRound = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -769,6 +913,16 @@ export const placeBet = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -800,6 +954,13 @@ export const placeBet = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -829,6 +990,7 @@ export const placeBet = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -863,6 +1025,16 @@ export const skipBet = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -894,6 +1066,13 @@ export const skipBet = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -923,6 +1102,7 @@ export const skipBet = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -957,6 +1137,16 @@ export const createNewMessage = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -988,6 +1178,13 @@ export const createNewMessage = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1017,6 +1214,7 @@ export const createNewMessage = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -1039,6 +1237,118 @@ export const createNewMessage = /* GraphQL */ `
 export const clearData = /* GraphQL */ `
   mutation ClearData {
     clearData
+  }
+`;
+export const finishRound = /* GraphQL */ `
+  mutation FinishRound($gameID: String!) {
+    finishRound(gameID: $gameID) {
+      id
+      index
+      mode
+      public
+      winCondition
+      activeRoundID
+      status
+      teamAID
+      teamBID
+      teamAColor
+      teamBColor
+      result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      createdAt
+      updatedAt
+      TeamA {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      ActiveRound {
+        id
+        gameID
+        status
+        stackCount
+        activeStackID
+        turnSequence
+        turn
+        mode
+        betPoints
+        result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+        hands {
+          nextToken
+        }
+        stacks {
+          nextToken
+        }
+        activeStack {
+          id
+          roundID
+          size
+          winnerID
+          createdAt
+          updatedAt
+        }
+      }
+      Rounds {
+        items {
+          id
+          gameID
+          status
+          stackCount
+          activeStackID
+          turnSequence
+          turn
+          mode
+          betPoints
+          result
+          winnerID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      messages {
+        items {
+          id
+          gameID
+          text
+          userID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+    }
   }
 `;
 export const createSequenceNumber = /* GraphQL */ `
@@ -1173,6 +1483,13 @@ export const createHand = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1228,6 +1545,13 @@ export const updateHand = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1283,6 +1607,13 @@ export const deleteHand = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1430,6 +1761,13 @@ export const createStack = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1506,6 +1844,13 @@ export const updateStack = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1582,6 +1927,13 @@ export const deleteStack = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1639,6 +1991,16 @@ export const createRound = /* GraphQL */ `
       mode
       betPoints
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       hands {
@@ -1685,6 +2047,7 @@ export const createRound = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -1715,6 +2078,16 @@ export const updateRound = /* GraphQL */ `
       mode
       betPoints
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       hands {
@@ -1761,6 +2134,7 @@ export const updateRound = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -1791,6 +2165,16 @@ export const deleteRound = /* GraphQL */ `
       mode
       betPoints
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       hands {
@@ -1837,6 +2221,7 @@ export const deleteRound = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -1869,6 +2254,16 @@ export const createGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -1900,6 +2295,13 @@ export const createGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1929,6 +2331,7 @@ export const createGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -1966,6 +2369,16 @@ export const updateGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -1997,6 +2410,13 @@ export const updateGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -2026,6 +2446,7 @@ export const updateGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -2063,6 +2484,16 @@ export const deleteGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -2094,6 +2525,13 @@ export const deleteGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -2123,6 +2561,7 @@ export const deleteGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }

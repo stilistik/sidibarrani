@@ -93,7 +93,10 @@ def new_round_quattro(game: Game):
     return vars(GameModel.set_active_round(game.id, round.id))
 
 
-def new_round(game: Game):
+def new_round(event):
+    game_id = event['arguments'].get('gameID')
+    game = GameModel.find_by_id(game_id)
+
     if game.mode == GameMode.DUO:
         return new_round_duo(game)
     elif game.mode == GameMode.QUATTRO:
@@ -109,5 +112,9 @@ def start_game(event):
     elif game.status == GameStatus.ENDED:
         raise Exception("Game has ended.")
 
-    new_round(game)
+    if game.mode == GameMode.DUO:
+        new_round_duo(game)
+    elif game.mode == GameMode.QUATTRO:
+        new_round_quattro(game)
+
     return vars(GameModel.set_status(game_id, GameStatus.STARTED))

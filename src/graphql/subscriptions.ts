@@ -17,6 +17,16 @@ export const onUpdateGameState = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -48,6 +58,13 @@ export const onUpdateGameState = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -77,6 +94,7 @@ export const onUpdateGameState = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -207,6 +225,13 @@ export const onCreateHand = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -259,6 +284,13 @@ export const onUpdateHand = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -311,6 +343,13 @@ export const onDeleteHand = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -446,6 +485,13 @@ export const onCreateStack = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -519,6 +565,13 @@ export const onUpdateStack = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -592,6 +645,13 @@ export const onDeleteStack = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -646,6 +706,16 @@ export const onCreateRound = /* GraphQL */ `
       mode
       betPoints
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       hands {
@@ -692,6 +762,7 @@ export const onCreateRound = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -719,6 +790,16 @@ export const onUpdateRound = /* GraphQL */ `
       mode
       betPoints
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       hands {
@@ -765,6 +846,7 @@ export const onUpdateRound = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -792,6 +874,16 @@ export const onDeleteRound = /* GraphQL */ `
       mode
       betPoints
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       hands {
@@ -838,6 +930,7 @@ export const onDeleteRound = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -867,6 +960,16 @@ export const onCreateGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -898,6 +1001,13 @@ export const onCreateGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -927,6 +1037,7 @@ export const onCreateGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -961,6 +1072,16 @@ export const onUpdateGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -992,6 +1113,13 @@ export const onUpdateGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1021,6 +1149,7 @@ export const onUpdateGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }
@@ -1055,6 +1184,16 @@ export const onDeleteGame = /* GraphQL */ `
       teamAColor
       teamBColor
       result
+      winnerID
+      winner {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
       createdAt
       updatedAt
       TeamA {
@@ -1086,6 +1225,13 @@ export const onDeleteGame = /* GraphQL */ `
         mode
         betPoints
         result
+        winnerID
+        winner {
+          id
+          name
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
         hands {
@@ -1115,6 +1261,7 @@ export const onDeleteGame = /* GraphQL */ `
           mode
           betPoints
           result
+          winnerID
           createdAt
           updatedAt
         }

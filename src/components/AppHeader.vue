@@ -16,6 +16,7 @@
   >
     <User :username="data?.username || ''" />
     <div class="flex gap-3">
+      <FinishRoundButton />
       <ClearDataButton />
       <LogoutButton />
     </div>
@@ -27,6 +28,7 @@ import { defineComponent } from "vue";
 import User from "./User.vue";
 import LogoutButton from "./LogoutButton.vue";
 import ClearDataButton from "./ClearDataButton.vue";
+import FinishRoundButton from "./FinishRoundButton.vue";
 import { useCurrentUserQuery } from "../api";
 
 export default defineComponent({
@@ -35,6 +37,7 @@ export default defineComponent({
     User,
     LogoutButton,
     ClearDataButton,
+    FinishRoundButton,
   },
   setup() {
     return useCurrentUserQuery();

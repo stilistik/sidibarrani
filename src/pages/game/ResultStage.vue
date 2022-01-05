@@ -1,42 +1,86 @@
 <template>
-  <div class="w-full h-full flex justify-center text-white overflow-auto">
-    <div class="flex flex-col gap-3 pt-40">
-      <Button @click="newRound" class="mb-10">New Round</Button>
-      <div class="flex gap-3 pb-20">
-        <div
-          v-for="result in results"
-          :key="result.team.id"
-          class="flex flex-col gap-3"
-        >
-          <div
-            class="
-              flex
-              items-center
-              font-black
-              text-2xl
-              gap-2
-              bg-gray-800
-              rounded-full
-              px-5
-              py-2
-              mb-5
-            "
-          >
-            <span>{{ result?.team?.name }}:</span>
-            <span class="text-primary">{{ result?.score }} Points</span>
-          </div>
+  <div class="w-full h-full text-white overflow-auto pt-40">
+    <div
+      v-if="game.status === 'ENDED'"
+      class="mb-20 flex flex-col items-center"
+    >
+      <h1 class="text-8xl font-black text-primary">Victory!</h1>
+      <h2 class="text-4xl font-black text-white">
+        {{ game.winner?.name }} has won the game
+      </h2>
+    </div>
 
+    <div class="flex justify-center gap-20">
+      <div>
+        <Button
+          v-if="game.status !== 'ENDED'"
+          @click="newRound"
+          class="w-full mb-5"
+          >New Round</Button
+        >
+        <table class="font-black">
+          <thead>
+            <tr>
+              <td class="px-8 py-3 border-b-2 border-primary"></td>
+              <td class="px-8 py-3 border-b-2 border-primary">
+                {{ game.TeamA.name }}
+              </td>
+              <td class="px-8 py-3 border-b-2 border-primary">
+                {{ game.TeamB.name }}
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(row, index) in gameResults" :key="index">
+              <td
+                class="px-8 py-3"
+                :class="{
+                  'border-t-2 border-primary': index === gameResults.length - 1,
+                }"
+              >
+                {{ row.name }}
+              </td>
+              <td
+                class="px-8 py-3"
+                :class="{
+                  'border-t-2 border-primary': index === gameResults.length - 1,
+                }"
+              >
+                {{ row.a }}
+              </td>
+              <td
+                class="px-8 py-3"
+                :class="{
+                  'border-t-2 border-primary': index === gameResults.length - 1,
+                }"
+              >
+                {{ row.b }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <h1 class="text-5xl font-black mb-10">Last Round Turns</h1>
+        <div class="flex gap-3 pb-20">
           <div
-            v-for="(stack, index) in result.stacks"
+            v-for="(stacks, index) in activeRoundStacks"
             :key="index"
-            class="text-white flex gap-2 pl-3"
+            class="flex flex-col gap-3"
           >
-            <StaticCard
-              v-for="card in stack?.cards"
-              :key="card"
-              :card="card"
-              :style="{ width: 65, height: 100 }"
-            />
+            <div
+              v-for="(stack, index) in stacks"
+              :key="index"
+              class="text-white flex gap-2"
+            >
+              <StaticCard
+                v-for="card in stack?.cards"
+                :key="card"
+                :card="card"
+                :style="{ width: 65, height: 100 }"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -46,11 +90,10 @@
 
 <script lang="ts">
 import { computed, defineComponent, reactive } from "vue";
-import { useActiveRound, useNewRoundMutation } from "../../api";
+import { useActiveRound, useCurrentGame, useNewRoundMutation } from "../../api";
 import Button from "../../components/Button.vue";
 import StaticCard from "./StaticCard.vue";
-import router from "../../router";
-import { useGameQuery } from "../../api";
+import { getGameTeamById } from "../../utils/GameUtils";
 
 export default defineComponent({
   name: "ResultStage",
@@ -59,53 +102,58 @@ export default defineComponent({
     StaticCard,
   },
   setup() {
-    const gameId = computed(
-      () => router.currentRoute.value.query.gameId as string
-    );
-    const { data } = useGameQuery(gameId);
-
+    const game = useCurrentGame();
     const activeRound = useActiveRound();
     const newRoundMutation = useNewRoundMutation();
 
     function newRound() {
       newRoundMutation.mutate({
-        gameID: gameId.value,
+        gameID: game.value.id,
       });
     }
 
-    function getStack(teamId: string) {
-      const stacks = activeRound.value?.stacks?.items.filter(
-        (stack: any) => stack.winner.teamID === teamId
-      );
-      return stacks
-        .map((stack: any) => ({
-          cards: stack.actions.items
-            .filter((action: any) => action.type === "PLAY")
-            .map((action: any) => action.value),
-        }))
-        .filter((stack: any) => stack.cards.length > 0);
-    }
-
-    const results = computed(() => {
-      const result = JSON.parse(activeRound.value?.result);
-
-      return Object.keys(result).map((teamId) => {
-        const team = data.value.Teams.items.find(
-          (team: any) => team.id === teamId
+    const activeRoundStacks = computed(() => {
+      function getStack(teamId: string) {
+        const stacks = activeRound.value?.stacks?.items.filter(
+          (stack: any) => stack?.winner?.teamID === teamId
         );
-        return {
-          team,
-          score: result[teamId],
-          stacks: getStack(teamId),
-        };
-      });
+        return stacks
+          .map((stack: any) => ({
+            cards: stack.actions.items
+              .filter((action: any) => action.type === "PLAY")
+              .map((action: any) => action.value),
+          }))
+          .filter((stack: any) => stack.cards.length > 0);
+      }
+
+      return [getStack(game.value.TeamA.id), getStack(game.value.TeamB.id)];
     });
 
-    console.log(results);
+    const gameResults = computed(() => {
+      const rows: { name: string; a: number; b: number }[] = [];
+
+      const idTeamA = game.value.TeamA.id;
+      const idTeamB = game.value.TeamB.id;
+
+      game.value.Rounds.items.forEach((round, index) => {
+        const result = JSON.parse(round.result);
+        rows.push({
+          name: `Round ${index + 1}`,
+          a: result[idTeamA],
+          b: result[idTeamB],
+        });
+      });
+
+      const result = JSON.parse(game.value.result);
+      rows.push({ name: "Total", a: result[idTeamA], b: result[idTeamB] });
+      return rows;
+    });
 
     return reactive({
       newRound,
-      results,
+      activeRoundStacks,
+      game,
+      gameResults,
     });
   },
 });

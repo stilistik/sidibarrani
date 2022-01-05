@@ -8,6 +8,11 @@ export const gameFragment = /* GraphQL */ `
     winCondition
     createdAt
     updatedAt
+    result
+    winner {
+      id
+      name
+    }
     ActiveRound {
       id
       turn
@@ -101,6 +106,7 @@ export const gameFragment = /* GraphQL */ `
         id
         gameID
         status
+        result
         createdAt
         updatedAt
       }

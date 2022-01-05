@@ -13,5 +13,6 @@ export * from "./mutations/SkipBetMutation";
 export * from "./mutations/EndRoundMutation";
 export * from "./mutations/ClearDataMutation";
 export * from "./mutations/MessageMutations";
+export * from "./mutations/FinishRoundMutation";
 
 export * from "./subscriptions/GameSubscription";

@@ -40,6 +40,7 @@ class Game():
         self.teamAColor: str = kwargs.get('teamAColor')
         self.teamBColor: str = kwargs.get('teamBColor')
         self.result: dict = kwargs.get('result', {})
+        self.winnerID: str = kwargs.get('winnerID', None)
 
 
 class GameModel:
@@ -110,7 +111,6 @@ class GameModel:
     @staticmethod
     def set_team(game_id: str, team_id: str, key: str) -> Game:
         date_now = get_iso_date_string()
-        print(team_id, key)
         response = game_table.update_item(Key={'id': game_id},
                                           AttributeUpdates={
                                               key: {
@@ -127,6 +127,21 @@ class GameModel:
     def find_by_id(game_id) -> Game:
         response = game_table.get_item(Key={'id': game_id})
         return Game(**response['Item'])
+
+    @staticmethod
+    def set_winner(game_id: str, team_id: str) -> Game:
+        date_now = get_iso_date_string()
+        response = game_table.update_item(Key={'id': game_id},
+                                          AttributeUpdates={
+                                              'winnerID': {
+                                                  'Value': team_id
+                                              },
+                                              'updatedAt': {
+                                                  'Value': date_now
+                                              },
+                                          },
+                                          ReturnValues="ALL_NEW")
+        return Game(**response['Attributes'])
 
     @staticmethod
     def clear_data():

@@ -131,6 +131,10 @@ def end_round(event):
     round = RoundModel.set_round_status(round_id, RoundStatus.ENDED)
     result = compute_result(round)
     RoundModel.set_result(round_id, result)
+
+    winner_team_id = max(result.keys(), key=(lambda key: result[key]))
+    RoundModel.set_winner(round_id, winner_team_id)
+
     game = GameModel.find_by_id(round.gameID)
     game_result = {
         k: game.result.get(k, 0) + result.get(k, 0)
@@ -138,8 +142,9 @@ def end_round(event):
     }
     game = GameModel.set_result(game.id, game_result)
 
-    for k in game.result.keys():
-        if game.result[k] > game.winCondition:
+    for team_id in game.result.keys():
+        if game.result[team_id] > game.winCondition:
             game = GameModel.set_status(game.id, GameStatus.ENDED)
+            game = GameModel.set_winner(game.id, team_id)
 
     return vars(game)

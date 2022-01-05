@@ -40,3 +40,9 @@ export function resolveTeams(game: Game, userId: string) {
     opponentId,
   };
 }
+
+export function getGameTeamById(game: Game, teamId: string) {
+  if (game.TeamA.id === teamId) return game.TeamA;
+  else if (game.TeamB.id === teamId) return game.TeamB;
+  else throw new Error(`Could not find team with id ${teamId} in game`);
+}

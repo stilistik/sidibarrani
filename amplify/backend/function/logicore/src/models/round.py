@@ -44,6 +44,7 @@ class Round():
         self.betPoints: int = kwargs.get('betPoints', None)
         self.result: dict = kwargs.get('result', None)
         self.turnSequence: List[str] = kwargs.get('turnSequence', [])
+        self.winnerID: str = kwargs.get('winnerID', None)
 
 
 class RoundModel:
@@ -206,6 +207,21 @@ class RoundModel:
             ConditionExpression="locked = :val",
             ExpressionAttributeValues={':val': key},
             ReturnValues="ALL_NEW")
+        return Round(**response['Attributes'])
+
+    @staticmethod
+    def set_winner(round_id: str, team_id: str) -> Round:
+        date_now = get_iso_date_string()
+        response = round_table.update_item(Key={'id': round_id},
+                                           AttributeUpdates={
+                                               'winnerID': {
+                                                   'Value': team_id
+                                               },
+                                               'updatedAt': {
+                                                   'Value': date_now
+                                               },
+                                           },
+                                           ReturnValues="ALL_NEW")
         return Round(**response['Attributes'])
 
     @staticmethod
