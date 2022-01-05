@@ -41,7 +41,7 @@ class Round():
         self.turn: str = kwargs.get('turn', None)
         self.mode: RoundMode = RoundMode(
             kwargs['mode']) if kwargs.get('mode') is not None else None
-        self.betPoints: int = kwargs.get('betPoints', None)
+        self.stake: dict = kwargs.get('stake', None)
         self.result: dict = kwargs.get('result', None)
         self.turnSequence: List[str] = kwargs.get('turnSequence', [])
         self.winnerID: str = kwargs.get('winnerID', None)
@@ -216,6 +216,20 @@ class RoundModel:
                                            AttributeUpdates={
                                                'winnerID': {
                                                    'Value': team_id
+                                               },
+                                               'updatedAt': {
+                                                   'Value': date_now
+                                               },
+                                           },
+                                           ReturnValues="ALL_NEW")
+        return Round(**response['Attributes'])
+
+    def set_stake(round_id: str, stake: dict) -> Round:
+        date_now = get_iso_date_string()
+        response = round_table.update_item(Key={'id': round_id},
+                                           AttributeUpdates={
+                                               'stake': {
+                                                   'Value': stake
                                                },
                                                'updatedAt': {
                                                    'Value': date_now

@@ -32,9 +32,25 @@ def do_end_round(round: Round):
     finalize_active_stack(round)
     round = RoundModel.set_round_status(round.id, RoundStatus.ENDED)
     result = compute_result(round)
+    winner_team_id = max(result.keys(), key=(lambda key: result[key]))
+
+    staking_team_id = None
+    non_staking_team_id = None
+    stake_value = round.stake['value']
+
+    for key in result.keys():
+        if key == round.stake['teamID']:
+            staking_team_id = key
+        else:
+            non_staking_team_id = key
+
+    if result[staking_team_id] >= stake_value:
+        result[staking_team_id] += stake_value
+    else:
+        result[non_staking_team_id] += stake_value
+
     RoundModel.set_result(round.id, result)
 
-    winner_team_id = max(result.keys(), key=(lambda key: result[key]))
     RoundModel.set_winner(round.id, winner_team_id)
 
     game = GameModel.find_by_id(round.gameID)

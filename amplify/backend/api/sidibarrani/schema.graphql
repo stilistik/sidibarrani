@@ -116,8 +116,8 @@ type Round
   turnSequence: [ID]
   turn: ID
   mode: RoundMode
-  betPoints: Int
-  result: AWSJSON
+  stake: AWSJSON # { teamID: ID, value: Int}
+  result: AWSJSON # Record<teamID, Int>
   winnerID: ID
   winner: Team
 }
@@ -138,7 +138,7 @@ type Game @model @auth(rules: [{ allow: private }]) {
   TeamB: Team @connection(fields: ["teamBID"])
   teamAColor: String
   teamBColor: String
-  result: AWSJSON
+  result: AWSJSON # Record<teamID, Int>
   winnerID: ID
   winner: Team @connection(fields: ["winnerID"])
   messages: [Message] @connection(keyName: "byGame", fields: ["id"])
