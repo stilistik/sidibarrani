@@ -49,6 +49,10 @@ def place_bet(event):
         RoundModel.set_round_status(round_id, RoundStatus.PLAY)
         RoundModel.set_turn(round_id, user_id)
         RoundModel.set_mode(round_id, mode)
+        RoundModel.set_stake(round_id, {
+            'teamID': team_user.teamID,
+            'value': amount
+        })
     else:
         ActionModel.create(ActionType.BET, user_id, stack.id,
                            '{mode}:{amount}'.format(mode=mode, amount=amount))
@@ -105,5 +109,11 @@ def skip_bet(event):
 
             # set the play mode of the round
             RoundModel.set_mode(round_id, mode)
+
+            # set the stake
+            RoundModel.set_stake(round_id, {
+                'teamID': team_user.teamID,
+                'value': max_amount_action.get_value()
+            })
 
     return vars(GameModel.find_by_id(game_id))

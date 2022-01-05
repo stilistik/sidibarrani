@@ -56,7 +56,7 @@ export const createNewGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -94,7 +94,7 @@ export const createNewGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -170,7 +170,7 @@ export const joinTeam = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -208,7 +208,7 @@ export const joinTeam = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -284,7 +284,7 @@ export const leaveGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -322,7 +322,7 @@ export const leaveGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -398,7 +398,7 @@ export const startGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -436,7 +436,7 @@ export const startGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -512,7 +512,7 @@ export const playCard = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -550,7 +550,7 @@ export const playCard = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -626,7 +626,7 @@ export const clearStack = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -664,7 +664,7 @@ export const clearStack = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -740,7 +740,7 @@ export const newRound = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -778,7 +778,7 @@ export const newRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -854,7 +854,7 @@ export const endRound = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -892,7 +892,7 @@ export const endRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -968,7 +968,7 @@ export const placeBet = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1006,7 +1006,7 @@ export const placeBet = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -1082,7 +1082,7 @@ export const skipBet = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1120,7 +1120,7 @@ export const skipBet = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -1196,7 +1196,7 @@ export const createNewMessage = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1234,7 +1234,7 @@ export const createNewMessage = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -1315,7 +1315,7 @@ export const finishRound = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1353,7 +1353,7 @@ export const finishRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -1505,7 +1505,7 @@ export const createHand = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1569,7 +1569,7 @@ export const updateHand = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1633,7 +1633,7 @@ export const deleteHand = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1791,7 +1791,7 @@ export const createStack = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1878,7 +1878,7 @@ export const updateStack = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1965,7 +1965,7 @@ export const deleteStack = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -2031,7 +2031,7 @@ export const createRound = /* GraphQL */ `
       turnSequence
       turn
       mode
-      betPoints
+      stake
       result
       winnerID
       winner {
@@ -2091,7 +2091,7 @@ export const createRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -2122,7 +2122,7 @@ export const updateRound = /* GraphQL */ `
       turnSequence
       turn
       mode
-      betPoints
+      stake
       result
       winnerID
       winner {
@@ -2182,7 +2182,7 @@ export const updateRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -2213,7 +2213,7 @@ export const deleteRound = /* GraphQL */ `
       turnSequence
       turn
       mode
-      betPoints
+      stake
       result
       winnerID
       winner {
@@ -2273,7 +2273,7 @@ export const deleteRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -2347,7 +2347,7 @@ export const createGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -2385,7 +2385,7 @@ export const createGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -2464,7 +2464,7 @@ export const updateGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -2502,7 +2502,7 @@ export const updateGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -2581,7 +2581,7 @@ export const deleteGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -2619,7 +2619,7 @@ export const deleteGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt

@@ -88,7 +88,7 @@ export const getHand = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -154,7 +154,7 @@ export const listHands = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -257,7 +257,7 @@ export const getStack = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -337,7 +337,7 @@ export const listStacks = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -366,7 +366,7 @@ export const getRound = /* GraphQL */ `
       turnSequence
       turn
       mode
-      betPoints
+      stake
       result
       winnerID
       winner {
@@ -426,7 +426,7 @@ export const getRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -459,7 +459,7 @@ export const listRounds = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -545,7 +545,7 @@ export const getGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -583,7 +583,7 @@ export const getGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -655,7 +655,7 @@ export const listGames = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt

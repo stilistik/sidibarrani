@@ -56,7 +56,7 @@ export const onUpdateGameState = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -94,7 +94,7 @@ export const onUpdateGameState = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -225,7 +225,7 @@ export const onCreateHand = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -286,7 +286,7 @@ export const onUpdateHand = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -347,7 +347,7 @@ export const onDeleteHand = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -493,7 +493,7 @@ export const onCreateStack = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -577,7 +577,7 @@ export const onUpdateStack = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -661,7 +661,7 @@ export const onDeleteStack = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -724,7 +724,7 @@ export const onCreateRound = /* GraphQL */ `
       turnSequence
       turn
       mode
-      betPoints
+      stake
       result
       winnerID
       winner {
@@ -784,7 +784,7 @@ export const onCreateRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -812,7 +812,7 @@ export const onUpdateRound = /* GraphQL */ `
       turnSequence
       turn
       mode
-      betPoints
+      stake
       result
       winnerID
       winner {
@@ -872,7 +872,7 @@ export const onUpdateRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -900,7 +900,7 @@ export const onDeleteRound = /* GraphQL */ `
       turnSequence
       turn
       mode
-      betPoints
+      stake
       result
       winnerID
       winner {
@@ -960,7 +960,7 @@ export const onDeleteRound = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -1031,7 +1031,7 @@ export const onCreateGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1069,7 +1069,7 @@ export const onCreateGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -1145,7 +1145,7 @@ export const onUpdateGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1183,7 +1183,7 @@ export const onUpdateGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt
@@ -1259,7 +1259,7 @@ export const onDeleteGame = /* GraphQL */ `
         turnSequence
         turn
         mode
-        betPoints
+        stake
         result
         winnerID
         winner {
@@ -1297,7 +1297,7 @@ export const onDeleteGame = /* GraphQL */ `
           turnSequence
           turn
           mode
-          betPoints
+          stake
           result
           winnerID
           createdAt

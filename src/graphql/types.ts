@@ -44,7 +44,7 @@ export interface Round {
   turnSequence: string[];
   turn: string;
   mode: RoundMode;
-  betPoints: number;
+  stake: string;
   result: string;
   winnerID: string;
   winner: Team;

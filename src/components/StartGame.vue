@@ -50,7 +50,7 @@ export default defineComponent({
       );
     }
 
-    return { start };
+    return { start, isLoading };
   },
 });
 </script>

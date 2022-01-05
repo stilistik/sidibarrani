@@ -35,6 +35,13 @@
               <td class="px-8 py-3 border-b-2 border-gray-700"></td>
               <td class="px-8 py-3 border-b-2 border-gray-700" width="160px">
                 <span
+                  class="flex justify-center px-3 py-2 bg-gray-800 rounded-xl"
+                >
+                  Stake
+                </span>
+              </td>
+              <td class="px-8 py-3 border-b-2 border-gray-700" width="160px">
+                <span
                   class="flex justify-center rounded-xl px-3 py-2"
                   :class="getColorClass(game.teamAColor)"
                 >
@@ -64,6 +71,22 @@
                   class="flex justify-center px-3 py-2 bg-gray-800 rounded-xl"
                 >
                   {{ row.name }}
+                </span>
+              </td>
+              <td
+                class="px-8 py-3"
+                :class="{
+                  'border-t-2 border-gray-700':
+                    index === gameResults.length - 1,
+                }"
+              >
+                <span
+                  v-if="row?.stake"
+                  class="flex justify-center px-3 py-2 rounded-xl"
+                  :class="getColorClassByTeamId(row.stake.teamID, 'text')"
+                >
+                  <ModeIcon :mode="row.mode" :size="20" class="mr-1" />
+                  {{ row?.stake?.value }}
                 </span>
               </td>
               <td
@@ -121,16 +144,19 @@
 import { computed, defineComponent, reactive, ref } from "vue";
 import { useActiveRound, useCurrentGame, useNewRoundMutation } from "../../api";
 import Button from "../../components/Button.vue";
+import ModeIcon from "../game/ModeIcon.vue";
 import Loading from "../../components/Loading.vue";
 import { Color, colorClasses } from "../../utils/ColorUtils";
 import { getTeamColorById } from "../../utils/GameUtils";
 import StaticCard from "./StaticCard.vue";
+import { RoundMode } from "../../graphql/types";
 
 export default defineComponent({
   name: "ResultStage",
   components: {
     Button,
     Loading,
+    ModeIcon,
     StaticCard,
   },
   setup() {
@@ -173,17 +199,26 @@ export default defineComponent({
     });
 
     const gameResults = computed(() => {
-      const rows: { name: string; a: number; b: number }[] = [];
+      const rows: {
+        name: string;
+        a: number;
+        b: number;
+        mode?: RoundMode;
+        stake?: { teamID: string; value: number };
+      }[] = [];
 
       const idTeamA = game.value.TeamA.id;
       const idTeamB = game.value.TeamB.id;
 
       game.value.Rounds.items.forEach((round, index) => {
         const result = JSON.parse(round.result);
+        const stake = JSON.parse(round.stake);
         rows.push({
           name: `Round ${index + 1}`,
           a: result[idTeamA],
           b: result[idTeamB],
+          stake,
+          mode: round.mode,
         });
       });
 
@@ -196,6 +231,11 @@ export default defineComponent({
       return colorClasses[color][type];
     }
 
+    function getColorClassByTeamId(teamId: string, type: "bg" | "text" = "bg") {
+      const color = getTeamColorById(game.value, teamId);
+      return colorClasses[color][type];
+    }
+
     return reactive({
       newRound,
       activeRoundTurns,
@@ -203,6 +243,7 @@ export default defineComponent({
       gameResults,
       newRoundLoading,
       getColorClass,
+      getColorClassByTeamId,
     });
   },
 });

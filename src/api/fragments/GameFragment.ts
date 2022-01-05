@@ -114,6 +114,7 @@ export const gameFragment = /* GraphQL */ `
         status
         result
         stake
+        mode
         createdAt
         updatedAt
       }
