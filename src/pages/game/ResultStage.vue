@@ -4,7 +4,16 @@
       v-if="game.status === 'ENDED'"
       class="mb-20 flex flex-col items-center"
     >
-      <h1 class="text-8xl font-black text-primary">Victory!</h1>
+      <h1
+        class="text-8xl font-black"
+        :class="
+          game.winner?.id == game.TeamA.id
+            ? getColorClass(game.teamAColor, 'text')
+            : getColorClass(game.teamBColor, 'text')
+        "
+      >
+        Victory!
+      </h1>
       <h2 class="text-4xl font-black text-white">
         {{ game.winner?.name }} has won the game
       </h2>
@@ -130,6 +139,8 @@ export default defineComponent({
     const newRoundMutation = useNewRoundMutation();
     const newRoundLoading = ref(false);
 
+    console.log(game);
+
     function newRound() {
       newRoundLoading.value = false;
       newRoundMutation.mutate(
@@ -181,8 +192,8 @@ export default defineComponent({
       return rows;
     });
 
-    function getColorClass(color: Color) {
-      return colorClasses[color].bg;
+    function getColorClass(color: Color, type: "bg" | "text" = "bg") {
+      return colorClasses[color][type];
     }
 
     return reactive({

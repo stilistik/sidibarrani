@@ -140,7 +140,7 @@ type Game @model @auth(rules: [{ allow: private }]) {
   teamBColor: String
   result: AWSJSON
   winnerID: ID
-  winner: Team
+  winner: Team @connection(fields: ["winnerID"])
   messages: [Message] @connection(keyName: "byGame", fields: ["id"])
 }
 

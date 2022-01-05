@@ -18,15 +18,6 @@ export const createNewGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -39,6 +30,15 @@ export const createNewGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -132,15 +132,6 @@ export const joinTeam = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -153,6 +144,15 @@ export const joinTeam = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -246,15 +246,6 @@ export const leaveGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -267,6 +258,15 @@ export const leaveGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -360,15 +360,6 @@ export const startGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -381,6 +372,15 @@ export const startGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -474,15 +474,6 @@ export const playCard = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -495,6 +486,15 @@ export const playCard = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -588,15 +588,6 @@ export const clearStack = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -609,6 +600,15 @@ export const clearStack = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -702,15 +702,6 @@ export const newRound = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -723,6 +714,15 @@ export const newRound = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -816,15 +816,6 @@ export const endRound = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -837,6 +828,15 @@ export const endRound = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -930,15 +930,6 @@ export const placeBet = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -951,6 +942,15 @@ export const placeBet = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -1044,15 +1044,6 @@ export const skipBet = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -1065,6 +1056,15 @@ export const skipBet = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -1158,15 +1158,6 @@ export const createNewMessage = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -1179,6 +1170,15 @@ export const createNewMessage = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -1277,15 +1277,6 @@ export const finishRound = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -1298,6 +1289,15 @@ export const finishRound = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -2309,15 +2309,6 @@ export const createGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -2330,6 +2321,15 @@ export const createGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -2426,15 +2426,6 @@ export const updateGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -2447,6 +2438,15 @@ export const updateGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -2543,15 +2543,6 @@ export const deleteGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -2564,6 +2555,15 @@ export const deleteGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt

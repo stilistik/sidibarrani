@@ -507,15 +507,6 @@ export const getGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -528,6 +519,15 @@ export const getGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -626,12 +626,6 @@ export const listGames = /* GraphQL */ `
         teamBColor
         result
         winnerID
-        winner {
-          id
-          name
-          createdAt
-          updatedAt
-        }
         createdAt
         updatedAt
         TeamA {
@@ -641,6 +635,12 @@ export const listGames = /* GraphQL */ `
           updatedAt
         }
         TeamB {
+          id
+          name
+          createdAt
+          updatedAt
+        }
+        winner {
           id
           name
           createdAt

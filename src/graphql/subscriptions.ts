@@ -18,15 +18,6 @@ export const onUpdateGameState = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -39,6 +30,15 @@ export const onUpdateGameState = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -993,15 +993,6 @@ export const onCreateGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -1014,6 +1005,15 @@ export const onCreateGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -1107,15 +1107,6 @@ export const onUpdateGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -1128,6 +1119,15 @@ export const onUpdateGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
@@ -1221,15 +1221,6 @@ export const onDeleteGame = /* GraphQL */ `
       teamBColor
       result
       winnerID
-      winner {
-        id
-        name
-        createdAt
-        updatedAt
-        TeamUsers {
-          nextToken
-        }
-      }
       createdAt
       updatedAt
       TeamA {
@@ -1242,6 +1233,15 @@ export const onDeleteGame = /* GraphQL */ `
         }
       }
       TeamB {
+        id
+        name
+        createdAt
+        updatedAt
+        TeamUsers {
+          nextToken
+        }
+      }
+      winner {
         id
         name
         createdAt
