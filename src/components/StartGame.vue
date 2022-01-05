@@ -10,6 +10,7 @@ import { defineComponent, ref } from "vue";
 import { useStartGameMutation } from "../api";
 import { Message } from "../utils/Message";
 import Button from "./Button.vue";
+import Loading from "./Loading.vue";
 import router from "../router";
 
 export default defineComponent({
@@ -19,6 +20,7 @@ export default defineComponent({
   },
   components: {
     Button,
+    Loading,
   },
   setup(props) {
     const startGameMutation = useStartGameMutation();

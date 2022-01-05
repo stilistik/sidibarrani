@@ -112,6 +112,7 @@
 import { computed, defineComponent, reactive, ref } from "vue";
 import { useActiveRound, useCurrentGame, useNewRoundMutation } from "../../api";
 import Button from "../../components/Button.vue";
+import Loading from "../../components/Loading.vue";
 import { Color, colorClasses } from "../../utils/ColorUtils";
 import { getTeamColorById } from "../../utils/GameUtils";
 import StaticCard from "./StaticCard.vue";
@@ -120,6 +121,7 @@ export default defineComponent({
   name: "ResultStage",
   components: {
     Button,
+    Loading,
     StaticCard,
   },
   setup() {
