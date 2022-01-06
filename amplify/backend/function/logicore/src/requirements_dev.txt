@@ -1,0 +1,5 @@
+moto==2.2.12
+coverage==5.5
+pylint==2.7.2
+pytest==6.2.2
+faker==11.3.0

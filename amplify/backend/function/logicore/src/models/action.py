@@ -8,6 +8,8 @@ from utils.utils import get_iso_date_string, clear_table
 
 ddb = boto3.resource('dynamodb')
 action_table_name = os.environ.get("ACTIONTABLE")
+
+print(action_table_name)
 action_table = ddb.Table(action_table_name)
 
 
@@ -28,6 +30,8 @@ class Action():
         self.updatedAt: str = kwargs['updatedAt']
 
     def get_value(self) -> int:
+        if self.type != ActionType.BET:
+            raise Exception("Value can only be read from action with type BET")
         return int(self.value.split(':')[-1]) if self.value else 0
 
 
@@ -54,6 +58,12 @@ class ActionModel:
             IndexName="byStack",
             KeyConditionExpression=Key("stackID").eq(stack_id))
         return [Action(**item) for item in response['Items']]
+
+    @staticmethod
+    def find_by_id(action_id: str) -> Action:
+
+        response = action_table.get_item(Key={'id': action_id})
+        return Action(**response['Item']) if response.get('Item') else None
 
     @staticmethod
     def clear_data():
