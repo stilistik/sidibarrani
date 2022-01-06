@@ -66,6 +66,25 @@ def create_ddb_tables():
                          }
                      }])
 
+    ddb.update_table(TableName=TABLE_DEFINITIONS['TEAMUSERTABLE'],
+                     GlobalSecondaryIndexUpdates=[{
+                         'Create': {
+                             'IndexName':
+                             'byTeam',
+                             'KeySchema': [{
+                                 'KeyType': 'HASH',
+                                 'AttributeName': 'teamID',
+                             }],
+                             "Projection": {
+                                 "ProjectionType": "ALL"
+                             },
+                             "ProvisionedThroughput": {
+                                 "ReadCapacityUnits": 1,
+                                 "WriteCapacityUnits": 1,
+                             }
+                         }
+                     }])
+
 
 @mock_dynamodb2
 class LogiCoreTestCase(unittest.TestCase):
@@ -81,8 +100,11 @@ class LogiCoreTestCase(unittest.TestCase):
         cls.env_patcher.stop()
 
     def setUp(self) -> None:
+        from models.user import UserModel
         create_ddb_tables()
         self.fake = Faker()
+        self.user_a = UserModel.create()
+        self.user_b = UserModel.create()
         return super().setUp()
 
     def tearDown(self) -> None:

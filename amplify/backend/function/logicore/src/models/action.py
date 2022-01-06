@@ -8,8 +8,6 @@ from utils.utils import get_iso_date_string, clear_table
 
 ddb = boto3.resource('dynamodb')
 action_table_name = os.environ.get("ACTIONTABLE")
-
-print(action_table_name)
 action_table = ddb.Table(action_table_name)
 
 

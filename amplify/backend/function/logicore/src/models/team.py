@@ -16,7 +16,7 @@ uuid_namespace = UUID('eeade8cc-2c08-4df8-92f7-664a29f52375')
 class Team():
     def __init__(self, **kwargs) -> None:
         self.id: str = kwargs['id']
-        self.name: str = kwargs['id']
+        self.name: str = kwargs['name']
         self.createdAt: str = kwargs['createdAt']
         self.updatedAt: str = kwargs['updatedAt']
 
@@ -43,11 +43,7 @@ class TeamModel:
         response = team_table.get_item(Key={
             'id': team_id,
         })
-        item = response.get('Item', None)
-        if item:
-            return Team(**item)
-        else:
-            return None
+        return Team(**response['Item']) if response.get('Item') else None
 
     @staticmethod
     def find_by_game(game_id: str) -> List[Team]:
