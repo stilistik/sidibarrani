@@ -39,7 +39,7 @@ class Game():
         self.teamBID: str = kwargs.get('teamBID')
         self.teamAColor: str = kwargs.get('teamAColor')
         self.teamBColor: str = kwargs.get('teamBColor')
-        self.result: dict = kwargs.get('result', {})
+        self.result: dict = kwargs.get('result', None)
         self.winnerID: str = kwargs.get('winnerID', None)
 
 

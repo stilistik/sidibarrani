@@ -7,13 +7,13 @@ class TestJoinTeam(LogiCoreTestCase):
         super().setUp()
         self.game = GameModel.create()
         self.event = {
-            "arguments": {
-                "gameID": self.game.id,
-                "teamKey": "A"
+            'arguments': {
+                'gameID': self.game.id,
+                'teamKey': 'A',
             },
-            "identity": {
-                "claims": {
-                    "sub": self.user_a.id
+            'identity': {
+                'claims': {
+                    'sub': self.user_a.id
                 }
             }
         }

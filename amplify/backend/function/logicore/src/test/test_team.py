@@ -39,16 +39,16 @@ class TestTeamModel(LogiCoreTestCase):
         from models.team import TeamModel
 
         game = GameModel.create()
-        teamA = TeamModel.create()
-        teamB = TeamModel.create()
+        team_a = TeamModel.create()
+        team_b = TeamModel.create()
 
-        GameModel.set_team(game.id, teamA.id, 'teamAID')
-        GameModel.set_team(game.id, teamA.id, 'teamBID')
+        GameModel.set_team(game.id, team_a.id, 'teamAID')
+        GameModel.set_team(game.id, team_b.id, 'teamBID')
 
         teams = TeamModel.find_by_game(game.id)
         self.assertEqual(len(teams), 2)
-        self.assertEqual(teams[0].id, teamA.id)
-        self.assertEqual(teams[1].id, teamB.id)
+        self.assertEqual(teams[0].id, team_a.id)
+        self.assertEqual(teams[1].id, team_b.id)
 
     def test_set_name_updates_team_name(self):
         from models.team import TeamModel

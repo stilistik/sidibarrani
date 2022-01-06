@@ -18,6 +18,32 @@ TABLE_DEFINITIONS = {
 }
 
 
+@mock_dynamodb2
+class LogiCoreTestCase(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.env_patcher = mock.patch.dict(os.environ, TABLE_DEFINITIONS)
+        cls.env_patcher.start()
+        super().setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
+        cls.env_patcher.stop()
+
+    def setUp(self) -> None:
+        from models.user import UserModel
+        create_ddb_tables()
+        self.fake = Faker()
+        self.user_a = UserModel.create()
+        self.user_b = UserModel.create()
+        return super().setUp()
+
+    def tearDown(self) -> None:
+        teardown_ddb_tables()
+        return super().tearDown()
+
+
 def teardown_ddb_tables():
     ddb = boto3.client('dynamodb')
     # drop the tables
@@ -85,28 +111,21 @@ def create_ddb_tables():
                          }
                      }])
 
-
-@mock_dynamodb2
-class LogiCoreTestCase(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        cls.env_patcher = mock.patch.dict(os.environ, TABLE_DEFINITIONS)
-        cls.env_patcher.start()
-        super().setUpClass()
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
-        cls.env_patcher.stop()
-
-    def setUp(self) -> None:
-        from models.user import UserModel
-        create_ddb_tables()
-        self.fake = Faker()
-        self.user_a = UserModel.create()
-        self.user_b = UserModel.create()
-        return super().setUp()
-
-    def tearDown(self) -> None:
-        teardown_ddb_tables()
-        return super().tearDown()
+    ddb.update_table(TableName=TABLE_DEFINITIONS['HANDTABLE'],
+                     GlobalSecondaryIndexUpdates=[{
+                         'Create': {
+                             'IndexName':
+                             'byRound',
+                             'KeySchema': [{
+                                 'KeyType': 'HASH',
+                                 'AttributeName': 'roundID',
+                             }],
+                             "Projection": {
+                                 "ProjectionType": "ALL"
+                             },
+                             "ProvisionedThroughput": {
+                                 "ReadCapacityUnits": 1,
+                                 "WriteCapacityUnits": 1,
+                             }
+                         }
+                     }])

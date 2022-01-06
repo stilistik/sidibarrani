@@ -27,10 +27,10 @@ class TeamModel:
         return str(uuid5(uuid_namespace, ''.join(user_ids)))
 
     @staticmethod
-    def create(id: str = str(uuid4()), name: str = get_random_name()) -> Team:
+    def create(id: str = None, name: str = get_random_name()) -> Team:
         date_now = get_iso_date_string()
         team = Team(
-            id=id,
+            id=id if id else str(uuid4()),
             name=name,
             createdAt=date_now,
             updatedAt=date_now,
