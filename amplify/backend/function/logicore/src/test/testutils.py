@@ -15,6 +15,7 @@ TABLE_DEFINITIONS = {
     'ACTIONTABLE': "Action-ddbtest",
     'SEQUENCENUMBERTABLE': "SequenceNumber-ddbtest",
     'USERTABLE': "User-ddbtest",
+    'MESSAGETABLE': "Message-ddbtest",
 }
 
 
@@ -73,52 +74,35 @@ def create_ddb_tables():
         )
 
     # create global secondary indices
-    ddb.update_table(TableName=TABLE_DEFINITIONS['ACTIONTABLE'],
-                     GlobalSecondaryIndexUpdates=[{
-                         'Create': {
-                             'IndexName':
-                             'byStack',
-                             'KeySchema': [{
-                                 'KeyType': 'HASH',
-                                 'AttributeName': 'stackID',
-                             }],
-                             "Projection": {
-                                 "ProjectionType": "ALL"
-                             },
-                             "ProvisionedThroughput": {
-                                 "ReadCapacityUnits": 1,
-                                 "WriteCapacityUnits": 1,
-                             }
-                         }
-                     }])
+    _create_global_secondary_index(ddb,
+                                   table=TABLE_DEFINITIONS['ACTIONTABLE'],
+                                   name='byStack',
+                                   key='stackID')
 
-    ddb.update_table(TableName=TABLE_DEFINITIONS['TEAMUSERTABLE'],
-                     GlobalSecondaryIndexUpdates=[{
-                         'Create': {
-                             'IndexName':
-                             'byTeam',
-                             'KeySchema': [{
-                                 'KeyType': 'HASH',
-                                 'AttributeName': 'teamID',
-                             }],
-                             "Projection": {
-                                 "ProjectionType": "ALL"
-                             },
-                             "ProvisionedThroughput": {
-                                 "ReadCapacityUnits": 1,
-                                 "WriteCapacityUnits": 1,
-                             }
-                         }
-                     }])
+    _create_global_secondary_index(ddb,
+                                   table=TABLE_DEFINITIONS['TEAMUSERTABLE'],
+                                   name='byTeam',
+                                   key='teamID')
+    _create_global_secondary_index(ddb,
+                                   table=TABLE_DEFINITIONS['HANDTABLE'],
+                                   name='byRound',
+                                   key='roundID')
 
-    ddb.update_table(TableName=TABLE_DEFINITIONS['HANDTABLE'],
+    _create_global_secondary_index(ddb,
+                                   table=TABLE_DEFINITIONS['MESSAGETABLE'],
+                                   name='byGame',
+                                   key='gameID')
+
+
+def _create_global_secondary_index(ddb, **kwargs):
+    ddb.update_table(TableName=kwargs['table'],
                      GlobalSecondaryIndexUpdates=[{
                          'Create': {
                              'IndexName':
-                             'byRound',
+                             kwargs['name'],
                              'KeySchema': [{
                                  'KeyType': 'HASH',
-                                 'AttributeName': 'roundID',
+                                 'AttributeName': kwargs['key'],
                              }],
                              "Projection": {
                                  "ProjectionType": "ALL"

@@ -35,3 +35,11 @@ class MessageModel:
         )
         message_table.put_item(Item=vars(message))
         return message
+
+    @staticmethod
+    def find_by_game(game_id: str) -> List[Message]:
+        response = message_table.query(
+            IndexName="byGame",
+            KeyConditionExpression=Key("gameID").eq(game_id),
+        )
+        return [Message(**item) for item in response['Items']]
