@@ -57,7 +57,6 @@ def do_end_round(round: Round):
         result[non_staking_team_id]['stake_bonus'] = stake_value
 
     RoundModel.set_result(round.id, result)
-
     RoundModel.set_winner(round.id, winner_team_id)
 
     game = GameModel.find_by_id(round.gameID)
@@ -69,6 +68,7 @@ def do_end_round(round: Round):
         }
         for k in game.result.keys() | result.keys()
     }
+    game = GameModel.set_result(game.id, game_result)
 
     for team_id in game.result.keys():
         if game.result[team_id]['value'] > game.winCondition:
