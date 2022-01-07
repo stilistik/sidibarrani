@@ -43,7 +43,7 @@ class Round():
             kwargs['mode']) if kwargs.get('mode') is not None else None
         self.stake: dict = kwargs.get('stake', None)
         self.result: dict = kwargs.get('result', None)
-        self.turnSequence: List[str] = kwargs.get('turnSequence', [])
+        self.turnSequence: List[str] = kwargs.get('turnSequence', None)
         self.winnerID: str = kwargs.get('winnerID', None)
 
 

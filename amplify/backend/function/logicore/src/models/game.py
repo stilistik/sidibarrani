@@ -126,7 +126,7 @@ class GameModel:
     @staticmethod
     def find_by_id(game_id) -> Game:
         response = game_table.get_item(Key={'id': game_id})
-        return Game(**response['Item'])
+        return Game(**response['Item']) if response.get('Item') else None
 
     @staticmethod
     def set_winner(game_id: str, team_id: str) -> Game:
