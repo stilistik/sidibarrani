@@ -2,6 +2,7 @@ from testutils import LogiCoreTestCase
 
 
 class TestGetHandCards(LogiCoreTestCase):
+
     def setUp(self) -> None:
         from models.game import GameModel
         from models.round import RoundModel

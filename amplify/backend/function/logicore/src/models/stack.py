@@ -12,6 +12,7 @@ stack_table = ddb.Table(stack_table_name)
 
 
 class Stack():
+
     def __init__(self, **kwargs) -> None:
         self.id: str = kwargs['id']
         self.roundID: str = kwargs['roundID']
@@ -24,8 +25,9 @@ class Stack():
 
 
 class StackModel:
+
     @staticmethod
-    def create(round_id, size):
+    def create(round_id, size) -> Stack:
         date_now = get_iso_date_string()
         stack = Stack(
             id=str(uuid()),
