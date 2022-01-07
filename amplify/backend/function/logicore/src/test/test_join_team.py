@@ -21,8 +21,10 @@ class TestJoinTeam(LogiCoreTestCase):
     def test_user_can_join_team(self):
         from resolvers.join_team import join_team
         from models.team import TeamModel
+        from models.game import GameStatus
         game = join_team(self.event)
         self.assertIsNotNone(game['teamAID'])
+        self.assertEqual(game['status'], GameStatus.WAITING)
 
         team = TeamModel.find_by_id(game["teamAID"])
         self.assertEqual(team.name, self.user_a.username)
