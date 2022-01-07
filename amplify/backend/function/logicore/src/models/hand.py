@@ -70,17 +70,6 @@ class HandModel:
             ReturnValues="ALL_NEW")
         return Hand(**response['Attributes'])
 
-    @staticmethod
-    def remove_card(hand_id, card) -> Hand:
-        index = HandModel.get_card_index(hand_id, card)
-        response = hand_table.update_item(
-            Key={
-                'id': hand_id,
-            },
-            UpdateExpression=f'remove cards[{index}]',
-            ReturnValues="ALL_NEW")
-        return Hand(**response['Attributes'])
-
     def get_card_index(hand_id: str, card: str) -> int:
         hand = HandModel.find_by_id(hand_id)
         try:
