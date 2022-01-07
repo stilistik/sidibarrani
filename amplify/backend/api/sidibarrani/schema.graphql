@@ -104,7 +104,7 @@ type Stack
 type Round
   @model
   @auth(rules: [{ allow: private }])
-  @key(name: "byGame", fields: ["gameID"]) {
+  @key(name: "byGame", fields: ["gameID", "createdAt"]) {
   id: ID!
   gameID: ID
   status: RoundStatus
@@ -120,6 +120,7 @@ type Round
   result: AWSJSON # Record<teamID, { value: Int, stake_bonus?: Int}>
   winnerID: ID
   winner: Team
+  createdAt: AWSDateTime
 }
 
 type Game @model @auth(rules: [{ allow: private }]) {
