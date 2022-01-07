@@ -1,32 +1,4 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-sidibarrani-dev-152134-authRole",
-      "UnauthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-152134-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::875427163685:role/amplify-sidibarrani-dev-152134-authRole",
-      "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-sidibarrani-dev-152134-deployment",
-      "UnauthRoleName": "amplify-sidibarrani-dev-152134-unauthRole",
-      "StackName": "amplify-sidibarrani-dev-152134",
-      "StackId": "arn:aws:cloudformation:eu-central-1:875427163685:stack/amplify-sidibarrani-dev-152134/1fc2bfe0-6fc5-11ec-b5cf-0a671b7dc550",
-      "AmplifyAppId": "da3xodyxlcfep"
-    },
-    "categories": {
-      "auth": {
-        "sidibarrani76d4ecdc": {}
-      },
-      "function": {
-        "sidibarrani76d4ecdcPostConfirmation": {},
-        "logicore": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "da3xodyxlcfep",
-          "type": "manual"
-        }
-      }
-    }
-  },
   "prod": {
     "awscloudformation": {
       "AuthRoleName": "amplify-sidibarrani-prod-163334-authRole",
