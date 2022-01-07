@@ -255,6 +255,8 @@ type Subscription {
         "skipBet"
         "joinTeam"
         "createNewMessage"
+        "endRound"
+        "updateGame"
         "finishRound"
       ]
     )

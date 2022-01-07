@@ -4,3 +4,13 @@ src.egg-info/PKG-INFO
 src.egg-info/SOURCES.txt
 src.egg-info/dependency_links.txt
 src.egg-info/top_level.txt
+test/test_action.py
+test/test_create_game.py
+test/test_create_message.py
+test/test_end_round.py
+test/test_get_hand_cards.py
+test/test_join_team.py
+test/test_stack.py
+test/test_start_game.py
+test/test_team.py
+test/testutils.py
