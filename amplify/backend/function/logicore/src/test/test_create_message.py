@@ -1,4 +1,4 @@
-from testutils import LogiCoreTestCase
+from test.testutils import LogiCoreTestCase
 
 
 class TestCreateMessage(LogiCoreTestCase):

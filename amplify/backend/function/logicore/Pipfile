@@ -9,6 +9,10 @@ verify_ssl = true
 src = {editable = true, path = "./src"}
 boto3 = "*"
 faker = "*"
+mock = "*"
+moto = "*"
+coverage = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.8"

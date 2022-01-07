@@ -21,7 +21,6 @@ TABLE_DEFINITIONS = {
 
 @mock_dynamodb2
 class LogiCoreTestCase(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.env_patcher = mock.patch.dict(os.environ, TABLE_DEFINITIONS)
