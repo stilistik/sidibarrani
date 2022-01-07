@@ -93,6 +93,11 @@ def create_ddb_tables():
                                    name='byGame',
                                    key='gameID')
 
+    _create_global_secondary_index(ddb,
+                                   table=TABLE_DEFINITIONS['STACKTABLE'],
+                                   name='byRound',
+                                   key='roundID')
+
 
 def _create_global_secondary_index(ddb, **kwargs):
     ddb.update_table(TableName=kwargs['table'],

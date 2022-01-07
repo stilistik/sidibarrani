@@ -60,7 +60,7 @@ class TeamUserModel:
         response = teamuser_table.get_item(Key={
             'id': team_user_id,
         }, )
-        return TeamUser(**response['Item'])
+        return TeamUser(**response['Item']) if response.get('Item') else None
 
     @staticmethod
     def find_by_game(game_id: str) -> List[TeamUser]:

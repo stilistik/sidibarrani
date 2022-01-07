@@ -201,13 +201,16 @@ class RoundModel:
 
     @staticmethod
     def unlock(round_id: str, key: str):
-        response = round_table.update_item(
-            Key={'id': round_id},
-            UpdateExpression="remove locked",
-            ConditionExpression="locked = :val",
-            ExpressionAttributeValues={':val': key},
-            ReturnValues="ALL_NEW")
-        return Round(**response['Attributes'])
+        try:
+            response = round_table.update_item(
+                Key={'id': round_id},
+                UpdateExpression="remove locked",
+                ConditionExpression="locked = :val",
+                ExpressionAttributeValues={':val': key},
+                ReturnValues="ALL_NEW")
+            return Round(**response['Attributes'])
+        except:
+            return None
 
     @staticmethod
     def set_winner(round_id: str, team_id: str) -> Round:

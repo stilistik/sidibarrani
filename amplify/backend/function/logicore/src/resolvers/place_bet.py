@@ -59,7 +59,6 @@ def place_bet(event):
         RoundModel.next_turn(round_id)
 
     game = GameModel.find_by_id(round.gameID)
-    print(vars(game))
     return vars(game)
 
 

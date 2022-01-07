@@ -40,7 +40,7 @@ class StackModel:
     @staticmethod
     def find_by_id(stack_id):
         response = stack_table.get_item(Key={'id': stack_id})
-        return Stack(**response['Item'])
+        return Stack(**response['Item']) if response.get('Item') else None
 
     @staticmethod
     def find_by_round(round_id) -> List[Stack]:
