@@ -48,9 +48,12 @@ class TeamModel:
     @staticmethod
     def find_by_game(game_id: str) -> List[Team]:
         game = GameModel.find_by_id(game_id)
+        teams: List[Team] = []
         team_a = TeamModel.find_by_id(game.teamAID)
         team_b = TeamModel.find_by_id(game.teamBID)
-        return [team_a, team_b]
+        if team_a: teams.append(team_a)
+        if team_b: teams.append(team_b)
+        return teams
 
     @staticmethod
     def set_name(team_id: str, name: str) -> Team:
