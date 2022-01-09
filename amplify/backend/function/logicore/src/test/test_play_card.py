@@ -4,61 +4,8 @@ from mock import patch
 
 class TestPlayCard(LogiCoreTestCase):
     def setUp(self) -> None:
-        from models.game import GameModel
-        from models.team import TeamModel
-        from models.team_user import TeamUserModel
-        from models.round import RoundModel, RoundStatus, RoundMode
-        from models.stack import StackModel
-        from models.hand import HandModel, HandType
-
         super().setUp()
-
-        self.game = GameModel.create()
-
-        self.round = RoundModel.create(self.game.id, 2)
-        RoundModel.set_round_status(self.round.id, RoundStatus.PLAY)
-        RoundModel.set_mode(self.round.id, RoundMode.TOP_DOWN)
-        RoundModel.set_turn(self.round.id, self.user_a.id)
-        RoundModel.set_turn_sequence(self.round.id,
-                                     [self.user_a.id, self.user_b.id])
-
-        self.stack = StackModel.create(self.round.id, 2)
-        RoundModel.set_active_stack(self.round.id, self.stack.id)
-
-        GameModel.set_active_round(self.game.id, self.round.id)
-
-        team_a = TeamModel.create()
-        team_b = TeamModel.create()
-
-        GameModel.set_team(self.game.id, team_a.id, 'teamAID')
-        GameModel.set_team(self.game.id, team_b.id, 'teamBID')
-
-        TeamUserModel.create(team_a.id, self.user_a.id)
-        TeamUserModel.create(team_b.id, self.user_b.id)
-
-        self.normal_a = HandModel.create(self.round.id, self.user_a.id,
-                                         HandType.NORMAL,
-                                         ['6H', '7H', '8H', '9H', '10H', 'JH'])
-        self.open_a = HandModel.create(self.round.id, self.user_a.id,
-                                       HandType.OPEN,
-                                       ['6S', '7S', '8S', '9S', '10S', 'JS'])
-        self.hidden_a = HandModel.create(
-            self.round.id,
-            self.user_a.id,
-            HandType.HIDDEN, ['X'] * 6,
-            hidden_cards=['6D', '7D', '8D', '9D', '10D', 'JD'])
-
-        self.normal_b = HandModel.create(self.round.id, self.user_b.id,
-                                         HandType.NORMAL,
-                                         ['6H', '7H', '8H', '9H', '10H', 'JH'])
-        self.open_b = HandModel.create(self.round.id, self.user_b.id,
-                                       HandType.OPEN,
-                                       ['6S', '7S', '8S', '9S', '10S', 'JS'])
-        self.hidden_b = HandModel.create(
-            self.round.id,
-            self.user_b.id,
-            HandType.HIDDEN, ['X'] * 6,
-            hidden_cards=['6D', '7D', '8D', '9D', '10D', 'JD'])
+        self.create_duo_mode_test_scenario()
 
     def _get_event(self, round_id: str, value: str, user_id):
         return {

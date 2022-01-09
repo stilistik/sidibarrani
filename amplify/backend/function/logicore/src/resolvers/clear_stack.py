@@ -136,9 +136,9 @@ def clear_stack(event):
 
         # handle slalom round mode switch
         if round.mode == RoundMode.SLALOM_BOTTOM:
-            RoundModel.set_mode(RoundMode.SLALOM_TOP)
+            RoundModel.set_mode(round.id, RoundMode.SLALOM_TOP)
         elif round.mode == RoundMode.SLALOM_TOP:
-            RoundModel.set_mode(RoundMode.SLALOM_TOP)
+            RoundModel.set_mode(round.id, RoundMode.SLALOM_BOTTOM)
 
         return vars(GameModel.find_by_id(round.gameID))
 
