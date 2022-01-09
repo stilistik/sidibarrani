@@ -15,11 +15,22 @@
         icon="long-arrow-alt-down"
         :style="{ width: size, height: size }"
       />
-      <Icon
-        v-if="mode === 'SLALOM'"
-        icon="arrows-alt-v"
-        :style="{ width: size, height: size }"
-      />
+      <div class="relative" v-if="mode === 'SLALOM_TOP'">
+        <Icon icon="arrows-alt-v" :style="{ width: size, height: size }" />
+        <Icon
+          class="absolute"
+          icon="long-arrow-alt-down"
+          :style="{ width: size / 2, height: size / 2, marginLeft: -size / 4 }"
+        />
+      </div>
+      <div class="relative" v-if="mode === 'SLALOM_BOTTOM'">
+        <Icon icon="arrows-alt-v" :style="{ width: size, height: size }" />
+        <Icon
+          class="absolute"
+          icon="long-arrow-alt-up"
+          :style="{ width: size / 2, height: size / 2, marginLeft: -size / 4 }"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -40,8 +51,13 @@ export default defineComponent({
   },
   props: {
     mode: String,
-    size: Number,
+    size: {
+      type: Number,
+      default: 30,
+    },
   },
-  setup() {},
+  setup(props) {
+    return { size: props.size };
+  },
 });
 </script>

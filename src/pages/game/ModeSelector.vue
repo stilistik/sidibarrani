@@ -31,7 +31,8 @@ export default defineComponent({
     const modes = [
       "BOTTOM_UP",
       "TOP_DOWN",
-      "SLALOM",
+      "SLALOM_BOTTOM",
+      "SLALOM_TOP",
       "TRUMP_D",
       "TRUMP_H",
       "TRUMP_S",
