@@ -101,29 +101,3 @@ class TestEndRound(LogiCoreTestCase):
                     'value': ev_team_b
                 }
             })
-
-    def test_should_not_allow_to_run_mutation_in_parallel(self):
-        from resolvers.end_round import end_round
-
-        def first_process(self):
-            try:
-                end_round(self.event)
-                return None
-            except Exception as e:
-                return e
-
-        def second_process(self):
-            time.sleep(0.000001)
-            with self.assertRaises(Exception) as e:
-                end_round(self.event)
-
-            return str(e.exception)
-
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            t1 = executor.submit(first_process, self)
-            t2 = executor.submit(second_process, self)
-            result_1 = t1.result()
-            result_2 = t2.result()
-
-            self.assertIsNone(result_1)
-            self.assertEqual(result_2, "Game is busy.")

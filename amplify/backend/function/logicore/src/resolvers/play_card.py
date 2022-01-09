@@ -6,6 +6,45 @@ from models.hand import HandModel, Hand, HandType
 from models.game import GameModel, GameMode
 from typing import List
 
+all_cards = [
+    '6H',
+    '7H',
+    '8H',
+    '9H',
+    '10H',
+    'JH',
+    'QH',
+    'KH',
+    'AH',
+    '6C',
+    '7C',
+    '8C',
+    '9C',
+    '10C',
+    'JC',
+    'QC',
+    'KC',
+    'AC',
+    '6D',
+    '7D',
+    '8D',
+    '9D',
+    '10D',
+    'JD',
+    'QD',
+    'KD',
+    'AD',
+    '6S',
+    '7S',
+    '8S',
+    '9S',
+    '10S',
+    'JS',
+    'QS',
+    'KS',
+    'AS',
+]
+
 
 def get_rank(value: str, is_trump=False):
     rank_str = value[0:-1]
@@ -148,7 +187,6 @@ def is_trump(round: Round, value: str):
 def validate_card_played(stack_id: str, round: Round, hands: List[Hand],
                          value: str):
     actions = ActionModel.find_by_stack(stack_id)
-
     if is_trump(round, value):
         return True
 
@@ -164,6 +202,9 @@ def play_card(event):
     round_id = event['arguments'].get('roundID')
     value = event['arguments'].get('value')
     user_id = event['identity']['claims'].get('sub')
+
+    if value not in all_cards:
+        raise Exception('Invalid card played.')
 
     round = RoundModel.find_by_id(round_id)
     game = GameModel.find_by_id(round.gameID)

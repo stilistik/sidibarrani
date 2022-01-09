@@ -82,6 +82,8 @@ class HandModel:
         hand = HandModel.find_by_id(hand_id)
         if hand.type != HandType.HIDDEN:
             raise Exception("Can't unhide card in non-hidden hand")
+        if not hand.hiddenCards or len(hand.hiddenCards) <= index:
+            raise Exception("Hand does not have hidden cards to reveal.")
 
         response = hand_table.update_item(
             Key={

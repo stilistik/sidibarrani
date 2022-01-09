@@ -1,4 +1,3 @@
-from boto3 import client
 from test.testutils import LogiCoreTestCase
 
 
@@ -55,6 +54,14 @@ class TestHandModel(LogiCoreTestCase):
         card = 'B'
         index = HandModel.get_card_index(hand.id, card)
         self.assertEqual(index, self.cards.index(card))
+
+    def test_should_raise_if_card_not_found(self):
+        from models.hand import HandModel, HandType
+        hand = HandModel.create(self.round.id, self.user_a.id, HandType.NORMAL,
+                                self.cards)
+        card = 'inexistent'
+        with self.assertRaises(Exception):
+            HandModel.get_card_index(hand.id, card)
 
     def test_unhide_card(self):
         from models.hand import HandModel, HandType
