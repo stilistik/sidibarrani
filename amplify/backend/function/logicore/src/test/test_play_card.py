@@ -1,6 +1,5 @@
 from test.testutils import LogiCoreTestCase
-import concurrent.futures
-import time
+from mock import patch
 
 
 class TestPlayCard(LogiCoreTestCase):
@@ -155,3 +154,19 @@ class TestPlayCard(LogiCoreTestCase):
         team_user = TeamUserModel.find_by_game_user(self.game.id,
                                                     self.user_b.id)
         self.assertEqual(stack.winnerID, team_user.id)
+
+    def test_should_lock_round_to_avoid_parallel_updates(self):
+        from resolvers.play_card import play_card
+        from models.round import RoundModel
+
+        key = self.fake.uuid4()
+        event = self._get_event(self.round.id, '6H', self.user_a.id)
+        with patch.object(RoundModel, attribute='lock',
+                          return_value=key) as mock_lock, patch.object(
+                              RoundModel,
+                              attribute='unlock',
+                              return_value=self.round) as mock_unlock:
+            play_card(event)
+        mock_lock.assert_called_once()
+        mock_unlock.assert_called_once()
+        mock_unlock.assert_called_with(self.round.id, key)

@@ -130,8 +130,9 @@ class TestRoundModel(LogiCoreTestCase):
         round = RoundModel.create(self.game.id, 2)
         key = RoundModel.lock(round.id)
         self.assertIsNotNone(key)
-        with self.assertRaises(Exception):
+        with self.assertRaises(Exception) as e:
             key = RoundModel.lock(round.id)
+        self.assertEqual(str(e.exception), 'Game is busy.')
 
     def test_raises_if_round_unlocked_with_wrong_key(self):
         from models.round import RoundModel

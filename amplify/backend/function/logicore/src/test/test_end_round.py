@@ -1,6 +1,5 @@
 from test.testutils import LogiCoreTestCase
-import concurrent.futures
-import time
+from mock import patch
 
 
 class TestEndRound(LogiCoreTestCase):
@@ -101,3 +100,18 @@ class TestEndRound(LogiCoreTestCase):
                     'value': ev_team_b
                 }
             })
+
+    def test_should_lock_round_to_avoid_parallel_updates(self):
+        from resolvers.end_round import end_round
+        from models.round import RoundModel
+
+        key = self.fake.uuid4()
+        with patch.object(RoundModel, attribute='lock',
+                          return_value=key) as mock_lock, patch.object(
+                              RoundModel,
+                              attribute='unlock',
+                              return_value=self.round) as mock_unlock:
+            end_round(self.event)
+        mock_lock.assert_called_once()
+        mock_unlock.assert_called_once()
+        mock_unlock.assert_called_with(self.round.id, key)
