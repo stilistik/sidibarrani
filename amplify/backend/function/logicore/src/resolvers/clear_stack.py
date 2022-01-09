@@ -133,6 +133,13 @@ def clear_stack(event):
 
         new_stack = StackModel.create(round.id, stack.size)
         RoundModel.set_active_stack(round.id, new_stack.id)
+
+        # handle slalom round mode switch
+        if round.mode == RoundMode.SLALOM_BOTTOM:
+            RoundModel.set_mode(RoundMode.SLALOM_TOP)
+        elif round.mode == RoundMode.SLALOM_TOP:
+            RoundModel.set_mode(RoundMode.SLALOM_TOP)
+
         return vars(GameModel.find_by_id(round.gameID))
 
     finally:
