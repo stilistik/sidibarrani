@@ -2,20 +2,13 @@
   <ModeSelector
     :selectedMode="mode"
     @modeChange="onModeChange"
-    class="absolute right-20"
+    class="absolute right-20 bottom-32"
   />
   <History class="absolute left-10 top-20 py-20 z-hud" />
   <CurrentBet
     v-if="Boolean(lastBet)"
     :action="lastBet"
-    class="
-      flex
-      justify-center
-      absolute
-      left-1/2
-      top-1/2
-      -translate-x-1/2 -translate-y-1/2
-    "
+    class="flex justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
   />
   <BetInput
     v-model="bet"

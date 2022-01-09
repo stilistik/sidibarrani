@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center gap-5 pt-52">
+  <div class="flex flex-col justify-center gap-5">
     <Button
       v-for="mode in modes"
       :key="mode"
