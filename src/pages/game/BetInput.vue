@@ -22,12 +22,31 @@
         <Icon icon="caret-down" />
       </Button>
     </div>
-    <Button class="h-full rounded-none" @click="$emit('onPlaceBet')">
-      <Icon icon="coins" />
-    </Button>
-    <Button class="h-full rounded-l-none" @click="$emit('onSkip')">
-      <Icon icon="forward" />
-    </Button>
+    <StaticTooltip>
+      <template v-slot:tooltip>
+        <h4 class="text-xl">Place bet</h4>
+        <span>Place a bet of your choosing on the currently selected mode</span>
+      </template>
+      <template v-slot:outlet>
+        <Button class="h-full rounded-none" @click="$emit('onPlaceBet')">
+          <Icon icon="coins" />
+        </Button>
+      </template>
+    </StaticTooltip>
+    <StaticTooltip>
+      <template v-slot:tooltip>
+        <h4 class="text-xl">Skip</h4>
+        <span
+          >Skip to the next player without taking action. If everyone has
+          skipped, the highest bet mode will be selected to play.</span
+        >
+      </template>
+      <template v-slot:outlet>
+        <Button class="h-full rounded-l-none" @click="$emit('onSkip')">
+          <Icon icon="forward" />
+        </Button>
+      </template>
+    </StaticTooltip>
   </div>
 </template>
 
@@ -35,9 +54,14 @@
 import { defineComponent, ref } from "vue";
 import Input from "../../components/Input.vue";
 import Button from "../../components/Button.vue";
+import StaticTooltip from "../../components/StaticTooltip.vue";
 export default defineComponent({
   name: "BetInput",
-  components: { Input, Button },
+  components: {
+    Input,
+    Button,
+    StaticTooltip,
+  },
   props: {
     modelValue: Number,
   },

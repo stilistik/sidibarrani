@@ -15,20 +15,38 @@
         icon="long-arrow-alt-down"
         :style="{ width: size, height: size }"
       />
-      <div class="relative" v-if="mode === 'SLALOM_TOP'">
+      <div
+        v-if="mode === 'SLALOM_TOP'"
+        class="relative flex items-center"
+        :style="{ width: `${size}px`, height: `${size}px` }"
+      >
         <Icon icon="arrows-alt-v" :style="{ width: size, height: size }" />
         <Icon
           class="absolute"
           icon="long-arrow-alt-down"
-          :style="{ width: size / 2, height: size / 2, marginLeft: -size / 4 }"
+          :style="{
+            width: size / 2,
+            height: size / 2,
+            left: '70%',
+            top: '0',
+          }"
         />
       </div>
-      <div class="relative" v-if="mode === 'SLALOM_BOTTOM'">
+      <div
+        v-if="mode === 'SLALOM_BOTTOM'"
+        class="relative flex items-center"
+        :style="{ width: `${size}px`, height: `${size}px` }"
+      >
         <Icon icon="arrows-alt-v" :style="{ width: size, height: size }" />
         <Icon
           class="absolute"
           icon="long-arrow-alt-up"
-          :style="{ width: size / 2, height: size / 2, marginLeft: -size / 4 }"
+          :style="{
+            width: size / 2,
+            height: size / 2,
+            left: '70%',
+            top: '0',
+          }"
         />
       </div>
     </div>

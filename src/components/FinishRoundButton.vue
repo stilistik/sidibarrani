@@ -1,17 +1,21 @@
 <template>
-  <IconButton v-if="shouldRender" @click="handleFinishRound">
-    <Icon icon="forward" />
-  </IconButton>
+  <Tooltip text="Finish this round immediately">
+    <IconButton v-if="shouldRender" @click="handleFinishRound">
+      <Icon icon="forward" />
+    </IconButton>
+  </Tooltip>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useCurrentGame, useFinishRoundMutation } from "../api";
 import IconButton from "./IconButton.vue";
+import Tooltip from "./Tooltip.vue";
 
 export default defineComponent({
   components: {
     IconButton,
+    Tooltip,
   },
   setup(props) {
     const game = useCurrentGame();

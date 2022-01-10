@@ -4,15 +4,7 @@
       <Icon icon="comments" />
       <span
         v-if="unreadMessages > 0"
-        class="
-          absolute
-          top-0
-          right-0
-          rounded-full
-          bg-primary
-          text-sm
-          font-black
-        "
+        class="absolute top-0 right-0 rounded-full bg-primary text-sm font-black"
         style="width: 20px; height: 20px"
       >
         {{ unreadMessages }}

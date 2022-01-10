@@ -1,7 +1,9 @@
 <template>
-  <IconButton v-if="shouldRender" @click="handleClearData">
-    <Icon icon="trash" />
-  </IconButton>
+  <Tooltip text="Clear the data of the entire environment">
+    <IconButton v-if="shouldRender" @click="handleClearData">
+      <Icon icon="trash" />
+    </IconButton>
+  </Tooltip>
 </template>
 
 <script lang="ts">
@@ -9,11 +11,13 @@ import { defineComponent } from "vue";
 import { useClearDataMutation } from "../api";
 import { Message } from "../utils/Message";
 import IconButton from "./IconButton.vue";
+import Tooltip from "./Tooltip.vue";
 
 export default defineComponent({
   name: "ClearDataButton",
   components: {
     IconButton,
+    Tooltip,
   },
   setup(props) {
     const clearDataMutation = useClearDataMutation();
