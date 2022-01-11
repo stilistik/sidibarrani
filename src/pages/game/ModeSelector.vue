@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col justify-center gap-5">
-    <StaticTooltip v-for="mode in modes" :key="mode.value" :placement="'left'">
+    <Tooltip v-for="mode in modes" :key="mode.value" :placement="'left'">
       <template v-slot:tooltip>
         <h4 class="text-xl" v-if="mode.title">{{ mode.title }}</h4>
         <span v-if="mode.tooltip">{{ mode.tooltip }}</span>
@@ -15,7 +15,7 @@
           <ModeIcon :mode="mode.value" />
         </Button>
       </template>
-    </StaticTooltip>
+    </Tooltip>
   </div>
 </template>
 
@@ -23,13 +23,13 @@
 import { defineComponent, reactive } from "vue";
 import Button from "../../components/Button.vue";
 import ModeIcon from "./ModeIcon.vue";
-import StaticTooltip from "../../components/StaticTooltip.vue";
+import Tooltip from "../../components/Tooltip.vue";
 
 export default defineComponent({
   components: {
     ModeIcon,
     Button,
-    StaticTooltip,
+    Tooltip,
   },
   props: {
     selectedMode: String,

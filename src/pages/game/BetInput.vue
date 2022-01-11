@@ -22,7 +22,7 @@
         <Icon icon="caret-down" />
       </Button>
     </div>
-    <StaticTooltip>
+    <Tooltip :placement="'top'">
       <template v-slot:tooltip>
         <h4 class="text-xl">Place bet</h4>
         <span>Place a bet of your choosing on the currently selected mode</span>
@@ -32,8 +32,8 @@
           <Icon icon="coins" />
         </Button>
       </template>
-    </StaticTooltip>
-    <StaticTooltip>
+    </Tooltip>
+    <Tooltip :placement="'top'">
       <template v-slot:tooltip>
         <h4 class="text-xl">Skip</h4>
         <span
@@ -46,7 +46,7 @@
           <Icon icon="forward" />
         </Button>
       </template>
-    </StaticTooltip>
+    </Tooltip>
   </div>
 </template>
 
@@ -54,13 +54,14 @@
 import { defineComponent, ref } from "vue";
 import Input from "../../components/Input.vue";
 import Button from "../../components/Button.vue";
-import StaticTooltip from "../../components/StaticTooltip.vue";
+import Tooltip from "../../components/Tooltip.vue";
+
 export default defineComponent({
   name: "BetInput",
   components: {
     Input,
     Button,
-    StaticTooltip,
+    Tooltip,
   },
   props: {
     modelValue: Number,
