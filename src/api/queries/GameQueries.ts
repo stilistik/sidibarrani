@@ -51,7 +51,7 @@ export const useListGamesQuery = (
     async () => {
       const filter: any = {
         public: { eq: true },
-        status: { eq: "WAITING" },
+        not: { status: { eq: "ENDED" } },
       };
       const { data } = (await API.graphql(
         graphqlOperation(listGames, {

@@ -1,18 +1,7 @@
 <template>
   <div class="absolute top-20 flex gap-3 p-3">
     <div
-      class="
-        flex
-        items-center
-        font-black
-        text-2xl
-        gap-2
-        bg-gray-800
-        rounded-full
-        text-primary
-        px-5
-        py-2
-      "
+      class="flex items-center font-black text-2xl gap-2 bg-gray-800 rounded-full text-primary px-5 py-2"
     >
       <span>Play Mode:</span>
       <ModeIcon :mode="activeRound.mode" :size="28" />
@@ -62,37 +51,37 @@
     :zIndex="10"
   />
   <Hand
-    v-if="Boolean(activeRound && userId)"
+    v-if="Boolean(activeRound && teamData)"
     :round="activeRound"
     :handType="'HIDDEN'"
-    :userId="userId"
+    :userId="teamData.playerId"
     :interCardDistance="165"
     :cardWidth="140"
     :position="[window.innerWidth / 2, window.innerHeight - 250]"
-    :interactive="true"
+    :interactive="userId === teamData.playerId"
     :zIndex="0"
   />
   <Hand
-    v-if="Boolean(activeRound && userId)"
+    v-if="Boolean(activeRound && teamData)"
     :round="activeRound"
     :handType="'OPEN'"
-    :userId="userId"
+    :userId="teamData.playerId"
     :interCardDistance="165"
     :cardWidth="140"
     :position="[window.innerWidth / 2, window.innerHeight - 220]"
-    :interactive="true"
+    :interactive="userId === teamData.playerId"
     :zIndex="10"
   />
   <Hand
-    v-if="Boolean(activeRound && userId)"
+    v-if="Boolean(activeRound && teamData)"
     :round="activeRound"
     :handType="'NORMAL'"
-    :userId="userId"
+    :userId="teamData.playerId"
     :interCardDistance="100"
     :cardWidth="160"
     :position="[window.innerWidth / 2, window.innerHeight + 30]"
     :shiftOnHover="true"
-    :interactive="true"
+    :interactive="userId === teamData.playerId"
     :filterPlayed="true"
     :zIndex="20"
   />
@@ -153,8 +142,6 @@ export default defineComponent({
     const activeRound = useActiveRound();
     const activeStack = useActiveStack();
     const { removeAllCardsFromField } = useCardManager();
-
-    console.log(activeRound);
 
     onBeforeUnmount(removeAllCardsFromField);
 

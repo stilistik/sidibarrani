@@ -97,7 +97,9 @@ export enum RoundStatus {
   ENDED = "ENDED",
 }
 
-export interface Hand {}
+export interface Hand {
+  cards: string[];
+}
 
 export interface Team {
   id: string;

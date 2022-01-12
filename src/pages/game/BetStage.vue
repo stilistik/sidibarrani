@@ -18,6 +18,18 @@
   />
   <YourTurn />
   <Hand
+    v-if="Boolean(activeRound && teamData)"
+    :round="activeRound"
+    :handType="'NORMAL'"
+    :userId="teamData.opponentId"
+    :interCardDistance="100"
+    :cardWidth="140"
+    :position="[window.innerWidth / 2, 100]"
+    :interactive="false"
+    :filterPlayed="true"
+    :zIndex="20"
+  />
+  <Hand
     v-if="activeRound && teamData"
     :round="activeRound"
     :handType="'HIDDEN'"
@@ -40,37 +52,37 @@
     :zIndex="10"
   />
   <Hand
-    v-if="Boolean(activeRound && userId)"
+    v-if="Boolean(activeRound && teamData)"
     :round="activeRound"
     :handType="'HIDDEN'"
-    :userId="userId"
+    :userId="teamData.playerId"
     :interCardDistance="165"
     :cardWidth="140"
     :position="[window.innerWidth / 2, window.innerHeight - 250]"
-    :interactive="true"
+    :interactive="teamData.playerId === userId"
     :zIndex="0"
   />
   <Hand
-    v-if="Boolean(activeRound && userId)"
+    v-if="Boolean(activeRound && teamData)"
     :round="activeRound"
     :handType="'OPEN'"
-    :userId="userId"
+    :userId="teamData.playerId"
     :interCardDistance="165"
     :cardWidth="140"
     :position="[window.innerWidth / 2, window.innerHeight - 220]"
-    :interactive="true"
+    :interactive="teamData.playerId === userId"
     :zIndex="10"
   />
   <Hand
-    v-if="Boolean(activeRound && userId)"
+    v-if="Boolean(activeRound && teamData)"
     :round="activeRound"
     :handType="'NORMAL'"
-    :userId="userId"
+    :userId="teamData.playerId"
     :interCardDistance="100"
     :cardWidth="160"
     :position="[window.innerWidth / 2, window.innerHeight + 30]"
+    :interactive="teamData.playerId === userId"
     :shiftOnHover="true"
-    :interactive="true"
     :filterPlayed="true"
     :zIndex="20"
   />

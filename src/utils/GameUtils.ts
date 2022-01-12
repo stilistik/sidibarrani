@@ -28,12 +28,17 @@ export function resolveTeams(game: Game, userId: string) {
     opponentTeam = game.TeamA;
     opponentTeamColor = game.teamAColor;
   } else {
-    throw new Error("User not found in either of the game teams.");
+    // default to enable spectator mode
+    userTeam = game.TeamA;
+    userTeamColor = game.teamAColor;
+    opponentTeam = game.TeamB;
+    opponentTeamColor = game.teamBColor;
   }
 
   const opponentId = opponentTeam.TeamUsers.items[0].user.id;
-
+  const playerId = userTeam.TeamUsers.items[0].user.id;
   return {
+    playerId,
     userTeam,
     userTeamColor,
     opponentTeamColor,

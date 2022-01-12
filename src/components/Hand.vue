@@ -44,7 +44,7 @@ export default defineComponent({
       useCardManager();
 
     const cards = computed(() => {
-      const hand = activeRound.value.hands.items.find((hand: any) => {
+      const hand = activeRound?.value?.hands?.items?.find((hand: any) => {
         return hand.type === props.handType && hand.userID == props.userId;
       });
 

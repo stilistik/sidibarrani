@@ -3,58 +3,22 @@
     @click="join"
     @mouseenter="hovered = true"
     @mouseleave="hovered = false"
-    class="
-      relative
-      w-full
-      text-white
-      shadow-2xl
-      overflow-hidden
-      flex
-      items-center
-      rounded-xl
-      bg-gray-800
-    "
+    class="relative w-full text-white shadow-2xl overflow-hidden flex items-center rounded-xl bg-gray-800"
     :style="{ height: '150px', maxWidth: '1000px' }"
   >
     <div
-      class="
-        bg-gray-800
-        text-white
-        flex flex-col
-        items-center
-        justify-start
-        gap-5
-        py-5
-      "
+      class="bg-gray-800 text-white flex flex-col items-center justify-start gap-5 py-5"
       :style="{ width: '100px' }"
     >
       <span
-        class="
-          bg-gray-700
-          rounded-full
-          flex flex-col
-          items-center
-          justify-center
-          p-1
-          text-xs
-          font-black
-        "
+        class="bg-gray-700 rounded-full flex flex-col items-center justify-center p-1 text-xs font-black"
         :style="{ width: '50px', height: '50px' }"
       >
         <Icon icon="dice" />
         {{ game?.mode }}
       </span>
       <span
-        class="
-          bg-gray-700
-          rounded-full
-          flex flex-col
-          items-center
-          justify-center
-          p-1
-          text-xs
-          font-black
-        "
+        class="bg-gray-700 rounded-full flex flex-col items-center justify-center p-1 text-xs font-black"
         :style="{ width: '50px', height: '50px' }"
       >
         <Icon icon="trophy" />
@@ -74,15 +38,7 @@
       />
       <div class="relative z-10 w-full h-full flex p-8">
         <div
-          class="
-            w-full
-            h-full
-            justify-between
-            flex
-            items-center
-            text-2xl
-            font-thin
-          "
+          class="w-full h-full justify-between flex items-center text-2xl font-thin"
         >
           <span v-if="teamA?.name" class="font-black">{{ teamA?.name }}</span>
           <Icon v-else icon="question" />
@@ -91,6 +47,12 @@
           <Icon v-else icon="question" />
         </div>
       </div>
+    </div>
+    <div
+      class="bg-gray-800 text-white flex flex-col items-center justify-start gap-5 py-5"
+      :style="{ width: '50px' }"
+    >
+      <h3 class="font-black text-2xl -rotate-90">{{ $props?.game?.status }}</h3>
     </div>
   </button>
 </template>
